@@ -1,32 +1,36 @@
 {
+  "root": true,
   "env": {
     "browser": true,
-    "es2021": true
+    "es6": true,
+    "node": true
   },
-  "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:react/recommended",
-    "prettier"
-  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": "latest",
-    "sourceType": "module"
-  },
-  "plugins": ["react", "react-hooks", "@typescript-eslint", "prettier"],
-  "rules": {
-    "react/react-in-jsx-scope": "off",
-    "spaced-comment": "error",
-    "quotes": ["error", "single"],
-    "no-duplicate-imports": "error"
-  },
-  "settings": {
-    "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx", ".js"]
+    "ecmaFeatures": {
+      "jsx": true
     },
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "ignorePatterns": ["webpack.config.js"],
+  "extends": [
+    "airbnb",
+    "airbnb-typescript",
+    "airbnb/hooks",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint",
+    "recommended-requiring-type-checking",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["prettier", "@typescript-eslint", "import"],
+  "settings": {
     "import/resolver": {
-      "typescript": "./tsconfig.json"
+      "typescript": {}
     }
+  },
+  "rules": {
+    "prettier/prettier": ["error", { "endOfLine": "auto" }]
   }
 }
