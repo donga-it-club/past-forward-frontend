@@ -13,19 +13,35 @@ const NavBar = () => {
       </LeftBox>
 
       <RightBox>
-        <IconStyle borderRadius='10px'>
-          <div style={{ display: 'flex' }}>
-            <PersonCircle style={{ padding: '5px' }} />
-            <p style={{ alignItems: 'center' }}>Clayton Santos</p>
-          </div>
-        </IconStyle>
-        <IconStyle borderRadius='45%'>
-          <Gear />
-        </IconStyle>
-        <IconStyle borderRadius='50%'>
-          <Bell />
-        </IconStyle>
-        <Link href='#'>Logout</Link>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'flex-end'
+          }}
+        >
+          <IconStyle borderRadius='10px' width='auto'>
+            <div
+              style={{
+                display: 'flex',
+                textAlign: 'center',
+                alignContent: 'center',
+                margin: '2px'
+              }}
+            >
+              <PersonCircle style={{ padding: '5px' }} />
+              <p style={{ margin: 'auto 10px' }}>Clayton Santos</p>
+            </div>
+          </IconStyle>
+
+          <IconStyle borderRadius='45%' width='20px'>
+            <Gear />
+          </IconStyle>
+          <IconStyle borderRadius='50%' width='20px'>
+            <Bell />
+          </IconStyle>
+          <Link href='#'>Logout</Link>
+        </div>
       </RightBox>
     </Container>
   );
@@ -44,16 +60,17 @@ const Container = styled.div`
 
 const LeftBox = styled.div`
   flex: auto;
-  text-align: center;
+  margin: '10px';
+  justify-content: 'flex-start';
 `;
 
 const RightBox = styled.div`
   flex: auto;
-  flex-direction: row;
   text-align: center;
 `;
 
-const IconStyle = styled.div<{ borderRadius: string }>`
+const IconStyle = styled.div<{ borderRadius: string; width: string }>`
+  width: ${(props) => props.width};
   border-radius: ${(props) => props.borderRadius};
   display: inline-block;
   border: 2px solid black;
