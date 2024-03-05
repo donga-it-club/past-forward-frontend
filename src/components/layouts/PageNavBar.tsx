@@ -92,7 +92,7 @@ const RightBox = styled.div`
   text-align: center;
 `;
 
-const IconStyle = styled.div<{ borderRadius: string; width: string }>`
+export const IconStyle = styled.div<{ borderRadius: string; width: string }>`
   width: ${props => props.width};
   border-radius: ${props => props.borderRadius};
   display: inline-block;

@@ -1,10 +1,22 @@
 import styled from 'styled-components';
 
 const PageSideBar = () => {
-  return <Template>side Bar</Template>;
+  return (
+    <Template>
+      <LogoText>Past Forward</LogoText>
+    </Template>
+  );
 };
 
 export default PageSideBar;
+
+const LogoText = styled.a`
+  padding: 10px;
+  border: 20px;
+  color: #111b47;
+  font-size: 30px;
+  font-weight: bold;
+`;
 
 const Template = styled.div`
   display: flex;
@@ -13,5 +25,5 @@ const Template = styled.div`
   width: 400px;
   height: 100vh;
   color: white;
-  background-color: black;
+  background-color: #e6e6e6;
 `;

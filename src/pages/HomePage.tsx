@@ -1,5 +1,4 @@
 import React from 'react';
-import PageLayout from '../components/layouts/PageLayout';
 import NavBar from '../components/layouts/PageNavBar';
 
 const HomePage: React.FC = () => {
