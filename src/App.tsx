@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import GlobalStyle from './styles/fonts/GlobalStyle';
 import GlobalFont from './styles/fonts/GlobalFont';
-import TemplateNothingPage from './pages/TemplateNothingPage';
+import CreateRetroPage from './pages/CreateRetroPage';
 
 const App: React.FC = () => {
   return (
@@ -11,8 +11,8 @@ const App: React.FC = () => {
       <GlobalStyle />
       <Router>
         <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/tn' element={<TemplateNothingPage />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/create" element={<CreateRetroPage />} />
         </Routes>
       </Router>
     </>
