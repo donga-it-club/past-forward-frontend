@@ -12,31 +12,35 @@ module.exports = (env, argv) => {
     entry: './src/index.tsx',
     output: {
       path: path.join(__dirname, '/dist'),
-      filename: '[name].js'
+      filename: '[name].js',
     },
     devServer: {
       port: 3000,
       hot: true,
-      historyApiFallback: true
+      historyApiFallback: true,
     },
     resolve: {
-      extensions: ['.js', '.jsx', '.ts', '.tsx']
+      extensions: ['.js', '.jsx', '.ts', '.tsx'],
     },
     module: {
       rules: [
         {
           test: /\.tsx?$/,
-          use: ['babel-loader', 'ts-loader']
+          use: ['babel-loader', 'ts-loader'],
         },
         {
           test: /\.(?:gif|png|jpg|jpeg)$/i,
-          type: 'asset/resource'
-        }
-      ]
+          type: 'asset/resource',
+        },
+        {
+          test: /\.css$/,
+          use: ['style-loader', 'css-loader'],
+        },
+      ],
     },
     plugins: [
       new webpack.ProvidePlugin({
-        React: 'react'
+        React: 'react',
       }),
       new HtmlWebpackPlugin({
         template: './public/index.html',
@@ -44,11 +48,11 @@ module.exports = (env, argv) => {
           process.env.NODE_ENV === 'production'
             ? {
                 collapseWhitespace: true, // 빈칸 제거
-                removeComments: true // 주석 제거
+                removeComments: true, // 주석 제거
               }
-            : false
+            : false,
       }),
-      new CleanWebpackPlugin()
-    ]
+      new CleanWebpackPlugin(),
+    ],
   };
 };

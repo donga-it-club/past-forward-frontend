@@ -1,6 +1,7 @@
 import React from 'react';
 import NavBar from '../components/layouts/PageNavBar';
 
+
 const HomePage: React.FC = () => {
   return (
     <div>
