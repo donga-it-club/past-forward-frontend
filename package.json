@@ -6,6 +6,10 @@
   "author": "jeongmingong <jmgong59@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "bootstrap": "5.3.3",
+    "react": "^18.2.0",
+    "react-bootstrap-icons": "^1.11.3",
+
     "css-loader": "^6.10.0",
     "moment": "^2.30.1",
     "react": "^18.2.0",
