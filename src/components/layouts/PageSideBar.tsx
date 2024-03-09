@@ -32,12 +32,15 @@ const PageSideBar = () => {
 
 export default PageSideBar;
 
-const LogoText = styled.a`
-  color: #111b47;
-  font-size: 30px;
-  font-weight: bold;
-  border: 20px;
-  padding: 10px;
+const Template = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 400px;
+  height: 100vh;
+  color: white;
+  background-color: #f8f8f8;
+  z-index: 999;
 `;
 
 const LogoBox = styled.div`
@@ -46,16 +49,14 @@ const LogoBox = styled.div`
   padding-top: 10px;
 `;
 
-const Template = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 400px;
-  height: 100vh;
-  color: white;
-  background-color: #e6e6e6;
-  z-index: 999;
+const LogoText = styled.a`
+  color: #111b47;
+  font-size: 30px;
+  font-weight: bold;
+  border: 20px;
+  padding: 10px;
 `;
+
 const ProfileBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -63,6 +64,14 @@ const ProfileBox = styled.div`
   padding: 20px 25%;
   margin: 0 auto;
   align-items: center;
+`;
+
+const MiniBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  color: #111b47;
+  padding: 10px 0;
+  border: 3px solid #d2d2d2;
 `;
 
 const MainName = styled.h1`
@@ -74,14 +83,6 @@ const MainName = styled.h1`
 
 const MailName = styled.h2`
   color: #d2d2d2;
-`;
-
-const MiniBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  color: #111b47;
-  padding: 10px 0;
-  border: 3px solid #d2d2d2;
 `;
 
 const Line = styled.div`
