@@ -1,38 +1,24 @@
 // 버튼 2개 묶음 - 화면상 배치 및 모달 클릭 적용
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React from 'react';
+import * as S from '../../styles/createRetro/CreateButtonBox.style';
 import TeamRetroCreateButton from './TeamRetroCreateButton';
 import PersonalRetroCreateButton from './PersonalRetroCreateButton';
-import CreateModal from './CreateModal';
 
-const ButtonListContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin: 0 auto;
-`;
+interface CreateButtonBoxProps {
+  onClick: () => void;
+}
 
-const SpacedButton = styled.div`
-  margin: 0 1rem; // 버튼 간 간격 만듦
-  cursor: pointer;
-`;
-
-const CreateButtonBox: React.FC = () => {
-  const [modalOpen, setModalOpen] = useState(false);
-
-  const handleCreateButtonClick = () => {
-    setModalOpen(true);
-  };
+const CreateButtonBox: React.FC<CreateButtonBoxProps> = ({ onClick }) => {
   return (
     <>
-      {modalOpen && <CreateModal onClose={() => setModalOpen(false)} />}
-      <ButtonListContainer onClick={handleCreateButtonClick}>
-        <SpacedButton>
+      <S.ButtonListContainer onClick={onClick}>
+        <S.SpacedButton>
           <TeamRetroCreateButton />
-        </SpacedButton>
-        <SpacedButton>
+        </S.SpacedButton>
+        <S.SpacedButton>
           <PersonalRetroCreateButton />
-        </SpacedButton>
-      </ButtonListContainer>
+        </S.SpacedButton>
+      </S.ButtonListContainer>
     </>
   );
 };
