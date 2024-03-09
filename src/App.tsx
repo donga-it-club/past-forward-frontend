@@ -3,6 +3,7 @@ import HomePage from '@/pages/HomePage';
 import GlobalStyle from '@/styles/fonts/GlobalStyle';
 import GlobalFont from '@/styles/fonts/GlobalFont';
 import CreateRetroPage from '@/pages/CreateRetroPage';
+import WriteRetroTeamPage from '@/pages/WriteRetroTeamPage';
 
 const App: React.FC = () => {
   return (
@@ -13,6 +14,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/create" element={<CreateRetroPage />} />
+          <Route path="/WriteRetroTeamPage" element={<WriteRetroTeamPage />} />
         </Routes>
       </Router>
     </>

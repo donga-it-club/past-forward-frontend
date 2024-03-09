@@ -21,9 +21,11 @@ module.exports = (env, argv) => {
     },
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx'],
+
       alias: {
         '@': path.resolve(__dirname, './src/'),
       },
+
     },
     module: {
       rules: [
@@ -35,10 +37,12 @@ module.exports = (env, argv) => {
           test: /\.(?:gif|png|jpg|jpeg)$/i,
           type: 'asset/resource',
         },
+
         {
           test: /\.css$/,
           use: ['style-loader', 'css-loader'],
         },
+
       ],
     },
     plugins: [
