@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CreateButtonBox from '../components/createRetro/CreateButtonBox';
+import NavBar from '../components/layouts/PageNavBar';
+import CreateModal from '../components/createRetro/CreateModal';
 
 const TemplateNothingPage: React.FC = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleCreateButtonClick = () => {
+    setModalOpen(true);
+  };
   return (
     <>
-      <div>네비게이션바 영역</div>
-      <CreateButtonBox />
+      {modalOpen && <CreateModal onClose={() => setModalOpen(false)} />}
+      <NavBar>
+        <CreateButtonBox onClick={handleCreateButtonClick} />
+      </NavBar>
     </>
   );
 };
