@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import PlusIconImg from '../../assets/PlusIcon_light.png';
+import PlusIconImg from '@/assets/PlusIcon_light.png';
 
 interface TextProps {
   color: string;

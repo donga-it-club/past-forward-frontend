@@ -1,5 +1,5 @@
+import CreateButtonBox from '@/components/createRetro/CreateButtonBox';
 import React from 'react';
-import CreateButtonBox from '../components/createRetro/CreateButtonBox';
 
 const TemplateNothingPage: React.FC = () => {
   return (
