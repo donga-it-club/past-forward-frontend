@@ -3,6 +3,7 @@ import HomePage from './pages/HomePage';
 import GlobalStyle from './styles/fonts/GlobalStyle';
 import GlobalFont from './styles/fonts/GlobalFont';
 import TemplateNothingPage from './pages/TemplateNothingPage';
+import WriteRetroTeamPage from './pages/WriteRetroTeamPage';
 
 const App: React.FC = () => {
   return (
@@ -11,8 +12,9 @@ const App: React.FC = () => {
       <GlobalStyle />
       <Router>
         <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/tn' element={<TemplateNothingPage />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/tn" element={<TemplateNothingPage />} />
+          <Route path="/WriteRetroTeamPage" element={<WriteRetroTeamPage />} />
         </Routes>
       </Router>
     </>
