@@ -1,0 +1,67 @@
+/*폰트 스타일*/
+@font-face {
+  font-family: 'PretendardLight';
+  font-style: normal;
+  font-weight: 300;
+  src: url('@/src/styles/fonts/PretendardLight.woff');
+}
+
+@font-face {
+  font-family: 'PretendardSemiBold';
+  font-style: normal;
+  font-weight: 500;
+  src: url('@/src/styles/fonts/PretendardSemiBold.woff');
+}
+
+@font-face {
+  font-family: 'PretendardExtraBold';
+  font-style: normal;
+  font-weight: 700;
+  src: url('@/src/styles/fonts/PretendardExtraBold.woff');
+}
+
+/*전체 스타일*/
+:root {
+  background-color: #d7ecff;
+  height: 100vh;
+  left: 50%;
+  transform: translate(-50%);
+  max-width: 443px;
+  position: absolute;
+  width: 100vw;
+  z-index: -9999;
+
+  /*색상*/
+  --mainColor: #111b47;
+  --subColor: #505f98;
+  --chatMyColor: #f4f4f4;
+  --font-Deep-Color: #091133;
+  --font-blue-Color: #505f98;
+
+  --main-font-family: 'PretendardLight';
+  font-size: 20px;
+  font-synthesis: none;
+
+  --font-h4: 32px;
+  --font-h5: 24px;
+  --font-h6: 20px;
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+a {
+  font-weight: 500;
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  color: var(--font-Deep-Color);
+}
+
+.react-datepicker-popper {
+  z-index: 9999;
+}

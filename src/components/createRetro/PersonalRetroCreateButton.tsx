@@ -1,6 +1,7 @@
 import React from 'react';
-import * as S from '../../styles/createRetro/PersonalRetroCreateButton.style';
-import PlusIconImg from '../../assets/PlusIcon_dark.png';
+import * as S from '@/styles/createRetro/PersonalRetroCreateButton.style';
+import PlusIconImg from '@/assets/PlusIcon_dark.png';
+
 
 const PersonalRetroCreateButton: React.FC = () => {
   return (
