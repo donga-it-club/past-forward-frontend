@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import PlusIconImg from '../../assets/PlusIcon_light.png';
+import PlusIconImg from '@/assets/PlusIcon_dark.png';
 
 interface TextProps {
   color: string;
@@ -17,11 +17,13 @@ const CreateButtonBorder = styled.div`
   align-items: center;
 `;
 
-const CreateButtonBg = styled.div`
+const CreateButtonBackground = styled.div`
   width: 24rem;
   height: 12rem;
   border-radius: 1rem;
-  background-color: rgba(17, 27, 71, 1);
+  background-color: white;
+  border-radius: 1rem;
+  border: 1px solid rgba(17, 27, 71, 1);
 `;
 
 const CenteredContainer = styled.div`
@@ -38,27 +40,27 @@ const PlusIcon = styled.img`
 `;
 
 const Text = styled.div<TextProps>`
-  color: ${(props) => props.color};
-  font-weight: ${(props) => props.weight || 'normal'};
+  color: ${props => props.color};
+  font-weight: ${props => props.weight || 'normal'};
   margin-top: 1rem;
 `;
 
-const TeamRetroCreateButton: React.FC = () => {
+const PersonalRetroCreateButton: React.FC = () => {
   return (
     <>
       <CreateButtonBorder>
-        <CreateButtonBg>
+        <CreateButtonBackground>
           <CenteredContainer>
             <PlusIcon src={PlusIconImg} />
-            <Text color='white'>Team Retrospect</Text>
-            <Text color='rgba(175, 175, 175, 1)' weight='100'>
-              Kudos / Went Well / To Improve / Action Items
+            <Text color="rgba(17, 27, 71, 1)">Personal Retrospect</Text>
+            <Text color="rgba(119, 119, 119, 1)" weight="100">
+              Keep / Problem / To Improve / Action Items
             </Text>
           </CenteredContainer>
-        </CreateButtonBg>
+        </CreateButtonBackground>
       </CreateButtonBorder>
     </>
   );
 };
 
-export default TeamRetroCreateButton;
+export default PersonalRetroCreateButton;

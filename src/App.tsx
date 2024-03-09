@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HomePage from './pages/HomePage';
-import GlobalStyle from './styles/fonts/GlobalStyle';
-import GlobalFont from './styles/fonts/GlobalFont';
-import TemplateNothingPage from './pages/TemplateNothingPage';
-import WriteRetroTeamPage from './pages/WriteRetroTeamPage';
+import HomePage from '@/pages/HomePage';
+import GlobalStyle from '@/styles/fonts/GlobalStyle';
+import GlobalFont from '@/styles/fonts/GlobalFont';
+import CreateRetroPage from '@/pages/CreateRetroPage';
+import WriteRetroTeamPage from '@/pages/WriteRetroTeamPage';
 
 const App: React.FC = () => {
   return (
@@ -13,7 +13,7 @@ const App: React.FC = () => {
       <Router>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/tn" element={<TemplateNothingPage />} />
+          <Route path="/create" element={<CreateRetroPage />} />
           <Route path="/WriteRetroTeamPage" element={<WriteRetroTeamPage />} />
         </Routes>
       </Router>
