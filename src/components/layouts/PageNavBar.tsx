@@ -75,7 +75,7 @@ const Container = styled.div`
   display: flex;
   align-self: flex-start;
   z-index: 1;
-  width: 100%;
+  width: 95%;
   margin: 30px;
   position: sticky;
   align-items: center;
