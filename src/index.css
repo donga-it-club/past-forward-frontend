@@ -52,16 +52,18 @@
   -webkit-text-size-adjust: 100%;
 }
 
-a {
-  font-weight: 500;
-  text-decoration: none;
-  color: inherit;
-}
+@layer base {
+  a {
+    font-weight: 500;
+    text-decoration: none;
+    color: inherit;
+  }
 
-a:hover {
-  color: var(--font-Deep-Color);
-}
+  a:hover {
+    color: var(--font-Deep-Color);
+  }
 
-.react-datepicker-popper {
-  z-index: 9999;
+  .react-datepicker-popper {
+    z-index: 9999;
+  }
 }
