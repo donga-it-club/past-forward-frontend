@@ -4,7 +4,7 @@ import GlobalStyle from '@/styles/fonts/GlobalStyle';
 import GlobalFont from '@/styles/fonts/GlobalFont';
 import CreateRetroPage from '@/pages/CreateRetroPage';
 import WriteRetroTeamPage from '@/pages/WriteRetroTeamPage';
-import NavBar from './components/layouts/PageNavBar';
+import NavBar from './components/layout/PageNavBar';
 
 const App: React.FC = () => {
   return (

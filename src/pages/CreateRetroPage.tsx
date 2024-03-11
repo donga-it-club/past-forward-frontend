@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import CreateButtonBox from '@/components/createRetro/CreateButtonBox';
-import NavBar from '@/components/layouts/PageNavBar';
+import NavBar from '@/components/layout/PageNavBar';
 import CreateModal from '@/components/createRetro/CreateModal';
-
 
 const TemplateNothingPage: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
