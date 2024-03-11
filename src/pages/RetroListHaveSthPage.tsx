@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import RetroListContentsFilter from '@/components/RetroListHaveSth/RetroListContentsFilter';
+import RetroListSearch from '@/components/RetroListHaveSth/RetroListSearch';
+import RetroListSortButton from '@/components/RetroListHaveSth/RetroListSortButton';
 import styled from 'styled-components';
-
-import RetroListContentsFilter from '../components/RetroListHaveSth/RetroListContentsFilter';
-import RetroListSearch from '../components/RetroListHaveSth/RetroListSearch';
-import RetroListSortButton from '../components/RetroListHaveSth/RetroListSortButton';
 
 const Container = styled.div`
   display: flex;
@@ -27,7 +25,7 @@ const SortButtonContainer = styled.div`
   padding-right: 10px;
 `;
 
-const RetroListHaveSthPage: React.FC = () => {
+const RetroListHaveSthPage = () => {
   return (
     <>
       <Container>

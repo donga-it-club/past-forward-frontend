@@ -1,11 +1,16 @@
 import { CaretRightFill, PeopleFill, Person, PersonCircle, PersonFill } from 'react-bootstrap-icons';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const PageSideBar = () => {
+  const navigate = useNavigate();
+  const moveOnHome = () => {
+    navigate('/');
+  };
   return (
     <Template>
       <LogoBox>
-        <LogoText>Past Forward</LogoText>
+        <LogoText onClick={() => moveOnHome()}>Past Forward</LogoText>
       </LogoBox>
       <ProfileBox>
         <PersonCircle style={{ width: '100', height: '100', color: '#C3CAD9' }} />
@@ -15,14 +20,18 @@ const PageSideBar = () => {
       <MiniBox>
         <div style={{ padding: '2px 0' }}>
           <CaretRightFill /> <Person style={{ marginRight: '5px' }} />
-          Personal Retro
+          <a href="/WriteRetroTeamPage" style={{ color: '#111b47', textDecoration: 'none' }}>
+            Personal Retro
+          </a>
         </div>
         <Line />
       </MiniBox>
       <MiniBox>
         <div style={{ padding: '2px 0' }}>
           <CaretRightFill /> <PeopleFill style={{ marginRight: '5px' }} />
-          Team Retro
+          <a href="/create" style={{ color: '#111b47', textDecoration: 'none' }}>
+            Team Retro
+          </a>
         </div>
         <Line />
       </MiniBox>
@@ -55,6 +64,7 @@ const LogoText = styled.a`
   font-weight: bold;
   border: 20px;
   padding: 10px;
+  text-decoration: none;
 `;
 
 const ProfileBox = styled.div`
