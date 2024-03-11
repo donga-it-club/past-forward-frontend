@@ -4,7 +4,8 @@ import GlobalStyle from '@/styles/fonts/GlobalStyle';
 import GlobalFont from '@/styles/fonts/GlobalFont';
 import CreateRetroPage from '@/pages/CreateRetroPage';
 import WriteRetroTeamPage from '@/pages/WriteRetroTeamPage';
-import NavBar from './components/layout/PageNavBar';
+import NavBar from '@/components/layout/PageNavBar';
+import MyPage from '@/pages/MyPage';
 
 const App: React.FC = () => {
   return (
@@ -17,6 +18,7 @@ const App: React.FC = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/create" element={<CreateRetroPage />} />
             <Route path="/WriteRetroTeamPage" element={<WriteRetroTeamPage />} />
+            <Route path="/my" element={<MyPage />} />
           </Routes>
         </NavBar>
       </Router>

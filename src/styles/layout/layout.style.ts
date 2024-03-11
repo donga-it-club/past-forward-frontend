@@ -59,7 +59,7 @@ export const Link = styled.a`
 `;
 
 /* sideBar*/
-export const Template = styled.div`
+export const SideBarBGContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
@@ -113,7 +113,7 @@ export const MailName = styled.h2`
   color: #d2d2d2;
 `;
 
-export const Line = styled.div`
+export const DivingLine = styled.div`
   display: flex;
   flex-direction: column;
   width: 70%;

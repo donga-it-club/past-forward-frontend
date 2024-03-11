@@ -8,7 +8,7 @@ const PageSideBar = () => {
     navigate('/');
   };
   return (
-    <S.Template>
+    <S.SideBarBGContainer>
       <S.LogoBox>
         <S.LogoText onClick={() => moveOnHome()}>Past Forward</S.LogoText>
       </S.LogoBox>
@@ -24,7 +24,7 @@ const PageSideBar = () => {
             Personal Retro
           </a>
         </div>
-        <S.Line />
+        <S.DivingLine />
       </S.MiniBox>
       <S.MiniBox>
         <div style={{ padding: '2px 0' }}>
@@ -33,9 +33,9 @@ const PageSideBar = () => {
             Team Retro
           </a>
         </div>
-        <S.Line />
+        <S.DivingLine />
       </S.MiniBox>
-    </S.Template>
+    </S.SideBarBGContainer>
   );
 };
 
