@@ -4,17 +4,6 @@ export const MyPageBGContainer = styled.div`
   display: flex;
   padding: 5px 25%;
 `;
-export const ProfileContainer = styled.div`
-  display: flex;
-  width: 100%;
-  background-color: #111b47;
-  height: 100px;
-  color: white;
-  justify-items: center;
-  align-items: center;
-  font-size: 60px;
-  margin: 10px 0;
-`;
 
 export const MyPageContainer = styled.div`
   display: flex;
@@ -91,3 +80,5 @@ export const PWInput = styled.input`
   margin: 5px 10px;
   width: 150px;
 `;
+
+export const DeleteBox = styled.div``;
