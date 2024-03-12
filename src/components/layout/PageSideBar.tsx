@@ -3,20 +3,18 @@ import * as S from '@/styles/layout/layout.style';
 import { useNavigate } from 'react-router-dom';
 
 const PageSideBar = () => {
-  const navigate = useNavigate();
-  const moveOnHome = () => {
-    navigate('/');
-  };
   return (
     <S.SideBarBGContainer>
       <S.LogoBox>
-        <S.LogoText onClick={() => moveOnHome()}>Past Forward</S.LogoText>
+        <S.LogoText href="/#">Past Forward</S.LogoText>
       </S.LogoBox>
-      <S.ProfileBox>
+      <S.ProfileLink>
         <PersonCircle style={{ width: '100', height: '100', color: '#C3CAD9' }} />
-        <S.MainName>Clayton Santos</S.MainName>
-        <S.MailName>Clayton@gmail.com</S.MailName>
-      </S.ProfileBox>
+        <a href="/my">
+          <S.MainName>Clayton Santos</S.MainName>
+          <S.MailName>Clayton@gmail.com</S.MailName>
+        </a>
+      </S.ProfileLink>
       <S.MiniBox>
         <div style={{ padding: '2px 0' }}>
           <CaretRightFill /> <Person style={{ marginRight: '5px' }} />

@@ -93,6 +93,12 @@ export const ProfileBox = styled.div`
   align-items: center;
 `;
 
+export const ProfileLink = styled(ProfileBox)`
+  a {
+    text-decoration: none;
+  }
+`;
+
 export const MiniBox = styled.div`
   display: flex;
   flex-direction: column;
