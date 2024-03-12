@@ -39,11 +39,11 @@ export const ProfileBox = styled.div`
   align-items: center;
 `;
 
-export const OrdinaryButton = styled.button`
+export const OrdinaryButton = styled.button<{ color: string }>`
   background: white;
   color: #111b47;
   margin: 10px 20px;
-  border: 2px solid;
+  border: 2px solid ${props => props.color};
   border-radius: 3px;
   font-size: 12px;
   padding: 10px;
@@ -61,7 +61,7 @@ export const NicknameInput = styled.input`
 `;
 
 export const SubName = styled.h2<{ fontSize: string }>`
-  color: #d2d2d2;
+  color: #111b47;
   padding: 10px 5px;
   font-size: ${props => props.fontSize};
 `;
@@ -81,5 +81,4 @@ export const PWInput = styled.input`
   width: 150px;
 `;
 
-export const PWButton = styled.button`
-`
+export const DeleteBox = styled.div``;

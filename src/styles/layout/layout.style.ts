@@ -64,7 +64,6 @@ export const SideBarBGContainer = styled.div`
   flex-direction: column;
   position: relative;
   width: 400px;
-  height: 100vh;
   color: white;
   background-color: #f8f8f8;
   z-index: 999;
