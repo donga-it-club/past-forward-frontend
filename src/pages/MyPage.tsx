@@ -1,4 +1,6 @@
 import ImageUploader from '@/components/my/ImageUploader';
+import ChangePWButton from '@/components/my/ChangePWButton';
+import Modal from '@/components/my/ChangePWButton';
 import * as S from '@/styles/my/myPage.style';
 import { useState } from 'react';
 import { Asterisk, Icon, InfoCircle, PersonCircle } from 'react-bootstrap-icons';
@@ -37,7 +39,7 @@ const MyPage = () => {
             </S.PWFont>
             <S.PWInput />
             <div style={{ display: 'flex', flexDirection: 'row-reverse', margin: '10px' }}>
-              <S.OrdinaryButton color="#111B47">비밀번호 변경</S.OrdinaryButton>
+              <ChangePWButton />
             </div>
           </S.PWBox>
           <S.MainName>계정 삭제 </S.MainName>
