@@ -38,15 +38,15 @@ const NavBar = ({ children }: Props) => {
                     margin: '2px',
                   }}
                 >
-                  <PersonCircle style={{ padding: '5px' }} />
+                  <PersonCircle style={{ width: '30px', margin: 'auto 3px' }} />
                   <p style={{ margin: 'auto 10px' }}>Clayton Santos</p>
                 </div>
               </S.IconStyle>
 
-              <S.IconStyle borderRadius="45%" width="20px">
+              <S.IconStyle borderRadius="45%">
                 <Gear />
               </S.IconStyle>
-              <S.IconStyle borderRadius="50%" width="20px">
+              <S.IconStyle borderRadius="50%">
                 <Bell />
               </S.IconStyle>
               <S.Link href="#">Logout</S.Link>

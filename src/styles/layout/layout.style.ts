@@ -32,8 +32,8 @@ export const RightBox = styled.div`
   text-align: center;
 `;
 
-export const IconStyle = styled.div<{ borderRadius: string; width: string }>`
-  width: ${props => props.width};
+export const IconStyle = styled.div<{ borderRadius: string }>`
+  width: auto;
   border-radius: ${props => props.borderRadius};
   display: inline-block;
   border: 2px solid black;

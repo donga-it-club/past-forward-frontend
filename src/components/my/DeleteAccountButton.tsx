@@ -2,7 +2,6 @@ import * as S from '@/styles/my/myPage.style';
 import {
   Button,
   Modal,
-  ModalBody,
   ModalCloseButton,
   ModalContent,
   ModalFooter,
@@ -11,15 +10,14 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 
-const ChangePWButton = () => {
+const DeleteAccountButton = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>
-      <S.OrdinaryButton color="#111b47" onClick={onOpen}>
-        비밀번호 변경
+      <S.OrdinaryButton color="orange" onClick={onOpen}>
+        계정 삭제
       </S.OrdinaryButton>
-
       <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
@@ -27,7 +25,7 @@ const ChangePWButton = () => {
           <ModalCloseButton />
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3}>
+            <Button colorScheme="red" mr={3}>
               삭제하기
             </Button>
             <Button onClick={onClose}>취소하기</Button>
@@ -38,4 +36,4 @@ const ChangePWButton = () => {
   );
 };
 
-export default ChangePWButton;
+export default DeleteAccountButton;

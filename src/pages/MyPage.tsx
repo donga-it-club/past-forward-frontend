@@ -4,6 +4,8 @@ import Modal from '@/components/my/ChangePWButton';
 import * as S from '@/styles/my/myPage.style';
 import { useState } from 'react';
 import { Asterisk, Icon, InfoCircle, PersonCircle } from 'react-bootstrap-icons';
+import DeleteAccountButton from '@/components/my/DeleteAccountButton';
+import PasswordInput from '@/components/my/PasswordInput';
 
 const MyPage = () => {
   const [image, setImage] = useState<string>('');
@@ -30,14 +32,18 @@ const MyPage = () => {
           </S.SubName>
           <S.PWBox>
             <S.PWFont>
-              <Asterisk style={{ width: '5px', color: 'red', margin: '0 2px' }} />
-              현재 비밀번호
+              <div style={{ display: 'flex' }}>
+                <Asterisk style={{ width: '5px', color: 'red', margin: '0 2px' }} />
+                현재 비밀번호
+              </div>
             </S.PWFont>
-            <S.PWInput />
+            <PasswordInput />
             <S.PWFont>
-              <Asterisk style={{ width: '5px', color: 'red', margin: '0 2px' }} />새 비밀번호
+              <div style={{ display: 'flex' }}>
+                <Asterisk style={{ width: '5px', color: 'red', margin: '0 2px' }} />새 비밀번호
+              </div>
             </S.PWFont>
-            <S.PWInput />
+            <PasswordInput />
             <div style={{ display: 'flex', flexDirection: 'row-reverse', margin: '10px' }}>
               <ChangePWButton />
             </div>
@@ -45,11 +51,13 @@ const MyPage = () => {
           <S.MainName>계정 삭제 </S.MainName>
           <S.DivingLine />
           <S.SubName fontSize="13px">
-            <InfoCircle style={{ width: '15px', color: 'orange', margin: 'auto 2px' }} />
-            삭제 후 복구 할 수 없습니다.
+            <div style={{ display: 'flex' }}>
+              <InfoCircle style={{ width: '15px', color: 'orange', margin: 'auto 2px' }} />
+              삭제 후 복구 할 수 없습니다.
+            </div>
           </S.SubName>
           <div style={{ display: 'flex', flexDirection: 'row-reverse', margin: '10px' }}>
-            <S.OrdinaryButton color="orange">계정 삭제</S.OrdinaryButton>
+            <DeleteAccountButton />
           </div>
           <div style={{ display: 'flex', flexDirection: 'row-reverse', margin: '10px' }}>
             <S.OrdinaryButton color="#C3CAD9">CANCEL</S.OrdinaryButton>

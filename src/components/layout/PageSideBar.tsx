@@ -17,19 +17,23 @@ const PageSideBar = () => {
       </S.ProfileLink>
       <S.MiniBox>
         <div style={{ padding: '2px 0' }}>
-          <CaretRightFill /> <Person style={{ marginRight: '5px' }} />
-          <a href="/WriteRetroTeamPage" style={{ color: '#111b47', textDecoration: 'none' }}>
-            Personal Retro
-          </a>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <CaretRightFill /> <Person style={{ marginRight: '5px' }} />
+            <a href="/WriteRetroTeamPage" style={{ color: '#111b47', textDecoration: 'none' }}>
+              Personal Retro
+            </a>
+          </div>
         </div>
         <S.DivingLine />
       </S.MiniBox>
       <S.MiniBox>
         <div style={{ padding: '2px 0' }}>
-          <CaretRightFill /> <PeopleFill style={{ marginRight: '5px' }} />
-          <a href="/create" style={{ color: '#111b47', textDecoration: 'none' }}>
-            Team Retro
-          </a>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <CaretRightFill /> <PeopleFill style={{ marginRight: '5px' }} />
+            <a href="/create" style={{ color: '#111b47', textDecoration: 'none' }}>
+              Team Retro
+            </a>
+          </div>
         </div>
         <S.DivingLine />
       </S.MiniBox>
