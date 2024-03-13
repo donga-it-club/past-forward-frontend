@@ -2,7 +2,6 @@ import * as S from '@/styles/my/myPage.style';
 import {
   Button,
   Modal,
-  ModalBody,
   ModalCloseButton,
   ModalContent,
   ModalFooter,

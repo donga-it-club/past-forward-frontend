@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import CreateButtonBox from '@/components/createRetro/CreateButtonBox';
-import NavBar from '@/components/layout/PageNavBar';
+import Layout from '@/components/layout/PageLayout';
 import CreateModal from '@/components/createRetro/CreateModal';
 
 const TemplateNothingPage: React.FC = () => {
@@ -12,9 +12,9 @@ const TemplateNothingPage: React.FC = () => {
   return (
     <>
       {modalOpen && <CreateModal onClose={() => setModalOpen(false)} />}
-      <NavBar>
+      <Layout>
         <CreateButtonBox onClick={handleCreateButtonClick} />
-      </NavBar>
+      </Layout>
     </>
   );
 };

@@ -9,15 +9,26 @@ import {
   ModalOverlay,
   useDisclosure,
 } from '@chakra-ui/react';
+import { InfoCircle } from 'react-bootstrap-icons';
 
 const DeleteAccountButton = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>
-      <S.OrdinaryButton color="orange" onClick={onOpen}>
-        계정 삭제
-      </S.OrdinaryButton>
+      <S.MainName>계정 삭제 </S.MainName>
+      <S.DivingLine />
+      <S.SubName fontSize="13px">
+        <div style={{ display: 'flex' }}>
+          <InfoCircle style={{ width: '15px', color: 'orange', margin: 'auto 2px' }} />
+          삭제 후 복구 할 수 없습니다.
+        </div>
+      </S.SubName>
+      <div style={{ display: 'flex', flexDirection: 'row-reverse', margin: '10px' }}>
+        <S.OrdinaryButton color="orange" onClick={onOpen}>
+          계정 삭제
+        </S.OrdinaryButton>
+      </div>  
       <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

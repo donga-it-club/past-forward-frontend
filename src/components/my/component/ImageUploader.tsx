@@ -36,6 +36,8 @@ const ImageUploader: FC<Props> = ({ image, setImage }) => {
 
   return (
     <>
+      <S.MainName>프로필 사진 </S.MainName>
+      <S.DivingLine />
       <S.ProfileBox>
         {image ? <UploadImage src={image} /> : <PersonCircle style={{ width: '100px', height: 'auto' }} />}
       </S.ProfileBox>
