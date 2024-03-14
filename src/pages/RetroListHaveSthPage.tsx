@@ -1,44 +1,22 @@
 import RetroListContentsFilter from '@/components/RetroListHaveSth/RetroListContentsFilter';
 import RetroListSearch from '@/components/RetroListHaveSth/RetroListSearch';
 import RetroListSortButton from '@/components/RetroListHaveSth/RetroListSortButton';
-import styled from 'styled-components';
-
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-const FilterContainer = styled.div`
-  flex: 5;
-  padding-left: 10px;
-  padding-right: 10px;
-`;
-
-const SearchContainer = styled.div`
-  flex: 1;
-  padding-left: 10px;
-  padding-right: 10px;
-`;
-
-const SortButtonContainer = styled.div`
-  flex: 1;
-  padding-left: 10px;
-  padding-right: 10px;
-`;
+import * as S from '../styles/RetroListHaveSth/RetroListHaveSthPage.style';
 
 const RetroListHaveSthPage = () => {
   return (
     <>
-      <Container>
-        <FilterContainer>
+      <S.Container>
+        <S.FilterContainer>
           <RetroListContentsFilter />
-        </FilterContainer>
-        <SearchContainer>
+        </S.FilterContainer>
+        <S.SearchContainer>
           <RetroListSearch />
-        </SearchContainer>
-        <SortButtonContainer>
+        </S.SearchContainer>
+        <S.SortButtonContainer>
           <RetroListSortButton />
-        </SortButtonContainer>
-      </Container>
+        </S.SortButtonContainer>
+      </S.Container>
     </>
   );
 };
