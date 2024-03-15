@@ -1,19 +1,15 @@
 import * as S from '@/styles/layout/layout.style';
-import { ReactNode } from 'react';
 import PageSideBar from './parts/PageSideBar';
 import PageNavBar from './parts/PageNavBar';
+import { Outlet } from 'react-router-dom';
 
-interface Props {
-  children: ReactNode;
-}
-
-const SubLayout = ({ children }: Props) => {
+const SubLayout = () => {
   return (
     <S.BGContainer>
       <PageSideBar />
       <S.MainContainer>
         <PageNavBar />
-        <main>{children}</main>
+        <Outlet />
       </S.MainContainer>
     </S.BGContainer>
   );

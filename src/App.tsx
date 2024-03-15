@@ -5,7 +5,8 @@ import GlobalFont from '@/styles/fonts/GlobalFont';
 import CreateRetroPage from '@/pages/CreateRetroPage';
 import WriteRetroTeamPage from '@/pages/WriteRetroTeamPage';
 import MyPage from '@/pages/MyPage';
-import Layout from './components/layout/PageLayout';
+import SubLayout from '@/components/layout/PageSubLayout';
+import Layout from '@/components/layout/PageLayout';
 
 const App: React.FC = () => {
   return (
@@ -13,14 +14,16 @@ const App: React.FC = () => {
       <GlobalFont />
       <GlobalStyle />
       <Router>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/create" element={<CreateRetroPage />} />
-            <Route path="/WriteRetroTeamPage" element={<WriteRetroTeamPage />} />
-            <Route path="/my" element={<MyPage />} />
-          </Routes>
-        </Layout>
+        <Routes>
+          <Route element={<SubLayout />}>
+            <Route path="/create" element={<CreateRetroPage />}></Route>
+            <Route path="/WriteRetroTeamPage" element={<WriteRetroTeamPage />}></Route>
+          </Route>
+          <Route element={<Layout />}>
+            <Route path="/" element={<HomePage />}></Route>
+            <Route path="/my" element={<MyPage />}></Route>
+          </Route>
+        </Routes>
       </Router>
     </>
   );

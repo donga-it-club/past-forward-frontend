@@ -1,6 +1,5 @@
-import { CaretRightFill, PeopleFill, Person, PersonCircle, PersonFill } from 'react-bootstrap-icons';
+import { CaretRightFill, PeopleFill, Person, PersonCircle } from 'react-bootstrap-icons';
 import * as S from '@/styles/layout/layout.style';
-import { useNavigate } from 'react-router-dom';
 
 const PageSideBar = () => {
   return (
