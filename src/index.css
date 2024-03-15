@@ -3,34 +3,25 @@
   font-family: 'PretendardLight';
   font-style: normal;
   font-weight: 300;
-  src: url('@/src/styles/fonts/PretendardLight.woff');
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff');
 }
 
 @font-face {
   font-family: 'PretendardSemiBold';
   font-style: normal;
   font-weight: 500;
-  src: url('@/src/styles/fonts/PretendardSemiBold.woff');
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff');
 }
 
 @font-face {
   font-family: 'PretendardExtraBold';
   font-style: normal;
   font-weight: 700;
-  src: url('@/src/styles/fonts/PretendardExtraBold.woff');
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff');
 }
 
 /*전체 스타일*/
 :root {
-  background-color: #d7ecff;
-  height: 100vh;
-  left: 50%;
-  transform: translate(-50%);
-  max-width: 443px;
-  position: absolute;
-  width: 100vw;
-  z-index: -9999;
-
   /*색상*/
   --mainColor: #111b47;
   --subColor: #505f98;
