@@ -34,11 +34,6 @@ function Task({ left }: TaskProps) {
         <S.MessageIcon>
           <img src={Message}></img>
         </S.MessageIcon>
-        <S.TaskSubCount left="94px">{TestTask.MessageCount}</S.TaskSubCount>
-        <S.DaysLeftIcon>
-          <img src={DaysLeft}></img>
-        </S.DaysLeftIcon>
-        <S.TaskSubCount left="147px">{TestTask.DaysLeft}</S.TaskSubCount>
       </S.TaskStyle>
     </div>
   );

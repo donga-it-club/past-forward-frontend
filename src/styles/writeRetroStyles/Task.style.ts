@@ -51,21 +51,12 @@ export const MessageIcon = styled.div`
   width: 20px;
   height: 20px;
   position: absolute;
-  top: 76px;
+  top: 73px;
   left: 67px;
 `;
 
-export const DaysLeftIcon = styled.div`
-  width: 30px;
-  height: 30px;
-  position: absolute;
-  top: 71px;
-  left: 114px;
-  /* border: 1px solid red; */
-`;
-
 export const TaskSubCount = styled.p<{ left: string }>`
-  width: auto;
+  width: 6px;
   height: 20px;
   font-size: 10px;
   font-weight: 700;
