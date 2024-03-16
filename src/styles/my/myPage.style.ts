@@ -77,6 +77,23 @@ export const SubName = styled.h2<{ fontSize: string }>`
   font-size: ${props => props.fontSize};
 `;
 
+export const LoginBox = styled.div<{ backgroundColor: string }>`
+  display: flex;
+  flex-direction: row;
+  background-color: ${props => props.backgroundColor};
+  margin: 5px 0px;
+  border: 1px solid #717171;
+  width: 80%;
+  height: 50px;
+  border-radius: 45px;
+  padding: auto 0;
+`;
+
+export const KakaoIcon = styled.img`
+  width: 20px;
+  margin: auto 10px;
+`;
+
 export const PWBox = styled.div`
   margin: 10px 5px;
 `;

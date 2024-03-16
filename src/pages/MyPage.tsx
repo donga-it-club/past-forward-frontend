@@ -4,6 +4,7 @@ import { useState } from 'react';
 import DeleteAccountButton from '@/components/my/DeleteAccountBox';
 import PasswordBox from '@/components/my/PasswordBox';
 import EmailBox from '@/components/my/EmailBox';
+import NicknameBox from '@/components/my/NicknameBox';
 
 const MyPage = () => {
   const [image, setImage] = useState<string>('');
@@ -16,9 +17,7 @@ const MyPage = () => {
       <S.MyPageBGContainer>
         <S.MyPageContainer>
           <ImageUploader image={image} setImage={setImage} />
-          <S.MainName>닉네임 </S.MainName>
-          <S.DivingLine />
-          <S.NicknameInput />
+          <NicknameBox /> 
           <EmailBox />
           <PasswordBox />
           <DeleteAccountButton />
