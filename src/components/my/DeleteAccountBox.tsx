@@ -25,10 +25,10 @@ const DeleteAccountButton = () => {
         </div>
       </S.SubName>
       <div style={{ display: 'flex', flexDirection: 'row-reverse', margin: '10px' }}>
-        <S.OrdinaryButton color="orange" onClick={onOpen}>
+        <S.OrdinaryButton id="mypage_rmacc" color="orange" onClick={onOpen}>
           계정 삭제
         </S.OrdinaryButton>
-      </div>  
+      </div>
       <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

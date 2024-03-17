@@ -43,12 +43,12 @@ const ImageUploader: FC<Props> = ({ image, setImage }) => {
       </S.ProfileBox>
       <S.ImageButtonBox>
         <div>
-          <S.OrdinaryButton color="#111B47" onClick={handleUploadButtonClick}>
+          <S.OrdinaryButton id="mypage_editimg" color="#111B47" onClick={handleUploadButtonClick}>
             이미지 편집
             <input type="file" ref={inputRef} onChange={handleImageChange} accept="image/*" hidden></input>
           </S.OrdinaryButton>
         </div>
-        <S.OrdinaryButton color="#111B47" onClick={DeleteImage}>
+        <S.OrdinaryButton id="mypage_rmimg" color="#111B47" onClick={DeleteImage}>
           이미지 제거
         </S.OrdinaryButton>
       </S.ImageButtonBox>

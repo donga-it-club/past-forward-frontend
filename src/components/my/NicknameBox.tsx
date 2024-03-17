@@ -8,7 +8,7 @@ const NicknameBox = () => {
       <S.DivingLine />
       <Editable defaultValue="Clayton Santos" margin="5px 0" padding="5px" backgroundColor="white" borderRadius="10px">
         <EditablePreview />
-        <EditableInput />
+        <EditableInput id="mypage_nick"/>
       </Editable>
     </>
   );

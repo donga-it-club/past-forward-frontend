@@ -18,7 +18,11 @@ const PageSideBar = () => {
         <div style={{ padding: '2px 0' }}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <CaretRightFill /> <Person style={{ marginRight: '5px' }} />
-            <a href="/WriteRetroTeamPage" style={{ color: '#111b47', textDecoration: 'none' }}>
+            <a
+              id="leftside_personaltoggle"
+              href="/WriteRetroTeamPage"
+              style={{ color: '#111b47', textDecoration: 'none' }}
+            >
               Personal Retro
             </a>
           </div>
@@ -29,7 +33,7 @@ const PageSideBar = () => {
         <div style={{ padding: '2px 0' }}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <CaretRightFill /> <PeopleFill style={{ marginRight: '5px' }} />
-            <a href="/create" style={{ color: '#111b47', textDecoration: 'none' }}>
+            <a id="leftside_persnalproject" href="/create" style={{ color: '#111b47', textDecoration: 'none' }}>
               Team Retro
             </a>
           </div>

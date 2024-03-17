@@ -17,13 +17,17 @@ const MyPage = () => {
       <S.MyPageBGContainer>
         <S.MyPageContainer>
           <ImageUploader image={image} setImage={setImage} />
-          <NicknameBox /> 
+          <NicknameBox />
           <EmailBox />
           <PasswordBox />
           <DeleteAccountButton />
           <div style={{ display: 'flex', flexDirection: 'row-reverse', margin: '10px' }}>
-            <S.OrdinaryButton color="#C3CAD9">CANCEL</S.OrdinaryButton>
-            <S.OrdinaryButton color="#C3CAD9">SAVE</S.OrdinaryButton>
+            <S.OrdinaryButton id="mypage_cancel" color="#C3CAD9">
+              CANCEL
+            </S.OrdinaryButton>
+            <S.OrdinaryButton id="mypage_save" color="#C3CAD9">
+              SAVE
+            </S.OrdinaryButton>
           </div>
         </S.MyPageContainer>
       </S.MyPageBGContainer>

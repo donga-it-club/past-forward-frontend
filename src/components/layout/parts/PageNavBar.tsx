@@ -6,10 +6,18 @@ const PageNavBar = () => {
     <>
       <S.Container>
         <S.LeftBox>
-          <S.Link href="#">Home</S.Link>
-          <S.Link href="#">Template</S.Link>
-          <S.Link href="#">About us</S.Link>
-          <S.Link href="#">Contact</S.Link>
+          <S.Link href="#" id="header_home">
+            Home
+          </S.Link>
+          <S.Link href="#" id="header_temp">
+            Template
+          </S.Link>
+          <S.Link href="#" id="header_about">
+            About us
+          </S.Link>
+          <S.Link href="#" id="header_contact">
+            Contact
+          </S.Link>
           <S.OrdinaryButton>Create</S.OrdinaryButton>
         </S.LeftBox>
 
