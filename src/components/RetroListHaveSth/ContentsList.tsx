@@ -1,6 +1,11 @@
 import React from 'react';
 import Thumbnail from '@/assets/Thumbnail.png';
 import MoreIcon from '@/assets/MoreIcon.png';
+import BookmarkIcon_Y from '@/assets/BookmarkIcon_Y.png';
+import LinkIcon from '@/assets/Link.png';
+import ProgressBefore from '@/assets/Progress_Before.png';
+import ProgressIng from '@/assets/Progress_Ing.png';
+import ProgressDone from '@/assets/Progress_Done.png';
 import * as S from '../../styles/RetroListHaveSth/ContentsList.styles';
 
 interface Content {
@@ -33,6 +38,8 @@ const ContentList: React.FC<ContentListProps> = ({ status, viewMode }) => {
 
   const filteredData = data.filter(item => item.status === status);
 
+  const isBookmarked: boolean = true;
+
   return (
     <div>
       {viewMode === 'board' && (
@@ -53,11 +60,37 @@ const ContentList: React.FC<ContentListProps> = ({ status, viewMode }) => {
       )}
 
       {viewMode === 'list' && (
-        <ul>
-          {filteredData.map(item => (
-            <li key={item.id}>{item.title}</li>
-          ))}
-        </ul>
+        <>
+          <S.ListContainer>
+            <S.ListTopBox>
+              <S.ListTitleBox>회고이름</S.ListTitleBox> <S.ListUserBox>생성자</S.ListUserBox>{' '}
+              <S.ListTimeBox>마지막 수정시간</S.ListTimeBox> <S.ListBookmarkBox>즐겨찾기</S.ListBookmarkBox>{' '}
+              <S.ListLinkBox>공유링크</S.ListLinkBox>
+              <S.ListProgressBox> 회고진행여부</S.ListProgressBox>
+            </S.ListTopBox>
+
+            <div>
+              {filteredData.map(item => (
+                <S.ItemBox key={item.id}>
+                  <S.ListTitleBox> {item.title}</S.ListTitleBox>
+                  <S.ListUserBox>
+                    <text></text> {/* 생성자 이름 */}
+                  </S.ListUserBox>
+                  <S.ListTimeBox>
+                    <text> </text> {/* 수정시간 */}
+                  </S.ListTimeBox>
+                  <S.ListBookmarkBox>{isBookmarked && <S.Icon src={BookmarkIcon_Y} />}</S.ListBookmarkBox>
+                  <S.ListLinkBox>
+                    <S.Icon src={LinkIcon} />
+                  </S.ListLinkBox>
+                  <S.ListProgressBox>
+                    <S.Icon src={ProgressBefore} />
+                  </S.ListProgressBox>
+                </S.ItemBox>
+              ))}
+            </div>
+          </S.ListContainer>
+        </>
       )}
     </div>
   );

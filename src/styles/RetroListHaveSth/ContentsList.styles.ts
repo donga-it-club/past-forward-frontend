@@ -4,17 +4,16 @@ export const Container = styled.div`
   padding-top: 10px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start; /* Box 틀을 가운데 정렬 */
+  justify-content: flex-start;
 `;
 
 export const Box = styled.div`
   border: 1px solid #d9d9d9;
-  width: 200px; /* 한 줄에 4개씩 정렬하기 위한 너비 설정 */
+  width: 200px;
   height: 190px;
   margin-top: 30px;
   margin-left: 40px;
   margin-right: 40px;
-  /* flex-grow: 1; */
 `;
 
 export const ImgBox = styled.div`
@@ -40,4 +39,45 @@ export const MoreIcon = styled.img`
   width: 15px;
   height: 5px;
   margin-left: auto;
+`;
+
+export const ListContainer = styled.div`
+  padding-top: 10px;
+`;
+
+export const ListTopBox = styled.div`
+  display: flex;
+  justify-content: space-around;
+  color: #9b9b9b;
+  margin-bottom: 15px;
+`;
+
+export const ItemBox = styled.li`
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-around;
+`;
+
+export const ListTitleBox = styled.div`
+  flex: 1;
+`;
+export const ListUserBox = styled.div`
+  flex: 1;
+`;
+export const ListTimeBox = styled.div`
+  flex: 1;
+`;
+export const ListBookmarkBox = styled.div`
+  flex: 1;
+`;
+export const ListLinkBox = styled.div`
+  flex: 1;
+`;
+export const ListProgressBox = styled.div`
+  flex: 1;
+`;
+
+export const Icon = styled.img`
+  width: 20px;
+  height: 20px;
 `;
