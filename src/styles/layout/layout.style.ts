@@ -71,11 +71,13 @@ export const SideBarBGContainer = styled.div`
 
 export const LogoBox = styled.div`
   height: auto;
-  width: 200px;
+
   padding-top: 10px;
 `;
 
 export const LogoText = styled.a`
+  display: flex;
+  width: auto;
   color: #111b47;
   font-size: 30px;
   font-weight: bold;
@@ -124,4 +126,11 @@ export const DivingLine = styled.div`
   width: 70%;
   height: 0;
   border: 1px solid #111b47;
+`;
+
+export const GetStaredButton = styled.button`
+  padding: 5px;
+  background-color: #111b47;
+  color: white;
+  border-radius: 5px;
 `;

@@ -1,18 +1,16 @@
 import * as S from '@/styles/layout/layout.style';
-import PageSideBar from './parts/PageSideBar';
-import PageNavBar from './parts/ProfileNavBar';
 import { Outlet } from 'react-router-dom';
+import MainNavBar from './parts/MainNavBar';
 
-const SubLayout = () => {
+const MainLayout = () => {
   return (
     <S.BGContainer>
-      <PageSideBar />
       <S.MainContainer>
-        <PageNavBar />
+        <MainNavBar />
         <Outlet />
       </S.MainContainer>
     </S.BGContainer>
   );
 };
 
-export default SubLayout;
+export default MainLayout;

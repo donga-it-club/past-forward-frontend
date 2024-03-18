@@ -1,8 +1,8 @@
 import * as S from '@/styles/layout/layout.style';
-import PageNavBar from '@/components/layout/parts/PageNavBar';
+import PageNavBar from '@/components/layout/parts/ProfileNavBar';
 import { Outlet } from 'react-router-dom';
 
-const Layout = () => {
+const ProfileLayout = () => {
   return (
     <S.BGContainer>
       <S.MainContainer>
@@ -13,4 +13,4 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+export default ProfileLayout;

@@ -1,25 +1,14 @@
 import * as S from '@/styles/layout/layout.style';
 import { Bell, Gear, PersonCircle } from 'react-bootstrap-icons';
+import LogoBox from './LogoBox';
+import MenuBar from './MenuBar';
 
-const PageNavBar = () => {
+const MainNavBar = () => {
   return (
     <>
       <S.Container>
-        <S.LeftBox>
-          <S.Link href="#" id="header_home">
-            Home
-          </S.Link>
-          <S.Link href="#" id="header_temp">
-            Template
-          </S.Link>
-          <S.Link href="#" id="header_about">
-            About us
-          </S.Link>
-          <S.Link href="#" id="header_contact">
-            Contact
-          </S.Link>
-          <S.OrdinaryButton>Create</S.OrdinaryButton>
-        </S.LeftBox>
+        <MenuBar />
+        <LogoBox />
 
         <S.RightBox>
           <div
@@ -43,13 +32,8 @@ const PageNavBar = () => {
               </div>
             </S.IconStyle>
 
-            <S.IconStyle borderRadius="45%">
-              <Gear />
-            </S.IconStyle>
-            <S.IconStyle borderRadius="50%">
-              <Bell />
-            </S.IconStyle>
             <S.Link href="#">Logout</S.Link>
+            <S.GetStaredButton>Get Started for Free</S.GetStaredButton>
           </div>
         </S.RightBox>
       </S.Container>
@@ -57,4 +41,4 @@ const PageNavBar = () => {
   );
 };
 
-export default PageNavBar;
+export default MainNavBar;

@@ -6,7 +6,8 @@ import CreateRetroPage from '@/pages/CreateRetroPage';
 import WriteRetroTeamPage from '@/pages/WriteRetroTeamPage';
 import MyPage from '@/pages/MyPage';
 import SubLayout from '@/components/layout/PageSubLayout';
-import Layout from '@/components/layout/PageLayout';
+import ProfileLayout from '@/components/layout/ProfileLayout';
+import MainLayout from './components/layout/MainLayout';
 
 const App: React.FC = () => {
   return (
@@ -19,9 +20,11 @@ const App: React.FC = () => {
             <Route path="/create" element={<CreateRetroPage />}></Route>
             <Route path="/WriteRetroTeamPage" element={<WriteRetroTeamPage />}></Route>
           </Route>
-          <Route element={<Layout />}>
-            <Route path="/" element={<HomePage />}></Route>
+          <Route element={<ProfileLayout />}>
             <Route path="/my" element={<MyPage />}></Route>
+          </Route>
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<HomePage />}></Route>
           </Route>
         </Routes>
       </Router>
