@@ -1,21 +1,28 @@
-import React, { useState } from 'react';
 import * as S from '../../styles/RetroListHaveSth/RetroListContentsFilter.style';
 
-const RetroListContentsFilter: React.FC = () => {
-  const [selectContents, setSelectContents] = useState<string>('all');
+type RetroListContentsFilterProps = {
+  status: string;
+  onStatusChange: (newStatus: string) => void;
+};
 
-  const handleFilterChange = (filter: string) => {
-    setSelectContents(filter);
-  };
-
+const RetroListContentsFilter: React.FC<RetroListContentsFilterProps> = ({ status, onStatusChange }) => {
   return (
-    <div className="filter">
-      <S.ContentsFilterButton onClick={() => handleFilterChange('all')}>All files</S.ContentsFilterButton>
-      <S.ContentsFilterButton onClick={() => handleFilterChange('teams')}>Teams</S.ContentsFilterButton>
-      <S.ContentsFilterButton onClick={() => handleFilterChange('personal')}>Personal</S.ContentsFilterButton>
-      {selectContents === 'all' && <div>All files</div>}
-      {selectContents === 'teams' && <div>Teams</div>}
-      {selectContents === 'personal' && <div>Personal</div>}
+    <div>
+      <S.ContentsFilterButton
+        onClick={() => onStatusChange('All files')}
+        className={status === 'All files' ? 'active' : ''}
+      >
+        All files
+      </S.ContentsFilterButton>
+      <S.ContentsFilterButton onClick={() => onStatusChange('Teams')} className={status === 'Teams' ? 'active' : ''}>
+        Teams
+      </S.ContentsFilterButton>
+      <S.ContentsFilterButton
+        onClick={() => onStatusChange('Personal')}
+        className={status === 'Personal' ? 'active' : ''}
+      >
+        Personal
+      </S.ContentsFilterButton>
     </div>
   );
 };

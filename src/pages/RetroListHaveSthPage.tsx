@@ -1,22 +1,40 @@
+import { useState } from 'react';
 import RetroListContentsFilter from '@/components/RetroListHaveSth/RetroListContentsFilter';
 import RetroListSearch from '@/components/RetroListHaveSth/RetroListSearch';
-import RetroListSortButton from '@/components/RetroListHaveSth/RetroListSortButton';
+import RetroListViewButton from '@/components/RetroListHaveSth/RetroListViewButton';
+import ContentList from '@/components/RetroListHaveSth/ContentsList';
 import * as S from '../styles/RetroListHaveSth/RetroListHaveSthPage.style';
 
 const RetroListHaveSthPage = () => {
+  const [status, setStatus] = useState<string>('All files');
+  const [viewMode, setViewMode] = useState<string>('board');
+
+  const handleStatusChange = (newStatus: string) => {
+    setStatus(newStatus);
+  };
+
+  const handleViewModeChange = (newStatus: string) => {
+    setViewMode(newStatus);
+  };
+
   return (
     <>
-      <S.Container>
-        <S.FilterContainer>
-          <RetroListContentsFilter />
-        </S.FilterContainer>
-        <S.SearchContainer>
-          <RetroListSearch />
-        </S.SearchContainer>
-        <S.SortButtonContainer>
-          <RetroListSortButton />
-        </S.SortButtonContainer>
-      </S.Container>
+      <div>
+        <S.Container>
+          <S.FilterContainer>
+            <RetroListContentsFilter status={status} onStatusChange={handleStatusChange} />
+          </S.FilterContainer>
+          <S.SearchContainer>
+            <RetroListSearch />
+          </S.SearchContainer>
+          <S.SortButtonContainer>
+            <RetroListViewButton viewMode={viewMode} onViewModeChange={handleViewModeChange} />
+          </S.SortButtonContainer>
+        </S.Container>
+        <S.Box>
+          <ContentList status={status} viewMode={viewMode} />
+        </S.Box>
+      </div>
     </>
   );
 };

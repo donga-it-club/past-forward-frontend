@@ -23,3 +23,8 @@ export const SortButtonContainer = styled.div`
   padding-left: 10px;
   padding-right: 10px;
 `;
+
+export const Box = styled.div`
+  padding-left: 40px;
+  padding-right: 40px;
+`;
