@@ -1,14 +1,19 @@
 import styled from 'styled-components';
 
-export const TaskStyle = styled.div<{ left: string }>`
-  width: 311px;
-  height: 115px;
+export const TaskStyle = styled.div`
+  width: 313px;
+  height: auto;
   border-radius: 5px;
   background-color: #ffffff;
-  box-shadow: 0px 2px 5px 0px rgba(38, 51, 77, 0.3);
-  position: absolute;
-  top: 361px;
-  left: ${props => props.left};
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.25);
+  margin-bottom: 20px;
+`;
+
+export const TaskMainStyle = styled.div`
+  width: 313px;
+  height: auto;
+  min-height: 110px;
+  position: relative;
 `;
 
 export const TaskUserNameStyle = styled.span`
@@ -61,7 +66,6 @@ export const DaysLeftIcon = styled.div`
   position: absolute;
   top: 71px;
   left: 114px;
-  /* border: 1px solid red; */
 `;
 
 export const TaskSubCount = styled.p<{ left: string }>`
@@ -71,6 +75,11 @@ export const TaskSubCount = styled.p<{ left: string }>`
   font-weight: 700;
   color: #6b7a99;
   position: absolute;
-  top: 82px;
+  top: 78.5px;
   left: ${props => props.left};
+`;
+
+export const TaskMessageBox = styled.div`
+  width: 313px;
+  height: auto;
 `;

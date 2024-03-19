@@ -1,4 +1,4 @@
-import WriteRetroTitle from '../components/writeRetro/WriteRetroTitle';
+import Title from '../components/writeRetro/Title';
 import WriteRetroKudos from '../components/writeRetro/WriteRetroKudos';
 import WriteRetroWentWell from '../components/writeRetro/WriteRetroWentWell';
 import WriteRetroToImprove from '../components/writeRetro/WriteRetroToImprove';
@@ -9,7 +9,7 @@ import CheckPopUp from '../components/writeRetro/CheckPopUp';
 function WriteRetroTeamPage() {
   return (
     <>
-      <WriteRetroTitle title="First Retro"></WriteRetroTitle>
+      <Title title="First Retro"></Title>
       <SaveButton></SaveButton>
       <CheckPopUp></CheckPopUp>
       <WriteRetroKudos></WriteRetroKudos>

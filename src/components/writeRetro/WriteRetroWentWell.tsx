@@ -9,6 +9,7 @@ function WriteRetroWentWell() {
         color="#1A265C"
         mark_background_color="#CECECE"
         left="720px"
+        button_color="light"
       ></Frame>
     </>
   );

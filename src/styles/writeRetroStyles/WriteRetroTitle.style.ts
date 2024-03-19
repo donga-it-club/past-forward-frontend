@@ -18,5 +18,5 @@ export const TitleTextStyle = styled.span`
   font-size: 40px;
   font-weight: 700;
   color: #434343;
-  margin: auto 0;
+  margin: auto 5px;
 `;

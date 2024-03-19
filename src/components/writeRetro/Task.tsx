@@ -3,6 +3,7 @@ import image from '../../assets/Avatar Image.png';
 import ThumbUp from '../../assets/thumb_up.png';
 import Message from '../../assets/message.png';
 import DaysLeft from '../../assets/access_alarms.png';
+import TaskMessage from '../../components/writeRetro/TaskMessage';
 
 // 테스트용 객체
 const TestTask = {
@@ -14,33 +15,35 @@ const TestTask = {
   DaysLeft: '2 Hours ago',
 };
 
-type TaskProps = {
-  left: string;
-};
-
-function Task({ left }: TaskProps) {
+function Task() {
   return (
-    <div>
-      <S.TaskStyle left={left}>
-        <S.TaskUserNameStyle>{TestTask.UserName}</S.TaskUserNameStyle>
-        <S.TaskTitleStyle>{TestTask.TaskTitle}</S.TaskTitleStyle>
-        <S.TaskUserProfile>
-          <img src={image}></img>
-        </S.TaskUserProfile>
-        <S.ThumbUpIcon>
-          <img src={ThumbUp}></img>
-        </S.ThumbUpIcon>
-        <S.TaskSubCount left="42px">{TestTask.ThumbUpCount}</S.TaskSubCount>
-        <S.MessageIcon>
-          <img src={Message}></img>
-        </S.MessageIcon>
-        <S.TaskSubCount left="94px">{TestTask.MessageCount}</S.TaskSubCount>
-        <S.DaysLeftIcon>
-          <img src={DaysLeft}></img>
-        </S.DaysLeftIcon>
-        <S.TaskSubCount left="147px">{TestTask.DaysLeft}</S.TaskSubCount>
+    <>
+      <S.TaskStyle>
+        <S.TaskMainStyle>
+          <S.TaskUserNameStyle>{TestTask.UserName}</S.TaskUserNameStyle>
+          <S.TaskTitleStyle>{TestTask.TaskTitle}</S.TaskTitleStyle>
+          <S.TaskUserProfile>
+            <img src={image}></img>
+          </S.TaskUserProfile>
+          <S.ThumbUpIcon>
+            <img src={ThumbUp}></img>
+          </S.ThumbUpIcon>
+          <S.TaskSubCount left="42px">{TestTask.ThumbUpCount}</S.TaskSubCount>
+          <S.MessageIcon>
+            <img src={Message}></img>
+          </S.MessageIcon>
+          <S.TaskSubCount left="94px">{TestTask.MessageCount}</S.TaskSubCount>
+          <S.DaysLeftIcon>
+            <img src={DaysLeft}></img>
+          </S.DaysLeftIcon>
+          <S.TaskSubCount left="147px">{TestTask.DaysLeft}</S.TaskSubCount>
+        </S.TaskMainStyle>
+
+        <S.TaskMessageBox>
+          <TaskMessage></TaskMessage>
+        </S.TaskMessageBox>
       </S.TaskStyle>
-    </div>
+    </>
   );
 }
 
