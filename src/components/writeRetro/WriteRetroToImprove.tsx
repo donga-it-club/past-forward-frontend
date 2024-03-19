@@ -9,6 +9,7 @@ function WriteRetroToImprove() {
         color="#FFFFFF"
         mark_background_color="#FFFFFF"
         left="1097px"
+        button_color="dark"
       ></Frame>
     </>
   );

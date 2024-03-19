@@ -1,30 +1,33 @@
 import styled from 'styled-components';
 
 export const TaskMessageStyle = styled.div`
-  width: 311px;
+  width: 313px;
   height: auto;
-  padding: 6px;
-  position: absolute;
-  top: 107px;
-  border: 1px solid yellow;
+  min-height: 80px;
+  background-color: #ffffff;
+  padding: 2px 6px 6px 6px;
+  position: relative;
 `;
 
-export const AnnounceMessageCount = styled.span`
+export const AnnounceMessageCount = styled.p`
   font-size: 8px;
   font-weight: 700;
   color: #dadee5;
   width: 57px;
-  height: 22px;
-  position: absolute;
-  top: 12px;
-  left: 7px;
+  height: 13px;
+  text-align: center;
 `;
 
-export const TaskMessageLine = styled.div`
+export const MessageLine = styled.div`
   width: 222.74px;
-  height: 0;
   position: absolute;
-  top: 15px;
+  top: 7.5px;
   left: 63.76px;
-  border: 1px solid #dadee5;
+  border-top: 1px solid #dadee5;
+`;
+
+export const MessageBox = styled.div`
+  width: 301px;
+  height: auto;
+  padding: 6px;
 `;
