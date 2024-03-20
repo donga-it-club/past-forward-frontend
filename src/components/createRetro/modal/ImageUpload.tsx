@@ -3,7 +3,6 @@ import { Input, Box, Image, Button, Center } from '@chakra-ui/react';
 
 const ImageUpload: React.FC = () => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
   // 파일이 선택되면 실행되는 함수
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -12,10 +11,14 @@ const ImageUpload: React.FC = () => {
       const reader = new FileReader();
       reader.onloadend = () => {
         setImagePreview(reader.result as string); // 이미지 미리보기 업데이트
-        setSelectedImage(file); // 선택된 파일 업데이트
       };
       reader.readAsDataURL(file); // 파일을 읽어서 base64 형식으로 변환하여 미리보기에 사용
     }
+  };
+
+  // 이미지 제거 함수
+  const handleRemoveImage = () => {
+    setImagePreview(null);
   };
 
   // 이미지 업로드를 위한 input 컴포넌트 렌더링
@@ -27,7 +30,7 @@ const ImageUpload: React.FC = () => {
         <Center>
           <label htmlFor="image-upload">
             <Button as="span" mt={4} variant="outline" borderColor="gray.700" size="md" width="15rem">
-              PC에서 업로드
+              PC에서 이미지 선택
             </Button>
           </label>
         </Center>
@@ -36,19 +39,17 @@ const ImageUpload: React.FC = () => {
         <Center>
           {imagePreview && (
             <Box mt={4}>
-              <Image src={imagePreview} alt="Selected Image" maxH="200px" />
+              <Center>
+                <Image src={imagePreview} alt="Selected Image" maxH="200px" />
+              </Center>
+              <Center mt={2}>
+                <Button variant="outline" borderColor="gray.700" size="md" width="15rem" onClick={handleRemoveImage}>
+                  이미지 제거
+                </Button>
+              </Center>
             </Box>
           )}
         </Center>
-
-        {/* 이미지 업로드 버튼 */}
-        {/* {selectedImage && (
-          <Center mt={4}>
-            <Button colorScheme="blue" onClick={() => console.log('Upload', selectedImage)}>
-              Upload
-            </Button>
-          </Center>
-        )} */}
       </Box>
     </>
   );
