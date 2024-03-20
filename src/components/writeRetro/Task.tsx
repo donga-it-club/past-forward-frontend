@@ -1,9 +1,9 @@
-import * as S from '../../styles/writeRetroStyles/Task.style';
 import image from '../../assets/Avatar Image.png';
-import ThumbUp from '../../assets/thumb_up.png';
-import Message from '../../assets/message.png';
 import DaysLeft from '../../assets/access_alarms.png';
+import Message from '../../assets/message.png';
+import ThumbUp from '../../assets/thumb_up.png';
 import TaskMessage from '../../components/writeRetro/TaskMessage';
+import * as S from '../../styles/writeRetroStyles/Task.style';
 
 // 테스트용 객체
 const TestTask = {

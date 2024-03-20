@@ -1,7 +1,7 @@
 import React from 'react';
-import * as S from '@/styles/createRetro/DescriptionBox.style';
-import TeamRetroDescription from '@/components/createRetro/TeamRetroDescription';
 import PersonalRetroDescription from '@/components/createRetro/PersonalRetroDescription';
+import TeamRetroDescription from '@/components/createRetro/TeamRetroDescription';
+import * as S from '@/styles/createRetro/DescriptionBox.style';
 
 const DescriptionBox: React.FC = () => {
   return (

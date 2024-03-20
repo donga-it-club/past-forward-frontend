@@ -1,8 +1,8 @@
-import * as S from '@/styles/my/myPage.style';
 import { Asterisk } from 'react-bootstrap-icons';
+import ChangePWButton from '@/components/my/component/ChangePWButton';
 import CurrentPasswordInput from '@/components/my/component/CurrentPasswordInput';
 import NewPasswordInput from '@/components/my/component/NewPasswordInput';
-import ChangePWButton from '@/components/my/component/ChangePWButton';
+import * as S from '@/styles/my/myPage.style';
 
 const PasswordBox = () => {
   return (

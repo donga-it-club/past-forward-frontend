@@ -1,6 +1,6 @@
+import * as S from '../../styles/RetroListHaveSth/RetroListSortButton.style';
 import BoardIcon from '@/assets/RetroListBoardViewIcon.png';
 import ListIcon from '@/assets/RetroListLIstViewIcon.png';
-import * as S from '../../styles/RetroListHaveSth/RetroListSortButton.style';
 
 interface ViewModeButtonProps {
   viewMode: string;

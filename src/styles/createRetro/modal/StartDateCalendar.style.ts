@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import DatePicker from 'react-datepicker';
+import styled from 'styled-components';
 
 export const DateInput = styled(DatePicker)`
   width: 100%;

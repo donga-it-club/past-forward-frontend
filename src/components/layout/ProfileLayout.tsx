@@ -1,6 +1,6 @@
-import * as S from '@/styles/layout/layout.style';
-import PageNavBar from '@/components/layout/parts/ProfileNavBar';
 import { Outlet } from 'react-router-dom';
+import PageNavBar from '@/components/layout/parts/ProfileNavBar';
+import * as S from '@/styles/layout/layout.style';
 
 const ProfileLayout = () => {
   return (

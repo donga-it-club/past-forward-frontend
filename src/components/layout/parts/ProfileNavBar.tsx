@@ -1,7 +1,7 @@
-import * as S from '@/styles/layout/layout.style';
 import { Bell, Gear, PersonCircle } from 'react-bootstrap-icons';
 import LogoBox from './LogoBox';
 import MenuBar from './MenuBar';
+import * as S from '@/styles/layout/layout.style';
 
 const PageNavBar = () => {
   return (

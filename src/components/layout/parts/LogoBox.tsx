@@ -1,5 +1,5 @@
-import * as S from '@/styles/layout/layout.style';
 import Logo from '@/../public/logo.png';
+import * as S from '@/styles/layout/layout.style';
 const LogoBox = () => {
   return (
     <S.LogoBox>

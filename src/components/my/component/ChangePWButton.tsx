@@ -1,4 +1,3 @@
-import * as S from '@/styles/my/myPage.style';
 import {
   Button,
   Modal,
@@ -9,6 +8,7 @@ import {
   ModalOverlay,
   useDisclosure,
 } from '@chakra-ui/react';
+import * as S from '@/styles/my/myPage.style';
 
 const ChangePWButton = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();

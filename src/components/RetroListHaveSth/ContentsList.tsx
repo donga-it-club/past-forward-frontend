@@ -1,12 +1,10 @@
 import React from 'react';
-import Thumbnail from '@/assets/Thumbnail.png';
-import MoreIcon from '@/assets/MoreIcon.png';
+import * as S from '../../styles/RetroListHaveSth/ContentsList.styles';
 import BookmarkIcon_Y from '@/assets/BookmarkIcon_Y.png';
 import LinkIcon from '@/assets/Link.png';
+import MoreIcon from '@/assets/MoreIcon.png';
 import ProgressBefore from '@/assets/Progress_Before.png';
-import ProgressIng from '@/assets/Progress_Ing.png';
-import ProgressDone from '@/assets/Progress_Done.png';
-import * as S from '../../styles/RetroListHaveSth/ContentsList.styles';
+import Thumbnail from '@/assets/Thumbnail.png';
 
 interface Content {
   id: number;

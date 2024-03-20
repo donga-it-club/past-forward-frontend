@@ -1,6 +1,6 @@
 import React from 'react';
-import SearchIcon from '@/assets/SearchIcon.png';
 import * as S from '../../styles/RetroListHaveSth/RetroListSearch.style';
+import SearchIcon from '@/assets/SearchIcon.png';
 
 const RetroListSearch: React.FC = () => {
   return (

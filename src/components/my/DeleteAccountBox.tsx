@@ -1,4 +1,4 @@
-import * as S from '@/styles/my/myPage.style';
+import { InfoCircle } from 'react-bootstrap-icons';
 import {
   Button,
   Modal,
@@ -9,7 +9,7 @@ import {
   ModalOverlay,
   useDisclosure,
 } from '@chakra-ui/react';
-import { InfoCircle } from 'react-bootstrap-icons';
+import * as S from '@/styles/my/myPage.style';
 
 const DeleteAccountButton = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();

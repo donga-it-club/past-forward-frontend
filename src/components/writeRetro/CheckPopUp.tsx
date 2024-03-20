@@ -1,5 +1,5 @@
-import * as S from '../../styles/writeRetroStyles/CheckPopUp.style';
 import image from '../../assets/Vector.png';
+import * as S from '../../styles/writeRetroStyles/CheckPopUp.style';
 
 function CheckPopUp() {
   return (

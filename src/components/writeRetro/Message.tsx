@@ -1,5 +1,5 @@
-import * as S from '../../styles/writeRetroStyles/Message.style';
 import image from '../../assets/Avatar Image.png';
+import * as S from '../../styles/writeRetroStyles/Message.style';
 
 // 테스트용 객체
 const TestTask = {

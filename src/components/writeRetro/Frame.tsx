@@ -1,7 +1,7 @@
-import * as S from '../../styles/writeRetroStyles/Frame.style';
+import AddTaskButton from './AddTaskButton';
 import Label from './Label';
 import Task from './Task';
-import AddTaskButton from './AddTaskButton';
+import * as S from '../../styles/writeRetroStyles/Frame.style';
 
 type FrameProps = {
   title: string;

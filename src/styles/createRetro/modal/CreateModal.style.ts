@@ -1,5 +1,5 @@
+import { ModalBody } from '@chakra-ui/react';
 import styled from 'styled-components';
-import { ModalContent, ModalBody } from '@chakra-ui/react';
 
 // export const CustomModalContent = styled(ModalContent)`
 //   display: flex;

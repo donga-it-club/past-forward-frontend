@@ -1,10 +1,10 @@
-import ImageUploader from '@/components/my/component/ImageUploader';
-import * as S from '@/styles/my/myPage.style';
 import { useState } from 'react';
 import DeleteAccountButton from '@/components/my/DeleteAccountBox';
-import PasswordBox from '@/components/my/PasswordBox';
 import EmailBox from '@/components/my/EmailBox';
 import NicknameBox from '@/components/my/NicknameBox';
+import PasswordBox from '@/components/my/PasswordBox';
+import ImageUploader from '@/components/my/component/ImageUploader';
+import * as S from '@/styles/my/myPage.style';
 
 const MyPage = () => {
   const [image, setImage] = useState<string>('');

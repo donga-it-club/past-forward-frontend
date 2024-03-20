@@ -1,7 +1,7 @@
-import * as S from '@/styles/my/myPage.style';
 import { ChangeEventHandler, FC, MouseEventHandler, useRef } from 'react';
 import { PersonCircle } from 'react-bootstrap-icons';
 import styled from 'styled-components';
+import * as S from '@/styles/my/myPage.style';
 
 interface Props {
   image: string;

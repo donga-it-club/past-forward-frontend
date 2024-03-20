@@ -1,18 +1,17 @@
 import React from 'react';
-import ImageUpload from '@/components/createRetro/modal/ImageUpload';
-import TitleInput from '@/components/createRetro/modal/TitleInput';
-import TemlplateSelect from '@/components/createRetro/modal/TemplateSelect';
-import StartDateCalendar from '@/components/createRetro/modal/StartDateCalender';
 import {
   Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
   ModalFooter,
-  ModalBody,
   ModalCloseButton,
   Button,
 } from '@chakra-ui/react';
+import ImageUpload from '@/components/createRetro/modal/ImageUpload';
+import StartDateCalendar from '@/components/createRetro/modal/StartDateCalender';
+import TemlplateSelect from '@/components/createRetro/modal/TemplateSelect';
+import TitleInput from '@/components/createRetro/modal/TitleInput';
 import * as S from '@/styles/createRetro/modal/CreateModal.style';
 
 interface CreateModalProps {

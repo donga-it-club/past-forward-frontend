@@ -1,6 +1,6 @@
-import * as S from '../../styles/writeRetroStyles/AddTaskButton.style';
 import dark from '../../assets/PlusIcon_black.png';
 import light from '../../assets/PlusIcon_gray.png';
+import * as S from '../../styles/writeRetroStyles/AddTaskButton.style';
 
 type AddTaskButtonProps = {
   color: 'dark' | 'light';

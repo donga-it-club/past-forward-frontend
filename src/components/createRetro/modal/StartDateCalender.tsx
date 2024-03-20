@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
+import { ko } from 'date-fns/locale/ko';
 import * as S from '@/styles/createRetro/modal/StartDateCalendar.style';
 import '@/styles/createRetro/modal/Calendar.css';
-import { ko } from 'date-fns/locale/ko';
 
 const StartDateCalendar: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);

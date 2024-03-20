@@ -1,6 +1,6 @@
-import * as S from '@/styles/my/myPage.style';
-import kakao from '@/../public/kakao.png';
 import google from '@/../public/google.png';
+import kakao from '@/../public/kakao.png';
+import * as S from '@/styles/my/myPage.style';
 const EmailBox = () => {
   return (
     <>

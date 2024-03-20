@@ -1,7 +1,4 @@
-import ReactDOM from 'react-dom';
-import App from '@/App';
-import ErrorBoundary from './components/ErrorBoundary';
-import { ChakraProvider, ThemeConfig, extendTheme } from '@chakra-ui/react';
+import { ThemeConfig, extendTheme } from '@chakra-ui/react';
 import { colors } from './styles/@colors';
 
 const config: ThemeConfig = {
@@ -37,12 +34,3 @@ const theme = extendTheme({
 });
 
 export default theme;
-
-ReactDOM.render(
-  <ErrorBoundary>
-    <ChakraProvider>
-      <App />
-    </ChakraProvider>
-  </ErrorBoundary>,
-  document.getElementById('root'),
-);

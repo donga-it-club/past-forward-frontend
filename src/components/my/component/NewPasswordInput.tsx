@@ -1,6 +1,6 @@
-import { Button, Input, InputGroup, InputRightElement } from '@chakra-ui/react';
 import { useState } from 'react';
 import { Eye, EyeSlash } from 'react-bootstrap-icons';
+import { Button, Input, InputGroup, InputRightElement } from '@chakra-ui/react';
 
 const NewPasswordInput = () => {
   const [show, setShow] = useState(false);

@@ -1,6 +1,6 @@
-import * as S from '@/styles/layout/layout.style';
 import { Outlet } from 'react-router-dom';
 import MainNavBar from './parts/MainNavBar';
+import * as S from '@/styles/layout/layout.style';
 
 const MainLayout = () => {
   return (

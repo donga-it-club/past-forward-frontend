@@ -1,7 +1,7 @@
-import * as S from '@/styles/layout/layout.style';
+import { Outlet } from 'react-router-dom';
 import PageSideBar from './parts/PageSideBar';
 import PageNavBar from './parts/ProfileNavBar';
-import { Outlet } from 'react-router-dom';
+import * as S from '@/styles/layout/layout.style';
 
 const SubLayout = () => {
   return (

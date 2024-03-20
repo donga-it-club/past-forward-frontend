@@ -1,13 +1,13 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HomePage from '@/pages/HomePage';
-import GlobalStyle from '@/styles/fonts/GlobalStyle';
-import GlobalFont from '@/styles/fonts/GlobalFont';
-import CreateRetroPage from '@/pages/CreateRetroPage';
-import WriteRetroTeamPage from '@/pages/WriteRetroTeamPage';
-import MyPage from '@/pages/MyPage';
+import MainLayout from './components/layout/MainLayout';
 import SubLayout from '@/components/layout/PageSubLayout';
 import ProfileLayout from '@/components/layout/ProfileLayout';
-import MainLayout from './components/layout/MainLayout';
+import CreateRetroPage from '@/pages/CreateRetroPage';
+import HomePage from '@/pages/HomePage';
+import MyPage from '@/pages/MyPage';
+import WriteRetroTeamPage from '@/pages/WriteRetroTeamPage';
+import GlobalFont from '@/styles/fonts/GlobalFont';
+import GlobalStyle from '@/styles/fonts/GlobalStyle';
 
 const App: React.FC = () => {
   return (
