@@ -1,4 +1,7 @@
-import { ThemeConfig, extendTheme } from '@chakra-ui/react';
+import { App } from 'react-bootstrap-icons';
+import ReactDOM from 'react-dom/client';
+import { ChakraProvider, ThemeConfig, extendTheme } from '@chakra-ui/react';
+import ErrorBoundary from './components/ErrorBoundary';
 import { colors } from './styles/@colors';
 
 const config: ThemeConfig = {
@@ -34,3 +37,11 @@ const theme = extendTheme({
 });
 
 export default theme;
+
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  <ErrorBoundary>
+    <ChakraProvider>
+      <App />
+    </ChakraProvider>
+  </ErrorBoundary>,
+);
