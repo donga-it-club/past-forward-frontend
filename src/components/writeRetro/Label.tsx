@@ -1,4 +1,4 @@
-import * as S from '../../styles/writeRetroStyles/Label.style';
+import * as S from '@/styles/writeRetroStyles/Label.style';
 
 const TaskCount = '8';
 

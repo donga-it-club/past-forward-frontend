@@ -1,5 +1,11 @@
-import CheckPopUp from '../components/writeRetro/CheckPopUp';
+import CheckPopUp from '@/components/writeRetro/CheckPopUp';
+import SaveButton from '@/components/writeRetro/SaveButton';
 import SubTitle from '@/components/writeRetro/SubTitle';
+import Title from '@/components/writeRetro/Title';
+import WriteRetroActionItems from '@/components/writeRetro/WriteRetroActionItems';
+import WriteRetroKudos from '@/components/writeRetro/WriteRetroKudos';
+import WriteRetroToImprove from '@/components/writeRetro/WriteRetroToImprove';
+import WriteRetroWentWell from '@/components/writeRetro/WriteRetroWentWell';
 
 function WriteRetroTeamPage() {
   return (
