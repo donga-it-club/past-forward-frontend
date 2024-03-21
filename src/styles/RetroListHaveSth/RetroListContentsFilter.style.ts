@@ -9,6 +9,10 @@ export const ContentsFilterButton = styled.button`
   display: inline-block;
   font-size: 18px;
   font-weight: bold;
+  &.active {
+    color: #111b47;
+    border-bottom: 4px solid #111b47;
+  }
   &:focus {
     color: #111b47;
     border-bottom: 4px solid #111b47;
