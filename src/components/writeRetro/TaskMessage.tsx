@@ -1,16 +1,15 @@
 import Message from '../../components/writeRetro/Message';
 import * as S from '../../styles/writeRetroStyles/TaskMessage.style';
 
-// 테스트용 객체
-const TestTask = {
-  MessageCount: 3,
+type TaskMessageProps = {
+  count: string;
 };
 
-function TaskMessage() {
+function TaskMessage({ count }: TaskMessageProps) {
   return (
     <>
       <S.TaskMessageStyle>
-        <S.AnnounceMessageCount>{TestTask.MessageCount}개의 댓글</S.AnnounceMessageCount>
+        <S.AnnounceMessageCount>{count}개의 댓글</S.AnnounceMessageCount>
         <S.MessageLine></S.MessageLine>
         <S.MessageBox>
           <Message></Message>

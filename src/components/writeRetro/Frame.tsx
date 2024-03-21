@@ -15,22 +15,22 @@ type FrameProps = {
 function Frame({ title, background_color, color, mark_background_color, left, button_color }: FrameProps) {
   return (
     <>
-      <S.FrameStyle left={left}>
-        <Label
-          title={title}
-          background_color={background_color}
-          color={color}
-          mark_background_color={mark_background_color}
-        ></Label>
-        <S.TaskFrame>
-          <S.TaskBox>
-            <Task></Task>
-            <Task></Task>
-            <Task></Task>
-          </S.TaskBox>
-          <AddTaskButton color={button_color}></AddTaskButton>
-        </S.TaskFrame>
-      </S.FrameStyle>
+      <S.FrameBox left={left}>
+        <S.FrameStyle>
+          <Label
+            title={title}
+            background_color={background_color}
+            color={color}
+            mark_background_color={mark_background_color}
+          ></Label>
+          <S.TaskFrame>
+            <S.TaskBox>
+              <Task></Task>
+            </S.TaskBox>
+            <AddTaskButton color={button_color}></AddTaskButton>
+          </S.TaskFrame>
+        </S.FrameStyle>
+      </S.FrameBox>
     </>
   );
 }
