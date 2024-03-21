@@ -6,7 +6,7 @@ export const LabelStyle = styled.div<{ background_color: string }>`
   border-radius: 5px;
   background-color: ${props => props.background_color}; // 블로그에 정리하기
   display: flex;
-  position: absolute;
+  position: relative;
   margin-bottom: 38px;
   box-shadow: 0px 2px 5px 0px rgba(38, 51, 77, 0.3);
 `;

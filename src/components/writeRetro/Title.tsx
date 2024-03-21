@@ -1,4 +1,4 @@
-import * as S from '../../styles/writeRetroStyles/WriteRetroTitle.style';
+import * as S from '../../styles/writeRetroStyles/Title.style';
 import image from '../../assets/-group_senior.png';
 
 type TitleProps = {
