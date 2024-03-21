@@ -9,7 +9,7 @@ import WriteRetroTeamPage from '@/pages/WriteRetroTeamPage';
 import GlobalFont from '@/styles/fonts/GlobalFont';
 import GlobalStyle from '@/styles/fonts/GlobalStyle';
 
-const App: React.FC = () => {
+const App = () => {
   return (
     <>
       <GlobalFont />
