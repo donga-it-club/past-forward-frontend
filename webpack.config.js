@@ -62,7 +62,6 @@ module.exports = (env, argv) => {
             : false,
       }),
       new CleanWebpackPlugin(),
-      new Dotenv(),
     ],
   };
 };
