@@ -1,6 +1,6 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const path = require('path');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = (env, argv) => {
@@ -25,7 +25,6 @@ module.exports = (env, argv) => {
       alias: {
         '@': path.resolve(__dirname, './src/'),
       },
-
     },
     module: {
       rules: [
@@ -42,7 +41,10 @@ module.exports = (env, argv) => {
           test: /\.css$/,
           use: ['style-loader', 'css-loader'],
         },
-
+        {
+          test: /\.svg$/,
+          use: ['file-loader'],
+        },
       ],
     },
     plugins: [

@@ -64,26 +64,24 @@ export const SideBarBGContainer = styled.div`
   flex-direction: column;
   position: relative;
   width: 400px;
+  height: 120vh;
   color: white;
   background-color: #f8f8f8;
   z-index: 999;
 `;
 
-export const LogoBox = styled.div`
-  height: auto;
-
-  padding-top: 10px;
-`;
+export const LogoBox = styled.div``;
 
 export const LogoText = styled.a`
   display: flex;
-  width: auto;
+  width: 40vh;
   color: #111b47;
   font-size: 30px;
   font-weight: bold;
   border: 20px;
-  padding: 10px;
+  padding: 10px 5px;
   text-decoration: none;
+  padding-top: 10px;
 `;
 
 export const ProfileBox = styled.div`
@@ -104,9 +102,7 @@ export const ProfileLink = styled(ProfileBox)`
 export const MiniBox = styled.div`
   display: flex;
   flex-direction: column;
-  color: #111b47;
-  padding: 10px 0;
-  border: 3px solid #d2d2d2;
+  width: 100%;
 `;
 
 export const MainName = styled.h1`
