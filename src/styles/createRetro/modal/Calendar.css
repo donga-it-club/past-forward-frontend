@@ -61,7 +61,7 @@
 
 /* 달력 아이콘 추가 */
 .react-datepicker__input-container::before {
-  content: url('/src/assets/calendar_icon.svg');
+  content: url('/src/assets/CalendarIcon.svg');
   display: inline-block;
   position: absolute;
   top: 22%;
