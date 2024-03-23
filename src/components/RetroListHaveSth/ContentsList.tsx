@@ -17,9 +17,10 @@ interface Content {
 interface ContentListProps {
   status: string;
   viewMode: string;
+  searchData: string;
 }
 
-const ContentList: React.FC<ContentListProps> = ({ status, viewMode }) => {
+const ContentList: React.FC<ContentListProps> = ({ status, viewMode, searchData }) => {
   const data: Content[] = [
     { id: 1, title: '회고1', status: 'Teams', userId: null, teamId: 1 },
     { id: 2, title: '회고2', status: 'Teams', userId: null, teamId: 2 },
@@ -34,7 +35,9 @@ const ContentList: React.FC<ContentListProps> = ({ status, viewMode }) => {
     { id: 11, title: '회고11', status: 'All files', userId: 5, teamId: null },
   ];
 
-  const filteredData = data.filter(item => item.status === status);
+  const filteredData = data.filter(
+    item => item.status === status && item.title.toLowerCase().includes(searchData.toLowerCase()),
+  );
 
   const isBookmarked: boolean = true;
 
