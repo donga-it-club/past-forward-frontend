@@ -8,6 +8,7 @@ import RetroListViewButton from '@/components/RetroListHaveSth/RetroListViewButt
 const RetroListHaveSthPage = () => {
   const [status, setStatus] = useState<string>('All files');
   const [viewMode, setViewMode] = useState<string>('board');
+  const [searchData, setSearchData] = useState('');
 
   const handleStatusChange = (newStatus: string) => {
     setStatus(newStatus);
@@ -16,7 +17,9 @@ const RetroListHaveSthPage = () => {
   const handleViewModeChange = (newStatus: string) => {
     setViewMode(newStatus);
   };
-
+  const handleSearch = (searchTerm: string) => {
+    setSearchData(searchTerm);
+  };
   return (
     <>
       <div>
@@ -25,14 +28,14 @@ const RetroListHaveSthPage = () => {
             <RetroListContentsFilter status={status} onStatusChange={handleStatusChange} />
           </S.FilterContainer>
           <S.SearchContainer>
-            <RetroListSearch />
+            <RetroListSearch onSearch={handleSearch} />
           </S.SearchContainer>
           <S.SortButtonContainer>
             <RetroListViewButton viewMode={viewMode} onViewModeChange={handleViewModeChange} />
           </S.SortButtonContainer>
         </S.Container>
         <S.Box>
-          <ContentList status={status} viewMode={viewMode} />
+          <ContentList status={status} viewMode={viewMode} searchData={searchData} />
         </S.Box>
       </div>
     </>
