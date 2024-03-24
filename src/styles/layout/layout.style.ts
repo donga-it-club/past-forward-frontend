@@ -32,9 +32,9 @@ export const RightBox = styled.div`
   text-align: center;
 `;
 
-export const IconStyle = styled.div<{ border_radius: string }>`
+export const IconStyle = styled.div<{ borderRadius: string }>`
   width: auto;
-  border-radius: ${props => props.border_radius};
+  border-radius: ${props => props.borderRadius};
   display: inline-block;
   border: 2px solid black;
   padding: 5px;
@@ -64,7 +64,6 @@ export const SideBarBGContainer = styled.div`
   flex-direction: column;
   position: relative;
   width: 400px;
-  min-width: 300px;
   height: 120vh;
   color: white;
   background-color: #f8f8f8;
