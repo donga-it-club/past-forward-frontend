@@ -1,4 +1,7 @@
 import { useEffect, useState } from 'react';
+import { useCustomToast } from '../../hooks/useCustomToast';
+import { CommentResponse } from '@/api/@types/Comment';
+import { CommentService } from '@/api/services/Comment';
 import DeleteAccountButton from '@/components/my/DeleteAccountBox';
 import EmailBox from '@/components/my/EmailBox';
 import NicknameBox from '@/components/my/NicknameBox';
@@ -8,14 +11,21 @@ import * as S from '@/styles/my/myPage.style';
 
 const MyPage = () => {
   const [image, setImage] = useState<string>('');
-  const [todos, setTodos] = useState<Array<any>>([]);
+  const [comment, setComment] = useState<CommentResponse>();
+  const toast = useCustomToast();
+
+  const fetchComment = async () => {
+    try {
+      const data = await CommentService.getComment({ id: 'acb4287' });
+      setComment(data);
+      console.log(comment);
+    } catch (e) {
+      toast.error(e);
+    }
+  };
+
   useEffect(() => {
-    fetch('/comments')
-      .then(res => res.json())
-      .then(data => {
-        setTodos(data);
-        console.log(todos);
-      });
+    fetchComment();
   }, []);
   return (
     <>
@@ -25,7 +35,6 @@ const MyPage = () => {
 
       <S.MyPageBGContainer>
         <S.MyPageContainer>
-          <a>{todos}</a>
           <ImageUploader image={image} setImage={setImage} />
           <NicknameBox />
           <EmailBox />

@@ -2,12 +2,13 @@ import { http, RequestHandler, HttpResponse } from 'msw';
 import { setupWorker } from 'msw/browser';
 
 export const handlers: RequestHandler[] = [
-  http.get('/comments', () => {
+  http.get('/comments/get', () => {
     const mock = {
       id: 'acb4287',
-      like: true,
+      name: 'string',
+      text: 'string',
     };
     return HttpResponse.json(mock);
   }),
 ];
-export const msWorker = setupWorker(...handlers);
+export const mswWorker = setupWorker(...handlers);

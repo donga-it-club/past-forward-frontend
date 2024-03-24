@@ -31,6 +31,7 @@
     "@emotion/eslint-plugin": "^11.11.0",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
+    "@types/webpack-env": "^1.18.4",
     "axios": "^1.6.8",
     "bootstrap": "5.3.3",
     "css-loader": "^6.10.0",
@@ -50,6 +51,7 @@
     "style-loader": "^3.3.4",
     "styled-components": "^6.1.8",
     "styled-reset": "^4.5.2",
+    "webpack-env": "^0.8.0",
     "yarn": "^1.22.21"
   },
   "devDependencies": {
