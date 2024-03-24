@@ -32,7 +32,7 @@ const ProgressButton: React.FC = () => {
 
   return (
     <div>
-      <S.Box>
+      <S.Box isOpen={isOpen}>
         <S.Button onClick={handleToggle}>
           <S.ProgressIcon src={progressImage[selectedOption]} />
           <S.Text>{selectedOption}</S.Text>
