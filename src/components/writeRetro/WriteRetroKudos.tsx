@@ -1,5 +1,4 @@
 import Frame from './Frame';
-import Task from '../../components/writeRetro/Task';
 
 function WriteRetroKudos() {
   return (
@@ -10,8 +9,8 @@ function WriteRetroKudos() {
         color="#FFFFFF"
         mark_background_color="#FFFFFF"
         left="343px"
+        button_color="dark"
       ></Frame>
-      <Task left="361px"></Task>
     </>
   );
 }

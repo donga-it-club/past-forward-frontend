@@ -1,21 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import CreateButtonBox from '@/components/createRetro/CreateButtonBox';
-import NavBar from '@/components/layouts/PageNavBar';
-import CreateModal from '@/components/createRetro/CreateModal';
-
+import DescriptionBox from '@/components/createRetro/DescriptionBox';
 
 const TemplateNothingPage: React.FC = () => {
-  const [modalOpen, setModalOpen] = useState(false);
-
-  const handleCreateButtonClick = () => {
-    setModalOpen(true);
-  };
   return (
     <>
-      {modalOpen && <CreateModal onClose={() => setModalOpen(false)} />}
-      <NavBar>
-        <CreateButtonBox onClick={handleCreateButtonClick} />
-      </NavBar>
+      <CreateButtonBox />
+      <DescriptionBox />
     </>
   );
 };

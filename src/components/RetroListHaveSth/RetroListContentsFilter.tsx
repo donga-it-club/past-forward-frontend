@@ -1,36 +1,42 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import { useEffect, useRef } from 'react';
+import * as S from '@/styles/RetroListHaveSth/RetroListContentsFilter.style';
 
-const ContentsFilterButton = styled.button`
-  border: none;
-  background: white;
-  color: #949494;
-  padding: 5px 15px;
-  text-align: center;
-  display: inline-block;
-  font-size: 18px;
-  font-weight: bold;
-  &:focus {
-    color: #111b47;
-    border-bottom: 4px solid #111b47;
-  }
-`;
+type RetroListContentsFilterProps = {
+  status: string;
+  onStatusChange: (newStatus: string) => void;
+};
 
-const RetroListContentsFilter: React.FC = () => {
-  const [selectContents, setSelectContents] = useState<string>('all');
+const RetroListContentsFilter: React.FC<RetroListContentsFilterProps> = ({ status, onStatusChange }) => {
+  const ref = useRef<HTMLDivElement>(null);
 
-  const handleFilterChange = (filter: string) => {
-    setSelectContents(filter);
-  };
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+      }
+    };
+    document.addEventListener('mousedown', handleClick);
+    return () => {
+      document.removeEventListener('mousedown', handleClick);
+    };
+  }, [ref]);
 
   return (
-    <div className="filter">
-      <ContentsFilterButton onClick={() => handleFilterChange('all')}>All files</ContentsFilterButton>
-      <ContentsFilterButton onClick={() => handleFilterChange('teams')}>Teams</ContentsFilterButton>
-      <ContentsFilterButton onClick={() => handleFilterChange('personal')}>Personal</ContentsFilterButton>
-      {selectContents === 'all' && <div>All files</div>}
-      {selectContents === 'teams' && <div>Teams</div>}
-      {selectContents === 'personal' && <div>Personal</div>}
+    <div ref={ref}>
+      <S.ContentsFilterButton
+        onClick={() => onStatusChange('All files')}
+        className={status === 'All files' ? 'active' : ''}
+      >
+        All files
+      </S.ContentsFilterButton>
+      <S.ContentsFilterButton onClick={() => onStatusChange('Teams')} className={status === 'Teams' ? 'active' : ''}>
+        Teams
+      </S.ContentsFilterButton>
+      <S.ContentsFilterButton
+        onClick={() => onStatusChange('Personal')}
+        className={status === 'Personal' ? 'active' : ''}
+      >
+        Personal
+      </S.ContentsFilterButton>
     </div>
   );
 };

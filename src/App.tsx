@@ -1,20 +1,31 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HomePage from '@/pages/HomePage';
-import GlobalStyle from '@/styles/fonts/GlobalStyle';
-import GlobalFont from '@/styles/fonts/GlobalFont';
+import MainLayout from './components/layout/MainLayout';
+import SubLayout from '@/components/layout/PageSubLayout';
+import ProfileLayout from '@/components/layout/ProfileLayout';
 import CreateRetroPage from '@/pages/CreateRetroPage';
+import HomePage from '@/pages/HomePage';
+import MyPage from '@/pages/MyPage';
 import WriteRetroTeamPage from '@/pages/WriteRetroTeamPage';
+import GlobalFont from '@/styles/fonts/GlobalFont';
+import GlobalStyle from '@/styles/fonts/GlobalStyle';
 
-const App: React.FC = () => {
+const App = () => {
   return (
     <>
       <GlobalFont />
       <GlobalStyle />
       <Router>
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/create" element={<CreateRetroPage />} />
-          <Route path="/WriteRetroTeamPage" element={<WriteRetroTeamPage />} />
+          <Route element={<SubLayout />}>
+            <Route path="/create" element={<CreateRetroPage />}></Route>
+            <Route path="/WriteRetroTeamPage" element={<WriteRetroTeamPage />}></Route>
+          </Route>
+          <Route element={<ProfileLayout />}>
+            <Route path="/my" element={<MyPage />}></Route>
+          </Route>
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<HomePage />}></Route>
+          </Route>
         </Routes>
       </Router>
     </>

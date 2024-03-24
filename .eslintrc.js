@@ -6,7 +6,6 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
     'plugin:promise/recommended',
-    'next',
     'plugin:prettier/recommended',
     'prettier',
   ],
@@ -70,7 +69,7 @@ module.exports = {
         groups: ['builtin', 'external', 'internal', ['parent', 'sibling', 'index'], 'unknown'],
         pathGroups: [
           {
-            pattern: '{next*,next*/**,react*,react*/**}',
+            pattern: '{react*,react*/**}',
             group: 'external',
             position: 'before',
           },

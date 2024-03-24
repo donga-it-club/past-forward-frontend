@@ -1,46 +1,53 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import { useState } from 'react';
+import * as S from '../styles/RetroListHaveSth/RetroListHaveSthPage.style';
+import ContentList from '@/components/RetroListHaveSth/ContentsList';
+import ControlBar from '@/components/RetroListHaveSth/ControlBar';
+import RetroListContentsFilter from '@/components/RetroListHaveSth/RetroListContentsFilter';
+import RetroListSearch from '@/components/RetroListHaveSth/RetroListSearch';
+import RetroListViewButton from '@/components/RetroListHaveSth/RetroListViewButton';
 
-import RetroListContentsFilter from '../components/RetroList/RetroListContentsFilter';
-import RetroListSearch from '../components/RetroList/RetroListSearch';
-import RetroListSortButton from '../components/RetroList/RetroListSortButton';
+const RetroListHaveSthPage = () => {
+  const [status, setStatus] = useState<string>('All files');
+  const [viewMode, setViewMode] = useState<string>('board');
+  const [searchData, setSearchData] = useState('');
 
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-const FilterContainer = styled.div`
-  flex: 5;
-  padding-left: 10px;
-  padding-right: 10px;
-`;
+  const handleStatusChange = (newStatus: string) => {
+    setStatus(newStatus);
+  };
 
-const SearchContainer = styled.div`
-  flex: 1;
-  padding-left: 10px;
-  padding-right: 10px;
-`;
+  const handleViewModeChange = (newStatus: string) => {
+    setViewMode(newStatus);
+  };
+  const handleSearch = (searchTerm: string) => {
+    setSearchData(searchTerm);
+  };
 
-const SortButtonContainer = styled.div`
-  flex: 1;
-  padding-left: 10px;
-  padding-right: 10px;
-`;
+  const handleSortButtonClick = () => {
+    // 정렬 버튼
+  };
 
-const RetroListHaveSthPage: React.FC = () => {
+  const handleBookmarkButton3Click = () => {
+    // 북마크 버튼
+  };
   return (
     <>
-      <Container>
-        <FilterContainer>
-          <RetroListContentsFilter />
-        </FilterContainer>
-        <SearchContainer>
-          <RetroListSearch />
-        </SearchContainer>
-        <SortButtonContainer>
-          <RetroListSortButton />
-        </SortButtonContainer>
-      </Container>
+      <div>
+        <S.Container>
+          <S.FilterContainer>
+            <RetroListContentsFilter status={status} onStatusChange={handleStatusChange} />
+          </S.FilterContainer>
+          <S.SearchContainer>
+            <RetroListSearch onSearch={handleSearch} />
+          </S.SearchContainer>
+          <S.SortButtonContainer>
+            <RetroListViewButton viewMode={viewMode} onViewModeChange={handleViewModeChange} />
+          </S.SortButtonContainer>
+        </S.Container>
+        <ControlBar onSortButtonClick={handleSortButtonClick} onBookmarkButtonClick={handleBookmarkButton3Click} />
+        <S.Box>
+          <ContentList status={status} viewMode={viewMode} searchData={searchData} />
+        </S.Box>
+      </div>
     </>
   );
 };

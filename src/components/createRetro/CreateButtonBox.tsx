@@ -1,24 +1,24 @@
-// 버튼 2개 묶음 - 화면상 배치 및 모달 클릭 적용
 import React from 'react';
-import * as S from '../../styles/createRetro/CreateButtonBox.style';
-import TeamRetroCreateButton from './TeamRetroCreateButton';
-import PersonalRetroCreateButton from './PersonalRetroCreateButton';
+import { useDisclosure } from '@chakra-ui/react';
+import PersonalRetroCreateButton from '@/components/createRetro/PersonalRetroCreateButton';
+import TeamRetroCreateButton from '@/components/createRetro/TeamRetroCreateButton';
+import CreateModal from '@/components/createRetro/modal/CreateModal';
+import * as S from '@/styles/createRetro/CreateButtonBox.style';
 
-interface CreateButtonBoxProps {
-  onClick: () => void;
-}
+const CreateButtonBox: React.FC = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
-const CreateButtonBox: React.FC<CreateButtonBoxProps> = ({ onClick }) => {
   return (
     <>
-      <S.ButtonListContainer onClick={onClick}>
-        <S.SpacedButton>
+      <S.ButtonListContainer>
+        <S.SpacedButton onClick={onOpen}>
           <TeamRetroCreateButton />
         </S.SpacedButton>
-        <S.SpacedButton>
+        <S.SpacedButton onClick={onOpen}>
           <PersonalRetroCreateButton />
         </S.SpacedButton>
       </S.ButtonListContainer>
+      <CreateModal isOpen={isOpen} onClose={onClose} />
     </>
   );
 };

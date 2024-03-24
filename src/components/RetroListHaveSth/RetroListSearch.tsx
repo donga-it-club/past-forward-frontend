@@ -1,40 +1,26 @@
-import React from 'react';
-import styled from 'styled-components';
-import SearchIcon from '../../assets/SearchIcon.png';
+import React, { useState, ChangeEvent } from 'react';
+import * as S from '../../styles/RetroListHaveSth/RetroListSearch.style';
+import SearchIcon from '@/assets/SearchIcon.png';
 
-const SearchLayout = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  margin-right: 20px auto;
-`;
+interface RetroListSearchProps {
+  onSearch: (searchInput: string) => void;
+}
 
-const SearchInput = styled.input`
-  border: 1px solid #111b47;
-  border-radius: 30px;
-  outline: none;
-  width: 258px;
-  height: 40px;
-  padding-left: 45px;
-  margin-right: 0;
-  &::placeholder {
-    color: #505f98;
-  }
-`;
+const RetroListSearch: React.FC<RetroListSearchProps> = ({ onSearch }) => {
+  const [searchInput, setSearchInput] = useState('');
 
-const SearchIconImg = styled.img`
-  position: absolute;
-  left: 20px;
-  margin: 0;
-`;
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    setSearchInput(value);
+    onSearch(value);
+  };
 
-const RetroListSearch: React.FC = () => {
   return (
     <>
-      <SearchLayout>
-        <SearchInput type="search" placeholder="Search Tasks"></SearchInput>
-        <SearchIconImg src={SearchIcon} />
-      </SearchLayout>
+      <S.SearchLayout>
+        <S.SearchInput type="search" placeholder="Search Tasks" value={searchInput} onChange={handleInputChange} />
+        <S.SearchIconImg src={SearchIcon} />
+      </S.SearchLayout>
     </>
   );
 };

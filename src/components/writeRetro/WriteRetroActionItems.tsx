@@ -9,6 +9,7 @@ function WriteRetroActionItems() {
         color="#1A265C"
         mark_background_color="#CECECE"
         left="1474px"
+        button_color="light"
       ></Frame>
     </>
   );
