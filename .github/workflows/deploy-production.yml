@@ -1,0 +1,14 @@
+name: Deploy Production
+
+on:
+  push:
+    branches: ['main']
+
+jobs:
+  amplify-webhook:
+    runs-on: ubuntu-latest
+    env:
+      AMPLIFY_WEBHOOK_URL: ${{secrets.AMPLIFY_WEBHOOK_URL}}
+    steps:
+      - uses: actions/checkout@v2
+      - run: curl -X POST -d {} $AMPLIFY_WEBHOOK_URL -H "Content-Type:application/json"
