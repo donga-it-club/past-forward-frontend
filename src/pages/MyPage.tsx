@@ -16,17 +16,19 @@ const MyPage = () => {
 
   const fetchComment = async () => {
     try {
-      const data = await CommentService.getComment({ id: 'acb4287' });
+      const data = await CommentService.getComment();
       setComment(data);
       console.log(comment);
     } catch (e) {
       toast.error(e);
+      fetchComment();
     }
   };
 
   useEffect(() => {
     fetchComment();
   }, []);
+
   return (
     <>
       <S.ProfileContainer>

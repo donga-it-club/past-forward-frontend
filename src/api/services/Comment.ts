@@ -1,12 +1,10 @@
 import { CommentClient } from '../@types/Comment';
-import { axiosInstance } from '../client';
+import { mswInstance } from '../client';
 
 const ROUTE = '/comments';
 
 export const CommentService: CommentClient = {
-  getComment: async request => {
-    return await axiosInstance.get(`${ROUTE}/get`, {
-      params: request,
-    });
+  getComment: async () => {
+    return await mswInstance.get(`${ROUTE}/get`);
   },
 };

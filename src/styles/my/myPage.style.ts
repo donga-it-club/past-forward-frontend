@@ -20,7 +20,7 @@ export const MyPageContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-items: center;
-
+  width: 800px;
   background-color: #e6e6e6;
   margin: auto 0;
   border: 1px solid #505f98;

@@ -1,6 +1,7 @@
 import { http, RequestHandler, HttpResponse } from 'msw';
 import { setupWorker } from 'msw/browser';
 
+/* 임시 api */
 export const handlers: RequestHandler[] = [
   http.get('/comments/get', () => {
     const mock = {

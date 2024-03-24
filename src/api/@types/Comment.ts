@@ -9,5 +9,5 @@ export interface CommentResponse {
 }
 
 export interface CommentClient {
-  getComment(req: CommentRequest): Promise<CommentResponse>;
+  getComment(): Promise<CommentResponse>;
 }
