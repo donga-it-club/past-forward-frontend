@@ -1,4 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useCustomToast } from '../../hooks/useCustomToast';
+import { CommentResponse } from '@/api/@types/Comment';
+import { CommentService } from '@/api/services/Comment';
 import DeleteAccountButton from '@/components/my/DeleteAccountBox';
 import EmailBox from '@/components/my/EmailBox';
 import NicknameBox from '@/components/my/NicknameBox';
@@ -8,6 +11,24 @@ import * as S from '@/styles/my/myPage.style';
 
 const MyPage = () => {
   const [image, setImage] = useState<string>('');
+  const [comment, setComment] = useState<CommentResponse>();
+  const toast = useCustomToast();
+
+  const fetchComment = async () => {
+    try {
+      const data = await CommentService.getComment();
+      setComment(data);
+      console.log(comment);
+    } catch (e) {
+      toast.error(e);
+      fetchComment();
+    }
+  };
+
+  useEffect(() => {
+    fetchComment();
+  }, []);
+
   return (
     <>
       <S.ProfileContainer>
