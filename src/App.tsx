@@ -4,7 +4,9 @@ import SubLayout from '@/components/layout/PageSubLayout';
 import ProfileLayout from '@/components/layout/ProfileLayout';
 import CreateRetroPage from '@/pages/CreateRetroPage';
 import HomePage from '@/pages/HomePage';
+import LoginPage from '@/pages/LoginPage';
 import MyPage from '@/pages/MyPage';
+import RegisterPage from '@/pages/RegisterPage';
 import WriteRetroTeamPage from '@/pages/WriteRetroTeamPage';
 import GlobalFont from '@/styles/fonts/GlobalFont';
 import GlobalStyle from '@/styles/fonts/GlobalStyle';
@@ -26,6 +28,8 @@ const App = () => {
           <Route element={<MainLayout />}>
             <Route path="/" element={<HomePage />}></Route>
           </Route>
+          <Route path="/login" element={<LoginPage />}></Route>
+          <Route path="/register" element={<RegisterPage />}></Route>
         </Routes>
       </Router>
     </>

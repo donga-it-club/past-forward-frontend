@@ -2,7 +2,7 @@ import React from 'react';
 import CreateButtonBox from '@/components/createRetro/CreateButtonBox';
 import DescriptionBox from '@/components/createRetro/DescriptionBox';
 
-const TemplateNothingPage: React.FC = () => {
+const CreateRetroPage: React.FC = () => {
   return (
     <>
       <CreateButtonBox />
@@ -11,4 +11,4 @@ const TemplateNothingPage: React.FC = () => {
   );
 };
 
-export default TemplateNothingPage;
+export default CreateRetroPage;
