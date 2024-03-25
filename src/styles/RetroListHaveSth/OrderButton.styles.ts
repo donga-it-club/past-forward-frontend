@@ -2,9 +2,12 @@ import styled from 'styled-components';
 interface BoxProps {
   isOpen: boolean;
 }
-
+export const Container = styled.div`
+  margin-left: 20px;
+  margin-right: 20px;
+`;
 export const Box = styled.div<BoxProps>`
-  width: 80px;
+  width: 90px;
   height: 30px;
   background-color: #f0f2ef;
   border-radius: 3px;
@@ -15,21 +18,13 @@ export const Button = styled.button`
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: 20px 42px 18px;
-  align-content: center;
+  grid-template-columns: 20px 52px 18px;
 `;
 
-export const ProgressIcon = styled.img`
+export const OrderIcon = styled.img`
   justify-self: center;
   align-self: center;
   width: 12px;
-  height: 12px;
-`;
-
-export const ArrowIcon = styled.img`
-  justify-self: center;
-  align-self: center;
-  width: 15px;
   height: 12px;
 `;
 
@@ -40,16 +35,23 @@ export const Text = styled.text`
   font-size: 14px;
 `;
 
+export const ArrowIcon = styled.img`
+  justify-self: center;
+  align-self: center;
+  width: 15px;
+  height: 12px;
+`;
+
 export const ListBox = styled.div`
   position: absolute;
 `;
 
 export const DropBox = styled.li`
-  width: 80px;
+  width: 90px;
   height: 30px;
   background-color: #f0f2ef;
   display: grid;
-  grid-template-columns: 20px 42px 18px;
+  grid-template-columns: 20px 52px 18px;
   align-content: center;
   border-top: 1px solid #949494;
   &:hover {
