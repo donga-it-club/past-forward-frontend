@@ -6,14 +6,10 @@ import CreateRetroPage from '@/pages/CreateRetroPage';
 import HomePage from '@/pages/HomePage';
 import MyPage from '@/pages/MyPage';
 import WriteRetroTeamPage from '@/pages/WriteRetroTeamPage';
-import GlobalFont from '@/styles/fonts/GlobalFont';
-import GlobalStyle from '@/styles/fonts/GlobalStyle';
 
 const App = () => {
   return (
     <>
-      <GlobalFont />
-      <GlobalStyle />
       <Router>
         <Routes>
           <Route element={<SubLayout />}>
