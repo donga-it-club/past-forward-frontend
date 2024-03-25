@@ -6,14 +6,14 @@ const EmailBox = () => {
     <>
       <S.MainName>이메일 </S.MainName>
       <S.DivingLine />
-      <S.LoginBox backgroundColor="white">
+      <S.LoginBox background_color="white">
         <a style={{ margin: 'auto 10px' }}>Clayton@gmail.com</a>
       </S.LoginBox>
-      <S.LoginBox backgroundColor="#FFEB00">
+      <S.LoginBox background_color="#FFEB00">
         <S.KakaoIcon src={kakao} />
         <a style={{ margin: 'auto 5px' }}>Clayton@gmail.com</a>
       </S.LoginBox>
-      <S.LoginBox backgroundColor="white">
+      <S.LoginBox background_color="white">
         <S.KakaoIcon src={google} />
         <a style={{ margin: 'auto 5px' }}>Clayton@gmail.com</a>
       </S.LoginBox>

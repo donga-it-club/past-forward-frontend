@@ -32,9 +32,13 @@ export const RightBox = styled.div`
   text-align: center;
 `;
 
-export const IconStyle = styled.div<{ border_radius: string }>`
+interface IconProps {
+  'border-radius': string;
+}
+
+export const IconStyle = styled.div<IconProps>`
   width: auto;
-  border-radius: ${props => props.border_radius};
+  border-radius: ${props => props['border-radius']};
   display: inline-block;
   border: 2px solid black;
   padding: 5px;
