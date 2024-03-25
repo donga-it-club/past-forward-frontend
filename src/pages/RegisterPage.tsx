@@ -21,6 +21,7 @@ const RegisterPage: React.FC = () => {
     email: Yup.string().email('올바른 이메일을 입력해주세요.').required('이메일은 필수 항목입니다.'),
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSubmit = (values: FormValues, actions: any) => {
     console.log(values);
     actions.setSubmitting(false);

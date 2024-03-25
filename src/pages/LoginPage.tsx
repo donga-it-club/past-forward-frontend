@@ -25,6 +25,7 @@ const LoginPage: React.FC = () => {
     password: Yup.string().required('비밀번호는 필수 항목입니다.'),
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSubmit = (values: FormValues, actions: any) => {
     console.log(values);
     actions.setSubmitting(false);
