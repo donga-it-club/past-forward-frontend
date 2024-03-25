@@ -77,10 +77,10 @@ export const SubName = styled.h2<{ fontSize: string }>`
   font-size: ${props => props.fontSize};
 `;
 
-export const LoginBox = styled.div<{ backgroundColor: string }>`
+export const LoginBox = styled.div<{ background_color: string }>`
   display: flex;
   flex-direction: row;
-  background-color: ${props => props.backgroundColor};
+  background-color: ${props => props.background_color};
   margin: 5px 0px;
   border: 1px solid #717171;
   width: 80%;
@@ -98,7 +98,7 @@ export const PWBox = styled.div`
   margin: 10px 5px;
 `;
 
-export const PWFont = styled.p`
+export const PWFont = styled.div`
   font-size: 15px;
   margin: 5px 10px;
 `;

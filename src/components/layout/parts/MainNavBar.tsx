@@ -30,7 +30,7 @@ const MainNavBar = () => {
               justifyContent: 'flex-end',
             }}
           >
-            <S.IconStyle borderRadius="10px">
+            <S.IconStyle border-radius="10px">
               <div
                 style={{
                   display: 'flex',
