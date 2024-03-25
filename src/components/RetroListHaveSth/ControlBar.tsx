@@ -1,18 +1,18 @@
 import BookmarkButton from './BookmarkButton';
+import OrderButton from './OrderButton';
 import ProgressButton from './ProgressButton';
-import SortButton from './SortButton';
+
 import * as S from '@/styles/RetroListHaveSth/ControlBar.style';
 
 interface ControlBarProps {
-  onSortButtonClick: () => void;
   onBookmarkButtonClick: () => void;
 }
 
-const ControlBar: React.FC<ControlBarProps> = ({ onSortButtonClick, onBookmarkButtonClick }) => {
+const ControlBar: React.FC<ControlBarProps> = ({ onBookmarkButtonClick }) => {
   return (
     <S.Container>
       <ProgressButton />
-      <SortButton onClick={onSortButtonClick} />
+      <OrderButton />
       <BookmarkButton onClick={onBookmarkButtonClick} />
     </S.Container>
   );
