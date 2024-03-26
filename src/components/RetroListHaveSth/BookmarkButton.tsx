@@ -1,11 +1,20 @@
-interface BookmarkButtonProps {
-  onClick: () => void;
-}
+import { useState } from 'react';
+import BookmarkIcon from '@/assets/BookmarkIcon_Y.png';
+import * as S from '@/styles/RetroListHaveSth/BookmarkButton.styles';
 
-const BookmarkButton: React.FC<BookmarkButtonProps> = ({ onClick }) => {
+const BookmarkButton: React.FC = () => {
+  const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
+
+  const handleBookmark = () => {
+    setIsBookmarked(!isBookmarked);
+  };
+
   return (
     <>
-      <button onClick={onClick}>북마크</button>
+      <S.Button onClick={handleBookmark} isBookmarked={isBookmarked}>
+        <S.Icon src={BookmarkIcon} />
+        <S.Text>Bookmark</S.Text>
+      </S.Button>
     </>
   );
 };
