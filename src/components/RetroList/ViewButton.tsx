@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import BoardIcon from '@/assets/RetroListBoardViewIcon.png';
 import ListIcon from '@/assets/RetroListLIstViewIcon.png';
-import * as S from '@/styles/RetroListHaveSth/RetroListViewButton.style';
+import * as S from '@/styles/RetroList/ViewButton.style';
 
 interface ViewModeButtonProps {
   viewMode: string;
@@ -10,7 +10,7 @@ interface ViewModeButtonProps {
 
 type ActivePartType = 'board' | 'list' | null;
 
-const RetroListViewButton: React.FC<ViewModeButtonProps> = ({ viewMode, onViewModeChange }) => {
+const ViewButton: React.FC<ViewModeButtonProps> = ({ viewMode, onViewModeChange }) => {
   const [activePart, setActivePart] = useState<ActivePartType>('board');
 
   const handleBoardClick = () => {
@@ -55,4 +55,4 @@ const RetroListViewButton: React.FC<ViewModeButtonProps> = ({ viewMode, onViewMo
   );
 };
 
-export default RetroListViewButton;
+export default ViewButton;

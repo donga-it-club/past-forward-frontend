@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import * as S from '../styles/RetroListHaveSth/RetroListHaveSthPage.style';
-import ContentList from '@/components/RetroListHaveSth/ContentsList';
-import ControlBar from '@/components/RetroListHaveSth/ControlBar';
-import RetroListContentsFilter from '@/components/RetroListHaveSth/RetroListContentsFilter';
-import RetroListSearch from '@/components/RetroListHaveSth/RetroListSearch';
-import RetroListViewButton from '@/components/RetroListHaveSth/RetroListViewButton';
+import ContentsFilter from '@/components/RetroList/ContentsFilter';
+import ContentList from '@/components/RetroList/ContentsList';
+import ControlBar from '@/components/RetroList/ControlBar';
+import Search from '@/components/RetroList/Search';
+import ViewButton from '@/components/RetroList/ViewButton';
+import * as S from '@/styles/RetroList/RetroListPage.style';
 
-const RetroListHaveSthPage = () => {
+const RetroListPage = () => {
   const [status, setStatus] = useState<string>('All files');
   const [viewMode, setViewMode] = useState<string>('board');
   const [searchData, setSearchData] = useState('');
@@ -27,13 +27,13 @@ const RetroListHaveSthPage = () => {
       <div>
         <S.Container>
           <S.FilterContainer>
-            <RetroListContentsFilter status={status} onStatusChange={handleStatusChange} />
+            <ContentsFilter status={status} onStatusChange={handleStatusChange} />
           </S.FilterContainer>
           <S.SearchContainer>
-            <RetroListSearch onSearch={handleSearch} />
+            <Search onSearch={handleSearch} />
           </S.SearchContainer>
           <S.SortButtonContainer>
-            <RetroListViewButton viewMode={viewMode} onViewModeChange={handleViewModeChange} />
+            <ViewButton viewMode={viewMode} onViewModeChange={handleViewModeChange} />
           </S.SortButtonContainer>
         </S.Container>
         <ControlBar />
@@ -45,4 +45,4 @@ const RetroListHaveSthPage = () => {
   );
 };
 
-export default RetroListHaveSthPage;
+export default RetroListPage;

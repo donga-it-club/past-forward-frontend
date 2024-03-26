@@ -5,7 +5,7 @@ import ProgressAll from '@/assets/Progress_All.png';
 import ProgressBefore from '@/assets/Progress_Before.png';
 import ProgressDone from '@/assets/Progress_Done.png';
 import ProgressIng from '@/assets/Progress_Ing.png';
-import * as S from '@/styles/RetroListHaveSth/ProgressButton.style';
+import * as S from '@/styles/RetroList/ProgressButton.style';
 
 const ProgressButton: React.FC = () => {
   const options = ['ALL', 'Before', 'Ing', 'Done'];

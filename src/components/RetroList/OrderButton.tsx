@@ -3,7 +3,7 @@ import ArrowDown from '@/assets/ArrowDown.png';
 import ArrowUp from '@/assets/ArrowUp.png';
 import NewestIcon from '@/assets/Newest.png';
 import OldestIcon from '@/assets/Oldest.png';
-import * as S from '@/styles/RetroListHaveSth/OrderButton.styles';
+import * as S from '@/styles/RetroList/OrderButton.styles';
 
 const OrderButton: React.FC = () => {
   const order = ['Newest', 'Oldest'];
