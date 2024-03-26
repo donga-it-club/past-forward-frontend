@@ -4,5 +4,5 @@ export interface RetrospectivesTemplateResponse {
 }
 
 export interface retrospectivesTemplateClient {
-  getRetrospectivesTemplate(): Promise<RetrospectivesTemplateResponse>;
+  get(): Promise<RetrospectivesTemplateResponse>;
 }
