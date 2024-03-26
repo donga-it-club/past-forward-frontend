@@ -5,11 +5,19 @@ const TeamRetroDescription: React.FC = () => {
   return (
     <>
       <S.DescriptionBorder>
-        <li>팀원들 간의 의사소통 강화, 협력 촉진</li>
-        <li>문제와 성과를 공유하고 각자의 관점 이해</li>
-        <li>문제 식별하고 이에 대한 해결책 공유</li>
-        <li>회고를 통해 미래 대응, 지속적인 개선 가능</li>
-        <li>피드백으로 지속적인 개선 가능</li>
+        <li>
+          <span style={{ fontWeight: 'bold' }}>Kudos</span>: 팀원 서로에게 감사의 마음이나 긍정적 피드백 전달
+        </li>
+        <li>
+          <span style={{ fontWeight: 'bold' }}>Went Well</span>: 프로젝트나 스프린트 동안 잘 진행된 사항 공유
+        </li>
+        <li>
+          <span style={{ fontWeight: 'bold' }}>To Improve</span>: 개선이 필요한 부분을 솔직하게 공유
+        </li>
+        <li>
+          <span style={{ fontWeight: 'bold' }}>Action Items</span>: ‘To Improve’에서 도출된 문제를 해결하기 위한
+          구체적인 행동 계획
+        </li>
       </S.DescriptionBorder>
     </>
   );
