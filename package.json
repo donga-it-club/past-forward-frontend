@@ -52,12 +52,10 @@
     "style-loader": "^3.3.4",
     "styled-components": "^6.1.8",
     "styled-reset": "^4.5.2",
-
     "yarn": "^1.22.21",
-    "yup": "^1.4.0"
+    "yup": "^1.4.0",
     "ts-node": "^10.9.2",
-    "webpack-env": "^0.8.0",
-
+    "webpack-env": "^0.8.0"
   },
   "devDependencies": {
     "@babel/core": "^7.23.9",
