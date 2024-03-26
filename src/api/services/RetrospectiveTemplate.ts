@@ -4,7 +4,7 @@ import { mswInstance } from '../client';
 const ROUTE = 'retrospectivesTemplate';
 
 export const RetrospectiveTemplateService: retrospectivesTemplateClient = {
-  getRetrospectivesTemplate: async () => {
+  get: async () => {
     return await mswInstance.get(`${ROUTE}/`);
   },
 };
