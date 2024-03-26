@@ -1,12 +1,12 @@
 import { useEffect, useRef } from 'react';
-import * as S from '@/styles/RetroListHaveSth/RetroListContentsFilter.style';
+import * as S from '@/styles/RetroList/ContentsFilter.style';
 
-type RetroListContentsFilterProps = {
+type ContentsFilterProps = {
   status: string;
   onStatusChange: (newStatus: string) => void;
 };
 
-const RetroListContentsFilter: React.FC<RetroListContentsFilterProps> = ({ status, onStatusChange }) => {
+const ContentsFilter: React.FC<ContentsFilterProps> = ({ status, onStatusChange }) => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const RetroListContentsFilter: React.FC<RetroListContentsFilterProps> = ({ statu
         onClick={() => onStatusChange('All files')}
         className={status === 'All files' ? 'active' : ''}
       >
-        All files
+        ALL files
       </S.ContentsFilterButton>
       <S.ContentsFilterButton onClick={() => onStatusChange('Teams')} className={status === 'Teams' ? 'active' : ''}>
         Teams
@@ -41,4 +41,4 @@ const RetroListContentsFilter: React.FC<RetroListContentsFilterProps> = ({ statu
   );
 };
 
-export default RetroListContentsFilter;
+export default ContentsFilter;

@@ -1,10 +1,10 @@
 import React from 'react';
-import * as S from '../../styles/RetroListHaveSth/ContentsList.styles';
 import BookmarkIcon_Y from '@/assets/BookmarkIcon_Y.png';
 import LinkIcon from '@/assets/Link.png';
 import MoreIcon from '@/assets/MoreIcon.png';
 import ProgressBefore from '@/assets/Progress_Before.png';
 import Thumbnail from '@/assets/Thumbnail.png';
+import * as S from '@/styles/RetroList/ContentsList.styles';
 
 interface Content {
   id: number;

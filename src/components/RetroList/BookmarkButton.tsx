@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import BookmarkIcon from '@/assets/BookmarkIcon_Y.png';
-import * as S from '@/styles/RetroListHaveSth/BookmarkButton.styles';
+import * as S from '@/styles/RetroList/BookmarkButton.styles';
 
 const BookmarkButton: React.FC = () => {
   const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
