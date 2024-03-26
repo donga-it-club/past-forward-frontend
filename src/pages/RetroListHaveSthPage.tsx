@@ -22,9 +22,6 @@ const RetroListHaveSthPage = () => {
     setSearchData(searchTerm);
   };
 
-  const handleBookmarkButton3Click = () => {
-    // 북마크 버튼
-  };
   return (
     <>
       <div>
@@ -39,7 +36,7 @@ const RetroListHaveSthPage = () => {
             <RetroListViewButton viewMode={viewMode} onViewModeChange={handleViewModeChange} />
           </S.SortButtonContainer>
         </S.Container>
-        <ControlBar onBookmarkButtonClick={handleBookmarkButton3Click} />
+        <ControlBar />
         <S.Box>
           <ContentList status={status} viewMode={viewMode} searchData={searchData} />
         </S.Box>
