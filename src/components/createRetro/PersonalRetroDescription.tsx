@@ -5,11 +5,18 @@ const PersonalRetroDescription: React.FC = () => {
   return (
     <>
       <S.DescriptionBorder>
-        <li>회고를 통해 자기평가 및 학습 가능</li>
-        <li>강점/약점을 인식하고 지속적인 성장을 이끌어냄</li>
-        <li>목표 추적/목표 달성에 대한 효율 증가</li>
-        <li>자기개발 계획 수립</li>
-        <li>자신에 대한 이해를 얻는 것에 기여</li>
+        <li>
+          <span style={{ fontWeight: 'bold' }}>Keep</span>: 유지하고 싶은 좋은 습관이나 성과
+        </li>
+        <li>
+          <span style={{ fontWeight: 'bold' }}>Problem</span>: 프로젝트 중 발생한 문제점이나 개선이 필요한 부분
+        </li>
+        <li>
+          <span style={{ fontWeight: 'bold' }}>Try</span>: ‘Problem’에서 도출된 문제를 해결하기 위한 새로운 제안
+        </li>
+        <li>
+          <span style={{ fontWeight: 'bold' }}>Action Items</span>: 실제 개선을 이루기 위한 구체적인 행동 계획
+        </li>
       </S.DescriptionBorder>
     </>
   );
