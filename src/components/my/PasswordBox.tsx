@@ -16,7 +16,7 @@ const PasswordBox = () => {
         <S.PWFont>
           <div style={{ display: 'flex' }}>
             <Asterisk style={{ width: '5px', color: 'red', margin: '0 2px' }} />
-            현재 비밀번호
+            <a>현재 비밀번호</a>
           </div>
         </S.PWFont>
         <CurrentPasswordInput />

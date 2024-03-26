@@ -1,5 +1,6 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
@@ -9,7 +10,7 @@ module.exports = (env, argv) => {
   return {
     mode: prod ? 'production' : 'development',
     devtool: prod ? 'hidden-source-map' : 'eval',
-    entry: './src/index.tsx',
+    entry: './src/Index.tsx',
     output: {
       path: path.join(__dirname, '/dist'),
       filename: '[name].js',
@@ -62,6 +63,7 @@ module.exports = (env, argv) => {
             : false,
       }),
       new CleanWebpackPlugin(),
+      new Dotenv(),
     ],
   };
 };

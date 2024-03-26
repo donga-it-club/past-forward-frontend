@@ -18,7 +18,7 @@ const PageNavBar = () => {
               justifyContent: 'flex-end',
             }}
           >
-            <S.IconStyle borderRadius="10px">
+            <S.IconStyle border-radius="10px">
               <div
                 style={{
                   display: 'flex',
@@ -32,10 +32,10 @@ const PageNavBar = () => {
               </div>
             </S.IconStyle>
 
-            <S.IconStyle borderRadius="45%">
+            <S.IconStyle border-radius="45%">
               <Gear />
             </S.IconStyle>
-            <S.IconStyle borderRadius="50%">
+            <S.IconStyle border-radius="50%">
               <Bell />
             </S.IconStyle>
             <S.Link href="#">Logout</S.Link>
