@@ -1,12 +1,12 @@
 import React, { useState, ChangeEvent } from 'react';
-import * as S from '../../styles/RetroListHaveSth/RetroListSearch.style';
 import SearchIcon from '@/assets/SearchIcon.png';
+import * as S from '@/styles/RetroList/Search.style';
 
-interface RetroListSearchProps {
+interface SearchProps {
   onSearch: (searchInput: string) => void;
 }
 
-const RetroListSearch: React.FC<RetroListSearchProps> = ({ onSearch }) => {
+const Search: React.FC<SearchProps> = ({ onSearch }) => {
   const [searchInput, setSearchInput] = useState('');
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -25,4 +25,4 @@ const RetroListSearch: React.FC<RetroListSearchProps> = ({ onSearch }) => {
   );
 };
 
-export default RetroListSearch;
+export default Search;
