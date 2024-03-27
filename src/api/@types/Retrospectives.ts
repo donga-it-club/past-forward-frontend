@@ -37,7 +37,7 @@ export interface NodeData {
 
 export interface GetRetrospectiveData {
   totalCount: number;
-  nodes: NodeData;
+  nodes: Array<NodeData>;
 }
 
 export interface GetRetrospectiveResponse {

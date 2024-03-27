@@ -6,15 +6,17 @@ export const MockRetrospective: GetRetrospectiveResponse = {
   message: 'okay',
   data: {
     totalCount: 0,
-    nodes: {
-      id: 0,
-      title: 'hee',
-      userId: 0,
-      teamId: 0,
-      templateId: 0,
-      status: Status.COMPLETED,
-      isBookmarked: true,
-      thumbnail: '3fa85f64',
-    },
+    nodes: [
+      {
+        id: 0,
+        title: 'hee',
+        userId: 0,
+        teamId: 0,
+        templateId: 0,
+        status: Status.COMPLETED,
+        isBookmarked: true,
+        thumbnail: '3fa85f64',
+      },
+    ],
   },
 };
