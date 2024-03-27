@@ -8,6 +8,7 @@ import {
   ModalCloseButton,
   Button,
 } from '@chakra-ui/react';
+import DescriptionInput from '@/components/createRetro/modal/DescriptionInput';
 import ImageUpload from '@/components/createRetro/modal/ImageUpload';
 import StartDateCalendar from '@/components/createRetro/modal/StartDateCalender';
 import TemlplateSelect from '@/components/createRetro/modal/TemplateSelect';
@@ -39,6 +40,10 @@ const CreateModal: React.FC<CreateModalProps> = ({ isOpen, onClose }) => {
             <StartDateCalendar />
           </S.RightColumn>
         </S.CustomModalBody>
+        <S.BottomModalBody>
+          <div>회고 설명</div>
+          <DescriptionInput />
+        </S.BottomModalBody>
 
         <ModalFooter>
           <Button colorScheme="blue" mr={3} onClick={onClose}>
