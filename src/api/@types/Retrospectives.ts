@@ -24,15 +24,10 @@ export interface GetRetrospectiveRequest {
   isBookmarked: boolean;
 }
 
-export interface NodeData {
+export interface NodeData extends RetrospectiveData {
   id: number;
-  title: string;
   userId: number;
-  teamId: number;
-  templateId: number;
-  status: Status;
   isBookmarked: boolean;
-  thumbnail: string;
 }
 
 export interface GetRetrospectiveData {
@@ -61,7 +56,7 @@ export interface PutRetrospectiveRequest {
 }
 
 export interface RetrospectivesClient {
-  post(request: RetrospectiveData): Promise<PostRetrospectivesResponse>;
+  create(request: RetrospectiveData): Promise<PostRetrospectivesResponse>;
   get(request: GetRetrospectiveRequest): Promise<GetRetrospectiveResponse>;
   delete(request: DeleteRetrospectiveRequest): Promise<void>;
   put(request: PutRetrospectiveRequest): Promise<GetRetrospectiveResponse>;

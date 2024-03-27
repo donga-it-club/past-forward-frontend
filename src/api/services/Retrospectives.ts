@@ -4,7 +4,7 @@ import { mswInstance } from '../client';
 const ROUTE = 'retrospectives';
 
 export const Retrospective: RetrospectivesClient = {
-  post: async request => {
+  create: async request => {
     return await mswInstance.post(`${ROUTE}/`, {
       params: request,
     });
