@@ -7,6 +7,7 @@ import HomePage from '@/pages/HomePage';
 import LoginPage from '@/pages/LoginPage';
 import MyPage from '@/pages/MyPage';
 import RegisterPage from '@/pages/RegisterPage';
+import SurveyPage from '@/pages/SurveyPage';
 import WriteRetroTeamPage from '@/pages/WriteRetroTeamPage';
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
           </Route>
           <Route path="/login" element={<LoginPage />}></Route>
           <Route path="/register" element={<RegisterPage />}></Route>
+          <Route path="/survey" element={<SurveyPage />}></Route>
         </Routes>
       </Router>
     </>
