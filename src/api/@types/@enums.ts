@@ -3,3 +3,8 @@ export enum Status {
   COMPLETED = 'COMPLETED',
   NOT_STARTED = 'NOT_STARTED',
 }
+
+export enum Order {
+  RECENTLY = 'RECENTLY',
+  PREVIOUSLY = 'PREVIOUSLY',
+}
