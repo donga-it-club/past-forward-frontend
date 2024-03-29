@@ -13,37 +13,39 @@ const MainNavBar = () => {
 
   return (
     <>
-      <S.Container>
-        <MenuBar />
-        <LogoBox />
+      <div style={{ backgroundColor: 'white' }}>
+        <S.Container>
+          <MenuBar />
+          <LogoBox />
 
-        <S.RightBox>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-            }}
-          >
-            <S.IconStyle border-radius="10px">
-              <div
-                style={{
-                  display: 'flex',
-                  textAlign: 'center',
-                  alignContent: 'center',
-                  margin: '2px',
-                }}
-              >
-                <PersonCircle style={{ width: '30px', margin: 'auto 3px' }} />
-                <p style={{ margin: 'auto 10px' }}>Clayton Santos</p>
-              </div>
-            </S.IconStyle>
+          <S.RightBox>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'flex-end',
+              }}
+            >
+              <S.IconStyle border-radius="10px">
+                <div
+                  style={{
+                    display: 'flex',
+                    textAlign: 'center',
+                    alignContent: 'center',
+                    margin: '2px',
+                  }}
+                >
+                  <PersonCircle style={{ width: '30px', margin: 'auto 3px' }} />
+                  <p style={{ margin: 'auto 10px' }}>Clayton Santos</p>
+                </div>
+              </S.IconStyle>
 
-            <S.Link onClick={handleLogin}>Login</S.Link>
-            <S.GetStaredButton>Get Started for Free</S.GetStaredButton>
-          </div>
-        </S.RightBox>
-      </S.Container>
+              <S.Link onClick={handleLogin}>Login</S.Link>
+              <S.GetStaredButton>Get Started for Free</S.GetStaredButton>
+            </div>
+          </S.RightBox>
+        </S.Container>
+      </div>
     </>
   );
 };
