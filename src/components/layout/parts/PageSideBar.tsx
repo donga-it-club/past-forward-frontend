@@ -29,9 +29,8 @@ const PageSideBar = () => {
                       Personal Retro
                     </a>
                   </div>
+                  <S.DivingLine />
                 </div>
-
-                <S.DivingLine />
               </S.MiniBox>
             </AccordionButton>
           </h2>
@@ -59,9 +58,7 @@ const PageSideBar = () => {
                 <div style={{ padding: '2px 0' }}>
                   <div style={{ display: 'flex', alignItems: 'center' }}>
                     <AccordionIcon /> <PeopleFill style={{ marginRight: '5px' }} />
-                    <a id="leftside_persnalproject" style={{ color: '#111b47', textDecoration: 'none' }}>
-                      Team Retro
-                    </a>
+                    <S.MenuText id="leftside_teamproject">Team Retro </S.MenuText>
                   </div>
                 </div>
                 <S.DivingLine />

@@ -1,6 +1,7 @@
-import { Bell, Gear, PersonCircle } from 'react-bootstrap-icons';
+import { Gear, PersonCircle } from 'react-bootstrap-icons';
 import LogoBox from './LogoBox';
 import MenuBar from './MenuBar';
+import Alarm from '@/components/alarm/Alarm';
 import * as S from '@/styles/layout/layout.style';
 
 const PageNavBar = () => {
@@ -35,9 +36,7 @@ const PageNavBar = () => {
             <S.IconStyle border-radius="45%">
               <Gear />
             </S.IconStyle>
-            <S.IconStyle border-radius="50%">
-              <Bell />
-            </S.IconStyle>
+            <Alarm />
             <S.Link href="#">Logout</S.Link>
           </div>
         </S.RightBox>
