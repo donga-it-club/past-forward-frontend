@@ -28,11 +28,13 @@
     "*.js": "eslint --cache --fix"
   },
   "dependencies": {
+    "@aws-amplify/ui-react": "^6.1.6",
     "@chakra-ui/react": "^2.8.2",
     "@emotion/eslint-plugin": "^11.11.0",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
     "@types/webpack-env": "^1.18.4",
+    "aws-amplify": "^6.0.24",
     "axios": "^1.6.8",
     "bootstrap": "5.3.3",
     "css-loader": "^6.10.0",
