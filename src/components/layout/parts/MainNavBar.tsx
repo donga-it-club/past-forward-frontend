@@ -13,7 +13,7 @@ const MainNavBar = () => {
 
   return (
     <>
-      <div style={{ backgroundColor: 'white' }}>
+      <div style={{ backgroundColor: 'white', zIndex: 1 }}>
         <S.Container>
           <MenuBar />
           <LogoBox />
