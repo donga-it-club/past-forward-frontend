@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Modal,
   ModalOverlay,
@@ -22,6 +23,11 @@ interface CreateModalProps {
 
 const CreateModal: React.FC<CreateModalProps> = ({ isOpen, onClose }) => {
   const size = 'xl';
+  const navigate = useNavigate();
+  const handleCreateClick = () => {
+    onClose();
+    navigate('/invite');
+  };
 
   return (
     <Modal isOpen={isOpen} size={size} onClose={onClose}>
@@ -46,7 +52,7 @@ const CreateModal: React.FC<CreateModalProps> = ({ isOpen, onClose }) => {
         </S.BottomModalBody>
 
         <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={onClose}>
+          <Button colorScheme="blue" mr={3} onClick={handleCreateClick}>
             Create
           </Button>
         </ModalFooter>
