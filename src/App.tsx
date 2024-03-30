@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MainLayout from './components/layout/MainLayout';
+import InviteTeamModal from '@/components/inviteTeam/InviteTeamModal';
 import SubLayout from '@/components/layout/PageSubLayout';
 import ProfileLayout from '@/components/layout/ProfileLayout';
 import CreateRetroPage from '@/pages/CreateRetroPage';
@@ -17,6 +18,7 @@ const App = () => {
         <Routes>
           <Route element={<SubLayout />}>
             <Route path="/create" element={<CreateRetroPage />}></Route>
+            <Route path="/invite" element={<InviteTeamModal />}></Route>
             <Route path="/WriteRetroTeamPage" element={<WriteRetroTeamPage />}></Route>
           </Route>
           <Route element={<ProfileLayout />}>
