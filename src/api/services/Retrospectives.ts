@@ -5,9 +5,7 @@ const ROUTE = 'retrospectives';
 
 export const Retrospective: RetrospectivesClient = {
   create: async request => {
-    return await mswInstance.post(`${ROUTE}/`, {
-      params: request,
-    });
+    return await mswInstance.post(`${ROUTE}/`, request);
   },
   get: async request => {
     return await mswInstance.get(`${ROUTE}/`, {
