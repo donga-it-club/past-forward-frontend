@@ -11,7 +11,6 @@ export const MockRetrospective: GetRetrospectiveResponse = {
         id: 0,
         title: 'hee',
         userId: 0,
-        teamId: 0,
         templateId: 0,
         status: Status.COMPLETED,
         isBookmarked: true,

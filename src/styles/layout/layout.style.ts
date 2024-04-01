@@ -77,10 +77,14 @@ export const SideBarBGContainer = styled.div`
 
 export const LogoBox = styled.div``;
 
-export const LogoText = styled.a`
+interface ColorProps {
+  color: string;
+}
+
+export const LogoText = styled.a<ColorProps>`
   display: flex;
   width: 40vh;
-  color: #111b47;
+  color: ${props => props['color']};
   font-size: 30px;
   font-weight: bold;
   border: 20px;

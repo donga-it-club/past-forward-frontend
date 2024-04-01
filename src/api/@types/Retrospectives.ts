@@ -2,7 +2,6 @@ import { Order, Status } from './@enums';
 
 export interface RetrospectiveData {
   title: string;
-  teamId: number;
   templateId: number;
   status: Status;
   thumbnail: string;
