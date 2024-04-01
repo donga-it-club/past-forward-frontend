@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Modal,
   ModalOverlay,
@@ -8,6 +9,7 @@ import {
   ModalCloseButton,
   Button,
 } from '@chakra-ui/react';
+import DescriptionInput from '@/components/createRetro/modal/DescriptionInput';
 import ImageUpload from '@/components/createRetro/modal/ImageUpload';
 import StartDateCalendar from '@/components/createRetro/modal/StartDateCalender';
 import TemlplateSelect from '@/components/createRetro/modal/TemplateSelect';
@@ -21,6 +23,11 @@ interface CreateModalProps {
 
 const CreateModal: React.FC<CreateModalProps> = ({ isOpen, onClose }) => {
   const size = 'xl';
+  const navigate = useNavigate();
+  const handleCreateClick = () => {
+    onClose();
+    navigate('/invite');
+  };
 
   return (
     <Modal isOpen={isOpen} size={size} onClose={onClose}>
@@ -39,9 +46,13 @@ const CreateModal: React.FC<CreateModalProps> = ({ isOpen, onClose }) => {
             <StartDateCalendar />
           </S.RightColumn>
         </S.CustomModalBody>
+        <S.BottomModalBody>
+          <div>회고 설명</div>
+          <DescriptionInput />
+        </S.BottomModalBody>
 
         <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={onClose}>
+          <Button colorScheme="blue" mr={3} onClick={handleCreateClick}>
             Create
           </Button>
         </ModalFooter>

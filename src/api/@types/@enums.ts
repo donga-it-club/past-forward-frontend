@@ -1,3 +1,4 @@
+
 export const Status = {
   IN_PROGRESS: 'IN_PROGRESS',
   COMPLETED: 'COMPLETED',
@@ -8,3 +9,4 @@ export const Order = {
   RECENTLY: 'RECENTLY',
   PREVIOUSLY: 'PREVIOUSLY',
 } as const;
+
