@@ -1,10 +1,10 @@
-export enum Status {
-  IN_PROGRESS = 'IN_PROGRESS',
-  COMPLETED = 'COMPLETED',
-  NOT_STARTED = 'NOT_STARTED',
-}
+export const Status = {
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED',
+  NOT_STARTED: 'NOT_STARTED',
+} as const;
 
-export enum Order {
-  RECENTLY = 'RECENTLY',
-  PREVIOUSLY = 'PREVIOUSLY',
-}
+export const Order = {
+  RECENTLY: 'RECENTLY',
+  PREVIOUSLY: 'PREVIOUSLY',
+} as const;
