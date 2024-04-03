@@ -1,4 +1,6 @@
+
 import { SectionsContainer, Section } from 'react-fullpage';
+import MainDesign from '@/components/home/MainDesign';
 import About from '@/components/Main/About';
 import Contact from '@/components/Main/Contact';
 import Home from '@/components/Main/Home';
@@ -20,7 +22,7 @@ const App: React.FC<AppProps> = () => {
     <>
       <SectionsContainer {...options}>
         <Section>
-          <Home />
+         <MainDesign />
         </Section>
         <Section>
           <Template1 />
@@ -44,6 +46,7 @@ const App: React.FC<AppProps> = () => {
           </S.ButtonContainer>
         </Section>
       </SectionsContainer>
+
     </>
   );
 };

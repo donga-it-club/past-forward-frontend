@@ -1,5 +1,0 @@
-export enum Status {
-  IN_PROGRESS = 'IN_PROGRESS',
-  COMPLETED = 'COMPLETED',
-  NOT_STARTED = 'NOT_STARTED',
-}

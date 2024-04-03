@@ -36,7 +36,7 @@ interface IconProps {
   'border-radius': string;
 }
 
-export const IconStyle = styled.div<IconProps>`
+export const IconStyle = styled.button<IconProps>`
   width: auto;
   border-radius: ${props => props['border-radius']};
   display: inline-block;
@@ -77,10 +77,14 @@ export const SideBarBGContainer = styled.div`
 
 export const LogoBox = styled.div``;
 
-export const LogoText = styled.a`
+interface ColorProps {
+  color: string;
+}
+
+export const LogoText = styled.a<ColorProps>`
   display: flex;
   width: 40vh;
-  color: #111b47;
+  color: ${props => props['color']};
   font-size: 30px;
   font-weight: bold;
   border: 20px;
@@ -134,4 +138,18 @@ export const GetStaredButton = styled.button`
   background-color: #111b47;
   color: white;
   border-radius: 5px;
+`;
+
+export const MenuText = styled.a`
+  color: #111b47;
+  text-decoration: none;
+`;
+
+export const AlarmContents = styled.div`
+  background-color: #f8f8f8;
+  width: 90%;
+  height: auto;
+  border-radius: 10px;
+  padding: 2px 5px;
+  margin-bottom: 20px;
 `;

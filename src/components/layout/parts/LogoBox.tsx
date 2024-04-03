@@ -1,9 +1,9 @@
-import Logo from '@/../public/logo.png';
+import Logo from '@/../public/logo.svg';
 import * as S from '@/styles/layout/layout.style';
 const LogoBox = () => {
   return (
     <S.LogoBox>
-      <S.LogoText href="/#">
+      <S.LogoText color="brand" href="/#">
         <img src={Logo} />
         Past Forward
       </S.LogoText>

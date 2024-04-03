@@ -10,4 +10,13 @@ export const SectionServices: SectionClient = {
   create: async request => {
     return await mswInstance.post(`${ROUTE}/`, request);
   },
+  patch: async ({ sectionId, ...request }) => {
+    return await mswInstance.patch(`${ROUTE}/${sectionId}`, request);
+  },
+  delete: async sectionId => {
+    return await mswInstance.delete(`${ROUTE}/${sectionId}`);
+  },
+  likePost: async id => {
+    return await mswInstance.post(`${ROUTE}/${id}/likes`);
+  },
 };

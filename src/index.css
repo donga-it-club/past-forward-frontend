@@ -30,8 +30,4 @@
   a:hover {
     color: var(--font-Deep-Color);
   }
-
-  .react-datepicker-popper {
-    z-index: 9999;
-  }
 }
