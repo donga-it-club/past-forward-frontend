@@ -1,9 +1,9 @@
-import { Order, Status } from './@enums';
+import { TOrder, TStatus } from './@asConst';
 
 export interface RetrospectiveData {
   title: string;
   templateId: number;
-  status: Status;
+  status: TStatus;
   thumbnail: string;
 }
 
@@ -17,8 +17,8 @@ export interface PostRetrospectivesResponse {
 export interface GetRetrospectiveRequest {
   page: number;
   size: number;
-  order: Order;
-  status: Status;
+  order: TOrder;
+  status: TStatus;
   keyword: string;
   isBookmarked: boolean;
 }
@@ -50,7 +50,7 @@ export interface PutRetrospectiveRequest {
   teamId: string;
   userId: number;
   description: string;
-  status: Status;
+  status: TStatus;
   thumbnail: string | null;
 }
 
