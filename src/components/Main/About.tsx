@@ -1,8 +1,11 @@
+import AboutUs from '@/assets/AboutUs.png';
+import * as S from '@/styles/Main/About.styles';
+
 const About: React.FC = () => {
   return (
-    <div>
-      <h1>About</h1>
-    </div>
+    <S.Container>
+      <S.Img src={AboutUs} />
+    </S.Container>
   );
 };
 

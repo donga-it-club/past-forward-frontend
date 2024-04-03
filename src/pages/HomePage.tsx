@@ -6,6 +6,7 @@ import Template1 from '@/components/Main/Template1';
 import Template2 from '@/components/Main/Template2';
 import Template3 from '@/components/Main/Template3';
 import Template4 from '@/components/Main/Template4';
+import * as S from '@/styles/Main/HomaPage.styles';
 
 interface AppProps {}
 
@@ -38,6 +39,9 @@ const App: React.FC<AppProps> = () => {
         </Section>
         <Section>
           <Contact />
+          <S.ButtonContainer>
+            <S.Button>회고 무료로 시작하기</S.Button>
+          </S.ButtonContainer>
         </Section>
       </SectionsContainer>
     </>
