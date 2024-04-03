@@ -1,13 +1,11 @@
-
 import { SectionsContainer, Section } from 'react-fullpage';
-import MainDesign from '@/components/home/MainDesign';
 import About from '@/components/Main/About';
 import Contact from '@/components/Main/Contact';
-import Home from '@/components/Main/Home';
 import Template1 from '@/components/Main/Template1';
 import Template2 from '@/components/Main/Template2';
 import Template3 from '@/components/Main/Template3';
 import Template4 from '@/components/Main/Template4';
+import MainDesign from '@/components/home/MainDesign';
 import * as S from '@/styles/Main/HomaPage.styles';
 
 interface AppProps {}
@@ -22,7 +20,7 @@ const App: React.FC<AppProps> = () => {
     <>
       <SectionsContainer {...options}>
         <Section>
-         <MainDesign />
+          <MainDesign />
         </Section>
         <Section>
           <Template1 />
@@ -46,7 +44,6 @@ const App: React.FC<AppProps> = () => {
           </S.ButtonContainer>
         </Section>
       </SectionsContainer>
-
     </>
   );
 };
