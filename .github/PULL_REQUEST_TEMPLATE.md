@@ -6,7 +6,7 @@
 
 <!-- github 이슈번호  -->
 
-Implements [issue #1](https://github.com/donga-it-club/past-forward-frontend/issues/1)
+이슈번호 [issue #1](https://github.com/donga-it-club/past-forward-frontend/issues/1)
 
 <br><br>
 
