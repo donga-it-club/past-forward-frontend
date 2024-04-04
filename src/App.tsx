@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import '@aws-amplify/ui-react/styles.css';
-import { withAuthenticator } from '@aws-amplify/ui-react';
 import { Amplify } from 'aws-amplify';
 import awsConfig from './awsConfig';
 import MainLayout from './components/layout/MainLayout';
@@ -48,4 +47,4 @@ const App = () => {
   );
 };
 
-export default withAuthenticator(App);
+export default App;
