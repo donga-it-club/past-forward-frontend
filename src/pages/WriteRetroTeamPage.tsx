@@ -1,23 +1,17 @@
-import CheckPopUp from '@/components/writeRetro/CheckPopUp';
-import SaveButton from '@/components/writeRetro/SaveButton';
-import SubTitle from '@/components/writeRetro/SubTitle';
-import Title from '@/components/writeRetro/Title';
-import WriteRetroActionItems from '@/components/writeRetro/WriteRetroActionItems';
-import WriteRetroToImprove from '@/components/writeRetro/WriteRetroToImprove';
-import WriteRetroWentWell from '@/components/writeRetro/WriteRetroWentWell';
+import { Kudos, WentWell, ToImprove, ActionItems, Title, SaveSetting } from '@/components/writeRetro/layout/Layout';
+import * as S from '@/styles/writeRetroStyles/Layout.style';
 
-function WriteRetroTeamPage() {
+export const WriteRetroTeamPage = () => {
   return (
     <>
-      <Title title="First Retro"></Title>
-      <SubTitle subTitle="첫 회고 진행 - 앞으로 남은 회고는 2번!"></SubTitle>
-      <SaveButton></SaveButton>
-      <CheckPopUp></CheckPopUp>
-      <WriteRetroWentWell></WriteRetroWentWell>
-      <WriteRetroToImprove></WriteRetroToImprove>
-      <WriteRetroActionItems></WriteRetroActionItems>
+      <Title></Title>
+      <SaveSetting></SaveSetting>
+      <S.SectionBox>
+        <Kudos></Kudos>
+        <WentWell></WentWell>
+        <ToImprove></ToImprove>
+        <ActionItems></ActionItems>
+      </S.SectionBox>
     </>
   );
-}
-
-export default WriteRetroTeamPage;
+};
