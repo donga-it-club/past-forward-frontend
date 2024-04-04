@@ -11,7 +11,10 @@ import CreateRetroPage from '@/pages/CreateRetroPage';
 import HomePage from '@/pages/HomePage';
 import MyPage from '@/pages/MyPage';
 import SurveyPage from '@/pages/SurveyPage';
-import WriteRetroTeamPage from '@/pages/WriteRetroTeamPage';
+import { WriteRetroPersonalPage } from '@/pages/WriteRetroPersonalPage';
+import { WriteRetroRevisePersonalPage } from '@/pages/WriteRetroRevisePersonalPage';
+import { WriteRetroReviseTeamPage } from '@/pages/WriteRetroReviseTeamPage';
+import { WriteRetroTeamPage } from '@/pages/WriteRetroTeamPage';
 
 interface PrivateRouteProps {
   children: ReactElement;
