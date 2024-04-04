@@ -1,0 +1,17 @@
+.amplify-tabs__item--active {
+  color: var(--amplify-colors-blue-90);
+  border-color: var(--amplify-colors-blue-90);
+}
+
+.amplify-tabs__item:hover {
+  color: var(--amplify-colors-blue-90);
+  cursor: pointer;
+}
+
+.amplify-button--primary {
+  background-color: var(--amplify-colors-blue-90);
+}
+
+.amplify-button--small {
+  color: var(--amplify-colors-blue-90);
+}
