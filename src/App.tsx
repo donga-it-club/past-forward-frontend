@@ -13,7 +13,10 @@ import LoginPage from '@/pages/LoginPage';
 import MyPage from '@/pages/MyPage';
 import RegisterPage from '@/pages/RegisterPage';
 import SurveyPage from '@/pages/SurveyPage';
-import WriteRetroTeamPage from '@/pages/WriteRetroTeamPage';
+import { WriteRetroPersonalPage } from '@/pages/WriteRetroPersonalPage';
+import { WriteRetroRevisePersonalPage } from '@/pages/WriteRetroRevisePersonalPage';
+import { WriteRetroReviseTeamPage } from '@/pages/WriteRetroReviseTeamPage';
+import { WriteRetroTeamPage } from '@/pages/WriteRetroTeamPage';
 
 Amplify.configure(awsConfig);
 
@@ -26,6 +29,9 @@ const App = () => {
             <Route path="/create" element={<CreateRetroPage />}></Route>
             <Route path="/invite" element={<InviteTeamModal />}></Route>
             <Route path="/WriteRetroTeamPage" element={<WriteRetroTeamPage />}></Route>
+            <Route path="/WriteRetroPersonalPage" element={<WriteRetroPersonalPage />}></Route>
+            <Route path="/WriteRetroReviseTeamPage" element={<WriteRetroReviseTeamPage />}></Route>
+            <Route path="/WriteRetroRevisePersonalPage" element={<WriteRetroRevisePersonalPage />}></Route>
           </Route>
           <Route element={<ProfileLayout />}>
             <Route path="/my" element={<MyPage />}></Route>
