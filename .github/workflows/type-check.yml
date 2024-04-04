@@ -1,0 +1,15 @@
+name: type check
+
+on: pull_request
+
+jobs:
+  type-test:
+    name: type test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '18.18.0'
+      - run: npm install
+      - run: npm run typecheck

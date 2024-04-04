@@ -88,7 +88,7 @@ export const LogoText = styled.a<ColorProps>`
   font-size: 30px;
   font-weight: bold;
   border: 20px;
-  padding: 10px 5px;
+  padding: 10px 20px;
   text-decoration: none;
   padding-top: 10px;
 `;
