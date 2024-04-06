@@ -40,6 +40,24 @@ export const SettingMenu = () => {
   );
 };
 
+export const Setting = () => {
+  return (
+    <>
+      <S.SettingStyle>
+        <SettingImage></SettingImage>
+        <ReviseTitle></ReviseTitle>
+        <ReviseType></ReviseType>
+        <ReviseTemplateType></ReviseTemplateType>
+        <ReviseLeader></ReviseLeader>
+        <ReviseExplanation></ReviseExplanation>
+        <ReviseCompletion></ReviseCompletion>
+        <ReviseDelete></ReviseDelete>
+        <ReviseButton></ReviseButton>
+      </S.SettingStyle>
+    </>
+  );
+};
+
 export const SettingImage = () => {
   return (
     <>
@@ -174,29 +192,11 @@ export const ReviseDelete = () => {
 
 export const ReviseButton = () => {
   return (
-    <div style={{ marginTop: '25x', position: 'relative' }}>
+    <div style={{ marginTop: '25px', position: 'relative' }}>
       <div style={{ display: 'flex', marginLeft: '200px' }}>
         <S.ReviseButtonStyle>CANCLE</S.ReviseButtonStyle>
         <S.ReviseButtonStyle>SAVE</S.ReviseButtonStyle>
       </div>
     </div>
-  );
-};
-
-export const Setting = () => {
-  return (
-    <>
-      <S.SettingStyle>
-        <SettingImage></SettingImage>
-        <ReviseTitle></ReviseTitle>
-        <ReviseType></ReviseType>
-        <ReviseTemplateType></ReviseTemplateType>
-        <ReviseLeader></ReviseLeader>
-        <ReviseExplanation></ReviseExplanation>
-        <ReviseCompletion></ReviseCompletion>
-        <ReviseDelete></ReviseDelete>
-        <ReviseButton></ReviseButton>
-      </S.SettingStyle>
-    </>
   );
 };

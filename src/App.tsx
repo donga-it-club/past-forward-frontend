@@ -80,6 +80,30 @@ const App = () => {
               }
             ></Route>
           </Route>
+          <Route
+            path="/WriteRetroPersonalPage"
+            element={
+              <PrivateRoute>
+                <WriteRetroPersonalPage />
+              </PrivateRoute>
+            }
+          ></Route>
+          <Route
+            path="/WriteRetroReviseTeamPage"
+            element={
+              <PrivateRoute>
+                <WriteRetroReviseTeamPage />
+              </PrivateRoute>
+            }
+          ></Route>
+          <Route
+            path="/WriteRetroRevisePersonalPage"
+            element={
+              <PrivateRoute>
+                <WriteRetroRevisePersonalPage />
+              </PrivateRoute>
+            }
+          ></Route>
           <Route element={<ProfileLayout />}>
             <Route
               path="/my"
