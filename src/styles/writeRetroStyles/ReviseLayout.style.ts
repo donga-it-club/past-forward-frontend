@@ -210,3 +210,138 @@ export const ReviseButtonStyle = styled.button`
     cursor: pointer;
   }
 `;
+
+export const ManageStyle = styled.div`
+  width: auto;
+  /* height: auto; */
+  height: 800px;
+  position: absolute;
+  top: 111px;
+  left: 10px;
+`;
+
+export const ManageTitleStyle = styled.p`
+  width: auto;
+  height: 46px;
+  font-size: 30px;
+  font-weight: 500;
+  color: #434343;
+`;
+
+export const InvitationLinkButton = styled.button`
+  width: 130px;
+  height: 33px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 33px;
+  text-align: center;
+  background-color: #2f4dce;
+  border-radius: 5px;
+  margin: auto 0;
+  margin-left: 35px;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const LinkExpirationText = styled.p`
+  font-size: 9px;
+  font-weight: 500;
+  color: #f93333;
+  margin-top: 23px;
+  margin-left: 10px;
+`;
+
+export const ManageSearchInput = styled.input`
+  width: 253px;
+  height: 33px;
+  font-size: 13px;
+  font-weight: 500;
+  background-color: #ffffff;
+  border: 0.3px solid rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  padding: 0px 7px;
+`;
+
+export const ManageSearchButton = styled.button`
+  width: 66px;
+  height: 33px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 33px;
+  text-align: center;
+  background-color: #111b47;
+  border-radius: 4px;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const ManageTableStyle = styled.div`
+  width: auto;
+  height: auto;
+  margin-top: 40px;
+`;
+
+export const ManageTableTrStyle = styled.tr`
+  width: 1443px;
+  height: 78px;
+  &:hover {
+    cursor: pointer;
+    background-color: #f9fafb;
+  }
+`;
+
+export const ManageTableDateTh = styled.th`
+  width: 581px;
+  height: 78px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1f2937;
+  line-height: 78px;
+  text-align: left;
+  padding: 26px 16px;
+`;
+
+export const ManageTableEmailTh = styled(ManageTableDateTh)`
+  width: 428px;
+  box-shadow: 0px -1px 0px rgba(181, 181, 181, 0.2) inset;
+`;
+
+export const ManageTableNickNameTh = styled(ManageTableDateTh)`
+  width: 240px;
+  box-shadow: 0px -1px 0px rgba(181, 181, 181, 0.2) inset;
+`;
+
+export const ManageTableTaskTh = styled(ManageTableDateTh)`
+  width: 194px;
+  text-align: center;
+`;
+
+export const ManageTableDateTd = styled.td`
+  width: 581px;
+  height: 78px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #1f2937;
+  line-height: 78px;
+  text-align: left;
+  padding: 26px 16px;
+`;
+
+export const ManageTableEmailTd = styled(ManageTableDateTd)`
+  width: 428px;
+  box-shadow: 0px -1px 0px rgba(181, 181, 181, 0.2) inset;
+`;
+
+export const ManageTableNickNameTd = styled(ManageTableDateTd)`
+  width: 240px;
+  box-shadow: 0px -1px 0px rgba(181, 181, 181, 0.2) inset;
+`;
+
+export const ManageTableTaskTd = styled(ManageTableDateTd)`
+  width: 194px;
+  text-align: center;
+`;

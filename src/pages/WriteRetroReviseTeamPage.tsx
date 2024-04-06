@@ -1,10 +1,12 @@
-import { SettingMenu, SettingTitle } from '@/components/writeRetro/layout/Setting';
+import { ManageMenu } from '@/components/writeRetro/layout/Manage';
+import { SettingTitle } from '@/components/writeRetro/layout/Setting';
 
 export const WriteRetroReviseTeamPage = () => {
   return (
     <>
       <SettingTitle></SettingTitle>
-      <SettingMenu></SettingMenu>
+      {/* <SettingMenu></SettingMenu> */}
+      <ManageMenu></ManageMenu>
     </>
   );
 };
