@@ -16,7 +16,7 @@ export const SectionServices: SectionClient = {
   delete: async sectionId => {
     return await mswInstance.delete(`${ROUTE}/${sectionId}`);
   },
-  likePost: async id => {
-    return await mswInstance.post(`${ROUTE}/${id}/likes`);
+  likePost: async userId => {
+    return await mswInstance.post(`${ROUTE}/${userId}/likes`);
   },
 };
