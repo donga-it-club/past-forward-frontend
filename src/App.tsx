@@ -3,6 +3,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { getCurrentUser } from 'aws-amplify/auth';
 import MainLayout from './components/layout/MainLayout';
+import WriteRetroReviseTeamPage from './pages/WriteRetroReviseTeamPage';
 import InviteTeamModal from '@/components/inviteTeam/InviteTeamModal';
 import SubLayout from '@/components/layout/PageSubLayout';
 import ProfileLayout from '@/components/layout/ProfileLayout';
@@ -13,7 +14,6 @@ import MyPage from '@/pages/MyPage';
 import SurveyPage from '@/pages/SurveyPage';
 import { WriteRetroPersonalPage } from '@/pages/WriteRetroPersonalPage';
 import { WriteRetroRevisePersonalPage } from '@/pages/WriteRetroRevisePersonalPage';
-import { WriteRetroReviseTeamPage } from '@/pages/WriteRetroReviseTeamPage';
 import { WriteRetroTeamPage } from '@/pages/WriteRetroTeamPage';
 
 interface PrivateRouteProps {

@@ -1,7 +1,8 @@
 import { AddTask } from '@/components/writeRetro/layout/AddTask';
 import Label from '@/components/writeRetro/layout/Label';
 import Title from '@/components/writeRetro/layout/Title';
-import { TeamActionItemsTask, TeamTask } from '@/components/writeRetro/task/Task';
+import { TeamActionItemsTask } from '@/components/writeRetro/task/TeamActionItemsTask';
+import TeamTask from '@/components/writeRetro/task/TeamTask';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 
 export const WriteRetroTeamPage = () => {

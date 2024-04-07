@@ -1,7 +1,7 @@
 import { AddTask } from '@/components/writeRetro/layout/AddTask';
 import Label from '@/components/writeRetro/layout/Label';
 import Title from '@/components/writeRetro/layout/Title';
-import { PersonalTask } from '@/components/writeRetro/task/Task';
+import PersonalTask from '@/components/writeRetro/task/PersonalTask';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 
 export const WriteRetroPersonalPage = () => {

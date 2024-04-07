@@ -2,24 +2,8 @@ import { useState } from 'react';
 import { BiSolidPencil } from 'react-icons/bi';
 import { IoPersonCircle } from 'react-icons/io5';
 import { LiaExclamationCircleSolid } from 'react-icons/lia';
-import { MdPeopleAlt } from 'react-icons/md';
 import { RiFileUploadLine } from 'react-icons/ri';
 import * as S from '@/styles/writeRetroStyles/ReviseLayout.style';
-
-export const SettingTitle = () => {
-  const title: string = 'FirstRetro';
-
-  return (
-    <>
-      <S.TitleBox>
-        <div style={{ display: 'flex' }}>
-          <MdPeopleAlt size="60px" color="#434343" />
-          <S.TitleText>{title}</S.TitleText>
-        </div>
-      </S.TitleBox>
-    </>
-  );
-};
 
 export const SettingMenu = () => {
   const [clicked, setClicked] = useState(false);
