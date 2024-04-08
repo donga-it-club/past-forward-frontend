@@ -6,12 +6,6 @@ import * as S from '@/styles/writeRetroStyles/Layout.style';
 
 export const PersonalTaskMessage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const TaskMessageCount = 5;
-  const MessageImage = <FaPlus size="20px" color="#DADEE5" />;
-  const messageUserName = '김체리';
-  const messageTime = '1일 전';
-  const MessageText: string = '맥락까지 꼼꼼하게 문서에 기재해주셔서 너무 좋아요!';
   // Input 높이 자동 조절
   const [value, setValue] = useState('');
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -26,7 +20,7 @@ export const PersonalTaskMessage = () => {
       <S.TaskMessageBoxStyle>
         {/* TaskMessageTop */}
         <div style={{ display: 'flex' }}>
-          <S.TaskMessageCount>{TaskMessageCount}개의 댓글</S.TaskMessageCount>
+          <S.TaskMessageCount>5개의 댓글</S.TaskMessageCount>
           <S.TaskMessageLine></S.TaskMessageLine>
         </div>
 
@@ -34,13 +28,15 @@ export const PersonalTaskMessage = () => {
         <div style={{ width: '279px', height: 'auto' }}>
           <S.TaskMessageStyle>
             <div style={{ display: 'flex' }}>
-              <S.MessageUserProfile>{MessageImage}</S.MessageUserProfile>
+              <div>
+                <FaPlus size="20px" color="#DADEE5" />
+              </div>
 
               <div style={{ marginLeft: '5px' }}>
                 {/* TaskMessageTop */}
                 <S.MessageTopStyle>
-                  <S.MessageUserName>{messageUserName}</S.MessageUserName>
-                  <S.MessageTime>{messageTime}</S.MessageTime>
+                  <S.MessageUserName>김체리</S.MessageUserName>
+                  <S.MessageTime>1일 전</S.MessageTime>
                   <div style={{ margin: 'auto 0', position: 'relative', left: '165px' }}>
                     <div style={{ display: 'flex', width: '35px' }}>
                       <S.TaskRevise>수정</S.TaskRevise>
@@ -51,7 +47,7 @@ export const PersonalTaskMessage = () => {
                 </S.MessageTopStyle>
                 {/* TaskMessageMain */}
                 <S.MessageText onClick={onOpen}>
-                  {MessageText}
+                  맥락까지 꼼꼼하게 문서에 기재해주셔서 너무 좋아요!
                   <S.ReviseMessageText>(수정됨)</S.ReviseMessageText>
                 </S.MessageText>
                 {/* MessageModal */}

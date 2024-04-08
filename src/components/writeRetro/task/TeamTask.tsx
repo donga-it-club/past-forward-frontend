@@ -16,7 +16,7 @@ const TeamTask = () => {
   };
 
   const [messaged, setMessaged] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
   const handleMessaged = () => {
     setMessaged(messaged => !messaged);
     setIsVisible(isVisible => !isVisible);
@@ -44,7 +44,7 @@ const TeamTask = () => {
           {/* TaskTextModal */}
           <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
-            <ModalContent sx={{ width: 'auto', height: 'auto', borderRadius: '30px', position: 'relative' }}>
+            <ModalContent sx={{ borderRadius: '30px', position: 'relative' }}>
               <ReviseModal />
               <ModalCloseButton
                 sx={{

@@ -6,7 +6,7 @@ const Title = () => {
   return (
     <>
       <S.TitleBox>
-        <div style={{ display: 'flex', flexDirection: 'column', flex: 7, margin: '20px 0' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', flex: 7, margin: '20px 10px' }}>
           <div style={{ display: 'flex' }}>
             <MdPeopleAlt size="60px" color="#434343" />
             <S.TitleText>FirstRetro</S.TitleText>
