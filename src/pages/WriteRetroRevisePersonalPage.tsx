@@ -1,3 +1,5 @@
-export const WriteRetroRevisePersonalPage = () => {
+const WriteRetroRevisePersonalPage = () => {
   return <></>;
 };
+
+export default WriteRetroRevisePersonalPage;

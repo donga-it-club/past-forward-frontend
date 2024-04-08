@@ -1,3 +1,5 @@
+// 임시 API
+
 export interface CommentRequest {
   id: string;
 }

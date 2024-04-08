@@ -4,18 +4,17 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { getCurrentUser } from 'aws-amplify/auth';
 import { RecoilRoot } from 'recoil';
 import MainLayout from './components/layout/MainLayout';
+import WriteRetroTeamPage from './pages/WriteRetroTeamPage';
 import InviteTeamModal from '@/components/inviteTeam/InviteTeamModal';
-import SubLayout from '@/components/layout/PageSubLayout';
 import ProfileLayout from '@/components/layout/ProfileLayout';
 import AuthPage from '@/pages/AuthPage';
 import CreateRetroPage from '@/pages/CreateRetroPage';
 import HomePage from '@/pages/HomePage';
 import MyPage from '@/pages/MyPage';
 import SurveyPage from '@/pages/SurveyPage';
-import { WriteRetroPersonalPage } from '@/pages/WriteRetroPersonalPage';
-import { WriteRetroRevisePersonalPage } from '@/pages/WriteRetroRevisePersonalPage';
-import { WriteRetroReviseTeamPage } from '@/pages/WriteRetroReviseTeamPage';
-import { WriteRetroTeamPage } from '@/pages/WriteRetroTeamPage';
+import WriteRetroPersonalPage from '@/pages/WriteRetroPersonalPage';
+import WriteRetroRevisePersonalPage from '@/pages/WriteRetroRevisePersonalPage';
+import WriteRetroReviseTeamPage from '@/pages/WriteRetroReviseTeamPage';
 
 interface PrivateRouteProps {
   children: ReactElement;
@@ -53,10 +52,11 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
 const App = () => {
   return (
     <>
+
       <RecoilRoot>
         <Router>
           <Routes>
-            <Route element={<SubLayout />}>
+            <Route element={<ProfileLayout />}>
               <Route
                 path="/create"
                 element={
@@ -98,6 +98,24 @@ const App = () => {
                 </PrivateRoute>
               }
             ></Route>
+
+            <Route
+
+              path="/WriteRetroPersonalPage"
+              element={
+                <PrivateRoute>
+                  <WriteRetroPersonalPage />
+                </PrivateRoute>
+              }
+            ></Route>
+            <Route
+              path="/WriteRetroReviseTeamPage"
+              element={
+                <PrivateRoute>
+                  <WriteRetroReviseTeamPage />
+                </PrivateRoute>
+              }
+            ></Route>
             <Route
               path="/WriteRetroRevisePersonalPage"
               element={
@@ -106,7 +124,6 @@ const App = () => {
                 </PrivateRoute>
               }
             ></Route>
-            <Route element={<ProfileLayout />}>
               <Route
                 path="/my"
                 element={
@@ -128,9 +145,34 @@ const App = () => {
                 </PrivateRoute>
               }
             ></Route>
+            <Route
+              path="/WriteRetroTeamPage"
+              element={
+                <PrivateRoute>
+                  <WriteRetroTeamPage />
+                </PrivateRoute>
+              }
+            ></Route>
+          </Route>
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<HomePage />}></Route>
+          </Route>
+          <Route path="/login" element={<AuthPage />}></Route>
+          <Route
+            path="/survey"
+            element={
+              <PrivateRoute>
+                <SurveyPage />
+              </PrivateRoute>
+            }
+          ></Route>
+        </Routes>
+      </Router>
+
           </Routes>
         </Router>
       </RecoilRoot>
+
     </>
   );
 };

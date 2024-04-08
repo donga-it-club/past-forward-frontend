@@ -1,16 +1,21 @@
 import { useState, useEffect } from 'react';
 import { Gear, PersonCircle } from 'react-bootstrap-icons';
+import { GiHamburgerMenu } from 'react-icons/gi';
+import { Button, Drawer, DrawerContent, DrawerOverlay, useDisclosure } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@chakra-ui/react';
 import { getCurrentUser, signOut, fetchUserAttributes } from 'aws-amplify/auth';
 import { useRecoilState } from 'recoil';
 import LogoBox from './LogoBox';
 import MenuBar from './MenuBar';
+import PageSideBar from './PageSideBar';
 import Alarm from '@/components/alarm/Alarm';
 import { userNicknameState } from '@/recoil/user/userAtom';
 import * as S from '@/styles/layout/layout.style';
 
 const PageNavBar = () => {
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   // const [userNickname, setUserNickname] = useState<string | null>(null);
@@ -58,9 +63,20 @@ const PageNavBar = () => {
     handleFetchUserAttributes();
   }, []);
 
+
   return (
     <>
       <S.Container>
+        <Button colorScheme="brand" onClick={onOpen}>
+          <GiHamburgerMenu />
+        </Button>
+        <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
+          <DrawerOverlay />
+          <DrawerContent>
+            <PageSideBar />
+          </DrawerContent>
+        </Drawer>
+
         <LogoBox />
         <MenuBar />
 
