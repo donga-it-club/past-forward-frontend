@@ -17,7 +17,6 @@ export const TitleText = styled.p`
 `;
 
 export const SubTitleText = styled.p`
-  width: auto;
   height: 20px;
   font-size: 20px;
   font-weight: 600;
@@ -27,7 +26,6 @@ export const SubTitleText = styled.p`
 
 export const SaveSettingBox = styled.div`
   display: flex;
-  top: 134px;
 `;
 
 export const SaveButton = styled.div`
@@ -57,11 +55,10 @@ export const SettingButton = styled.div`
 
 export const SectionBox = styled.div`
   display: flex;
-  position: absolute;
+  margin-top: 10px;
 `;
 
 export const FrameStyle = styled.div`
-  height: auto;
   min-height: 100vh;
   background-color: #f8f8f8;
   box-shadow:
@@ -70,7 +67,7 @@ export const FrameStyle = styled.div`
     0 -0.3px 0 0.3px #4d5e80;
   border-radius: 10px 10px 0px 0px;
   padding: 15px;
-  margin-right: 30px;
+  margin-left: 10px;
 `;
 
 export const LabelStyle = styled.div<{ color: string }>`
@@ -92,7 +89,6 @@ export const LabelMark = styled.div<{ mark_color: string }>`
 `;
 
 export const LabelName = styled.p<{ font_color: string }>`
-  width: auto;
   height: 20px;
   font-size: 18px;
   font-weight: 900;
@@ -114,11 +110,14 @@ export const TaskCount = styled.div`
   padding: 5px 8.5px;
   position: absolute;
   top: 18px;
-  left: 90%;
+  left: 80%;
 `;
 
 export const TaskBox = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   min-height: 115px;
+  min-width: 200px;
   background-color: #ffffff;
   border-radius: 5px;
   box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.25);
@@ -127,12 +126,13 @@ export const TaskBox = styled.div`
 `;
 
 export const TaskMainStyle = styled.div`
-  padding: 20px;
+  padding: 10px;
 `;
 
 export const TaskUserProfile = styled.div`
   display: flex;
   margin: auto 0;
+  flex: 2;
 `;
 
 export const TaskUserName = styled.p`
@@ -155,7 +155,9 @@ export const TaskRevise = styled.div`
 `;
 
 export const TaskText = styled.p`
-  font-size: 20px;
+  font-size: 15px;
+  min-width: 200px;
+  max-width: 500px;
   font-weight: 700;
   color: #6b7a99;
   line-height: 20px;
@@ -178,8 +180,8 @@ export const ReviseText = styled.p`
 `;
 
 export const SubTaskBox = styled.div`
-  width: auto;
   height: 20px;
+  width: 100%;
   display: flex;
   margin-top: 12px;
 `;
@@ -187,7 +189,7 @@ export const SubTaskBox = styled.div`
 export const SubTaskStyle = styled.div`
   margin: auto 0;
   display: flex;
-  margin-right: 18px;
+  margin-right: 2px;
 `;
 
 export const SubTaskIcon = styled.div`
@@ -199,7 +201,7 @@ export const SubTaskIcon = styled.div`
 
 export const SubTaskCount = styled.p`
   margin: auto 5px;
-  font-size: 15px;
+  font-size: 12px;
   font-weight: 700;
   color: #6b7a99;
   line-height: 20px;
@@ -220,7 +222,7 @@ export const TaskMessageCount = styled.p`
 `;
 
 export const TaskMessageLine = styled.div`
-  width: 70%;
+  width: 60%;
   margin: auto 10px;
   border-bottom: 1px solid #dadee5;
 `;
@@ -278,8 +280,8 @@ export const ReviseMessageText = styled.p`
 export const InputMessage = styled.textarea.attrs(props => ({
   placeholder: props.placeholder,
 }))`
+  width: 75%;
   font-size: 15px;
-  width: 250px;
   font-weight: 500;
   padding: auto 0;
   color: #425170;
@@ -295,7 +297,6 @@ export const InputMessage = styled.textarea.attrs(props => ({
 `;
 
 export const InputButton = styled.button`
-  width: 100px;
   font-size: 15px;
   padding: 5px 10px;
   margin: 0 10px;
