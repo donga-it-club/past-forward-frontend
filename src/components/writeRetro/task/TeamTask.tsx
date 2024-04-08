@@ -10,19 +10,13 @@ import * as S from '@/styles/writeRetroStyles/Layout.style';
 const TeamTask = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const userName: string = '김사과';
-  const taskText: string = '문서 작성 - 수기를 담당하신 분이 작성한 회의록';
-  const likeCount: number = 3;
-  const MessageCount: number = 4;
-  const DaysLeftCount: number = 20240326;
-
   const [liked, setLiked] = useState(false);
   const handleLike = () => {
     setLiked(!liked);
   };
 
   const [messaged, setMessaged] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const handleMessaged = () => {
     setMessaged(messaged => !messaged);
     setIsVisible(isVisible => !isVisible);
@@ -33,23 +27,18 @@ const TeamTask = () => {
       <S.TaskBox>
         <S.TaskMainStyle>
           {/* TaskTop */}
-          <div style={{ display: 'flex' }}>
+          <div style={{ display: 'flex', margin: '10px auto' }}>
             <S.TaskUserProfile>
-              <CgProfile size="20px" color="#DADEE5" />
+              <CgProfile size="50px" color="#DADEE5" />
+              <S.TaskUserName>김사과</S.TaskUserName>
             </S.TaskUserProfile>
-            <S.TaskUserName>{userName}</S.TaskUserName>
-            <div style={{ margin: 'auto 0', position: 'relative', left: '180px' }}>
-              <div style={{ display: 'flex', width: '35px' }}>
-                <S.TaskRevise>수정</S.TaskRevise>
-                <p style={{ fontSize: '8px', fontWeight: '500', color: '#adb8cc' }}>/</p>
-                <S.TaskRevise>삭제</S.TaskRevise>
-              </div>
-            </div>
+
+            <S.TaskRevise>삭제</S.TaskRevise>
           </div>
 
           {/* TaskCenter */}
           <S.TaskText onClick={onOpen}>
-            {taskText}
+            문서 작성 - 수기를 담당하신 분이 작성한 회의록
             <S.ReviseText>(수정됨)</S.ReviseText>
           </S.TaskText>
           {/* TaskTextModal */}
@@ -76,23 +65,23 @@ const TeamTask = () => {
             {/* Like */}
             <S.SubTaskStyle>
               <S.SubTaskIcon onClick={handleLike}>
-                {liked ? <BiSolidLike size="20px" color="#111B47" /> : <BiLike size="20px" color="#DADEE5" />}
+                {liked ? <BiSolidLike size="30px" color="#111B47" /> : <BiLike size="30px" color="#DADEE5" />}
               </S.SubTaskIcon>
-              <S.SubTaskCount>{likeCount}</S.SubTaskCount>
+              <S.SubTaskCount>3</S.SubTaskCount>
             </S.SubTaskStyle>
             {/* Message */}
             <S.SubTaskStyle>
               <S.SubTaskIcon onClick={handleMessaged}>
-                {messaged ? <MdMessage size="20px" color="#111B47" /> : <MdMessage size="20px" color="#DADEE5" />}
+                {messaged ? <MdMessage size="30px" color="#111B47" /> : <MdMessage size="30px" color="#DADEE5" />}
               </S.SubTaskIcon>
-              <S.SubTaskCount>{MessageCount}</S.SubTaskCount>
+              <S.SubTaskCount>4</S.SubTaskCount>
             </S.SubTaskStyle>
             {/* DaysLeft */}
             <S.SubTaskStyle>
               <S.SubTaskIcon>
-                <MdAccessAlarm size="20px" color="#DADEE5" />
+                <MdAccessAlarm size="30px" color="#DADEE5" />
               </S.SubTaskIcon>
-              <S.SubTaskCount>{DaysLeftCount}</S.SubTaskCount>
+              <S.SubTaskCount>20240326</S.SubTaskCount>
             </S.SubTaskStyle>
           </S.SubTaskBox>
         </S.TaskMainStyle>

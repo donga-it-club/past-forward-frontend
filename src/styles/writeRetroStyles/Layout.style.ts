@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 
+export const Container = styled.div`
+  margin: 0 30px;
+`;
 export const TitleBox = styled.div`
-  width: auto;
-  height: auto;
-  position: absolute;
-  top: 120px;
-  left: 349px;
+  display: flex;
 `;
 
 export const TitleText = styled.p`
@@ -28,9 +27,7 @@ export const SubTitleText = styled.p`
 
 export const SaveSettingBox = styled.div`
   display: flex;
-  position: absolute;
   top: 134px;
-  left: 1602px;
 `;
 
 export const SaveButton = styled.div`
@@ -59,16 +56,11 @@ export const SettingButton = styled.div`
 `;
 
 export const SectionBox = styled.div`
-  width: auto;
-  height: auto;
   display: flex;
   position: absolute;
-  top: 261px;
-  left: 349px;
 `;
 
 export const FrameStyle = styled.div`
-  width: 347px;
   height: auto;
   min-height: 100vh;
   background-color: #f8f8f8;
@@ -82,7 +74,6 @@ export const FrameStyle = styled.div`
 `;
 
 export const LabelStyle = styled.div<{ color: string }>`
-  width: 317px;
   height: 60px;
   background-color: ${props => props.color};
   box-shadow: 0px 2px 5px 0px rgba(38, 51, 77, 0.03);
@@ -112,7 +103,6 @@ export const LabelName = styled.p<{ font_color: string }>`
 `;
 
 export const TaskCount = styled.div`
-  width: auto;
   min-width: 22px;
   height: 24px;
   font-size: 10px;
@@ -124,12 +114,10 @@ export const TaskCount = styled.div`
   padding: 5px 8.5px;
   position: absolute;
   top: 18px;
-  left: 278px;
+  left: 90%;
 `;
 
 export const TaskBox = styled.div`
-  width: 311px;
-  height: auto;
   min-height: 115px;
   background-color: #ffffff;
   border-radius: 5px;
@@ -139,47 +127,41 @@ export const TaskBox = styled.div`
 `;
 
 export const TaskMainStyle = styled.div`
-  width: 311px;
-  height: auto;
-  padding: 16px;
+  padding: 20px;
 `;
 
 export const TaskUserProfile = styled.div`
-  width: 20px;
-  height: 20px;
+  display: flex;
+  margin: auto 0;
 `;
 
 export const TaskUserName = styled.p`
-  width: auto;
   height: 20px;
-  font-size: 10px;
+  font-size: 20px;
   font-weight: 700;
   color: #adb8cc;
   line-height: 20px;
-  margin-left: 10px;
+  margin: auto 10px;
 `;
 
 export const TaskRevise = styled.div`
-  width: 18px;
-  height: 10px;
-  font-size: 8px;
+  font-size: 15px;
   font-weight: 500;
-  color: #adb8cc;
-  text-align: center;
+  color: red;
+  margin: auto 10px;
   &:hover {
     cursor: pointer;
   }
 `;
 
-export const TaskText = styled.span`
-  width: 261px;
-  height: auto;
-  font-size: 12px;
+export const TaskText = styled.p`
+  font-size: 20px;
   font-weight: 700;
   color: #6b7a99;
   line-height: 20px;
   vertical-align: top;
   display: inline-block;
+  margin: 20px 0;
   margin-top: 5px;
   &:hover {
     cursor: pointer;
@@ -187,9 +169,7 @@ export const TaskText = styled.span`
 `;
 
 export const ReviseText = styled.p`
-  width: 35px;
-  height: 10px;
-  font-size: 10px;
+  font-size: 15px;
   font-weight: 600;
   color: #adb8cc;
   line-height: 10px;
@@ -205,33 +185,27 @@ export const SubTaskBox = styled.div`
 `;
 
 export const SubTaskStyle = styled.div`
-  width: auto;
-  height: 20px;
+  margin: auto 0;
   display: flex;
   margin-right: 18px;
 `;
 
 export const SubTaskIcon = styled.div`
-  width: 20px;
-  height: 20px;
+  margin: auto 3px;
   &:hover {
     cursor: pointer;
   }
 `;
 
 export const SubTaskCount = styled.p`
-  width: auto;
-  height: 20px;
-  font-size: 10px;
+  margin: auto 5px;
+  font-size: 15px;
   font-weight: 700;
   color: #6b7a99;
   line-height: 20px;
-  margin-left: 7px;
 `;
 
 export const TaskMessageBoxStyle = styled.div`
-  width: 311px;
-  height: auto;
   min-height: 50px;
   background-color: #ffffff;
   box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.25);
@@ -239,77 +213,61 @@ export const TaskMessageBoxStyle = styled.div`
 `;
 
 export const TaskMessageCount = styled.p`
-  width: 48px;
-  font-size: 8px;
+  font-size: 15px;
   font-weight: 700;
   color: #dadee5;
   padding: 0 auto;
 `;
 
 export const TaskMessageLine = styled.div`
-  width: 231px;
-  height: 6px;
+  width: 70%;
+  margin: auto 10px;
   border-bottom: 1px solid #dadee5;
 `;
 
 export const TaskMessageStyle = styled.div`
-  width: 279px;
-  height: auto;
   min-height: 35px;
   display: flex;
   margin-top: 10px;
 `;
 
-export const MessageUserProfile = styled.div`
-  width: 20px;
-  height: 20px;
-`;
+export const MessageUserProfile = styled.div``;
 
 export const MessageTopStyle = styled.div`
-  width: auto;
-  max-width: 200px;
   display: flex;
   position: relative;
 `;
 
 export const MessageUserName = styled.p`
-  width: auto;
-  height: 10px;
-  font-size: 10px;
+  font-size: 20px;
+  margin: auto 5px;
   font-weight: 700;
   color: #adb8cc;
 `;
 
 export const MessageTime = styled.p`
-  width: auto;
-  height: 6px;
-  font-size: 6px;
+  margin: auto 5px;
+  font-size: 15px;
   font-weight: 700;
   color: #dadee5;
   margin-left: 5px;
   position: relative;
-  top: 4px;
 `;
 
 export const MessageText = styled.div`
-  width: 244px;
-  height: auto;
-  font-size: 10px;
+  font-size: 15px;
   font-weight: 700;
   color: #6b7a99;
-  line-height: 15px;
   vertical-align: top;
   display: inline-block;
-  margin-top: 3px;
+  margin: 10px 0;
   &:hover {
     cursor: pointer;
   }
 `;
 
 export const ReviseMessageText = styled.p`
-  width: 35px;
-  height: 10px;
-  font-size: 7px;
+  font-size: 15px;
   font-weight: 600;
   color: #adb8cc;
   line-height: 10px;
@@ -320,17 +278,15 @@ export const ReviseMessageText = styled.p`
 export const InputMessage = styled.textarea.attrs(props => ({
   placeholder: props.placeholder,
 }))`
-  width: 232px;
-  height: auto;
-  min-height: 25px;
-  font-size: 10px;
+  font-size: 15px;
+  width: 250px;
   font-weight: 500;
+  padding: auto 0;
   color: #425170;
   line-height: 20px;
   background-color: #f3f3f3;
   border: 0.7px solid rgba(175, 175, 175, 1);
   border-radius: 7px;
-  padding: 2px 7px;
   resize: none;
   overflow-y: hidden;
   ::placeholder {
@@ -339,19 +295,18 @@ export const InputMessage = styled.textarea.attrs(props => ({
 `;
 
 export const InputButton = styled.button`
-  width: 35px;
-  height: 18px;
-  font-size: 9px;
+  width: 100px;
+  font-size: 15px;
+  padding: 5px 10px;
+  margin: 0 10px;
   font-weight: 700;
   color: #ffffff;
   background-color: #111b47;
   border-radius: 10px;
-  display: block;
 `;
 
 // AddTaskButtonStyle
 export const AddTaskButtonStyle = styled.div`
-  width: 311px;
   height: auto;
   min-height: 39px;
   background-color: #ffffff;
@@ -363,7 +318,6 @@ export const AddTaskButtonStyle = styled.div`
 `;
 
 export const AddTaskButtonBox = styled.div`
-  width: 311px;
   height: 39px;
   border-radius: 8px;
   position: relative;
@@ -383,8 +337,6 @@ export const AddTaskButtonImage = styled.div`
 `;
 
 export const InputTaskBox = styled.div`
-  width: 311px;
-  height: auto;
   border-top: 1px solid rgba(218, 222, 229, 1);
   border-bottom-right-radius: 8px;
   border-bottom-left-radius: 8px;
@@ -395,10 +347,8 @@ export const InputTaskBox = styled.div`
 export const InputTask = styled.textarea.attrs(props => ({
   placeholder: props.placeholder,
 }))`
-  width: 272px;
-  height: auto;
-  min-height: 53px;
-  font-size: 10px;
+  width: 90%;
+  font-size: 15px;
   font-weight: 400;
   line-height: 20px;
   color: #425170;

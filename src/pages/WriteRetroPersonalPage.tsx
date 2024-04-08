@@ -4,7 +4,7 @@ import Title from '@/components/writeRetro/layout/Title';
 import PersonalTask from '@/components/writeRetro/task/PersonalTask';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 
-export const WriteRetroPersonalPage = () => {
+const WriteRetroPersonalPage = () => {
   return (
     <>
       <Title />
@@ -36,3 +36,5 @@ export const WriteRetroPersonalPage = () => {
     </>
   );
 };
+
+export default WriteRetroPersonalPage;

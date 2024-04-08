@@ -1,18 +1,5 @@
 import { TOrder, TStatus } from './@asConst';
 
-export interface RetrospectiveData {
-  title: string;
-  templateId: number;
-  status: TStatus;
-  thumbnail: string;
-}
-
-export interface PostRetrospectivesResponse {
-  code: string;
-  message: string;
-  data: GetRetrospectiveData;
-}
-
 // get
 export interface GetRetrospectiveRequest {
   page: number;
@@ -21,42 +8,68 @@ export interface GetRetrospectiveRequest {
   status: TStatus;
   keyword: string;
   isBookmarked: boolean;
-}
-
-export interface NodeData extends RetrospectiveData {
-  id: number;
   userId: number;
-  isBookmarked: boolean;
 }
 
 export interface GetRetrospectiveData {
   totalCount: number;
-  nodes: Array<NodeData>;
+  nodes: Array<RetrospectiveResponse>;
 }
 
-export interface GetRetrospectiveResponse {
-  code: number;
-  message: string;
-  data: GetRetrospectiveData;
+//post
+export interface PostRetrospectivesRequest {
+  title: string;
+  teamId: number;
+  userId: number;
+  templateId: number;
+  status: TStatus;
+  thumbnail: string;
+  startedDate: string;
 }
 
-export interface DeleteRetrospectiveRequest {
-  id: number;
-}
-
-export interface PutRetrospectiveRequest {
+export interface PostRetrospectivesResponse {
   id: number;
   title: string;
-  teamId: string;
+  teamId: number;
+  userId: number;
+  templateId: number;
+  status: TStatus;
+  thumbnail: string;
+}
+
+//delete
+export interface DeleteRetrospectiveRequest {
+  retrospectiveId: number;
+  userId: number;
+}
+
+//put
+export interface PutRetrospectiveRequest {
+  title: string;
+  teamId?: string;
   userId: number;
   description: string;
   status: TStatus;
-  thumbnail: string | null;
+  thumbnail?: string;
+}
+
+export interface RetrospectiveResponse {
+  id: number;
+  title: string;
+  userId: number;
+  teamId: number;
+  templateId: number;
+  status: TStatus;
+  isBookmarked: boolean;
+  thumbnail: string;
+  startDate: string;
+  createdDate: string;
+  updatedDate: string;
 }
 
 export interface RetrospectivesClient {
-  create(request: RetrospectiveData): Promise<PostRetrospectivesResponse>;
-  get(request: GetRetrospectiveRequest): Promise<GetRetrospectiveResponse>;
+  create(request: PostRetrospectivesRequest): Promise<PostRetrospectivesResponse>;
+  get(request: GetRetrospectiveRequest): Promise<GetRetrospectiveData>;
   delete(request: DeleteRetrospectiveRequest): Promise<void>;
-  put(request: PutRetrospectiveRequest): Promise<GetRetrospectiveResponse>;
+  put(request: PutRetrospectiveRequest): Promise<RetrospectiveResponse>;
 }

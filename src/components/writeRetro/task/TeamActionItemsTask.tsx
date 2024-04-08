@@ -10,12 +10,6 @@ import * as S from '@/styles/writeRetroStyles/Layout.style';
 export const TeamActionItemsTask = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const userName: string = '김사과';
-  const taskText: string = '문서 작성 - 수기를 담당하신 분이 작성한 회의록';
-  const likeCount: number = 3;
-  const MessageCount: number = 4;
-  const DaysLeftCount: number = 20240326;
-
   const [liked, setLiked] = useState(false);
   const handleLike = () => {
     setLiked(!liked);
@@ -37,7 +31,7 @@ export const TeamActionItemsTask = () => {
             <S.TaskUserProfile>
               <CgProfile size="20px" color="#DADEE5" />
             </S.TaskUserProfile>
-            <S.TaskUserName>{userName}</S.TaskUserName>
+            <S.TaskUserName>김사과</S.TaskUserName>
             <div style={{ margin: 'auto 0', position: 'relative', left: '180px' }}>
               <div style={{ display: 'flex', width: '35px' }}>
                 <S.TaskRevise>수정</S.TaskRevise>
@@ -50,7 +44,7 @@ export const TeamActionItemsTask = () => {
           {/* TaskCenter */}
           <div style={{ display: 'flex', position: 'relative' }}>
             <S.ActionTaskText onClick={onOpen}>
-              {taskText}
+              문서 작성 - 수기를 담당하신 분이 작성한 회의록
               <S.ReviseText>(수정됨)</S.ReviseText>
             </S.ActionTaskText>
             {/* TaskTextModal */}
@@ -71,12 +65,6 @@ export const TeamActionItemsTask = () => {
                 />
               </ModalContent>
             </Modal>
-            <S.ManagerStyle>
-              <S.ManagerText>담당자</S.ManagerText>
-              <div>
-                <S.ManagerButton>M</S.ManagerButton>
-              </div>
-            </S.ManagerStyle>
           </div>
 
           {/* TaskBottom */}
@@ -86,21 +74,21 @@ export const TeamActionItemsTask = () => {
               <S.SubTaskIcon onClick={handleLike}>
                 {liked ? <BiSolidLike size="20px" color="#111B47" /> : <BiLike size="20px" color="#DADEE5" />}
               </S.SubTaskIcon>
-              <S.SubTaskCount>{likeCount}</S.SubTaskCount>
+              <S.SubTaskCount>3</S.SubTaskCount>
             </S.SubTaskStyle>
             {/* Message */}
             <S.SubTaskStyle>
               <S.SubTaskIcon onClick={handleMessaged}>
                 {messaged ? <MdMessage size="20px" color="#111B47" /> : <MdMessage size="20px" color="#DADEE5" />}
               </S.SubTaskIcon>
-              <S.SubTaskCount>{MessageCount}</S.SubTaskCount>
+              <S.SubTaskCount>4</S.SubTaskCount>
             </S.SubTaskStyle>
             {/* DaysLeft */}
             <S.SubTaskStyle>
               <S.SubTaskIcon>
                 <MdAccessAlarm size="20px" color="#DADEE5" />
               </S.SubTaskIcon>
-              <S.SubTaskCount>{DaysLeftCount}</S.SubTaskCount>
+              <S.SubTaskCount>20240326</S.SubTaskCount>
             </S.SubTaskStyle>
           </S.SubTaskBox>
         </S.TaskMainStyle>

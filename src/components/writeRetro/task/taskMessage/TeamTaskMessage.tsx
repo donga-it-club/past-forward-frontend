@@ -6,13 +6,6 @@ import * as S from '@/styles/writeRetroStyles/Layout.style';
 
 const TeamTaskMessage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const TaskMessageCount = 5;
-  const MessageImage = <CgProfile size="20px" color="#DADEE5" />;
-  const messageUserName = '김체리';
-  const messageTime = '1일 전';
-  const MessageText: string = '맥락까지 꼼꼼하게 문서에 기재해주셔서 너무 좋아요!';
-  // Input 높이 자동 조절
   const [value, setValue] = useState('');
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
@@ -26,53 +19,48 @@ const TeamTaskMessage = () => {
       <S.TaskMessageBoxStyle>
         {/* TaskMessageTop */}
         <div style={{ display: 'flex' }}>
-          <S.TaskMessageCount>{TaskMessageCount}개의 댓글</S.TaskMessageCount>
+          <S.TaskMessageCount>5개의 댓글</S.TaskMessageCount>
           <S.TaskMessageLine></S.TaskMessageLine>
         </div>
 
         {/* TaskMessages */}
-        <div style={{ width: '279px', height: 'auto' }}>
+        <div>
           <S.TaskMessageStyle>
-            <div style={{ display: 'flex' }}>
-              <S.MessageUserProfile>{MessageImage}</S.MessageUserProfile>
-
-              <div style={{ marginLeft: '5px' }}>
-                {/* TaskMessageTop */}
-                <S.MessageTopStyle>
-                  <S.MessageUserName>{messageUserName}</S.MessageUserName>
-                  <S.MessageTime>{messageTime}</S.MessageTime>
-                  <div style={{ margin: 'auto 0', position: 'relative', left: '165px' }}>
-                    <div style={{ display: 'flex', width: '35px' }}>
-                      <S.TaskRevise>수정</S.TaskRevise>
-                      <p style={{ fontSize: '8px', fontWeight: '500', color: '#adb8cc' }}>/</p>
-                      <S.TaskRevise>삭제</S.TaskRevise>
-                    </div>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              {/* TaskMessageTop */}
+              <S.MessageTopStyle>
+                <CgProfile size={40} color="#DADEE5" />
+                <S.MessageUserName>김체리</S.MessageUserName>
+                <S.MessageTime>1일 전</S.MessageTime>
+                <div style={{ margin: 'auto 0' }}>
+                  <div style={{ display: 'flex' }}>
+                    <S.TaskRevise>삭제</S.TaskRevise>
                   </div>
-                </S.MessageTopStyle>
-                {/* TaskMessageMain */}
-                <S.MessageText onClick={onOpen}>
-                  {MessageText}
-                  <S.ReviseMessageText>(수정됨)</S.ReviseMessageText>
-                </S.MessageText>
-                {/* MessageModal */}
-                <Modal isOpen={isOpen} onClose={onClose}>
-                  <ModalOverlay />
-                  <ModalContent sx={{ width: 'auto', height: 'auto', borderRadius: '30px', position: 'relative' }}>
-                    <ReviseModal />
-                    <ModalCloseButton
-                      sx={{
-                        width: '30px',
-                        height: '30px',
-                        fontSize: '18px',
-                        color: '#8B8B8B',
-                        position: 'absolute',
-                        top: '31px',
-                        left: '600px',
-                      }}
-                    />
-                  </ModalContent>
-                </Modal>
-              </div>
+                </div>
+              </S.MessageTopStyle>
+              {/* TaskMessageMain */}
+              <S.MessageText onClick={onOpen}>
+                맥락까지 꼼꼼하게 문서에 기재해주셔서 너무 좋아요!
+                <S.ReviseMessageText>(수정됨)</S.ReviseMessageText>
+              </S.MessageText>
+              {/* MessageModal */}
+              <Modal isOpen={isOpen} onClose={onClose}>
+                <ModalOverlay />
+                <ModalContent sx={{ width: 'auto', height: 'auto', borderRadius: '30px', position: 'relative' }}>
+                  <ReviseModal />
+                  <ModalCloseButton
+                    sx={{
+                      width: '30px',
+                      height: '30px',
+                      fontSize: '18px',
+                      color: '#8B8B8B',
+                      position: 'absolute',
+                      top: '31px',
+                      left: '600px',
+                    }}
+                  />
+                </ModalContent>
+              </Modal>
             </div>
           </S.TaskMessageStyle>
         </div>
@@ -85,7 +73,7 @@ const TeamTaskMessage = () => {
             placeholder="내용을 입력해주세요"
             rows={1}
           ></S.InputMessage>
-          <S.InputButton style={{ marginTop: '3px', marginLeft: '5px' }}>확인</S.InputButton>
+          <S.InputButton>확인</S.InputButton>
         </div>
       </S.TaskMessageBoxStyle>
     </>

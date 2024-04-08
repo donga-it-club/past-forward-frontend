@@ -32,7 +32,7 @@ export const AddTask = ({ color }: AddTaskProps) => {
         {isVisible && (
           <S.InputTaskBox>
             <S.InputTask value={value} onChange={handleChange} placeholder="내용을 입력해주세요" rows={1}></S.InputTask>
-            <S.InputButton style={{ marginTop: '10px', marginLeft: '256px' }}>확인</S.InputButton>
+            <S.InputButton style={{ marginTop: '10px', marginLeft: '70%' }}>확인</S.InputButton>
           </S.InputTaskBox>
         )}
       </S.AddTaskButtonStyle>
