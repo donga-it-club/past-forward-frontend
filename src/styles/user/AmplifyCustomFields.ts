@@ -20,12 +20,10 @@ const amplifyCustomFields = {
       label: 'Confirm Password',
       placeholder: '비밀번호를 다시 한 번 더 입력해주세요.',
     },
-    // 'custom:customField': {
-    //   label: 'Nickname',
-    //   placeholder: '닉네임을 입력해주세요.',
-    //   isRequired: true,
-    //   order: 1,
-    // },
+    nickname: {
+      order: 1,
+      placeholder: '사용할 닉네임을 입력해주세요.',
+    },
   },
   forgotPassword: {
     username: {

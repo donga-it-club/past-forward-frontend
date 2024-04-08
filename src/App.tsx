@@ -2,6 +2,7 @@ import React, { ReactElement, useEffect, useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { getCurrentUser } from 'aws-amplify/auth';
+import { RecoilRoot } from 'recoil';
 import MainLayout from './components/layout/MainLayout';
 import WriteRetroTeamPage from './pages/WriteRetroTeamPage';
 import InviteTeamModal from '@/components/inviteTeam/InviteTeamModal';
@@ -51,27 +52,55 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
 const App = () => {
   return (
     <>
-      <Router>
-        <Routes>
-          <Route element={<ProfileLayout />}>
+
+      <RecoilRoot>
+        <Router>
+          <Routes>
+            <Route element={<ProfileLayout />}>
+              <Route
+                path="/create"
+                element={
+                  <PrivateRoute>
+                    <CreateRetroPage />
+                  </PrivateRoute>
+                }
+              ></Route>
+              <Route
+                path="/invite"
+                element={
+                  <PrivateRoute>
+                    <InviteTeamModal />
+                  </PrivateRoute>
+                }
+              ></Route>
+              <Route
+                path="/WriteRetroTeamPage"
+                element={
+                  <PrivateRoute>
+                    <WriteRetroTeamPage />
+                  </PrivateRoute>
+                }
+              ></Route>
+            </Route>
             <Route
-              path="/create"
+              path="/WriteRetroPersonalPage"
               element={
                 <PrivateRoute>
-                  <CreateRetroPage />
+                  <WriteRetroPersonalPage />
                 </PrivateRoute>
               }
             ></Route>
             <Route
-              path="/invite"
+              path="/WriteRetroReviseTeamPage"
               element={
                 <PrivateRoute>
-                  <InviteTeamModal />
+                  <WriteRetroReviseTeamPage />
                 </PrivateRoute>
               }
             ></Route>
 
             <Route
+
               path="/WriteRetroPersonalPage"
               element={
                 <PrivateRoute>
@@ -95,12 +124,24 @@ const App = () => {
                 </PrivateRoute>
               }
             ></Route>
-
+              <Route
+                path="/my"
+                element={
+                  <PrivateRoute>
+                    <MyPage />
+                  </PrivateRoute>
+                }
+              ></Route>
+            </Route>
+            <Route element={<MainLayout />}>
+              <Route path="/" element={<HomePage />}></Route>
+            </Route>
+            <Route path="/login" element={<AuthPage />}></Route>
             <Route
-              path="/my"
+              path="/survey"
               element={
                 <PrivateRoute>
-                  <MyPage />
+                  <SurveyPage />
                 </PrivateRoute>
               }
             ></Route>
@@ -127,6 +168,11 @@ const App = () => {
           ></Route>
         </Routes>
       </Router>
+
+          </Routes>
+        </Router>
+      </RecoilRoot>
+
     </>
   );
 };
