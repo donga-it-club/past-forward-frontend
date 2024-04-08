@@ -8,11 +8,11 @@ export const ProfileContainer = styled.div`
   display: flex;
   width: 100%;
   background-color: #111b47;
-  height: 100px;
+  height: 4rem;
   color: white;
   justify-items: center;
   align-items: center;
-  font-size: 60px;
+  font-size: 40px;
   margin: 10px 0;
 `;
 
@@ -21,8 +21,10 @@ export const MyPageContainer = styled.div`
   flex-direction: column;
   justify-items: center;
   width: 800px;
-  background-color: #e6e6e6;
-  margin: auto 0;
+  background-color: rgba(251, 251, 251, 1);
+  /* margin: auto 0; */
+  margin-top: 2rem;
+  margin-bottom: 8rem;
   border: 1px solid #505f98;
   border-radius: 5%;
   padding: 20px 50px;
@@ -66,9 +68,33 @@ export const ImageButtonBox = styled.div`
   margin: 0 auto;
 `;
 
-export const NicknameInput = styled.input`
-  margin: 5px 10px;
-  font-size: 20px;
+export const NicknameContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+// export const NicknameBox = styled.div`
+//   margin-top: 1rem;
+//   margin-bottom: 2rem;
+//   font-size: 18px;
+//   border: 1px solid #717171;
+//   border-radius: 10px;
+//   background-color: white;
+//   width: 98%;
+//   height: 45px;
+//   display: flex;
+//   align-items: center;
+//   padding: 0 1rem;
+// `;
+
+export const NicknameUpdateBox = styled.div`
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+`;
+
+export const UpdateButton = styled.div`
+  display: flex;
+  justify-content: flex-end;
 `;
 
 export const SubName = styled.h2<{ fontSize: string }>`
@@ -77,16 +103,25 @@ export const SubName = styled.h2<{ fontSize: string }>`
   font-size: ${props => props.fontSize};
 `;
 
+export const LoginContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const LoginBox = styled.div<{ background_color: string }>`
   display: flex;
   flex-direction: row;
+  align-items: center;
   background-color: ${props => props.background_color};
-  margin: 5px 0px;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
   border: 1px solid #717171;
-  width: 80%;
-  height: 50px;
+  width: 98%;
+  height: 45px;
   border-radius: 45px;
-  padding: auto 0;
+  padding: 0 1rem;
+  /* font-size: 18px; */
 `;
 
 export const KakaoIcon = styled.img`
@@ -107,4 +142,10 @@ export const PWInput = styled.input`
   font-size: 15px;
   margin: 5px 10px;
   width: 150px;
+`;
+
+export const deleteContainer = styled.div`
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
 `;

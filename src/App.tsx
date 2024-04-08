@@ -2,6 +2,7 @@ import React, { ReactElement, useEffect, useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { getCurrentUser } from 'aws-amplify/auth';
+import { RecoilRoot } from 'recoil';
 import MainLayout from './components/layout/MainLayout';
 import InviteTeamModal from '@/components/inviteTeam/InviteTeamModal';
 import SubLayout from '@/components/layout/PageSubLayout';
@@ -52,82 +53,84 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
 const App = () => {
   return (
     <>
-      <Router>
-        <Routes>
-          <Route element={<SubLayout />}>
+      <RecoilRoot>
+        <Router>
+          <Routes>
+            <Route element={<SubLayout />}>
+              <Route
+                path="/create"
+                element={
+                  <PrivateRoute>
+                    <CreateRetroPage />
+                  </PrivateRoute>
+                }
+              ></Route>
+              <Route
+                path="/invite"
+                element={
+                  <PrivateRoute>
+                    <InviteTeamModal />
+                  </PrivateRoute>
+                }
+              ></Route>
+              <Route
+                path="/WriteRetroTeamPage"
+                element={
+                  <PrivateRoute>
+                    <WriteRetroTeamPage />
+                  </PrivateRoute>
+                }
+              ></Route>
+            </Route>
             <Route
-              path="/create"
+              path="/WriteRetroPersonalPage"
               element={
                 <PrivateRoute>
-                  <CreateRetroPage />
+                  <WriteRetroPersonalPage />
                 </PrivateRoute>
               }
             ></Route>
             <Route
-              path="/invite"
+              path="/WriteRetroReviseTeamPage"
               element={
                 <PrivateRoute>
-                  <InviteTeamModal />
+                  <WriteRetroReviseTeamPage />
                 </PrivateRoute>
               }
             ></Route>
             <Route
-              path="/WriteRetroTeamPage"
+              path="/WriteRetroRevisePersonalPage"
               element={
                 <PrivateRoute>
-                  <WriteRetroTeamPage />
+                  <WriteRetroRevisePersonalPage />
                 </PrivateRoute>
               }
             ></Route>
-          </Route>
-          <Route
-            path="/WriteRetroPersonalPage"
-            element={
-              <PrivateRoute>
-                <WriteRetroPersonalPage />
-              </PrivateRoute>
-            }
-          ></Route>
-          <Route
-            path="/WriteRetroReviseTeamPage"
-            element={
-              <PrivateRoute>
-                <WriteRetroReviseTeamPage />
-              </PrivateRoute>
-            }
-          ></Route>
-          <Route
-            path="/WriteRetroRevisePersonalPage"
-            element={
-              <PrivateRoute>
-                <WriteRetroRevisePersonalPage />
-              </PrivateRoute>
-            }
-          ></Route>
-          <Route element={<ProfileLayout />}>
+            <Route element={<ProfileLayout />}>
+              <Route
+                path="/my"
+                element={
+                  <PrivateRoute>
+                    <MyPage />
+                  </PrivateRoute>
+                }
+              ></Route>
+            </Route>
+            <Route element={<MainLayout />}>
+              <Route path="/" element={<HomePage />}></Route>
+            </Route>
+            <Route path="/login" element={<AuthPage />}></Route>
             <Route
-              path="/my"
+              path="/survey"
               element={
                 <PrivateRoute>
-                  <MyPage />
+                  <SurveyPage />
                 </PrivateRoute>
               }
             ></Route>
-          </Route>
-          <Route element={<MainLayout />}>
-            <Route path="/" element={<HomePage />}></Route>
-          </Route>
-          <Route path="/login" element={<AuthPage />}></Route>
-          <Route
-            path="/survey"
-            element={
-              <PrivateRoute>
-                <SurveyPage />
-              </PrivateRoute>
-            }
-          ></Route>
-        </Routes>
-      </Router>
+          </Routes>
+        </Router>
+      </RecoilRoot>
     </>
   );
 };

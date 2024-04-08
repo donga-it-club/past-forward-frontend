@@ -1,22 +1,35 @@
-import google from '@/../public/google.png';
-import kakao from '@/../public/kakao.png';
+import { useState, useEffect } from 'react';
+import { IoMailOutline } from 'react-icons/io5';
+import { fetchUserAttributes } from 'aws-amplify/auth';
 import * as S from '@/styles/my/myPage.style';
+
 const EmailBox = () => {
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+
+  async function handleFetchUserAttributes() {
+    try {
+      const userAttributes = await fetchUserAttributes();
+      console.log(userAttributes);
+      setUserEmail(userAttributes.email || null);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    handleFetchUserAttributes();
+  }, []);
+
   return (
     <>
-      <S.MainName>이메일 </S.MainName>
+      <S.MainName>이메일</S.MainName>
       <S.DivingLine />
-      <S.LoginBox background_color="white">
-        <a style={{ margin: 'auto 10px' }}>Clayton@gmail.com</a>
-      </S.LoginBox>
-      <S.LoginBox background_color="#FFEB00">
-        <S.KakaoIcon src={kakao} />
-        <a style={{ margin: 'auto 5px' }}>Clayton@gmail.com</a>
-      </S.LoginBox>
-      <S.LoginBox background_color="white">
-        <S.KakaoIcon src={google} />
-        <a style={{ margin: 'auto 5px' }}>Clayton@gmail.com</a>
-      </S.LoginBox>
+      <S.LoginContainer>
+        <S.LoginBox background_color="white">
+          <IoMailOutline />
+          <div style={{ margin: 'auto 10px' }}>{userEmail}</div>
+        </S.LoginBox>
+      </S.LoginContainer>
     </>
   );
 };

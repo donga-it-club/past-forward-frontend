@@ -32,7 +32,7 @@ const MainNavBar = () => {
     }
   };
 
-  // 로그아웃을 처리 함수
+  // 로그아웃 처리 함수
   async function handleSignOut() {
     try {
       await signOut({ global: true });
