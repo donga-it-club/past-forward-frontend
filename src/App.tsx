@@ -5,7 +5,6 @@ import { getCurrentUser } from 'aws-amplify/auth';
 import MainLayout from './components/layout/MainLayout';
 import WriteRetroTeamPage from './pages/WriteRetroTeamPage';
 import InviteTeamModal from '@/components/inviteTeam/InviteTeamModal';
-import SubLayout from '@/components/layout/PageSubLayout';
 import ProfileLayout from '@/components/layout/ProfileLayout';
 import AuthPage from '@/pages/AuthPage';
 import CreateRetroPage from '@/pages/CreateRetroPage';
@@ -54,7 +53,7 @@ const App = () => {
     <>
       <Router>
         <Routes>
-          <Route element={<SubLayout />}>
+          <Route element={<ProfileLayout />}>
             <Route
               path="/create"
               element={
@@ -71,32 +70,32 @@ const App = () => {
                 </PrivateRoute>
               }
             ></Route>
-          </Route>
-          <Route
-            path="/WriteRetroPersonalPage"
-            element={
-              <PrivateRoute>
-                <WriteRetroPersonalPage />
-              </PrivateRoute>
-            }
-          ></Route>
-          <Route
-            path="/WriteRetroReviseTeamPage"
-            element={
-              <PrivateRoute>
-                <WriteRetroReviseTeamPage />
-              </PrivateRoute>
-            }
-          ></Route>
-          <Route
-            path="/WriteRetroRevisePersonalPage"
-            element={
-              <PrivateRoute>
-                <WriteRetroRevisePersonalPage />
-              </PrivateRoute>
-            }
-          ></Route>
-          <Route element={<ProfileLayout />}>
+
+            <Route
+              path="/WriteRetroPersonalPage"
+              element={
+                <PrivateRoute>
+                  <WriteRetroPersonalPage />
+                </PrivateRoute>
+              }
+            ></Route>
+            <Route
+              path="/WriteRetroReviseTeamPage"
+              element={
+                <PrivateRoute>
+                  <WriteRetroReviseTeamPage />
+                </PrivateRoute>
+              }
+            ></Route>
+            <Route
+              path="/WriteRetroRevisePersonalPage"
+              element={
+                <PrivateRoute>
+                  <WriteRetroRevisePersonalPage />
+                </PrivateRoute>
+              }
+            ></Route>
+
             <Route
               path="/my"
               element={

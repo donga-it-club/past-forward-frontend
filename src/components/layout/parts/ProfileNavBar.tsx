@@ -1,13 +1,27 @@
 import { Gear, PersonCircle } from 'react-bootstrap-icons';
+import { GiHamburgerMenu } from 'react-icons/gi';
+import { Button, Drawer, DrawerContent, DrawerOverlay, useDisclosure } from '@chakra-ui/react';
 import LogoBox from './LogoBox';
 import MenuBar from './MenuBar';
+import PageSideBar from './PageSideBar';
 import Alarm from '@/components/alarm/Alarm';
 import * as S from '@/styles/layout/layout.style';
 
 const PageNavBar = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
       <S.Container>
+        <Button colorScheme="brand" onClick={onOpen}>
+          <GiHamburgerMenu />
+        </Button>
+        <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
+          <DrawerOverlay />
+          <DrawerContent>
+            <PageSideBar />
+          </DrawerContent>
+        </Drawer>
+
         <LogoBox />
         <MenuBar />
 

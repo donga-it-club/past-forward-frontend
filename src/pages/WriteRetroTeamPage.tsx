@@ -13,7 +13,7 @@ const WriteRetroTeamPage = () => {
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <div style={{ display: 'flex', flexDirection: 'row' }}>
             <IoMdInformationCircle size={25} style={{ margin: 'auto 0' }} />
-            <p style={{ fontSize: '20px', margin: '5px' }}>회고 카드를 누르면 수정이 가능합니다!</p>
+            <p style={{ fontSize: '20px', margin: '5px' }}>수정을 원한다면, 해당 텍스트를 선택하세요!</p>
           </div>
 
           <div style={{ display: 'flex' }}>
