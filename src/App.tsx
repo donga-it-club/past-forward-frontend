@@ -3,10 +3,8 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { getCurrentUser } from 'aws-amplify/auth';
 import { RecoilRoot } from 'recoil';
-import MainLayout from './components/layout/MainLayout';
-import WriteRetroRevisePage from './pages/WriteRetroRevisePage';
-import WriteRetroTeamPage from './pages/WriteRetroTeamPage';
 import InviteTeamModal from '@/components/inviteTeam/InviteTeamModal';
+import MainLayout from '@/components/layout/MainLayout';
 import ProfileLayout from '@/components/layout/ProfileLayout';
 import AuthPage from '@/pages/AuthPage';
 import CreateRetroPage from '@/pages/CreateRetroPage';
@@ -14,6 +12,8 @@ import HomePage from '@/pages/HomePage';
 import MyPage from '@/pages/MyPage';
 import SurveyPage from '@/pages/SurveyPage';
 import WriteRetroPersonalPage from '@/pages/WriteRetroPersonalPage';
+import WriteRetroRevisePage from '@/pages/WriteRetroRevisePage';
+import WriteRetroTeamPage from '@/pages/WriteRetroTeamPage';
 
 interface PrivateRouteProps {
   children: ReactElement;
@@ -125,10 +125,13 @@ const App = () => {
                 }
               />
             </Route>
+
             {/* MainLayout */}
             <Route element={<MainLayout />}>
               <Route path="/" element={<HomePage />} />
             </Route>
+
+            {/* not Layout */}
             <Route path="/login" element={<AuthPage />} />
             <Route
               path="/survey"
