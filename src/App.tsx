@@ -125,6 +125,14 @@ const App = () => {
                   </PrivateRoute>
                 }
               />
+              <Route
+                path="/retrolist"
+                element={
+                  <PrivateRoute>
+                    <RetroListPage />
+                  </PrivateRoute>
+                }
+              />
             </Route>
 
             {/* MainLayout */}
