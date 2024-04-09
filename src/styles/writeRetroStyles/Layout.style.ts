@@ -114,14 +114,12 @@ export const TaskCount = styled.div`
 `;
 
 export const TaskBox = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
   min-height: 115px;
   min-width: 200px;
   background-color: #ffffff;
   border-radius: 5px;
   box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.25);
-  margin-left: 3px;
+  margin: 0 3px;
   margin-top: 25px;
 `;
 
@@ -371,20 +369,17 @@ export const ActionTaskText = styled(TaskText)`
 `;
 
 export const ManagerStyle = styled.div`
-  width: 50px;
-  height: auto;
   display: flex;
-  margin-top: 6px;
-  margin-left: 9px;
+  flex-direction: row-reverse;
+  margin: 10px;
 `;
 
 export const ManagerText = styled.p`
-  width: 21px;
-  height: 28px;
-  font-size: 8px;
+  font-size: 15px;
   font-weight: 500;
   color: #1a265c;
   line-height: 28px;
+  margin: 0 5px;
 `;
 
 export const ManagerButton = styled.button`

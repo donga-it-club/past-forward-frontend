@@ -39,10 +39,16 @@ const PersonalTask = () => {
             문서 작성 - 수기를 담당하신 분이 작성한 회의록
             <S.ReviseText>(수정됨)</S.ReviseText>
           </S.TaskText>
+          <S.ManagerStyle>
+            <div>
+              <S.ManagerButton>M</S.ManagerButton>
+            </div>
+            <S.ManagerText>담당자</S.ManagerText>
+          </S.ManagerStyle>
           {/* TaskTextModal */}
           <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
-            <ModalContent sx={{ width: 'auto', height: 'auto', borderRadius: '30px', position: 'relative' }}>
+            <ModalContent sx={{ borderRadius: '30px', position: 'relative' }}>
               <ReviseModal />
               <ModalCloseButton
                 sx={{
