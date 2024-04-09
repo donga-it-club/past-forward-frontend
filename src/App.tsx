@@ -24,7 +24,6 @@ interface PrivateRouteProps {
 const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isChecking, setIsChecking] = useState(true);
-  const location = useLocation();
 
   useEffect(() => {
     checkLoginStatus();
@@ -50,6 +49,27 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
 
 // App 컴포넌트 수정
 const App = () => {
+  const SurveyControl = () => {
+    const checkSurveyVisited = () => {
+      // localStorage에서 값을 가져오되, 없으면 'false'를 기본값으로 사용
+      const visited = localStorage.getItem('surveyVisited');
+      return visited !== null ? visited === 'true' : false;
+    };
+
+    const location = useLocation();
+
+    useEffect(() => {
+      // 추가적인 페이지 접근 로직이 필요하면 여기에 구현
+    }, [location]);
+
+    // surveyVisited 값이 'true'인 경우, 홈 페이지로 리다이렉트
+    if (checkSurveyVisited()) {
+      return <Navigate to="/" replace />;
+    }
+    // 그 외의 경우 (값이 'false'이거나 없는 경우), SurveyPage를 보여줌
+    return <SurveyPage />;
+  };
+
   return (
     <>
       <RecoilRoot>
@@ -145,7 +165,7 @@ const App = () => {
               path="/survey"
               element={
                 <PrivateRoute>
-                  <SurveyPage />
+                  <SurveyControl />
                 </PrivateRoute>
               }
             ></Route>

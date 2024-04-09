@@ -2,18 +2,17 @@ import { useEffect, useState } from 'react';
 import { PersonCircle } from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@chakra-ui/react';
-import { getCurrentUser, signOut } from 'aws-amplify/auth';
+import { fetchUserAttributes, getCurrentUser, signOut } from 'aws-amplify/auth';
+import { useRecoilState } from 'recoil';
 import LogoBox from './LogoBox';
 import MenuBar from './MenuBar';
+import { userNicknameState } from '@/recoil/user/userAtom';
 import * as S from '@/styles/layout/layout.style';
 
 const MainNavBar = () => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    checkLoginStatus();
-  }, []);
+  const [userNickname, setUserNickname] = useRecoilState(userNicknameState);
 
   const checkLoginStatus = async () => {
     try {
@@ -43,6 +42,26 @@ const MainNavBar = () => {
     }
   }
 
+  // 닉네임 관련
+  async function handleFetchUserAttributes() {
+    try {
+      const userAttributes = await fetchUserAttributes();
+      console.log(userAttributes);
+      setUserNickname(userAttributes.nickname || null);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    checkLoginStatus();
+    handleFetchUserAttributes();
+  }, []);
+
+  const navigateToMyPage = () => {
+    navigate('/my');
+  };
+
   return (
     <>
       <div style={{ backgroundColor: 'white', zIndex: 1 }}>
@@ -65,10 +84,12 @@ const MainNavBar = () => {
                     textAlign: 'center',
                     alignContent: 'center',
                     margin: '2px',
+                    cursor: 'pointer',
                   }}
+                  onClick={navigateToMyPage}
                 >
                   <PersonCircle style={{ width: '30px', margin: 'auto 3px' }} />
-                  <p style={{ margin: 'auto 10px' }}>Clayton Santos</p>
+                  <p style={{ margin: 'auto 10px' }}>{userNickname}</p>
                 </div>
               </S.IconStyle>
 
