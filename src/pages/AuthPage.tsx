@@ -50,7 +50,7 @@ const AuthPageContent: React.FC = () => {
 
   useEffect(() => {
     if (authStatus === 'authenticated') {
-      navigate('/');
+      navigate('/survey');
     }
   }, [authStatus, navigate]);
 
