@@ -10,6 +10,7 @@ import AuthPage from '@/pages/AuthPage';
 import CreateRetroPage from '@/pages/CreateRetroPage';
 import HomePage from '@/pages/HomePage';
 import MyPage from '@/pages/MyPage';
+import RetroListPage from '@/pages/RetroListPage';
 import SurveyPage from '@/pages/SurveyPage';
 import WriteRetroPersonalPage from '@/pages/WriteRetroPersonalPage';
 import WriteRetroRevisePage from '@/pages/WriteRetroRevisePage';
