@@ -1,4 +1,5 @@
 import { InfoCircle } from 'react-bootstrap-icons';
+import { useNavigate } from 'react-router-dom';
 import { AccountSettings } from '@aws-amplify/ui-react';
 import {
   Modal,
@@ -15,9 +16,12 @@ import '@/styles/user/AuthPage.css';
 
 const DeleteAccountButton = () => {
   const { isOpen, onClose } = useDisclosure();
+  const navigate = useNavigate();
 
   const handleSuccess = () => {
     alert('성공적으로 탈퇴되었습니다.');
+    localStorage.removeItem('surveyVisited');
+    navigate('/');
   };
 
   async function handleDelete() {

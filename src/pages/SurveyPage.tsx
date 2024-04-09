@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text, Button, Divider } from '@chakra-ui/react';
 import AgeInput from '@/components/survey/AgeInput';
 import CityRadio from '@/components/survey/CityRadio';
@@ -9,6 +9,9 @@ import PurposeCheckbox from '@/components/survey/PurposeCheckbox';
 import * as S from '@/styles/survey/SurveyPage.style';
 
 const SurveyPage: React.FC = () => {
+  useEffect(() => {
+    localStorage.setItem('surveyVisited', 'true');
+  }, []);
   return (
     <>
       <S.Background>
