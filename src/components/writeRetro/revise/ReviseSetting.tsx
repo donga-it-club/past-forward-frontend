@@ -1,3 +1,4 @@
+import { ChangeEventHandler, MouseEventHandler, useRef, useState } from 'react';
 import { BsPersonCircle } from 'react-icons/bs';
 import { FaCheck } from 'react-icons/fa';
 import { IoIosInformationCircle } from 'react-icons/io';
@@ -22,6 +23,31 @@ import * as L from '@/styles/writeRetroStyles/Layout.style';
 import * as S from '@/styles/writeRetroStyles/ReviseLayout.style';
 
 const ReviseSetting = () => {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [image, setImage] = useState<string>('/Home.png');
+
+  const handleUploadButtonClick: MouseEventHandler<HTMLButtonElement> = () => {
+    inputRef.current?.click();
+  };
+
+  const handleImageChange: ChangeEventHandler<HTMLInputElement> = async event => {
+    const files = event.target.files;
+
+    if (!files || files.length === 0) return;
+
+    if (!files) return;
+
+    if (files) {
+      const file = files[0];
+      const imageUrl = URL.createObjectURL(file);
+      const imageUrlString: string = imageUrl;
+      setImage(imageUrlString);
+    }
+  };
+
+  const DeleteImage: MouseEventHandler<HTMLButtonElement> = () => {
+    setImage('');
+  };
   function EditableControls() {
     const { isEditing, getSubmitButtonProps, getCancelButtonProps, getEditButtonProps } = useEditableControls();
 
@@ -38,13 +64,21 @@ const ReviseSetting = () => {
   }
   return (
     <S.SettingContainer>
-      <Image src="/Home.png" width={500} margin="0 auto"></Image>
+      <Image
+        src={image ?? '/Home.png'}
+        maxWidth={500}
+        margin="20px auto"
+        h="auto"
+        aspectRatio="1/1"
+        objectFit="contain"
+      ></Image>
       <div style={{ margin: '0 auto' }}>
-        <Button colorScheme="brand" variant="outline" margin="0 30px">
+        <Button colorScheme="brand" variant="outline" margin="0 30px" onClick={handleUploadButtonClick}>
           <MdOutlineFileUpload style={{ margin: '0 5px' }} />
           변경하기
+          <input type="file" ref={inputRef} onChange={handleImageChange} accept="image/*" hidden></input>
         </Button>
-        <Button colorScheme="brand" variant="outline" margin="0 30px">
+        <Button colorScheme="brand" variant="outline" margin="0 30px" onClick={DeleteImage}>
           삭제하기
         </Button>
       </div>

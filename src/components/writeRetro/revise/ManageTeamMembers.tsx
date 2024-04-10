@@ -8,20 +8,28 @@ const ManageTeamMembers = () => {
       <div style={{ height: '46px', display: 'flex' }}>
         <S.ManageTitleStyle>팀원 관리</S.ManageTitleStyle>
         <S.InvitationLinkButton>팀원 초대 링크</S.InvitationLinkButton>
-        <S.LinkExpirationText>ꞏ 링크는 2시간 후에 만료됩니다.</S.LinkExpirationText>
+        <S.LinkExpirationText>링크는 2시간 후에 만료됩니다.</S.LinkExpirationText>
       </div>
       <div style={{ display: 'flex', marginTop: '20px' }}>
         <S.ManageSearchInput placeholder="이름 또는 이메일 주소를 검색"></S.ManageSearchInput>
         <S.ManageSearchButton>검색</S.ManageSearchButton>
       </div>
-      <TableContainer>
+      <TableContainer marginTop="40px">
         <Table variant="simple">
           <Thead>
             <Tr>
-              <Th>닉네임</Th>
-              <Th>이메일</Th>
-              <Th>회고 참여 일자</Th>
-              <Th>작업</Th>
+              <Th fontSize={20} margin="0 auto">
+                닉네임
+              </Th>
+              <Th fontSize={20} margin="0 auto">
+                이메일
+              </Th>
+              <Th fontSize={20} margin="0 auto">
+                회고 참여 일자
+              </Th>
+              <Th fontSize={20} margin="0 auto">
+                작업
+              </Th>
             </Tr>
           </Thead>
           <Tbody>

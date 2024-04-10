@@ -240,11 +240,10 @@ export const InvitationLinkButton = styled.button`
 `;
 
 export const LinkExpirationText = styled.p`
-  font-size: 9px;
+  font-size: 15px;
   font-weight: 500;
   color: #f93333;
-  margin-top: 23px;
-  margin-left: 10px;
+  margin: auto 10px;
 `;
 
 export const ManageSearchInput = styled.input`
@@ -263,6 +262,7 @@ export const ManageSearchButton = styled.button`
   height: 33px;
   font-size: 14px;
   font-weight: 500;
+  margin: 0 10px;
   color: #ffffff;
   line-height: 33px;
   text-align: center;

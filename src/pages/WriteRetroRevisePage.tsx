@@ -5,12 +5,6 @@ import ReviseSetting from '@/components/writeRetro/revise/ReviseSetting';
 import * as S from '@/styles/writeRetroStyles/ReviseLayout.style';
 
 const WriteRetroReviseTeamPage = () => {
-  // const [clicked, setClicked] = useState(false);
-  // const handleClick = () => {
-  //   setClicked(!clicked);
-  // };
-  // const color = clicked ? '#111B47' : '#A9A9A9';
-
   return (
     <>
       <S.TitleBox>
