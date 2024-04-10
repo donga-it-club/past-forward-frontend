@@ -1,11 +1,12 @@
+import { useEffect, useState } from 'react';
 import { PersonCircle } from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
+import { fetchUserAttributes, getCurrentUser, signOut } from '@aws-amplify/auth';
 import { Button } from '@chakra-ui/react';
 import { useRecoilState } from 'recoil';
 import LogoBox from './LogoBox';
 import MenuBar from './MenuBar';
 import UserNickname from '@/components/user/UserNickname';
-import { useAuth } from '@/hooks/useAuth';
 
 import { userNicknameState } from '@/recoil/user/userAtom';
 import * as S from '@/styles/layout/layout.style';
@@ -96,7 +97,6 @@ const MainNavBar = () => {
                     <UserNickname setUserNickname={setUserNickname} />
                     {userNickname}
                   </p>
-
                 </div>
               </S.IconStyle>
 
