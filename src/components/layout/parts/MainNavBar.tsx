@@ -1,16 +1,18 @@
-import { useEffect, useState } from 'react';
 import { PersonCircle } from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@chakra-ui/react';
-import { fetchUserAttributes, getCurrentUser, signOut } from 'aws-amplify/auth';
 import { useRecoilState } from 'recoil';
 import LogoBox from './LogoBox';
 import MenuBar from './MenuBar';
+import UserNickname from '@/components/user/UserNickname';
+import { useAuth } from '@/hooks/useAuth';
+
 import { userNicknameState } from '@/recoil/user/userAtom';
 import * as S from '@/styles/layout/layout.style';
 
 const MainNavBar = () => {
   const navigate = useNavigate();
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userNickname, setUserNickname] = useRecoilState(userNicknameState);
 
@@ -89,7 +91,12 @@ const MainNavBar = () => {
                   onClick={navigateToMyPage}
                 >
                   <PersonCircle style={{ width: '30px', margin: 'auto 3px' }} />
-                  <p style={{ margin: 'auto 10px' }}>{userNickname}</p>
+
+                  <p style={{ margin: 'auto 10px' }}>
+                    <UserNickname setUserNickname={setUserNickname} />
+                    {userNickname}
+                  </p>
+
                 </div>
               </S.IconStyle>
 

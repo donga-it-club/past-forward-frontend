@@ -114,6 +114,8 @@ export const TaskCount = styled.div`
 `;
 
 export const TaskBox = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   min-height: 115px;
   min-width: 200px;
   background-color: #ffffff;

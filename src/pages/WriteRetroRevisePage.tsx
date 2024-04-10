@@ -1,10 +1,17 @@
+
+import { useState } from 'react';
+import { IoPersonCircle } from 'react-icons/io5';
 import { MdPeopleAlt } from 'react-icons/md';
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
-import ManageTeamMembers from '@/components/writeRetro/revise/ManageTeamMembers';
-import ReviseSetting from '@/components/writeRetro/revise/ReviseSetting';
 import * as S from '@/styles/writeRetroStyles/ReviseLayout.style';
 
 const WriteRetroReviseTeamPage = () => {
+  const [clicked, setClicked] = useState(false);
+  const handleClick = () => {
+    setClicked(!clicked);
+  };
+  const color = clicked ? '#111B47' : '#A9A9A9';
+
+
   return (
     <>
       <S.TitleBox>
@@ -15,6 +22,7 @@ const WriteRetroReviseTeamPage = () => {
       </S.TitleBox>
       {/* <SettingMenu></SettingMenu> */}
       <S.SettingMenuStyle>
+
         <Tabs colorScheme="brand" isFitted>
           <TabList margin="0 40px" fontSize={60}>
             <Tab>회고 설정</Tab>
@@ -30,6 +38,7 @@ const WriteRetroReviseTeamPage = () => {
             </TabPanel>
           </TabPanels>
         </Tabs>
+
       </S.SettingMenuStyle>
     </>
   );

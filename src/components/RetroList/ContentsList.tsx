@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import BookmarkIcon_Y from '@/assets/BookmarkIcon_Y.png';
 import LinkIcon from '@/assets/Link.png';
 import MoreIcon from '@/assets/MoreIcon.png';
 import ProgressBefore from '@/assets/Progress_Before.png';
 import Thumbnail from '@/assets/Thumbnail.png';
+import Modal from '@/components/RetroList/Modal';
 import * as S from '@/styles/RetroList/ContentsList.styles';
 
 interface Content {
@@ -21,6 +22,16 @@ interface ContentListProps {
 }
 
 const ContentList: React.FC<ContentListProps> = ({ status, viewMode, searchData }) => {
+  const [openModalId, setOpenModalId] = useState<number | null>(null);
+
+  const openModalForItem = (itemId: number) => {
+    setOpenModalId(itemId);
+  };
+
+  const closeModalForItem = () => {
+    setOpenModalId(null);
+  };
+
   const data: Content[] = [
     { id: 1, title: '회고1', status: 'Teams', userId: null, teamId: 1 },
     { id: 2, title: '회고2', status: 'Teams', userId: null, teamId: 2 },
@@ -53,7 +64,8 @@ const ContentList: React.FC<ContentListProps> = ({ status, viewMode, searchData 
               <hr />
               <S.InfoBox>
                 {item.title}
-                <S.MoreIcon src={MoreIcon} />
+                <S.MoreIcon src={MoreIcon} onClick={() => openModalForItem(item.id)} />
+                <Modal onClose={closeModalForItem} isOpen={openModalId === item.id} />
               </S.InfoBox>
             </S.Box>
           ))}
