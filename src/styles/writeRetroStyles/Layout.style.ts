@@ -9,7 +9,7 @@ export const TitleBox = styled.div`
 
 export const TitleText = styled.p`
   width: auto;
-  font-size: 40px;
+  font-size: 30px;
   font-weight: 700;
   color: #434343;
   margin-top: 3px;
@@ -21,7 +21,6 @@ export const SubTitleText = styled.p`
   font-size: 20px;
   font-weight: 600;
   color: #8d8d8d;
-  margin-left: 10px;
 `;
 
 export const SaveSettingBox = styled.div`
@@ -114,8 +113,8 @@ export const TaskCount = styled.div`
 `;
 
 export const TaskBox = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  /* display: grid;
+  grid-template-columns: repeat(4, 1fr); */
   min-height: 115px;
   min-width: 200px;
   background-color: #ffffff;
@@ -137,7 +136,7 @@ export const TaskUserProfile = styled.div`
 
 export const TaskUserName = styled.p`
   height: 20px;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 700;
   color: #adb8cc;
   line-height: 20px;
@@ -211,7 +210,7 @@ export const TaskMessageBoxStyle = styled.div`
   min-height: 50px;
   background-color: #ffffff;
   box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.25);
-  padding: 8px 16px 10px;
+  padding: 8px 10px;
 `;
 
 export const TaskMessageCount = styled.p`
@@ -241,7 +240,7 @@ export const MessageTopStyle = styled.div`
 `;
 
 export const MessageUserName = styled.p`
-  font-size: 20px;
+  font-size: 15px;
   margin: auto 5px;
   font-weight: 700;
   color: #adb8cc;
@@ -269,7 +268,7 @@ export const MessageText = styled.div`
 `;
 
 export const ReviseMessageText = styled.p`
-  font-size: 15px;
+  font-size: 10px;
   font-weight: 600;
   color: #adb8cc;
   line-height: 10px;
@@ -280,10 +279,9 @@ export const ReviseMessageText = styled.p`
 export const InputMessage = styled.textarea.attrs(props => ({
   placeholder: props.placeholder,
 }))`
-  width: 75%;
   font-size: 15px;
   font-weight: 500;
-  padding: auto 0;
+  padding: 2px 3px;
   color: #425170;
   line-height: 20px;
   background-color: #f3f3f3;
@@ -299,7 +297,7 @@ export const InputMessage = styled.textarea.attrs(props => ({
 export const InputButton = styled.button`
   font-size: 15px;
   padding: 5px 10px;
-  margin: 0 10px;
+  margin-left: 10px;
   font-weight: 700;
   color: #ffffff;
   background-color: #111b47;
@@ -401,8 +399,6 @@ export const ManagerButton = styled.button`
 `;
 
 export const ReviseModalStyle = styled.div`
-  width: 672px;
-  height: auto;
   min-height: 274px;
   background-color: #ffffff;
   border-radius: 30px;
@@ -428,8 +424,7 @@ export const ReviseModalTitle = styled.div`
 export const ReviseModalInput = styled.textarea.attrs(props => ({
   placeholder: props.placeholder,
 }))`
-  width: 573px;
-  height: auto;
+  width: 80%;
   min-height: 87px;
   font-size: 18px;
   font-weight: 400;
@@ -451,16 +446,15 @@ export const ReviseModalInput = styled.textarea.attrs(props => ({
 
 export const ReviseModalButtonBox = styled.div`
   display: flex;
+  flex-direction: row-reverse;
   margin-top: 34px;
-  margin-left: 359px;
 `;
 
 export const ReviseModalButton = styled.button`
-  width: 101px;
-  height: 30px;
   font-size: 15px;
   font-weight: 700;
   color: #888888;
+  padding: 5px 20px;
   line-height: 30px;
   text-align: center;
   background-color: #f1f1f1;

@@ -29,7 +29,7 @@ const TeamTask = () => {
           {/* TaskTop */}
           <div style={{ display: 'flex', margin: '10px auto' }}>
             <S.TaskUserProfile>
-              <CgProfile size="50px" color="#DADEE5" />
+              <CgProfile size="40px" color="#DADEE5" />
               <S.TaskUserName>김사과</S.TaskUserName>
             </S.TaskUserProfile>
 
@@ -44,7 +44,7 @@ const TeamTask = () => {
           {/* TaskTextModal */}
           <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
-            <ModalContent sx={{ borderRadius: '30px', position: 'relative' }}>
+            <ModalContent sx={{ borderRadius: '30px' }}>
               <ReviseModal />
               <ModalCloseButton
                 sx={{
@@ -65,21 +65,21 @@ const TeamTask = () => {
             {/* Like */}
             <S.SubTaskStyle>
               <S.SubTaskIcon onClick={handleLike}>
-                {liked ? <BiSolidLike size="30px" color="#111B47" /> : <BiLike size="30px" color="#DADEE5" />}
+                {liked ? <BiSolidLike size="20px" color="#111B47" /> : <BiLike size="20px" color="#DADEE5" />}
               </S.SubTaskIcon>
               <S.SubTaskCount>3</S.SubTaskCount>
             </S.SubTaskStyle>
             {/* Message */}
             <S.SubTaskStyle>
               <S.SubTaskIcon onClick={handleMessaged}>
-                {messaged ? <MdMessage size="30px" color="#111B47" /> : <MdMessage size="30px" color="#DADEE5" />}
+                {messaged ? <MdMessage size="20px" color="#111B47" /> : <MdMessage size="20px" color="#DADEE5" />}
               </S.SubTaskIcon>
               <S.SubTaskCount>4</S.SubTaskCount>
             </S.SubTaskStyle>
             {/* DaysLeft */}
             <S.SubTaskStyle>
               <S.SubTaskIcon>
-                <MdAccessAlarm size="30px" color="#DADEE5" />
+                <MdAccessAlarm size="20px" color="#DADEE5" />
               </S.SubTaskIcon>
               <S.SubTaskCount>20240326</S.SubTaskCount>
             </S.SubTaskStyle>

@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from 'react';
+import { Button } from '@chakra-ui/react';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 
 const ReviseModal = () => {
@@ -23,8 +24,11 @@ const ReviseModal = () => {
         ></S.ReviseModalInput>
 
         <S.ReviseModalButtonBox>
-          <S.ReviseModalButton>삭제</S.ReviseModalButton>
-          <S.ReviseModalButton>확인</S.ReviseModalButton>
+          {/* <S.ReviseModalButton>삭제</S.ReviseModalButton> */}
+          <Button colorScheme="red" variant="outline" margin="0 10px">
+            삭제
+          </Button>
+          <Button colorScheme="brand">확인</Button>
         </S.ReviseModalButtonBox>
       </S.ReviseModalStyle>
     </>

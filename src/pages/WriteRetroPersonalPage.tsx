@@ -12,7 +12,7 @@ const WriteRetroPersonalPage = () => {
       <S.SectionBox>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <div style={{ display: 'flex', flexDirection: 'row' }}>
-            <IoMdInformationCircle size={25} style={{ margin: 'auto 0' }} />
+            <IoMdInformationCircle size={25} style={{ margin: 'auto 5px' }} />
             <p style={{ fontSize: '20px', margin: '5px' }}>수정을 원한다면, 해당 텍스트를 선택하세요!</p>
           </div>
           <div style={{ display: 'flex' }}>

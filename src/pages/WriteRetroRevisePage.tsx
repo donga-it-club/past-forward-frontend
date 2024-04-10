@@ -9,7 +9,7 @@ const WriteRetroReviseTeamPage = () => {
     <>
       <S.TitleBox>
         <div style={{ display: 'flex' }}>
-          <MdPeopleAlt size="60px" color="#434343" />
+          <MdPeopleAlt size="40px" color="#434343" style={{ margin: 'auto 0', marginLeft: '30px' }} />
           <S.TitleText>FistRetro</S.TitleText>
         </div>
       </S.TitleBox>

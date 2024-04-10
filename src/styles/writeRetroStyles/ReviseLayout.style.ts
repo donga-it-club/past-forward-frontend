@@ -6,11 +6,11 @@ export const TitleBox = styled.div`
 
 export const TitleText = styled.p`
   width: auto;
-  font-size: 40px;
+  font-size: 30px;
   font-weight: 700;
   color: #434343;
   margin-top: 3px;
-  margin-left: 27px;
+  margin-left: 20px;
 `;
 
 export const SettingMenuStyle = styled.div`
@@ -211,7 +211,7 @@ export const SettingContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 20px auto;
-  width: 700px;
+  width: 500px;
 `;
 
 export const ManageTitleStyle = styled.p`

@@ -8,7 +8,7 @@ const Title = () => {
       <S.TitleBox>
         <div style={{ display: 'flex', flexDirection: 'column', flex: 7, margin: '20px 10px' }}>
           <div style={{ display: 'flex' }}>
-            <MdPeopleAlt size="60px" color="#434343" />
+            <MdPeopleAlt size="40px" color="#434343" style={{ margin: 'auto 0' }} />
             <S.TitleText>FirstRetro</S.TitleText>
           </div>
 
