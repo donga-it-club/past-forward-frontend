@@ -1,11 +1,7 @@
 import styled from 'styled-components';
 
 export const TitleBox = styled.div`
-  width: auto;
-  height: auto;
-  position: absolute;
-  top: 95px;
-  left: 357px;
+  margin: 0 10px;
 `;
 
 export const TitleText = styled.p`
@@ -18,22 +14,16 @@ export const TitleText = styled.p`
 `;
 
 export const SettingMenuStyle = styled.div`
-  width: 1409px;
-  height: 61px;
   box-shadow: 0px -2px 0px #a9a9a9 inset;
   display: flex;
-  position: absolute;
-  top: 273px;
-  left: 389px;
+  flex-direction: column;
+  margin: 30px 0;
 `;
 
 export const SettingMenuBox = styled.div<{ color: string }>`
-  width: 129px;
-  height: 61px;
   font-size: 28px;
   font-weight: 500;
   color: ${props => props.color};
-  text-align: center;
   /* border-bottom: 4px solid ${props => props.color}; */
   margin-right: 10px;
   &:hover {
@@ -212,12 +202,16 @@ export const ReviseButtonStyle = styled.button`
 `;
 
 export const ManageStyle = styled.div`
-  width: auto;
-  /* height: auto; */
-  height: 800px;
-  position: absolute;
-  top: 111px;
-  left: 10px;
+  display: flex;
+  flex-direction: column;
+  margin: 20px 30px;
+`;
+
+export const SettingContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 20px auto;
+  width: 700px;
 `;
 
 export const ManageTitleStyle = styled.p`
@@ -246,11 +240,10 @@ export const InvitationLinkButton = styled.button`
 `;
 
 export const LinkExpirationText = styled.p`
-  font-size: 9px;
+  font-size: 15px;
   font-weight: 500;
   color: #f93333;
-  margin-top: 23px;
-  margin-left: 10px;
+  margin: auto 10px;
 `;
 
 export const ManageSearchInput = styled.input`
@@ -269,6 +262,7 @@ export const ManageSearchButton = styled.button`
   height: 33px;
   font-size: 14px;
   font-weight: 500;
+  margin: 0 10px;
   color: #ffffff;
   line-height: 33px;
   text-align: center;
@@ -279,15 +273,10 @@ export const ManageSearchButton = styled.button`
   }
 `;
 
-export const ManageTableStyle = styled.div`
-  width: auto;
-  height: auto;
-  margin-top: 40px;
-`;
+export const ManageTableStyle = styled.div``;
 
 export const ManageTableTrStyle = styled.tr`
-  width: 1443px;
-  height: 78px;
+  min-width: 1443px;
   &:hover {
     cursor: pointer;
     background-color: #f9fafb;
@@ -296,7 +285,6 @@ export const ManageTableTrStyle = styled.tr`
 
 export const ManageTableDateTh = styled.th`
   width: 581px;
-  height: 78px;
   font-size: 18px;
   font-weight: 700;
   color: #1f2937;
@@ -322,7 +310,7 @@ export const ManageTableTaskTh = styled(ManageTableDateTh)`
 
 export const ManageTableDateTd = styled.td`
   width: 581px;
-  height: 78px;
+
   font-size: 16px;
   font-weight: 400;
   color: #1f2937;
@@ -332,7 +320,6 @@ export const ManageTableDateTd = styled.td`
 `;
 
 export const ManageTableEmailTd = styled(ManageTableDateTd)`
-  width: 428px;
   box-shadow: 0px -1px 0px rgba(181, 181, 181, 0.2) inset;
 `;
 
@@ -344,4 +331,40 @@ export const ManageTableNickNameTd = styled(ManageTableDateTd)`
 export const ManageTableTaskTd = styled(ManageTableDateTd)`
   width: 194px;
   text-align: center;
+`;
+
+export const NotTextInput = styled.div`
+  background-color: #d9d9d9;
+  border-radius: 5px;
+  font-size: 20px;
+  padding: 3px;
+  margin: 20px 0;
+  color: #989898;
+`;
+
+export const NoteChangeText = styled.p`
+  font-size: 10px;
+  color: red;
+  margin: auto 10px;
+`;
+
+export const ReaderBox = styled.div`
+  border: 1px solid black;
+  border-radius: 5px;
+  font-size: 20px;
+  padding: 3px;
+  margin: 20px 0;
+  color: black;
+  display: flex;
+`;
+
+export const SettingLine = styled.div`
+  border: 1px solid black;
+  width: 100%;
+`;
+
+export const SettingDetailText = styled.p`
+  color: #636363;
+  font-size: 15px;
+  margin: auto 5px;
 `;
