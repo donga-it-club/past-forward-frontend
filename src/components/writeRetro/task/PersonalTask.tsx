@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AiFillPlusCircle } from 'react-icons/ai';
 import { CgProfile } from 'react-icons/cg';
 import { CiCirclePlus } from 'react-icons/ci';
 import { MdAccessAlarm } from 'react-icons/md';
-import { Modal, ModalCloseButton, ModalContent, ModalOverlay, useDisclosure } from '@chakra-ui/react';
+import { Flex, Modal, ModalCloseButton, ModalContent, ModalOverlay, useDisclosure } from '@chakra-ui/react';
 import { PersonalTaskMessage } from './taskMessage/PersonalTaskMessage';
+import { PostSectionResponse } from '@/api/@types/Section';
+import { SectionServices } from '@/api/services/Section';
 import ReviseModal from '@/components/writeRetro/task/ReviseModal';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 
@@ -16,35 +18,42 @@ const PersonalTask = () => {
     setMessaged(messaged => !messaged);
     setIsVisible(isVisible => !isVisible);
   };
+  const [section, setSection] = useState<PostSectionResponse>();
+
+  const FetchGetRetro = async () => {
+    const data = await SectionServices.get({ retrospectiveId: 0, teamId: 0 });
+    if (!data) return;
+    setSection(data);
+    console.log(section);
+  };
+
+  useEffect(() => {
+    FetchGetRetro();
+  }, []);
 
   return (
     <>
       <S.TaskBox>
         <S.TaskMainStyle>
           {/* TaskTop */}
-          <div style={{ display: 'flex' }}>
+          <Flex>
             <S.TaskUserProfile style={{ flex: 2 }}>
               <CgProfile size={40} color="#DADEE5" />
               <S.TaskUserName>김사과</S.TaskUserName>
             </S.TaskUserProfile>
             <div style={{ margin: 'auto 0' }}>
-              <div style={{ display: 'flex' }}>
+              <Flex>
                 <S.TaskRevise>삭제</S.TaskRevise>
-              </div>
+              </Flex>
             </div>
-          </div>
+          </Flex>
 
           {/* TaskCenter */}
           <S.TaskText onClick={onOpen}>
-            문서 작성 - 수기를 담당하신 분이 작성한 회의록
+            {/* {section?.data.id} */}
             <S.ReviseText>(수정됨)</S.ReviseText>
           </S.TaskText>
-          <S.ManagerStyle>
-            <div>
-              <S.ManagerButton>M</S.ManagerButton>
-            </div>
-            <S.ManagerText>담당자</S.ManagerText>
-          </S.ManagerStyle>
+
           {/* TaskTextModal */}
           <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />

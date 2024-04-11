@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import { CgProfile } from 'react-icons/cg';
-import { Modal, ModalCloseButton, ModalContent, ModalOverlay, useDisclosure } from '@chakra-ui/react';
+import { Flex, Modal, ModalCloseButton, ModalContent, ModalOverlay, useDisclosure } from '@chakra-ui/react';
 import ReviseModal from '../ReviseModal';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 
@@ -18,24 +18,24 @@ const TeamTaskMessage = () => {
       {/* TaskMessage */}
       <S.TaskMessageBoxStyle>
         {/* TaskMessageTop */}
-        <div style={{ display: 'flex' }}>
+        <Flex>
           <S.TaskMessageCount>5개의 댓글</S.TaskMessageCount>
           <S.TaskMessageLine></S.TaskMessageLine>
-        </div>
+        </Flex>
 
         {/* TaskMessages */}
         <div>
           <S.TaskMessageStyle>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <Flex flexDirection="column">
               {/* TaskMessageTop */}
               <S.MessageTopStyle>
                 <CgProfile size={40} color="#DADEE5" />
                 <S.MessageUserName>김체리</S.MessageUserName>
                 <S.MessageTime>1일 전</S.MessageTime>
                 <div style={{ margin: 'auto 0' }}>
-                  <div style={{ display: 'flex' }}>
+                  <Flex>
                     <S.TaskRevise>삭제</S.TaskRevise>
-                  </div>
+                  </Flex>
                 </div>
               </S.MessageTopStyle>
               {/* TaskMessageMain */}
@@ -46,7 +46,7 @@ const TeamTaskMessage = () => {
               {/* MessageModal */}
               <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
-                <ModalContent sx={{ width: 'auto', height: 'auto', borderRadius: '30px', position: 'relative' }}>
+                <ModalContent sx={{ borderRadius: '30px', position: 'relative' }}>
                   <ReviseModal />
                   <ModalCloseButton
                     sx={{
@@ -61,12 +61,12 @@ const TeamTaskMessage = () => {
                   />
                 </ModalContent>
               </Modal>
-            </div>
+            </Flex>
           </S.TaskMessageStyle>
         </div>
 
         {/* AddMessage */}
-        <div style={{ display: 'flex', marginTop: '10px' }}>
+        <Flex margin={10}>
           <S.InputMessage
             value={value}
             onChange={handleChange}
@@ -74,7 +74,7 @@ const TeamTaskMessage = () => {
             rows={1}
           ></S.InputMessage>
           <S.InputButton>확인</S.InputButton>
-        </div>
+        </Flex>
       </S.TaskMessageBoxStyle>
     </>
   );

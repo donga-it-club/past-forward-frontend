@@ -1,6 +1,6 @@
-import { TStatus } from '../@types/@asConst';
+import { Status } from '../@types/@asConst';
 
-export function MockRetrospective(Status: TStatus) {
+export function MockRetrospective() {
   return {
     id: 0,
     title: 'hee',

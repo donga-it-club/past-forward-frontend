@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { BiLike, BiSolidLike } from 'react-icons/bi';
 import { CgProfile } from 'react-icons/cg';
 import { MdAccessAlarm, MdMessage } from 'react-icons/md';
-import { Modal, ModalCloseButton, ModalContent, ModalOverlay, useDisclosure } from '@chakra-ui/react';
+import { Flex, Modal, ModalCloseButton, ModalContent, ModalOverlay, useDisclosure } from '@chakra-ui/react';
 import TeamTaskMessage from './taskMessage/TeamTaskMessage';
 import ReviseModal from '@/components/writeRetro/task/ReviseModal';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
@@ -27,20 +27,21 @@ const TeamTask = () => {
       <S.TaskBox>
         <S.TaskMainStyle>
           {/* TaskTop */}
-          <div style={{ display: 'flex', margin: '10px auto' }}>
+          <Flex margin="10px auto">
             <S.TaskUserProfile>
               <CgProfile size="40px" color="#DADEE5" />
               <S.TaskUserName>김사과</S.TaskUserName>
             </S.TaskUserProfile>
 
             <S.TaskRevise>삭제</S.TaskRevise>
-          </div>
+          </Flex>
 
           {/* TaskCenter */}
           <S.TaskText onClick={onOpen}>
             문서 작성 - 수기를 담당하신 분이 작성한 회의록
             <S.ReviseText>(수정됨)</S.ReviseText>
           </S.TaskText>
+
           {/* TaskTextModal */}
           <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />

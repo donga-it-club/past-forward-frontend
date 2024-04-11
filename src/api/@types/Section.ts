@@ -1,43 +1,54 @@
 //get
 export interface GetSectionRequest {
   retrospectiveId: number;
-  teamdId: number;
+  teamId?: number;
 }
 
 export interface GetSectionResponse {
-  sectionId: number;
-  username: string;
-  content: string;
-  likeCnt: number;
-  sectionName: string;
-  createdDate: string;
+  code: number;
+  message: string;
+  data: [
+    {
+      sectionId: number;
+      username: string;
+      content: string;
+      likeCnt: number;
+      sectionName: string;
+      createdDate: string;
+    },
+  ];
 }
-
 //post
 export interface CreateSectionRequest {
-  userId: number;
   retrospectiveId: number;
   templateSectionId: number;
   sectionContent: string;
 }
 
 export interface PostSectionResponse {
-  id: number;
-  userId: number;
-  retrospectiveId: number;
-  sectionContent: string;
+  code: number;
+  message: string;
+  data: {
+    id: number;
+    userId: number;
+    retrospectiveId: number;
+    sectionContent: string;
+  };
 }
 
 //patch
 export interface PatchSectionRequest {
-  userId: number;
   sectionId: number;
   sectionContent: string;
 }
 
 export interface PatchSectionResponse {
-  sectionId: number;
-  content: string;
+  code: number;
+  message: string;
+  data: {
+    sectionId: number;
+    content: string;
+  };
 }
 
 export interface DeleteSectionRequest {
@@ -50,8 +61,12 @@ export interface PostLikesSectionRequest {
 }
 
 export interface PostLikeSectionResponse {
-  sectionId: number;
-  likeCnt: number;
+  code: number;
+  message: string;
+  data: {
+    sectionId: number;
+    likeCnt: number;
+  };
 }
 export interface SectionClient {
   get(request: GetSectionRequest): Promise<PostSectionResponse>;

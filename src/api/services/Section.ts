@@ -4,8 +4,8 @@ import { mswInstance } from '../client';
 const ROUTE = 'sections';
 
 export const SectionServices: SectionClient = {
-  get: async () => {
-    return await mswInstance.get(`${ROUTE}/`);
+  get: async request => {
+    return await mswInstance.get(`${ROUTE}/`, { params: request });
   },
   create: async request => {
     return await mswInstance.post(`${ROUTE}/`, request);
@@ -16,7 +16,7 @@ export const SectionServices: SectionClient = {
   delete: async sectionId => {
     return await mswInstance.delete(`${ROUTE}/${sectionId}`);
   },
-  likePost: async userId => {
-    return await mswInstance.post(`${ROUTE}/${userId}/likes`);
+  likePost: async sectionId => {
+    return await mswInstance.post(`${ROUTE}/${sectionId}/likes`);
   },
 };

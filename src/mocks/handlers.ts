@@ -1,7 +1,6 @@
 import { http, RequestHandler, HttpResponse } from 'msw';
 import { setupWorker } from 'msw/browser';
 import { MockRetrospective } from '@/api/__mock__/retrospective';
-import { mockRetrospectiveTemplate } from '@/api/__mock__/retrospectiveTemplate';
 import { mockSection } from '@/api/__mock__/section';
 
 //Retro
@@ -25,7 +24,7 @@ export const RetrospectiveHandlers: RequestHandler[] = [
   }),
 
   http.get('/retrospectivesTemplate', () => {
-    return HttpResponse.json(mockRetrospectiveTemplate);
+    return HttpResponse.json();
   }),
 ];
 
