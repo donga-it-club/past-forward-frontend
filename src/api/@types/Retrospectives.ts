@@ -22,9 +22,10 @@ export interface PostRetrospectivesRequest {
   teamId: number;
   userId: number;
   templateId: number;
-  status: TStatus;
+  status: keyof TStatus;
   thumbnail: string;
-  startedDate: string;
+  startDate: string;
+  description: string;
 }
 
 export interface PostRetrospectivesResponse {
@@ -33,8 +34,9 @@ export interface PostRetrospectivesResponse {
   teamId: number;
   userId: number;
   templateId: number;
-  status: TStatus;
+  status: keyof TStatus;
   thumbnail: string;
+  description: string;
 }
 
 //delete

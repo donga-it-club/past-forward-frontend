@@ -1,18 +1,23 @@
 import React, { ChangeEvent, useState } from 'react';
 import { Input, Box, Image, Button, Center } from '@chakra-ui/react';
 
-const ImageUpload: React.FC = () => {
+interface ImageUploadProps {
+  onChange: (image: string) => void; // 이미지 파일의 URL을 외부로 전달하는 함수
+}
+
+const ImageUpload: React.FC<ImageUploadProps> = ({ onChange }) => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
-  // 파일이 선택되면 실행되는 함수
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]; // 첫 번째 파일만 선택
+    const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImagePreview(reader.result as string); // 이미지 미리보기 업데이트
+        const result = reader.result as string;
+        setImagePreview(result); // 이미지 미리보기 업데이트
+        onChange(result); // 외부로 이미지 URL 전달
       };
-      reader.readAsDataURL(file); // 파일을 읽어서 base64 형식으로 변환하여 미리보기에 사용
+      reader.readAsDataURL(file);
     }
   };
 

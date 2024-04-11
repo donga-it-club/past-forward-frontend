@@ -19,6 +19,12 @@ module.exports = (env, argv) => {
       port: 3000,
       hot: true,
       historyApiFallback: true,
+      proxy: [
+        {
+          context: ['/api'],
+          target: 'http://past-forward-load-balancer-1892345872.us-west-2.elb.amazonaws.com/',
+        },
+      ],
     },
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx'],
