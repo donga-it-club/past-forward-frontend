@@ -1,17 +1,31 @@
+import { useState } from 'react';
 import { PeopleFill, Person, PersonCircle, PersonFill, PlusCircleFill } from 'react-bootstrap-icons';
 import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel } from '@chakra-ui/react';
+import { useRecoilState } from 'recoil';
 import Search_SideBar from './Search_SideBar';
+import UserEmail from '@/components/user/UserEmail';
+import UserNickname from '@/components/user/UserNickname';
+import { userNicknameState } from '@/recoil/user/userAtom';
 import * as S from '@/styles/layout/layout.style';
 
 const PageSideBar = () => {
+  const [userNickname, setUserNickname] = useRecoilState(userNicknameState);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+
   return (
     <S.SideBarBGContainer>
       <S.LogoBox />
       <S.ProfileLink>
         <PersonCircle style={{ width: '100', height: '100', color: '#C3CAD9' }} />
         <a href="/my">
-          <S.MainName>Clayton Santos</S.MainName>
-          <S.MailName>Clayton@gmail.com</S.MailName>
+          <S.MainName>
+            <UserNickname setUserNickname={setUserNickname} />
+            {userNickname}
+          </S.MainName>
+          <S.MailName>
+            <UserEmail setUserEmail={setUserEmail} />
+            {userEmail}
+          </S.MailName>
         </a>
       </S.ProfileLink>
 

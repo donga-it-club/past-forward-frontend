@@ -1,24 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { IoMailOutline } from 'react-icons/io5';
-import { fetchUserAttributes } from 'aws-amplify/auth';
+import UserEmail from '@/components/user/UserEmail';
 import * as S from '@/styles/my/myPage.style';
 
 const EmailBox = () => {
   const [userEmail, setUserEmail] = useState<string | null>(null);
-
-  async function handleFetchUserAttributes() {
-    try {
-      const userAttributes = await fetchUserAttributes();
-      console.log(userAttributes);
-      setUserEmail(userAttributes.email || null);
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
-  useEffect(() => {
-    handleFetchUserAttributes();
-  }, []);
 
   return (
     <>
@@ -27,7 +13,10 @@ const EmailBox = () => {
       <S.LoginContainer>
         <S.LoginBox background_color="white">
           <IoMailOutline />
-          <div style={{ margin: 'auto 10px' }}>{userEmail}</div>
+          <div style={{ margin: 'auto 10px' }}>
+            <UserEmail setUserEmail={setUserEmail} />
+            {userEmail}
+          </div>
         </S.LoginBox>
       </S.LoginContainer>
     </>
