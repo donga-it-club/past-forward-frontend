@@ -4,8 +4,9 @@ export const Order = {
 } as const;
 
 export const Status = {
-  RECENTLY: 'RECENTLY',
-  PREVIOUSLY: 'PREVIOUSLY',
+  NOT_STARTED: 'NOT_STARTED',
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED',
 } as const;
 
 export type TStatus = typeof Status;
