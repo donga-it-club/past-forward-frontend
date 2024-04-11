@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const BoardContainer = styled.div`
   padding-top: 10px;
   display: flex;
   flex-wrap: wrap;
@@ -26,8 +26,28 @@ export const ImgBox = styled.div`
 export const InfoBox = styled.div`
   padding-left: 10px;
   padding-right: 10px;
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  align-content: stretch;
+`;
+
+export const RetroTitle = styled.span`
+  font-size: 15px;
+  margin-left: 3px;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const RetroUser = styled.span`
+  align-self: center;
+  font-size: x-small;
+`;
+export const RetroDate = styled.span`
+  align-self: center;
+  font-size: x-small;
+  color: #989898;
 `;
 
 export const Thumbnail = styled.img`
@@ -35,10 +55,41 @@ export const Thumbnail = styled.img`
   height: 100%;
 `;
 
+export const TeamIcon = styled.img`
+  width: 20px;
+  height: auto;
+`;
+
 export const MoreIcon = styled.img`
   width: 15px;
-  height: 5px;
+  height: 4px;
   margin-left: auto;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const MoreIconListView = styled.img`
+  width: 20px;
+  height: 6px;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const BookmarkIcon = styled.img`
+  width: 15px;
+  height: 15px;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const ProgressIcon = styled.img`
+  align-self: start;
+  justify-self: end;
+  width: 15px;
+  height: 15px;
 `;
 
 export const ListContainer = styled.div`

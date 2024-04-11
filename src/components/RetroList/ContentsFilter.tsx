@@ -1,12 +1,17 @@
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import * as S from '@/styles/RetroList/ContentsFilter.style';
 
 type ContentsFilterProps = {
-  status: string;
-  onStatusChange: (newStatus: string) => void;
+  onFilter: (filterType: string) => void;
 };
 
-const ContentsFilter: React.FC<ContentsFilterProps> = ({ status, onStatusChange }) => {
+const ContentsFilter: React.FC<ContentsFilterProps> = ({ onFilter }) => {
+  const [activeFilter, setActiveFilter] = useState<string>('ALL');
+  const [isActive, setIsActive] = useState<boolean>(false);
+  const handleActive = () => {
+    setIsActive(!isActive);
+  };
+
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -23,17 +28,32 @@ const ContentsFilter: React.FC<ContentsFilterProps> = ({ status, onStatusChange 
   return (
     <div ref={ref}>
       <S.ContentsFilterButton
-        onClick={() => onStatusChange('All files')}
-        className={status === 'All files' ? 'active' : ''}
+        onClick={() => {
+          onFilter('ALL');
+          setActiveFilter('ALL');
+          handleActive();
+        }}
+        className={activeFilter === 'ALL' ? 'active' : ''}
       >
         ALL files
       </S.ContentsFilterButton>
-      <S.ContentsFilterButton onClick={() => onStatusChange('Teams')} className={status === 'Teams' ? 'active' : ''}>
+      <S.ContentsFilterButton
+        onClick={() => {
+          onFilter('Teams');
+          setActiveFilter('Teams');
+          handleActive();
+        }}
+        className={activeFilter === 'Teams' ? 'active' : ''}
+      >
         Teams
       </S.ContentsFilterButton>
       <S.ContentsFilterButton
-        onClick={() => onStatusChange('Personal')}
-        className={status === 'Personal' ? 'active' : ''}
+        onClick={() => {
+          onFilter('Personal');
+          setActiveFilter('Personal');
+          handleActive();
+        }}
+        className={activeFilter === 'Personal' ? 'active' : ''}
       >
         Personal
       </S.ContentsFilterButton>
