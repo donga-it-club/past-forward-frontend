@@ -119,10 +119,11 @@ export const MainName = styled.h1`
   font-size: 20px;
   font-weight: bold;
   padding: 10px 0;
+  text-align: center;
 `;
 
 export const MailName = styled.h2`
-  color: #d2d2d2;
+  color: #939393;
 `;
 
 export const DivingLine = styled.div`

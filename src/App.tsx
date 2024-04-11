@@ -47,7 +47,6 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
   return isLoggedIn ? children : <Navigate to="/" replace state={{ from: location }} />;
 };
 
-// App 컴포넌트 수정
 const App = () => {
   const SurveyControl = () => {
     const checkSurveyVisited = () => {
@@ -134,7 +133,6 @@ const App = () => {
                   </PrivateRoute>
                 }
               />
-
             </Route>
 
             {/* MainLayout */}

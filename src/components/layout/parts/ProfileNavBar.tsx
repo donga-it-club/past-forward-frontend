@@ -1,5 +1,6 @@
 import { Gear, PersonCircle } from 'react-bootstrap-icons';
 import { GiHamburgerMenu } from 'react-icons/gi';
+import { useNavigate } from 'react-router-dom';
 import { Button, Drawer, DrawerContent, DrawerOverlay, useDisclosure } from '@chakra-ui/react';
 import { useRecoilState } from 'recoil';
 import LogoBox from './LogoBox';
@@ -15,6 +16,11 @@ const PageNavBar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isLoggedIn, handleLoginOrLogout } = useAuth();
   const [userNickname, setUserNickname] = useRecoilState(userNicknameState);
+
+  const navigate = useNavigate();
+  const navigateToMyPage = () => {
+    navigate('/my');
+  };
 
   return (
     <>
@@ -48,6 +54,7 @@ const PageNavBar = () => {
                   alignContent: 'center',
                   margin: '2px',
                 }}
+                onClick={navigateToMyPage}
               >
                 <PersonCircle style={{ width: '30px', margin: 'auto 3px' }} />
                 <UserNickname setUserNickname={setUserNickname} />

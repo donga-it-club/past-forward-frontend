@@ -1,13 +1,20 @@
+import { useNavigate } from 'react-router-dom';
 import logo from '@/../public/MainPageLogo.svg';
 import * as S from '@/styles/Home/home.style';
 import * as L from '@/styles/layout/layout.style';
 
 const MainDesign = () => {
+  const navigate = useNavigate();
+
+  const navigateToCreate = () => {
+    navigate('/create');
+  };
+
   return (
     <>
       <S.TopTriangleContainer>
         <S.TopText>
-          개인회고와 팀 회고 템플릿을 동시에 제공하는 회괴 웹페이지입니다. <br />
+          개인회고와 팀 회고 템플릿을 동시에 제공하는 회고 웹페이지입니다. <br />
           우리는 개인과 팀이 모두 발전할 수 있도록, <br />
           과거의 경험을 효과적으로 되새기고 배우는 것을 지원합니다.
         </S.TopText>
@@ -30,7 +37,7 @@ const MainDesign = () => {
             Past
           </L.LogoText>
         </S.BrandTextBox>
-        <S.StartedFreeButton>Get Started for Free</S.StartedFreeButton>
+        <S.StartedFreeButton onClick={navigateToCreate}>Get Started for Free</S.StartedFreeButton>
       </S.BrandContainer>
     </>
   );
