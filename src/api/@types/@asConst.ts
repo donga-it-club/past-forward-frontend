@@ -9,5 +9,5 @@ export const Status = {
   COMPLETED: 'COMPLETED',
 } as const;
 
-export type TStatus = keyof typeof Status;
-export type TOrder = keyof typeof Order;
+export type TStatus = typeof Status;
+export type TOrder = typeof Order;

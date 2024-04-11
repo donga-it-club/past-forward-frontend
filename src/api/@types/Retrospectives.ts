@@ -23,6 +23,7 @@ export interface GetRetrospectiveData {
 export interface PostRetrospectivesRequest {
   title: string;
   teamId: number;
+  userId: number;
   templateId: number;
   status: keyof TStatus;
   thumbnail: string;
