@@ -4,10 +4,13 @@ import { CgProfile } from 'react-icons/cg';
 import { CiCirclePlus } from 'react-icons/ci';
 import { MdAccessAlarm } from 'react-icons/md';
 import { Flex, Modal, ModalCloseButton, ModalContent, ModalOverlay, useDisclosure } from '@chakra-ui/react';
+import dayjs from 'dayjs';
 import { PersonalTaskMessage } from './taskMessage/PersonalTaskMessage';
 import { sectionData } from '@/api/@types/Section';
 import ReviseModal from '@/components/writeRetro/task/ReviseModal';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
+
+const formattedDate = (name: any) => dayjs(name).format('YYYY/MM/DD HH:MM');
 
 interface Props {
   name: sectionData;
@@ -21,19 +24,6 @@ const PersonalTask: FC<Props> = ({ name }) => {
     setMessaged(messaged => !messaged);
     setIsVisible(isVisible => !isVisible);
   };
-  // const [section, setSection] = useState<PostSectionResponse[]>();
-
-  // const FetchGetRetro = async () => {
-  //   const data = await SectionServices.get({ retrospectiveId: 0, teamId: 0 });
-  //   if (!data) return;
-  //   setSection(data.data);
-  //   console.log(data);
-  //   console.log(section);
-  // };
-
-  // useEffect(() => {
-  //   FetchGetRetro();
-  // }, []);
 
   return (
     <>
@@ -56,7 +46,7 @@ const PersonalTask: FC<Props> = ({ name }) => {
           <S.TaskText onClick={onOpen}>
             {name.content}
             {/* {section?.data.id} */}
-            <S.ReviseText>(수정됨)</S.ReviseText>
+            {/* <S.ReviseText>(수정됨)</S.ReviseText> */}
           </S.TaskText>
 
           {/* TaskTextModal */}
@@ -96,7 +86,7 @@ const PersonalTask: FC<Props> = ({ name }) => {
               <S.SubTaskIcon>
                 <MdAccessAlarm size="20px" color="#DADEE5" />
               </S.SubTaskIcon>
-              <S.SubTaskCount>20240326</S.SubTaskCount>
+              <S.SubTaskCount>{formattedDate(name.createdDate)}</S.SubTaskCount>
             </S.SubTaskStyle>
           </S.SubTaskBox>
         </S.TaskMainStyle>

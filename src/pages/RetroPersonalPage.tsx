@@ -51,7 +51,11 @@ const RetroPersonalPage = () => {
           </Flex>
           <Flex>
             <S.FrameStyle>
-              <Label labelName="Keep" labelType="dark" taskCount={3} />
+              <Label
+                labelName="Keep"
+                labelType="dark"
+                taskCount={mockSection.data.filter(data => data.sectionName === 'Keep').length}
+              />
               {mockSection.data
                 .filter(key => key.sectionName === 'Keep')
                 .map(name => (
@@ -61,7 +65,11 @@ const RetroPersonalPage = () => {
               <AddTask color="dark" />
             </S.FrameStyle>
             <S.FrameStyle>
-              <Label labelName="Problem" labelType="light" taskCount={3} />
+              <Label
+                labelName="Problem"
+                labelType="light"
+                taskCount={mockSection.data.filter(data => data.sectionName === 'Problem').length}
+              />
               {mockSection.data
                 .filter(key => key.sectionName === 'Problem')
                 .map(name => (
@@ -70,7 +78,11 @@ const RetroPersonalPage = () => {
               <AddTask color="light" />
             </S.FrameStyle>
             <S.FrameStyle>
-              <Label labelName="Try" labelType="dark" taskCount={3} />
+              <Label
+                labelName="Try"
+                labelType="dark"
+                taskCount={mockSection.data.filter(data => data.sectionName === 'Try').length}
+              />
               {mockSection.data
                 .filter(key => key.sectionName === 'Try')
                 .map(name => (
@@ -79,7 +91,11 @@ const RetroPersonalPage = () => {
               <AddTask color="dark" />
             </S.FrameStyle>
             <S.FrameStyle>
-              <Label labelName="Action Items" labelType="light" taskCount={3} />
+              <Label
+                labelName="Action Items"
+                labelType="light"
+                taskCount={mockSection.data.filter(data => data.sectionName === 'Action Items').length}
+              />
               {mockSection.data
                 .filter(key => key.sectionName === 'Action Items')
                 .map(name => (
