@@ -2,7 +2,7 @@ import { GetSectionResponse } from '../@types/Section';
 
 export const mockSection: GetSectionResponse = {
   code: 2,
-  message: 'string',
+  message: 'ㄷㄷㄷ',
   data: [
     {
       sectionId: 1,
