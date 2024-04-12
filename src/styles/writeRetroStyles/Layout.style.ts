@@ -59,6 +59,7 @@ export const SectionBox = styled.div`
 
 export const FrameStyle = styled.div`
   min-height: 100vh;
+  min-width: 300px;
   background-color: #f8f8f8;
   box-shadow:
     -0.3px 0 0 0.3px #4d5e80,
@@ -116,7 +117,7 @@ export const TaskBox = styled.div`
   /* display: grid;
   grid-template-columns: repeat(4, 1fr); */
   min-height: 115px;
-  min-width: 200px;
+  min-width: 250px;
   background-color: #ffffff;
   border-radius: 5px;
   box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.25);

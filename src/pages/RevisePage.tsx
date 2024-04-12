@@ -1,10 +1,42 @@
+import { useEffect, useState } from 'react';
 import { MdPeopleAlt } from 'react-icons/md';
+import { useParams } from 'react-router-dom';
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
+import { RetrospectiveResponse } from '@/api/@types/Retrospectives';
+import { RetrospectiveService } from '@/api/services/Retrospectives';
 import ManageTeamMembers from '@/components/writeRetro/revise/ManageTeamMembers';
 import ReviseSetting from '@/components/writeRetro/revise/ReviseSetting';
+import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/writeRetroStyles/ReviseLayout.style';
 
 const RetroRevisePage = () => {
+  const { id } = useParams();
+  console.log({ id });
+  const [retro, setRetro] = useState<RetrospectiveResponse>();
+
+  const toast = useCustomToast();
+
+  const FetchRetrospective = async () => {
+    try {
+      const data = await RetrospectiveService.put({
+        retrospectiveId: 1,
+        title: 'gg',
+        teamId: 1,
+        description: 'ggggg',
+        status: 'COMPLETED',
+        thumbnail: '/Home.png',
+      });
+      if (!data) return;
+      setRetro(data);
+      console.log(retro);
+    } catch (e) {
+      toast.error(e);
+    }
+  };
+
+  useEffect(() => {
+    FetchRetrospective();
+  }, []);
   return (
     <>
       <S.TitleBox>

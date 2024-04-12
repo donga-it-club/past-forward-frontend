@@ -1,16 +1,19 @@
-import { useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import { AiFillPlusCircle } from 'react-icons/ai';
 import { CgProfile } from 'react-icons/cg';
 import { CiCirclePlus } from 'react-icons/ci';
 import { MdAccessAlarm } from 'react-icons/md';
 import { Flex, Modal, ModalCloseButton, ModalContent, ModalOverlay, useDisclosure } from '@chakra-ui/react';
 import { PersonalTaskMessage } from './taskMessage/PersonalTaskMessage';
-import { PostSectionResponse } from '@/api/@types/Section';
-import { SectionServices } from '@/api/services/Section';
+import { sectionData } from '@/api/@types/Section';
 import ReviseModal from '@/components/writeRetro/task/ReviseModal';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 
-const PersonalTask = () => {
+interface Props {
+  name: sectionData;
+}
+
+const PersonalTask: FC<Props> = ({ name }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [messaged, setMessaged] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -18,18 +21,19 @@ const PersonalTask = () => {
     setMessaged(messaged => !messaged);
     setIsVisible(isVisible => !isVisible);
   };
-  const [section, setSection] = useState<PostSectionResponse>();
+  // const [section, setSection] = useState<PostSectionResponse[]>();
 
-  const FetchGetRetro = async () => {
-    const data = await SectionServices.get({ retrospectiveId: 0, teamId: 0 });
-    if (!data) return;
-    setSection(data);
-    console.log(section);
-  };
+  // const FetchGetRetro = async () => {
+  //   const data = await SectionServices.get({ retrospectiveId: 0, teamId: 0 });
+  //   if (!data) return;
+  //   setSection(data.data);
+  //   console.log(data);
+  //   console.log(section);
+  // };
 
-  useEffect(() => {
-    FetchGetRetro();
-  }, []);
+  // useEffect(() => {
+  //   FetchGetRetro();
+  // }, []);
 
   return (
     <>
@@ -39,7 +43,7 @@ const PersonalTask = () => {
           <Flex>
             <S.TaskUserProfile style={{ flex: 2 }}>
               <CgProfile size={40} color="#DADEE5" />
-              <S.TaskUserName>김사과</S.TaskUserName>
+              <S.TaskUserName>{name.username}</S.TaskUserName>
             </S.TaskUserProfile>
             <div style={{ margin: 'auto 0' }}>
               <Flex>
@@ -50,6 +54,7 @@ const PersonalTask = () => {
 
           {/* TaskCenter */}
           <S.TaskText onClick={onOpen}>
+            {name.content}
             {/* {section?.data.id} */}
             <S.ReviseText>(수정됨)</S.ReviseText>
           </S.TaskText>
