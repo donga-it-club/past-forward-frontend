@@ -6,21 +6,17 @@ const enum Colors {
   Warn = '#DE793B',
   Error = '#C73333',
 }
-
 const isDev = process.env.NODE_ENV === 'development';
 
 type PrintRequestLogParams = {
   method?: string;
   endPoint?: string;
-  requestData?: Record<string, unknown>; // 동적 속성을 가진 데이터를 처리
+  requestData?: Record<string, unknown>;
   requestParams?: Record<string, unknown>;
   config: AxiosRequestConfig;
 };
-
-//printRequestLog
 export function printRequestLog({ method, endPoint, requestData, requestParams, config }: PrintRequestLogParams) {
   if (!isDev) return;
-
   if (Object.keys(requestParams ?? {}).length) {
     console.log(
       `%c${method?.toUpperCase()} ${endPoint} [REQ PARAMS]`,
@@ -50,8 +46,6 @@ type PrintResponseLogParams = {
   endPoint?: string;
   responseObj?: Record<string, unknown>;
 };
-
-//printResponseLog
 export function printResponseLog({ method, endPoint, responseObj }: PrintResponseLogParams) {
   if (!isDev) return;
   console.log(
@@ -67,11 +61,8 @@ type PrintErrorLogParams = {
   errorMessage?: string;
   errorObj?: AxiosError;
 };
-
-//printErrorLog
 export function printErrorLog({ method, endPoint, errorMessage, errorObj }: PrintErrorLogParams) {
   if (!isDev) return;
-
   console.log(
     `%c${method?.toUpperCase()} ${endPoint} [ERR]`,
     `color: ${Colors.Error};font-weight: bold`,

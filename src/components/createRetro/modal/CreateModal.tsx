@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { Status } from '@/api/@types/@asConst';
 import { PostRetrospectivesRequest } from '@/api/@types/Retrospectives';
-import { RetrospectiveService } from '@/api/services/Retrospectives';
+import createRetrospective from '@/api/retrospectivesApi';
 import DescriptionInput from '@/components/createRetro/modal/DescriptionInput';
 import ImageUpload from '@/components/createRetro/modal/ImageUpload';
 import StartDateCalendar from '@/components/createRetro/modal/StartDateCalender';
@@ -40,7 +40,7 @@ const CreateModal: React.FC<CreateModalProps> = ({ isOpen, onClose }) => {
 
   const handleCreateClick = async () => {
     try {
-      const response = await RetrospectiveService.create({
+      const response = await createRetrospective({
         ...requestData,
         status: Status.NOT_STARTED,
       });
