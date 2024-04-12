@@ -3,43 +3,40 @@ import { Flex } from '@chakra-ui/react';
 import { AddTask } from '@/components/writeRetro/layout/AddTask';
 import Label from '@/components/writeRetro/layout/Label';
 import Title from '@/components/writeRetro/layout/Title';
-import { TeamActionItemsTask } from '@/components/writeRetro/task/TeamActionItemsTask';
-import TeamTask from '@/components/writeRetro/task/TeamTask';
+import PersonalTask from '@/components/writeRetro/task/PersonalTask';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 
-const WriteRetroTeamPage = () => {
+const RetroPersonalPage = () => {
   return (
     <S.Container>
       <Title />
       <S.SectionBox>
         <Flex flexDirection="column">
           <Flex>
-            <IoMdInformationCircle size={25} style={{ margin: 'auto 0' }} />
+            <IoMdInformationCircle size={25} style={{ margin: 'auto 5px' }} />
             <p style={{ fontSize: '20px', margin: '5px' }}>수정을 원한다면, 해당 텍스트를 선택하세요!</p>
           </Flex>
-
           <Flex>
             <S.FrameStyle>
-              <Label labelName="Kudos" labelType="dark" taskCount={3} />
-
-              <TeamTask />
-              <TeamTask />
-              <TeamTask />
+              <Label labelName="Keep" labelType="dark" taskCount={3} />
+              <PersonalTask />
+              <PersonalTask />
+              <PersonalTask />
               <AddTask color="dark" />
             </S.FrameStyle>
             <S.FrameStyle>
-              <Label labelName="Went Well" labelType="light" taskCount={3} />
-              <TeamTask />
+              <Label labelName="Problem" labelType="light" taskCount={3} />
+              <PersonalTask />
               <AddTask color="light" />
             </S.FrameStyle>
             <S.FrameStyle>
-              <Label labelName="To Improve" labelType="dark" taskCount={3} />
-              <TeamTask />
+              <Label labelName="Try" labelType="dark" taskCount={3} />
+              <PersonalTask />
               <AddTask color="dark" />
             </S.FrameStyle>
             <S.FrameStyle>
               <Label labelName="Action Items" labelType="light" taskCount={3} />
-              <TeamActionItemsTask />
+              <PersonalTask />
               <AddTask color="light" />
             </S.FrameStyle>
           </Flex>
@@ -49,4 +46,4 @@ const WriteRetroTeamPage = () => {
   );
 };
 
-export default WriteRetroTeamPage;
+export default RetroPersonalPage;

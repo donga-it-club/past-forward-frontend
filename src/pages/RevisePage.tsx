@@ -4,7 +4,7 @@ import ManageTeamMembers from '@/components/writeRetro/revise/ManageTeamMembers'
 import ReviseSetting from '@/components/writeRetro/revise/ReviseSetting';
 import * as S from '@/styles/writeRetroStyles/ReviseLayout.style';
 
-const WriteRetroReviseTeamPage = () => {
+const RetroRevisePage = () => {
   return (
     <>
       <S.TitleBox>
@@ -35,4 +35,4 @@ const WriteRetroReviseTeamPage = () => {
   );
 };
 
-export default WriteRetroReviseTeamPage;
+export default RetroRevisePage;
