@@ -18,6 +18,6 @@ export const sectionTitleName: sectionTitle = [
   },
   {
     id: 4,
-    title: 'Action',
+    title: 'Action Items',
   },
 ];

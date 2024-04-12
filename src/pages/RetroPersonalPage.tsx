@@ -9,6 +9,7 @@ import { AddTask } from '@/components/writeRetro/layout/AddTask';
 import Label from '@/components/writeRetro/layout/Label';
 import Title from '@/components/writeRetro/layout/Title';
 import PersonalTask from '@/components/writeRetro/task/PersonalTask';
+import { sectionTitleName } from '@/constant/section';
 import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 
@@ -50,59 +51,21 @@ const RetroPersonalPage = () => {
             <p style={{ fontSize: '20px', margin: '5px' }}>수정을 원한다면, 해당 텍스트를 선택하세요!</p>
           </Flex>
           <Flex>
-            <S.FrameStyle>
-              <Label
-                labelName="Keep"
-                labelType="dark"
-                taskCount={mockSection.data.filter(data => data.sectionName === 'Keep').length}
-              />
-              {mockSection.data
-                .filter(key => key.sectionName === 'Keep')
-                .map(name => (
-                  <PersonalTask name={name} />
-                ))}
-
-              <AddTask color="dark" />
-            </S.FrameStyle>
-            <S.FrameStyle>
-              <Label
-                labelName="Problem"
-                labelType="light"
-                taskCount={mockSection.data.filter(data => data.sectionName === 'Problem').length}
-              />
-              {mockSection.data
-                .filter(key => key.sectionName === 'Problem')
-                .map(name => (
-                  <PersonalTask name={name} />
-                ))}
-              <AddTask color="light" />
-            </S.FrameStyle>
-            <S.FrameStyle>
-              <Label
-                labelName="Try"
-                labelType="dark"
-                taskCount={mockSection.data.filter(data => data.sectionName === 'Try').length}
-              />
-              {mockSection.data
-                .filter(key => key.sectionName === 'Try')
-                .map(name => (
-                  <PersonalTask name={name} />
-                ))}
-              <AddTask color="dark" />
-            </S.FrameStyle>
-            <S.FrameStyle>
-              <Label
-                labelName="Action Items"
-                labelType="light"
-                taskCount={mockSection.data.filter(data => data.sectionName === 'Action Items').length}
-              />
-              {mockSection.data
-                .filter(key => key.sectionName === 'Action Items')
-                .map(name => (
-                  <PersonalTask name={name} />
-                ))}
-              <AddTask color="light" />
-            </S.FrameStyle>
+            {sectionTitleName.map(title => (
+              <S.FrameStyle>
+                <Label
+                  labelName={title.title}
+                  labelType="dark"
+                  taskCount={mockSection.data.filter(data => data.sectionName === title.title).length}
+                />
+                {mockSection.data
+                  .filter(key => key.sectionName === title.title)
+                  .map(name => (
+                    <PersonalTask name={name} />
+                  ))}
+                <AddTask color="dark" />
+              </S.FrameStyle>
+            ))}
           </Flex>
         </Flex>
       </S.SectionBox>
