@@ -54,8 +54,9 @@ export interface DeleteRetrospectiveRequest {
 
 //put
 export interface PutRetrospectiveRequest {
+  retrospectiveId: number;
   title: string;
-  teamId?: string;
+  teamId?: number;
   description: string;
   status: keyof TStatus;
   thumbnail?: string;

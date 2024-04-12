@@ -3,7 +3,7 @@ import { mswInstance } from '../client';
 
 const ROUTE = 'retrospectives';
 
-export const Retrospective: RetrospectivesClient = {
+export const RetrospectiveService: RetrospectivesClient = {
   create: async request => {
     return await mswInstance.post(`${ROUTE}/`, request);
   },
@@ -15,7 +15,7 @@ export const Retrospective: RetrospectivesClient = {
   delete: async id => {
     return await mswInstance.delete(`${ROUTE}/${id}`);
   },
-  put: async (id, ...request) => {
-    return await mswInstance.put(`${ROUTE}/${id}`, request);
+  put: async (retrospectiveId, ...request) => {
+    return await mswInstance.put(`${ROUTE}/${retrospectiveId}`, request);
   },
 };

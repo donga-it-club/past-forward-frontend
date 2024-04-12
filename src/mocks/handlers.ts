@@ -8,8 +8,19 @@ const RETRO_ROUTE = 'retrospectives';
 export const RetrospectiveHandlers: RequestHandler[] = [
   http.post(`/${RETRO_ROUTE}`, () => {
     const mock = {
-      id: 'acb4287',
-      name: 'string',
+      code: 0,
+      message: 'string',
+      data: {
+        id: 0,
+        title: 'heejung',
+        teamId: 0,
+        userId: 0,
+        templateId: 0,
+        status: 'NOT_STARTED',
+        thumbnail: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+        startDate: '2024-04-11T16:28:15.042Z',
+        description: 'heejung',
+      },
     };
     return HttpResponse.json(mock);
   }),
