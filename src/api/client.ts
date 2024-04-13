@@ -20,4 +20,4 @@ export const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(logRequest);
 axiosInstance.interceptors.response.use(flow([logResponse, unwrapResponse]), logAndProcessError);
 
-// mswInstance.interceptors.response.use(unwrapResponse);
+mswInstance.interceptors.response.use(unwrapResponse);

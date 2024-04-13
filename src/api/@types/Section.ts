@@ -51,8 +51,15 @@ export interface PatchSectionResponse {
   };
 }
 
+//delete
 export interface DeleteSectionRequest {
   sectionId: number;
+}
+
+export interface DeleteSectionResponse {
+  code: number;
+  message: string;
+  data: object;
 }
 
 //like

@@ -48,11 +48,11 @@ export const SectionHandlers: RequestHandler[] = [
   http.post(`${SECTION_ROUTE}/`, () => {
     return HttpResponse.json(mockSection);
   }),
-  http.patch(`${SECTION_ROUTE}/0`, () => {
+  http.patch(`${SECTION_ROUTE}/1`, () => {
     return HttpResponse.json(mockSection);
   }),
-  http.delete(`${SECTION_ROUTE}/0`, () => {
-    return;
+  http.delete(`${SECTION_ROUTE}/1`, () => {
+    return HttpResponse.json(mockSection);
   }),
   http.post(`${SECTION_ROUTE}/0/likes`, () => {
     const mockLikes = {

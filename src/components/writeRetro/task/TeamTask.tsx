@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 import { BiLike, BiSolidLike } from 'react-icons/bi';
 import { CgProfile } from 'react-icons/cg';
 import { MdAccessAlarm, MdMessage } from 'react-icons/md';
-import { Flex, Modal, ModalCloseButton, ModalContent, ModalOverlay, useDisclosure } from '@chakra-ui/react';
+import { Flex, Popover, PopoverContent, PopoverTrigger } from '@chakra-ui/react';
 import dayjs from 'dayjs';
 import TeamTaskMessage from './taskMessage/TeamTaskMessage';
 import { sectionData } from '@/api/@types/Section';
@@ -18,7 +18,6 @@ interface Props {
 }
 
 const TeamTask: FC<Props> = ({ name }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useCustomToast();
   const [liked, setLiked] = useState<number>(0);
   const [messaged, setMessaged] = useState<boolean>(false);
@@ -29,13 +28,21 @@ const TeamTask: FC<Props> = ({ name }) => {
       const data = await SectionServices.likePost({ sectionId: name.sectionId });
       setLiked(data.data.likeCnt);
     } catch (e) {
-      toast.error(e);
+      console.error(e);
     }
   };
 
   const handleMessaged = () => {
     setMessaged(messaged => !messaged);
     setIsVisible(isVisible => !isVisible);
+  };
+
+  const DeleteSection = async () => {
+    try {
+      await SectionServices.delete({ sectionId: name.sectionId });
+    } catch (e) {
+      toast.error(e);
+    }
   };
 
   return (
@@ -49,33 +56,31 @@ const TeamTask: FC<Props> = ({ name }) => {
               <S.TaskUserName>{name.username}</S.TaskUserName>
             </S.TaskUserProfile>
 
-            <S.TaskRevise>삭제</S.TaskRevise>
+            <S.TaskRevise onClick={DeleteSection}>삭제</S.TaskRevise>
           </Flex>
 
           {/* TaskCenter */}
-          <S.TaskText onClick={onOpen}>
-            {name.content}
-            {/* <S.ReviseText>(수정됨)</S.ReviseText> */}
-          </S.TaskText>
+          <Popover>
+            <PopoverTrigger>
+              <S.TaskText>
+                {name.content}
+                {/* <S.ReviseText>(수정됨)</S.ReviseText> */}
+              </S.TaskText>
+            </PopoverTrigger>
+            <PopoverContent>
+              {/* TaskTextModal */}
 
-          {/* TaskTextModal */}
-          <Modal isOpen={isOpen} onClose={onClose}>
-            <ModalOverlay />
-            <ModalContent sx={{ borderRadius: '30px' }}>
-              <ReviseModal />
-              <ModalCloseButton
-                sx={{
-                  width: '30px',
-                  height: '30px',
-                  fontSize: '18px',
-                  color: '#8B8B8B',
-                  position: 'absolute',
-                  top: '31px',
-                  left: '600px',
-                }}
-              />
-            </ModalContent>
-          </Modal>
+              <ReviseModal name={name} />
+            </PopoverContent>
+          </Popover>
+          {name.sectionName === 'Action Items' && (
+            <S.ManagerStyle>
+              <div>
+                <S.ManagerButton>M</S.ManagerButton>
+              </div>
+              <S.ManagerText>담당자</S.ManagerText>
+            </S.ManagerStyle>
+          )}
 
           {/* TaskBottom */}
           <S.SubTaskBox>
