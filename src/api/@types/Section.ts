@@ -57,7 +57,7 @@ export interface DeleteSectionRequest {
 
 //like
 export interface PostLikesSectionRequest {
-  userId: number;
+  sectionId: number;
 }
 
 export interface PostLikeSectionResponse {

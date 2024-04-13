@@ -60,6 +60,7 @@ export const SectionBox = styled.div`
 export const FrameStyle = styled.div`
   min-height: 100vh;
   min-width: 300px;
+  width: 345px;
   background-color: #f8f8f8;
   box-shadow:
     -0.3px 0 0 0.3px #4d5e80,
@@ -283,7 +284,10 @@ export const InputMessage = styled.textarea.attrs(props => ({
   font-size: 15px;
   font-weight: 500;
   padding: 2px 3px;
+  padding-top: 5px;
+  text-justify: center;
   color: #425170;
+  width: 100%;
   line-height: 20px;
   background-color: #f3f3f3;
   border: 0.7px solid rgba(175, 175, 175, 1);
@@ -298,6 +302,7 @@ export const InputMessage = styled.textarea.attrs(props => ({
 export const InputButton = styled.button`
   font-size: 15px;
   padding: 5px 10px;
+  width: 100px;
   margin-left: 10px;
   font-weight: 700;
   color: #ffffff;
