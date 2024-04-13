@@ -4,7 +4,6 @@ import { CgProfile } from 'react-icons/cg';
 import { MdAccessAlarm, MdMessage } from 'react-icons/md';
 import { Flex, Modal, ModalCloseButton, ModalContent, ModalOverlay, useDisclosure } from '@chakra-ui/react';
 import TeamTaskMessage from './taskMessage/TeamTaskMessage';
-import ReviseModal from '@/components/writeRetro/task/ReviseModal';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 
 export const TeamActionItemsTask = () => {
@@ -51,7 +50,6 @@ export const TeamActionItemsTask = () => {
           <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
             <ModalContent sx={{ borderRadius: '30px' }}>
-              <ReviseModal />
               <ModalCloseButton
                 sx={{
                   width: '30px',

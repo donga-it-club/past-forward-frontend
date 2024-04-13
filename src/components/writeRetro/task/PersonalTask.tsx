@@ -7,7 +7,6 @@ import { Flex, Modal, ModalCloseButton, ModalContent, ModalOverlay, useDisclosur
 import dayjs from 'dayjs';
 import { PersonalTaskMessage } from './taskMessage/PersonalTaskMessage';
 import { sectionData } from '@/api/@types/Section';
-import ReviseModal from '@/components/writeRetro/task/ReviseModal';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 
 const formattedDate = (name: any) => dayjs(name).format('YYYY/MM/DD HH:MM');
@@ -53,7 +52,6 @@ const PersonalTask: FC<Props> = ({ name }) => {
           <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
             <ModalContent sx={{ borderRadius: '30px', position: 'relative' }}>
-              <ReviseModal />
               <ModalCloseButton
                 sx={{
                   width: '30px',

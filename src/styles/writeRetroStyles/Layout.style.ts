@@ -405,21 +405,20 @@ export const ManagerButton = styled.button`
 `;
 
 export const ReviseModalStyle = styled.div`
-  min-height: 274px;
   background-color: #ffffff;
   border-radius: 30px;
-  padding: 36px 36px 24px;
+  padding: 10px;
 `;
 
 export const ReviseModalLine = styled.div`
-  width: 591px;
+  width: 85%;
   box-shadow: 0px -1px 0px rgba(181, 181, 181, 0.7) inset;
 `;
 
 export const ReviseModalTitle = styled.div`
   width: 62px;
   height: 38px;
-  font-size: 25px;
+  font-size: 15px;
   font-weight: 500;
   color: #111b47;
   line-height: 30px;
@@ -430,7 +429,7 @@ export const ReviseModalTitle = styled.div`
 export const ReviseModalInput = styled.textarea.attrs(props => ({
   placeholder: props.placeholder,
 }))`
-  width: 80%;
+  width: 85%;
   min-height: 87px;
   font-size: 18px;
   font-weight: 400;
@@ -441,7 +440,7 @@ export const ReviseModalInput = styled.textarea.attrs(props => ({
   border-radius: 4px;
   display: block;
   padding: 10px;
-  margin: 0 auto;
+  margin: 0 10px;
   margin-top: 26px;
   resize: none;
   overflow-y: hidden;
@@ -453,7 +452,7 @@ export const ReviseModalInput = styled.textarea.attrs(props => ({
 export const ReviseModalButtonBox = styled.div`
   display: flex;
   flex-direction: row-reverse;
-  margin-top: 34px;
+  margin-top: 10px;
 `;
 
 export const ReviseModalButton = styled.button`

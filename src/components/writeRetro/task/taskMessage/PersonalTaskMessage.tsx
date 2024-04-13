@@ -1,7 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import { CgProfile } from 'react-icons/cg';
 import { Flex, Modal, ModalCloseButton, ModalContent, ModalOverlay, useDisclosure } from '@chakra-ui/react';
-import ReviseModal from '@/components/writeRetro/task/ReviseModal';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 
 export const PersonalTaskMessage = () => {
@@ -48,7 +47,6 @@ export const PersonalTaskMessage = () => {
               <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent sx={{ width: 'auto', height: 'auto', borderRadius: '30px', position: 'relative' }}>
-                  <ReviseModal />
                   <ModalCloseButton
                     sx={{
                       width: '30px',
