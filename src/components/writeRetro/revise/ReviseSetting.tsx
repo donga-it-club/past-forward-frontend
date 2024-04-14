@@ -1,9 +1,10 @@
-import { ChangeEventHandler, MouseEventHandler, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BsPersonCircle } from 'react-icons/bs';
 import { FaCheck } from 'react-icons/fa';
 import { IoIosInformationCircle } from 'react-icons/io';
 import { IoClose } from 'react-icons/io5';
-import { MdModeEdit, MdOutlineFileUpload } from 'react-icons/md';
+import { MdModeEdit } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
 import {
   Button,
   ButtonGroup,
@@ -14,41 +15,65 @@ import {
   FormControl,
   FormLabel,
   IconButton,
-  Image,
   Input,
   Switch,
   useEditableControls,
 } from '@chakra-ui/react';
+import DeleteRetrospective from './DeleteRetrospective';
+import RetroImageUploader from './RetroImageUploader';
+import { RetrospectiveResponse } from '@/api/@types/Retrospectives';
 import { MockRetrospective } from '@/api/__mock__/retrospective';
+import { RetrospectiveService } from '@/api/services/Retrospectives';
+import { useCustomToast } from '@/hooks/useCustomToast';
 import * as L from '@/styles/writeRetroStyles/Layout.style';
 import * as S from '@/styles/writeRetroStyles/ReviseLayout.style';
 
 const ReviseSetting = () => {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [isChecked, setIsChecked] = useState<boolean>(false);
+  const [status, setStatus] = useState<string>();
+  const toast = useCustomToast();
+  const navigate = useNavigate();
+  const [retro, setRetro] = useState<RetrospectiveResponse>();
   const [image, setImage] = useState<string>('/Home.png');
 
-  const handleUploadButtonClick: MouseEventHandler<HTMLButtonElement> = () => {
-    inputRef.current?.click();
-  };
-
-  const handleImageChange: ChangeEventHandler<HTMLInputElement> = async event => {
-    const files = event.target.files;
-
-    if (!files || files.length === 0) return;
-
-    if (!files) return;
-
-    if (files) {
-      const file = files[0];
-      const imageUrl = URL.createObjectURL(file);
-      const imageUrlString: string = imageUrl;
-      setImage(imageUrlString);
+  const FetchRetrospective = async () => {
+    try {
+      const data = await RetrospectiveService.put({
+        retrospectiveId: 1,
+        title: 'gg',
+        teamId: 1,
+        description: 'ggggg',
+        status: 'COMPLETED',
+        thumbnail: '/Home.png',
+      });
+      if (!data) return;
+      setRetro(data);
+      console.log(retro);
+    } catch (e) {
+      console.error(e);
     }
   };
 
-  const DeleteImage: MouseEventHandler<HTMLButtonElement> = () => {
-    setImage('');
+  const handleNavigate = (props: string) => {
+    setTimeout(() => {
+      navigate('/retrolist');
+      toast.info(props);
+    }, 1000);
   };
+
+  const SwitchStatus = () => {
+    setIsChecked(!isChecked);
+    if (isChecked) {
+      toast.info('회고 완료 처리를 취소하였습니다.');
+      console.log('취소');
+      setStatus('COMPLETED');
+      console.log(status);
+    } else {
+      toast.success('해당 회고는 최종 완료 처리되었습니다.');
+      console.log('성공 ');
+    }
+  };
+
   function EditableControls() {
     const { isEditing, getSubmitButtonProps, getCancelButtonProps, getEditButtonProps } = useEditableControls();
 
@@ -63,27 +88,14 @@ const ReviseSetting = () => {
       </Flex>
     );
   }
+
+  useEffect(() => {
+    FetchRetrospective();
+  }, []);
+
   return (
     <S.SettingContainer>
-      <Image
-        src={image ?? '/Home.png'}
-        maxWidth={500}
-        margin="20px auto"
-        h="auto"
-        aspectRatio="1/1"
-        objectFit="contain"
-      ></Image>
-      <div style={{ margin: '0 auto' }}>
-        <Button colorScheme="brand" variant="outline" margin="0 30px" onClick={handleUploadButtonClick}>
-          <MdOutlineFileUpload style={{ margin: '0 5px' }} />
-          변경하기
-          <input type="file" ref={inputRef} onChange={handleImageChange} accept="image/*" hidden></input>
-        </Button>
-        <Button colorScheme="brand" variant="outline" margin="0 30px" onClick={DeleteImage}>
-          삭제하기
-        </Button>
-      </div>
-
+      <RetroImageUploader image={image} setImage={setImage} />
       {/* 회고명 */}
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         <L.TaskText style={{ fontSize: '20px' }}>회고명 </L.TaskText>
@@ -122,20 +134,19 @@ const ReviseSetting = () => {
           margin="10px 0"
         >
           <EditablePreview />
-          {/* Here is the custom input */}
           <Input as={EditableInput} />
           <EditableControls />
         </Editable>
+
+        {/* 최종완료 */}
         <L.TaskText style={{ fontSize: '20px' }}>회고 최종완료</L.TaskText>
         <S.SettingLine />
-
-        {/* 토글 */}
-        <FormControl display="flex" alignItems="center">
+        <FormControl display="flex" alignItems="center" onChange={SwitchStatus}>
           <FormLabel htmlFor="email-alerts" mb="0" margin="20px 10px" display="flex">
             <IoIosInformationCircle color="#FF4646" size={20} style={{ margin: 'auto 0' }} />
             <S.SettingDetailText>최종 완료 시, Done으로 표시되며 참여자는 수정이 불가합니다.</S.SettingDetailText>
           </FormLabel>
-          <Switch id="email-alerts" colorScheme="red" size="lg" />
+          <Switch colorScheme="orange" size="lg" isRequired isInvalid={isChecked} />
         </FormControl>
 
         {/* 회고 삭제 */}
@@ -146,17 +157,28 @@ const ReviseSetting = () => {
           <S.SettingDetailText>삭제 후 복구할 수 없습니다.</S.SettingDetailText>
         </div>
         <Flex flexDirection="row-reverse" margin="30px">
-          <Button colorScheme="red" variant="outline">
-            회고 삭제
-          </Button>
+          <DeleteRetrospective />
         </Flex>
 
         {/* save, cancel */}
         <Flex flexDirection="row-reverse">
-          <Button colorScheme="grey" variant="outline">
+          <Button
+            colorScheme="grey"
+            variant="outline"
+            onClick={() => {
+              handleNavigate('회고 수정이 정상 처리되었습니다.');
+            }}
+          >
             SAVE
           </Button>
-          <Button colorScheme="grey" variant="outline" margin="auto 20px">
+          <Button
+            colorScheme="grey"
+            variant="outline"
+            margin="auto 20px"
+            onClick={() => {
+              handleNavigate('회고 수정이 취소되었습니다.');
+            }}
+          >
             CANCEL
           </Button>
         </Flex>

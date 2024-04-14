@@ -19,7 +19,7 @@ const RetroTeamPage = () => {
   const FetchSection = async () => {
     try {
       const data = await SectionServices.get({
-        retrospectiveId: 1,
+        retrospectiveId: 3,
         teamId: 1,
       });
       if (!data) return;
