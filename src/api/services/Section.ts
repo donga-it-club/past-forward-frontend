@@ -1,22 +1,22 @@
 import { SectionClient } from '../@types/Section';
-import { mswInstance } from '../client';
+import { axiosInstance } from '../client';
 
 const ROUTE = 'sections';
 
 export const SectionServices: SectionClient = {
   get: async request => {
-    return await mswInstance.get(`${ROUTE}/`, { params: request });
+    return await axiosInstance.get(`${ROUTE}/`, { params: request });
   },
   create: async request => {
-    return await mswInstance.post(`${ROUTE}/`, request);
+    return await axiosInstance.post(`${ROUTE}/`, request);
   },
   patch: async ({ sectionId, ...request }) => {
-    return await mswInstance.patch(`${ROUTE}/${sectionId}`, request);
+    return await axiosInstance.patch(`${ROUTE}/${sectionId}`, request);
   },
-  delete: async sectionId => {
-    return await mswInstance.delete(`${ROUTE}/${sectionId}`);
+  delete: async ({ sectionId }) => {
+    return await axiosInstance.delete(`${ROUTE}/${sectionId}`);
   },
-  likePost: async sectionId => {
-    return await mswInstance.post(`${ROUTE}/${sectionId}/likes`);
+  likePost: async ({ sectionId }) => {
+    return await axiosInstance.post(`${ROUTE}/${sectionId}/likes`);
   },
 };

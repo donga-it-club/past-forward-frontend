@@ -4,19 +4,19 @@ export interface GetSectionRequest {
   teamId?: number;
 }
 
+export interface sectionData {
+  sectionId: number;
+  username: string;
+  content: string;
+  createdDate: string;
+  likeCnt: number;
+  sectionName: string;
+}
+
 export interface GetSectionResponse {
   code: number;
-  message: string;
-  data: [
-    {
-      sectionId: number;
-      username: string;
-      content: string;
-      likeCnt: number;
-      sectionName: string;
-      createdDate: string;
-    },
-  ];
+  error: string;
+  data: sectionData[];
 }
 //post
 export interface CreateSectionRequest {
@@ -51,13 +51,20 @@ export interface PatchSectionResponse {
   };
 }
 
+//delete
 export interface DeleteSectionRequest {
   sectionId: number;
 }
 
+export interface DeleteSectionResponse {
+  code: number;
+  message: string;
+  data: object;
+}
+
 //like
 export interface PostLikesSectionRequest {
-  userId: number;
+  sectionId: number;
 }
 
 export interface PostLikeSectionResponse {
@@ -69,7 +76,7 @@ export interface PostLikeSectionResponse {
   };
 }
 export interface SectionClient {
-  get(request: GetSectionRequest): Promise<PostSectionResponse>;
+  get(request: GetSectionRequest): Promise<GetSectionResponse>;
   create(request: CreateSectionRequest): Promise<PostSectionResponse>;
   patch(request: PatchSectionRequest): Promise<PatchSectionResponse>;
   delete(request: DeleteSectionRequest): Promise<void>;

@@ -1,10 +1,9 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, FC, useState } from 'react';
 import { CgProfile } from 'react-icons/cg';
 import { Flex, Modal, ModalCloseButton, ModalContent, ModalOverlay, useDisclosure } from '@chakra-ui/react';
-import ReviseModal from '../ReviseModal';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 
-const TeamTaskMessage = () => {
+const TeamTaskMessage: FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [value, setValue] = useState('');
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -47,7 +46,6 @@ const TeamTaskMessage = () => {
               <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent sx={{ borderRadius: '30px', position: 'relative' }}>
-                  <ReviseModal />
                   <ModalCloseButton
                     sx={{
                       width: '30px',
@@ -66,13 +64,8 @@ const TeamTaskMessage = () => {
         </div>
 
         {/* AddMessage */}
-        <Flex margin={10}>
-          <S.InputMessage
-            value={value}
-            onChange={handleChange}
-            placeholder="내용을 입력해주세요"
-            rows={1}
-          ></S.InputMessage>
+        <Flex>
+          <S.InputMessage value={value} onChange={handleChange} placeholder="내용을 입력해주세요" rows={1} />
           <S.InputButton>확인</S.InputButton>
         </Flex>
       </S.TaskMessageBoxStyle>

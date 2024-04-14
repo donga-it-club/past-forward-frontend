@@ -19,6 +19,7 @@ import {
   Switch,
   useEditableControls,
 } from '@chakra-ui/react';
+import { MockRetrospective } from '@/api/__mock__/retrospective';
 import * as L from '@/styles/writeRetroStyles/Layout.style';
 import * as S from '@/styles/writeRetroStyles/ReviseLayout.style';
 
@@ -84,13 +85,13 @@ const ReviseSetting = () => {
       </div>
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         <L.TaskText style={{ fontSize: '20px' }}>회고명 </L.TaskText>
-        <Input placeholder="회고명을 입력하세요." />
+        <Input placeholder={MockRetrospective.data.title} />
         <div style={{ display: 'flex', margin: '10px 0' }}>
           <L.TaskText style={{ fontSize: '20px', minWidth: 'auto', margin: 'auto 0' }}>회고 유형 </L.TaskText>
           <S.NoteChangeText>변경 불가</S.NoteChangeText>
         </div>
 
-        <S.NotTextInput>Team Project</S.NotTextInput>
+        <S.NotTextInput>{MockRetrospective.data.templateId}</S.NotTextInput>
         <div style={{ display: 'flex', margin: '10px 0' }}>
           <L.TaskText style={{ fontSize: '20px', minWidth: 'auto', margin: 'auto 0' }}>회고 템플릿 유형 </L.TaskText>
           <S.NoteChangeText>변경 불가</S.NoteChangeText>
@@ -101,6 +102,7 @@ const ReviseSetting = () => {
           <L.TaskText style={{ fontSize: '20px', minWidth: 'auto', margin: 'auto 0' }}>회고 리더 </L.TaskText>
           <S.NoteChangeText>변경 불가</S.NoteChangeText>
         </div>
+
         <S.ReaderBox>
           <BsPersonCircle size={30} style={{ margin: '5px' }} />
           <p style={{ margin: 'auto 0' }}> Chae yeon 선애조아</p>

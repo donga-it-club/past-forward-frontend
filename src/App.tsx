@@ -3,6 +3,8 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { getCurrentUser } from 'aws-amplify/auth';
 import { RecoilRoot } from 'recoil';
+import RetroTeamPage from './pages/RetroTeamPage';
+import RetroRevisePage from './pages/RevisePage';
 import InviteTeamModal from '@/components/inviteTeam/InviteTeamModal';
 import MainLayout from '@/components/layout/MainLayout';
 import ProfileLayout from '@/components/layout/ProfileLayout';
@@ -11,10 +13,8 @@ import CreateRetroPage from '@/pages/CreateRetroPage';
 import HomePage from '@/pages/HomePage';
 import MyPage from '@/pages/MyPage';
 import RetroListPage from '@/pages/RetroListPage';
+import RetroPersonalPage from '@/pages/RetroPersonalPage';
 import SurveyPage from '@/pages/SurveyPage';
-import WriteRetroPersonalPage from '@/pages/WriteRetroPersonalPage';
-import WriteRetroRevisePage from '@/pages/WriteRetroRevisePage';
-import WriteRetroTeamPage from '@/pages/WriteRetroTeamPage';
 
 interface PrivateRouteProps {
   children: ReactElement;
@@ -101,10 +101,10 @@ const App = () => {
                 }
               />
               <Route
-                path="/team"
+                path="/sections"
                 element={
                   <PrivateRoute>
-                    <WriteRetroTeamPage />
+                    <RetroTeamPage />
                   </PrivateRoute>
                 }
               />
@@ -112,7 +112,7 @@ const App = () => {
                 path="/personal"
                 element={
                   <PrivateRoute>
-                    <WriteRetroPersonalPage />
+                    <RetroPersonalPage />
                   </PrivateRoute>
                 }
               />
@@ -120,7 +120,7 @@ const App = () => {
                 path="/revise"
                 element={
                   <PrivateRoute>
-                    <WriteRetroRevisePage />
+                    <RetroRevisePage />
                   </PrivateRoute>
                 }
               />
