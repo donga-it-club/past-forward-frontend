@@ -62,4 +62,4 @@ export const SectionHandlers: RequestHandler[] = [
     return HttpResponse.json(mockLikes);
   }),
 ];
-export const mswWorker = setupWorker(...RetrospectiveHandlers, ...SectionHandlers);
+export const mswWorker = setupWorker(...RetrospectiveHandlers);

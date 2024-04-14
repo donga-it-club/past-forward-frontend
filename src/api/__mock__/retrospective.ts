@@ -1,6 +1,7 @@
 import { Status } from '../@types/@asConst';
+import { RetrospectiveResponse } from '../@types/Retrospectives';
 
-export const MockRetrospective = {
+export const MockRetrospective: RetrospectiveResponse = {
   code: 202,
   message: 'success',
   data: {
@@ -8,7 +9,7 @@ export const MockRetrospective = {
     title: 'hee',
     userId: 0,
     teamId: 0,
-    templateId: 0,
+    templateId: 1,
     status: Status.NOT_STARTED,
     isBookmarked: true,
     thumbnail: '3fa85f64',

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { IoMdInformationCircle } from 'react-icons/io';
 import { Flex } from '@chakra-ui/react';
-import { sectionData } from '@/api/@types/Section';
+import { GetSectionResponse } from '@/api/@types/Section';
 import { mockSection } from '@/api/__mock__/section';
 import { SectionServices } from '@/api/services/Section';
 import { AddTask } from '@/components/writeRetro/layout/AddTask';
@@ -13,7 +13,7 @@ import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 
 const RetroTeamPage = () => {
-  const [section, setSection] = useState<sectionData[]>();
+  const [section, setSection] = useState<GetSectionResponse>();
   const toast = useCustomToast();
 
   const FetchSection = async () => {
@@ -23,8 +23,8 @@ const RetroTeamPage = () => {
         teamId: 1,
       });
       if (!data) return;
-      if (data.data) {
-        setSection(data.data);
+      if (data) {
+        setSection(data);
       }
       console.log('data', data);
       console.log('section', section);

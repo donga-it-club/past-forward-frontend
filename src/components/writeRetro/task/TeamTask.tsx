@@ -78,7 +78,7 @@ const TeamTask: FC<Props> = ({ name }) => {
               <div>
                 <S.ManagerButton>M</S.ManagerButton>
               </div>
-              <S.ManagerText>담당자</S.ManagerText>
+              <S.ManagerText>{name.username}</S.ManagerText>
             </S.ManagerStyle>
           )}
 

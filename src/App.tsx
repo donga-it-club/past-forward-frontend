@@ -101,7 +101,7 @@ const App = () => {
                 }
               />
               <Route
-                path="/team"
+                path="/sections"
                 element={
                   <PrivateRoute>
                     <RetroTeamPage />
