@@ -83,33 +83,40 @@ const ReviseSetting = () => {
           삭제하기
         </Button>
       </div>
+
+      {/* 회고명 */}
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         <L.TaskText style={{ fontSize: '20px' }}>회고명 </L.TaskText>
         <Input placeholder={MockRetrospective.data.title} />
+
+        {/* 회고 유형 */}
         <div style={{ display: 'flex', margin: '10px 0' }}>
           <L.TaskText style={{ fontSize: '20px', minWidth: 'auto', margin: 'auto 0' }}>회고 유형 </L.TaskText>
           <S.NoteChangeText>변경 불가</S.NoteChangeText>
         </div>
-
         <S.NotTextInput>{MockRetrospective.data.templateId}</S.NotTextInput>
+
+        {/* 회고 템플릿 유형 */}
         <div style={{ display: 'flex', margin: '10px 0' }}>
           <L.TaskText style={{ fontSize: '20px', minWidth: 'auto', margin: 'auto 0' }}>회고 템플릿 유형 </L.TaskText>
           <S.NoteChangeText>변경 불가</S.NoteChangeText>
         </div>
-        <S.NotTextInput>Kudos</S.NotTextInput>
+        <S.NotTextInput>{MockRetrospective.data.templateId}</S.NotTextInput>
 
+        {/* 회고리더 */}
         <div style={{ display: 'flex', margin: '10px 0' }}>
           <L.TaskText style={{ fontSize: '20px', minWidth: 'auto', margin: 'auto 0' }}>회고 리더 </L.TaskText>
           <S.NoteChangeText>변경 불가</S.NoteChangeText>
         </div>
-
         <S.ReaderBox>
           <BsPersonCircle size={30} style={{ margin: '5px' }} />
-          <p style={{ margin: 'auto 0' }}> Chae yeon 선애조아</p>
+          <p style={{ margin: 'auto 0' }}>{MockRetrospective.data.userId}</p>
         </S.ReaderBox>
+
+        {/* 회고 설명 */}
         <Editable
           textAlign="center"
-          defaultValue="회고 설명을 적어주세요."
+          defaultValue={MockRetrospective.data.createdDate}
           fontSize="xl"
           isPreviewFocusable={false}
           margin="10px 0"
@@ -122,6 +129,7 @@ const ReviseSetting = () => {
         <L.TaskText style={{ fontSize: '20px' }}>회고 최종완료</L.TaskText>
         <S.SettingLine />
 
+        {/* 토글 */}
         <FormControl display="flex" alignItems="center">
           <FormLabel htmlFor="email-alerts" mb="0" margin="20px 10px" display="flex">
             <IoIosInformationCircle color="#FF4646" size={20} style={{ margin: 'auto 0' }} />
@@ -129,17 +137,21 @@ const ReviseSetting = () => {
           </FormLabel>
           <Switch id="email-alerts" colorScheme="red" size="lg" />
         </FormControl>
+
+        {/* 회고 삭제 */}
         <L.TaskText style={{ fontSize: '20px' }}>회고 삭제</L.TaskText>
         <S.SettingLine />
         <div style={{ margin: '20px 10px', display: 'flex' }}>
           <IoIosInformationCircle color="#FF4646" size={20} style={{ margin: 'auto 0' }} />
-          <S.SettingDetailText>최종 완료 시, Done으로 표시되며 참여자는 수정이 불가합니다.</S.SettingDetailText>
+          <S.SettingDetailText>삭제 후 복구할 수 없습니다.</S.SettingDetailText>
         </div>
         <Flex flexDirection="row-reverse" margin="30px">
           <Button colorScheme="red" variant="outline">
             회고 삭제
           </Button>
         </Flex>
+
+        {/* save, cancel */}
         <Flex flexDirection="row-reverse">
           <Button colorScheme="grey" variant="outline">
             SAVE

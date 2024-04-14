@@ -6,15 +6,13 @@ import { RetrospectiveResponse } from '@/api/@types/Retrospectives';
 import { RetrospectiveService } from '@/api/services/Retrospectives';
 import ManageTeamMembers from '@/components/writeRetro/revise/ManageTeamMembers';
 import ReviseSetting from '@/components/writeRetro/revise/ReviseSetting';
-import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/writeRetroStyles/ReviseLayout.style';
 
 const RetroRevisePage = () => {
   const { id } = useParams();
   console.log({ id });
   const [retro, setRetro] = useState<RetrospectiveResponse>();
-
-  const toast = useCustomToast();
+  // const toast = useCustomToast();
 
   const FetchRetrospective = async () => {
     try {
@@ -30,7 +28,7 @@ const RetroRevisePage = () => {
       setRetro(data);
       console.log(retro);
     } catch (e) {
-      toast.error(e);
+      console.error(e);
     }
   };
 

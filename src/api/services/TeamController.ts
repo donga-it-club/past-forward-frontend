@@ -1,4 +1,4 @@
-import { TeamControllerClient } from '../@types/TeamContoller';
+import { TeamControllerClient } from '../@types/TeamController';
 import { mswInstance } from '../client';
 
 const ROUTE = 'teams';
