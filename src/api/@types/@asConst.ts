@@ -9,6 +9,7 @@ export const Status = {
   COMPLETED: 'COMPLETED',
 } as const;
 
+//임시
 export const Template = {
   1: 'Keep',
   2: 'Ploblem',
