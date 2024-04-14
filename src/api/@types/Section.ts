@@ -1,7 +1,7 @@
 //get
 export interface GetSectionRequest {
   retrospectiveId: number;
-  teamId?: number;
+  teamId: number | null;
 }
 
 export interface sectionData {

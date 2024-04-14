@@ -12,10 +12,10 @@ export const RetrospectiveService: RetrospectivesClient = {
       params: request,
     });
   },
-  delete: async id => {
-    return await mswInstance.delete(`${ROUTE}/${id}`);
+  delete: async ({ retrospectiveId }) => {
+    return await mswInstance.delete(`${ROUTE}/${retrospectiveId}`);
   },
-  put: async (retrospectiveId, ...request) => {
+  put: async ({ retrospectiveId }, ...request) => {
     return await mswInstance.put(`${ROUTE}/${retrospectiveId}`, request);
   },
 };

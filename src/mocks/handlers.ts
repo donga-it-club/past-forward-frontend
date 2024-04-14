@@ -24,13 +24,13 @@ export const RetrospectiveHandlers: RequestHandler[] = [
     };
     return HttpResponse.json(mock);
   }),
-  http.get(`${RETRO_ROUTE}`, () => {
-    return HttpResponse.json(MockRetrospective);
+  http.get(`${RETRO_ROUTE}?retrospectiveId=1&teamId=1`, () => {
+    return HttpResponse.json(mockSection);
   }),
   http.delete(`${RETRO_ROUTE}/0`, () => {
     return;
   }),
-  http.put(`${RETRO_ROUTE}/0`, () => {
+  http.put(`${RETRO_ROUTE}/1`, () => {
     return HttpResponse.json(MockRetrospective);
   }),
 
