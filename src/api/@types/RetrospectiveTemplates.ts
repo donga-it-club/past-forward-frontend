@@ -1,6 +1,10 @@
 export interface RetrospectivesTemplateResponse {
-  id: number;
-  name: string;
+  code: number;
+  message: string | null;
+  data: Array<{
+    id: number;
+    name: string;
+  }>;
 }
 
 export interface retrospectivesTemplateClient {

@@ -22,7 +22,7 @@ module.exports = (env, argv) => {
       proxy: [
         {
           context: ['/api'],
-          target: 'http://past-forward-load-balancer-1892345872.us-west-2.elb.amazonaws.com/',
+          target: 'https://api.pastforward.link/',
         },
       ],
     },

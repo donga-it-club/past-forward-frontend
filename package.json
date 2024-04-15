@@ -34,6 +34,7 @@
     "@emotion/eslint-plugin": "^11.11.0",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
+    "@types/uuid": "^9.0.8",
     "@types/webpack-env": "^1.18.4",
     "aws-amplify": "^6.0.27",
     "axios": "^1.6.8",
@@ -59,8 +60,9 @@
     "styled-components": "^6.1.8",
     "styled-reset": "^4.5.2",
     "ts-node": "^10.9.2",
+    "uuid": "^9.0.1",
     "webpack-env": "^0.8.0",
-    "yarn": "^1.22.21",
+    "yarn": "^1.22.22",
     "yup": "^1.4.0"
   },
   "devDependencies": {

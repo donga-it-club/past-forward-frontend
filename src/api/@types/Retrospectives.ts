@@ -1,4 +1,4 @@
-import { TOrder, TStatus } from './@asConst';
+import { TOrder, TRetrospective, TStatus } from './@asConst';
 
 // get
 export interface GetRetrospectiveRequest {
@@ -19,7 +19,7 @@ export interface GetRetrospectiveData {
 //post
 export interface PostRetrospectivesRequest {
   title: string;
-  teamId: number;
+  type: keyof TRetrospective;
   userId: number;
   templateId: number;
   status: keyof TStatus;
@@ -31,7 +31,6 @@ export interface PostRetrospectivesRequest {
 export interface PostRetrospectivesResponse {
   id: number;
   title: string;
-  teamId: number;
   userId: number;
   templateId: number;
   status: keyof TStatus;

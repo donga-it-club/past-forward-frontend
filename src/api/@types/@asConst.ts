@@ -9,5 +9,11 @@ export const Status = {
   COMPLETED: 'COMPLETED',
 } as const;
 
+export const RetrospectiveType = {
+  TEAM: 'TEAM',
+  PERSONAL: 'PERSONAL',
+};
+
+export type TRetrospective = typeof RetrospectiveType;
 export type TStatus = typeof Status;
 export type TOrder = typeof Order;
