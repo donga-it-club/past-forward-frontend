@@ -11,7 +11,7 @@ const MainDesign = () => {
   };
 
   return (
-    <>
+    <div style={{ height: '100vh' }}>
       <S.TopTriangleContainer>
         <S.TopText>
           개인회고와 팀 회고 템플릿을 동시에 제공하는 회고 웹페이지입니다. <br />
@@ -39,7 +39,7 @@ const MainDesign = () => {
         </S.BrandTextBox>
         <S.StartedFreeButton onClick={navigateToCreate}>Get Started for Free</S.StartedFreeButton>
       </S.BrandContainer>
-    </>
+    </div>
   );
 };
 
