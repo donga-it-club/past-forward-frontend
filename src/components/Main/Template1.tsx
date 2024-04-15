@@ -42,7 +42,7 @@ const Template1: React.FC = () => {
         </S.CategoryBox>
       </S.CategoryTitle>
       <S.HexagonWrapper>
-        <S.Hexagon size={240}>
+        <S.Hexagon size={220}>
           <S.HexaIcon src={CategoryIcon1} />
           <S.HexaText>팀 성장 촉진</S.HexaText>
           <S.HoverTitleText className="HoverTitle">팀 성장 촉진</S.HoverTitleText>
@@ -57,7 +57,7 @@ const Template1: React.FC = () => {
         </S.Hexagon>
       </S.HexagonWrapper>
       <S.HexagonWrapper>
-        <S.Hexagon size={240}>
+        <S.Hexagon size={220}>
           <S.HexaIcon src={CategoryIcon2} />
           <S.HexaText>문제 해결</S.HexaText>
           <S.HoverTitleText className="HoverTitle">문제 해결</S.HoverTitleText>
@@ -75,7 +75,7 @@ const Template1: React.FC = () => {
         </S.Hexagon>
       </S.HexagonWrapper>
       <S.HexagonWrapper>
-        <S.Hexagon size={240}>
+        <S.Hexagon size={220}>
           <S.HexaIcon src={CategoryIcon3} />
           <S.HexaText>프로세스 개선</S.HexaText>
           <S.HoverTitleText className="HoverTitle">프로세스 개선</S.HoverTitleText>
@@ -90,7 +90,7 @@ const Template1: React.FC = () => {
         </S.Hexagon>
       </S.HexagonWrapper>
       <S.HexagonWrapper>
-        <S.Hexagon size={240}>
+        <S.Hexagon size={220}>
           <S.HexaIcon src={CategoryIcon4} />
           <S.HexaText>팀워크 강화</S.HexaText>
           <S.HoverTitleText className="HoverTitle">팀워크 강화</S.HoverTitleText>
@@ -104,7 +104,7 @@ const Template1: React.FC = () => {
         </S.Hexagon>
       </S.HexagonWrapper>
       <S.HexagonWrapper>
-        <S.Hexagon size={240}>
+        <S.Hexagon size={220}>
           <S.HexaIcon src={CategoryIcon5} />
           <S.HexaText>적응력 향상</S.HexaText>
           <S.HoverTitleText className="HoverTitle">적응력 향상</S.HoverTitleText>

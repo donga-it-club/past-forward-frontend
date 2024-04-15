@@ -5,7 +5,7 @@ interface RadioInputProps {
 }
 
 export const Container = styled.div`
-  height: 80%;
+  height: 75vh;
   display: grid;
   grid-template-columns: 0.3fr 1.5fr 3fr 0.3fr;
   grid-template-rows: 1fr 6.5fr 1fr;
@@ -198,4 +198,20 @@ export const ButtonText = styled.span`
   font-size: small;
   display: block;
   margin-top: 5px;
+`;
+
+export const ContactButtonContainer = styled.div`
+  height: 300px;
+  background-color: #ececec;
+  display: flex;
+  justify-content: center;
+`;
+
+export const ContactButton = styled.button`
+  width: 300px;
+  height: 50px;
+  color: white;
+  background-color: #111b47;
+  border-radius: 3px;
+  margin-top: 15px;
 `;

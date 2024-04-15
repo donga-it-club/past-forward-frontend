@@ -1,24 +1,27 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  height: 100vh;
   display: grid;
-  grid-template-rows: 120px 30px auto;
+  grid-template-rows: 80px 10px 30px auto;
+  padding-left: 115px;
+  padding-right: 115px;
 `;
 
 export const Title = styled.span`
   font-size: xx-large;
   font-weight: bold;
-  padding-top: 25px;
-  padding-bottom: 15px;
-  padding-left: 400px;
-  padding-right: 400px;
-  border-bottom: 2px solid #111b47;
+  padding-bottom: 10px;
+  align-self: center;
+  margin-top: 10px;
 `;
 
 export const SubTitle = styled.span`
   font-size: large;
   color: #a3a3a3;
   display: block;
+  align-self: center;
+  margin-top: 5px;
 `;
 
 export const TitleBox = styled.span`
@@ -30,6 +33,8 @@ export const TitleBox = styled.span`
   }
   justify-self: center;
   align-self: center;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const SubtitleBox = styled.div`
@@ -44,8 +49,8 @@ export const SubtitleBox = styled.div`
 `;
 
 export const BackgroundImg = styled.img`
-  width: auto;
-  height: 100%;
+  width: 1100px;
+  height: 595px;
   margin-top: 10px;
   z-index: -1;
 `;
@@ -57,11 +62,11 @@ export const SliderContainer = styled.div`
 `;
 
 export const Img = styled.img<{ active: boolean }>`
-  padding-top: 55px;
+  padding-top: 45px;
   position: absolute;
   z-index: 1;
-  width: 80%;
-  height: auto;
+  width: 890px;
+  height: 545px;
   display: block;
   transition: opacity 0.5s ease-in-out;
   opacity: ${({ active }) => (active ? 1 : 0)};
@@ -72,7 +77,7 @@ export const DotContainer = styled.div`
   transform: translateX(-50%);
   display: flex;
   z-index: 2;
-  top: 2.5%;
+  top: 3%;
 `;
 
 export const Dot = styled.div<{ active: boolean }>`
@@ -85,4 +90,13 @@ export const Dot = styled.div<{ active: boolean }>`
   background-color: ${({ active }) => (active ? '#F3F3F3' : 'white')};
   margin: 0 5px;
   cursor: pointer;
+`;
+
+export const Line = styled.div`
+  width: 900px;
+  height: 2px;
+  border: 1px solid #111b47;
+  background-color: '#111b47';
+  justify-self: center;
+  align-self: center;
 `;

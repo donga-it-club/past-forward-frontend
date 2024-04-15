@@ -16,6 +16,7 @@ const Template4: React.FC = () => {
       <S.TitleBox>
         <S.Title>미리보기</S.Title>
       </S.TitleBox>
+      <S.Line></S.Line>
       <S.SubtitleBox>
         <S.SubTitle>세부 설명이 포함된 Preview</S.SubTitle>
       </S.SubtitleBox>

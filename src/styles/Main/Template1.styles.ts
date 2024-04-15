@@ -1,10 +1,13 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  height: 100vh;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: 120px 30px 60px auto;
   overflow-x: hidden;
+  padding-left: 115px;
+  padding-right: 115px;
 `;
 
 export const TitleBox = styled.span`
@@ -22,8 +25,7 @@ export const TitleBox = styled.span`
 export const Title = styled.span`
   font-size: xx-large;
   font-weight: bold;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-bottom: 10px;
   padding-left: 400px;
   padding-right: 400px;
   border-bottom: 2px solid #111b47;
@@ -79,7 +81,9 @@ export const CheckIcon = styled.img`
 export const HexagonWrapper = styled.div`
   margin-top: 30px;
   display: grid;
-  place-items: center;
+  place-items: stretch;
+  position: relative;
+  left: 10%;
 `;
 
 export const Hexagon = styled.div<{ size: number }>`
@@ -174,4 +178,13 @@ export const Divider = styled.div`
   border-bottom: 2px solid white;
   opacity: 0;
   transition: opacity 0.7s ease;
+`;
+
+export const Line = styled.div`
+  width: 900px;
+  height: 2px;
+  border: 1px solid #111b47;
+  background-color: '#111b47';
+  justify-self: center;
+  align-self: center;
 `;
