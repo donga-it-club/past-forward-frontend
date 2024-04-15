@@ -1,19 +1,22 @@
-import { TOrder, TRetrospective, TStatus } from './@asConst';
+import { TRetrospective, TStatus } from './@asConst';
 
 // get
 export interface GetRetrospectiveRequest {
   page: number;
   size: number;
-  order: TOrder;
-  status: TStatus;
+  order: keyof TStatus;
+  status: keyof TStatus;
   keyword: string;
   isBookmarked: boolean;
-  userId: number;
 }
 
 export interface GetRetrospectiveData {
-  totalCount: number;
-  nodes: Array<RetrospectiveResponse>;
+  code: number;
+  message: string;
+  data: {
+    totalCount: number;
+    nodes: Array<RetrospectiveResponse>;
+  };
 }
 
 //post
@@ -41,31 +44,34 @@ export interface PostRetrospectivesResponse {
 //delete
 export interface DeleteRetrospectiveRequest {
   retrospectiveId: number;
-  userId: number;
 }
 
 //put
 export interface PutRetrospectiveRequest {
+  retrospectiveId: number;
   title: string;
-  teamId?: string;
-  userId: number;
+  teamId?: number;
   description: string;
-  status: TStatus;
+  status: keyof TStatus;
   thumbnail?: string;
 }
 
 export interface RetrospectiveResponse {
-  id: number;
-  title: string;
-  userId: number;
-  teamId: number;
-  templateId: number;
-  status: TStatus;
-  isBookmarked: boolean;
-  thumbnail: string;
-  startDate: string;
-  createdDate: string;
-  updatedDate: string;
+  code: number;
+  message: string;
+  data: {
+    id: number;
+    title: string;
+    userId: number;
+    teamId: number;
+    templateId: number;
+    status: keyof TStatus;
+    isBookmarked: boolean;
+    thumbnail: string;
+    startDate: string;
+    createdDate: string;
+    updatedDate: string;
+  };
 }
 
 export interface RetrospectivesClient {

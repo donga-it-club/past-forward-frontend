@@ -1,60 +1,82 @@
 //get
 export interface GetSectionRequest {
   retrospectiveId: number;
-  teamdId: number;
+  teamId?: number;
 }
 
-export interface GetSectionResponse {
+export interface sectionData {
   sectionId: number;
   username: string;
   content: string;
+  createdDate: string;
   likeCnt: number;
   sectionName: string;
-  createdDate: string;
 }
 
+export interface GetSectionResponse {
+  code: number;
+  error: string;
+  data: sectionData[];
+}
 //post
 export interface CreateSectionRequest {
-  userId: number;
   retrospectiveId: number;
   templateSectionId: number;
   sectionContent: string;
 }
 
 export interface PostSectionResponse {
-  id: number;
-  userId: number;
-  retrospectiveId: number;
-  sectionContent: string;
+  code: number;
+  message: string;
+  data: {
+    id: number;
+    userId: number;
+    retrospectiveId: number;
+    sectionContent: string;
+  };
 }
 
 //patch
 export interface PatchSectionRequest {
-  userId: number;
   sectionId: number;
   sectionContent: string;
 }
 
 export interface PatchSectionResponse {
-  sectionId: number;
-  content: string;
+  code: number;
+  message: string;
+  data: {
+    sectionId: number;
+    content: string;
+  };
 }
 
+//delete
 export interface DeleteSectionRequest {
   sectionId: number;
 }
 
+export interface DeleteSectionResponse {
+  code: number;
+  message: string;
+  data: object;
+}
+
 //like
 export interface PostLikesSectionRequest {
-  userId: number;
+  sectionId: number;
 }
 
 export interface PostLikeSectionResponse {
-  sectionId: number;
-  likeCnt: number;
+  code: number;
+  message: string;
+  data: {
+    sectionId: number;
+    likeCnt: number;
+  };
 }
 export interface SectionClient {
-  get(request: GetSectionRequest): Promise<PostSectionResponse>;
+  get(request: GetSectionRequest): Promise<GetSectionResponse>;
   create(request: CreateSectionRequest): Promise<PostSectionResponse>;
   patch(request: PatchSectionRequest): Promise<PatchSectionResponse>;
   delete(request: DeleteSectionRequest): Promise<void>;

@@ -1,7 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import { CgProfile } from 'react-icons/cg';
-import { Modal, ModalCloseButton, ModalContent, ModalOverlay, useDisclosure } from '@chakra-ui/react';
-import ReviseModal from '@/components/writeRetro/task/ReviseModal';
+import { Flex, Modal, ModalCloseButton, ModalContent, ModalOverlay, useDisclosure } from '@chakra-ui/react';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 
 export const PersonalTaskMessage = () => {
@@ -19,24 +18,24 @@ export const PersonalTaskMessage = () => {
       {/* TaskMessage */}
       <S.TaskMessageBoxStyle>
         {/* TaskMessageTop */}
-        <div style={{ display: 'flex' }}>
+        <Flex>
           <S.TaskMessageCount>5개의 댓글</S.TaskMessageCount>
           <S.TaskMessageLine></S.TaskMessageLine>
-        </div>
+        </Flex>
 
         {/* TaskMessages */}
         <div>
           <S.TaskMessageStyle>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <Flex flexDirection="column">
               {/* TaskMessageTop */}
               <S.MessageTopStyle>
                 <CgProfile size={40} color="#DADEE5" />
                 <S.MessageUserName>김체리</S.MessageUserName>
                 <S.MessageTime>1일 전</S.MessageTime>
                 <div style={{ margin: 'auto 0' }}>
-                  <div style={{ display: 'flex' }}>
+                  <Flex>
                     <S.TaskRevise>삭제</S.TaskRevise>
-                  </div>
+                  </Flex>
                 </div>
               </S.MessageTopStyle>
               {/* TaskMessageMain */}
@@ -48,7 +47,6 @@ export const PersonalTaskMessage = () => {
               <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent sx={{ width: 'auto', height: 'auto', borderRadius: '30px', position: 'relative' }}>
-                  <ReviseModal />
                   <ModalCloseButton
                     sx={{
                       width: '30px',
@@ -62,20 +60,15 @@ export const PersonalTaskMessage = () => {
                   />
                 </ModalContent>
               </Modal>
-            </div>
+            </Flex>
           </S.TaskMessageStyle>
         </div>
 
         {/* AddMessage */}
-        <div style={{ display: 'flex', margin: '10px 5px' }}>
-          <S.InputMessage
-            value={value}
-            onChange={handleChange}
-            placeholder="내용을 입력해주세요"
-            rows={1}
-          ></S.InputMessage>
+        <Flex>
+          <S.InputMessage value={value} onChange={handleChange} placeholder="내용을 입력해주세요" rows={1} />
           <S.InputButton>확인</S.InputButton>
-        </div>
+        </Flex>
       </S.TaskMessageBoxStyle>
     </>
   );

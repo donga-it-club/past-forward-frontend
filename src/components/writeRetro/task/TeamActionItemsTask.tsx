@@ -2,9 +2,8 @@ import { useState } from 'react';
 import { BiLike, BiSolidLike } from 'react-icons/bi';
 import { CgProfile } from 'react-icons/cg';
 import { MdAccessAlarm, MdMessage } from 'react-icons/md';
-import { Modal, ModalCloseButton, ModalContent, ModalOverlay, useDisclosure } from '@chakra-ui/react';
+import { Flex, Modal, ModalCloseButton, ModalContent, ModalOverlay, useDisclosure } from '@chakra-ui/react';
 import TeamTaskMessage from './taskMessage/TeamTaskMessage';
-import ReviseModal from '@/components/writeRetro/task/ReviseModal';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 
 export const TeamActionItemsTask = () => {
@@ -27,45 +26,43 @@ export const TeamActionItemsTask = () => {
       <S.TaskBox>
         <S.TaskMainStyle>
           {/* TaskTop */}
-          <div style={{ display: 'flex' }}>
+          <Flex margin="10px auto">
             <S.TaskUserProfile>
-              <CgProfile size="20px" color="#DADEE5" />
+              <CgProfile size="40px" color="#DADEE5" />
+              <S.TaskUserName>김사과</S.TaskUserName>
             </S.TaskUserProfile>
-            <S.TaskUserName>김사과</S.TaskUserName>
-            <div style={{ margin: 'auto 0', position: 'relative', left: '180px' }}>
-              <div style={{ display: 'flex', width: '35px' }}>
-                <S.TaskRevise>수정</S.TaskRevise>
-                <p style={{ fontSize: '8px', fontWeight: '500', color: '#adb8cc' }}>/</p>
-                <S.TaskRevise>삭제</S.TaskRevise>
-              </div>
-            </div>
-          </div>
+
+            <S.TaskRevise>삭제</S.TaskRevise>
+          </Flex>
 
           {/* TaskCenter */}
-          <div style={{ display: 'flex', position: 'relative' }}>
-            <S.ActionTaskText onClick={onOpen}>
-              문서 작성 - 수기를 담당하신 분이 작성한 회의록
-              <S.ReviseText>(수정됨)</S.ReviseText>
-            </S.ActionTaskText>
-            {/* TaskTextModal */}
-            <Modal isOpen={isOpen} onClose={onClose}>
-              <ModalOverlay />
-              <ModalContent sx={{ width: 'auto', height: 'auto', borderRadius: '30px', position: 'relative' }}>
-                <ReviseModal />
-                <ModalCloseButton
-                  sx={{
-                    width: '30px',
-                    height: '30px',
-                    fontSize: '18px',
-                    color: '#8B8B8B',
-                    position: 'absolute',
-                    top: '31px',
-                    left: '600px',
-                  }}
-                />
-              </ModalContent>
-            </Modal>
-          </div>
+          <S.TaskText onClick={onOpen}>
+            문서 작성 - 수기를 담당하신 분이 작성한 회의록
+            <S.ReviseText>(수정됨)</S.ReviseText>
+          </S.TaskText>
+          <S.ManagerStyle>
+            <div>
+              <S.ManagerButton>M</S.ManagerButton>
+            </div>
+            <S.ManagerText>담당자</S.ManagerText>
+          </S.ManagerStyle>
+          {/* TaskTextModal */}
+          <Modal isOpen={isOpen} onClose={onClose}>
+            <ModalOverlay />
+            <ModalContent sx={{ borderRadius: '30px' }}>
+              <ModalCloseButton
+                sx={{
+                  width: '30px',
+                  height: '30px',
+                  fontSize: '18px',
+                  color: '#8B8B8B',
+                  position: 'absolute',
+                  top: '31px',
+                  left: '600px',
+                }}
+              />
+            </ModalContent>
+          </Modal>
 
           {/* TaskBottom */}
           <S.SubTaskBox>
