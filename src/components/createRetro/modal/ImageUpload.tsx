@@ -1,12 +1,14 @@
 import React, { ChangeEvent, useState } from 'react';
 import { Input, Box, Image, Button, Center } from '@chakra-ui/react';
+import { v4 as uuidv4 } from 'uuid';
 
 interface ImageUploadProps {
-  onChange: (image: string) => void; // 이미지 파일의 URL을 외부로 전달하는 함수
+  onChange: (image: string, uuid: string) => void; // 이미지 파일의 URL, uuid를 외부로 전달하는 함수
 }
 
 const ImageUpload: React.FC<ImageUploadProps> = ({ onChange }) => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [, setImageUUID] = useState<string | null>(null);
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -14,8 +16,11 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onChange }) => {
       const reader = new FileReader();
       reader.onloadend = () => {
         const result = reader.result as string;
+        const uuid = uuidv4(); // UUID 생성
+        setImageUUID(uuid); // 생성된 UUID 설정
         setImagePreview(result); // 이미지 미리보기 업데이트
-        onChange(result); // 외부로 이미지 URL 전달
+        onChange(result, uuid);
+        console.log(uuid);
       };
       reader.readAsDataURL(file);
     }
@@ -24,9 +29,9 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onChange }) => {
   // 이미지 제거 함수
   const handleRemoveImage = () => {
     setImagePreview(null);
+    setImageUUID(null);
   };
 
-  // 이미지 업로드를 위한 input 컴포넌트 렌더링
   return (
     <>
       <Box>

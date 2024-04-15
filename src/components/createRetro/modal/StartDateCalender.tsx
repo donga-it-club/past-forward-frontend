@@ -1,33 +1,30 @@
-import { useState } from 'react';
-import 'react-datepicker/dist/react-datepicker.css';
+import React, { useState } from 'react';
 import { ko } from 'date-fns/locale/ko';
+import 'react-datepicker/dist/react-datepicker.css';
 import * as S from '@/styles/createRetro/modal/StartDateCalendar.style';
 import '@/styles/createRetro/modal/Calendar.css';
 
-const StartDateCalendar: React.FC<{ onChange: (startedDate: string) => void }> = ({ onChange }) => {
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+interface StartDateCalendarProps {
+  onDateChange: (dateString: string) => void;
+}
 
-  const handleDateChange = (date: Date | null) => {
+const StartDateCalendar: React.FC<StartDateCalendarProps> = ({ onDateChange }) => {
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  const handleDateChange = (date: Date) => {
     setSelectedDate(date);
-    onChange(date ? date.toISOString() : ''); // ISO 8601 형식으로 변환
-  };
-
-  const formatDateForDisplay = (date: Date | null) => {
-    return date ? date.toLocaleDateString('ko-KR') : ''; // 화면에 보여질 형식은 지역화된 날짜 형식을 사용합니다.
+    const isoDateString = date.toISOString(); // 백엔드 request body에 보낼 날짜 타입
+    onDateChange(isoDateString);
   };
 
   return (
-    <>
-      <div>Start Date</div>
-      <S.DateInput
-        selected={selectedDate}
-        onChange={handleDateChange}
-        locale={ko}
-        dateFormat="yyyy-MM-dd"
-        showPopperArrow={false}
-        value={formatDateForDisplay(selectedDate)}
-      />
-    </>
+    <S.DateInput
+      selected={selectedDate}
+      onChange={handleDateChange}
+      locale={ko}
+      dateFormat="yyyy-MM-dd"
+      showPopperArrow={false}
+    />
   );
 };
 

@@ -1,7 +1,9 @@
-// export const mockRetrospectiveTemplate: RetrospectivesTemplateResponse[] = [
-//   { id: 1, name: 'hee' },
-//   {
-//     id: 2,
-//     name: 'jung',
-//   },
-// ];
+import { RetrospectivesTemplateResponse } from '../@types/RetrospectiveTemplates';
+
+export const mockRetrospectiveTemplate: RetrospectivesTemplateResponse[] = [
+  // { id: 1, name: 'hee' },
+  // {
+  //   id: 2,
+  //   name: 'jung',
+  // },
+];

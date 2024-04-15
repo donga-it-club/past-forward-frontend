@@ -9,6 +9,11 @@ export const Status = {
   COMPLETED: 'COMPLETED',
 } as const;
 
+export const RetrospectiveType = {
+  TEAM: 'TEAM',
+  PERSONAL: 'PERSONAL',
+};
+
 export const Template = {
   1: 'Keep',
   2: 'Ploblem',
@@ -19,3 +24,4 @@ export const Template = {
 export type TStatus = typeof Status;
 export type TOrder = typeof Order;
 export type TTemplate = typeof Template;
+export type TRetrospective = typeof RetrospectiveType;
