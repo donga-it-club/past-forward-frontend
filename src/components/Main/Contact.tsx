@@ -3,7 +3,7 @@ import * as S from '@/styles/Main/Contact.styles';
 
 const Contact: React.FC = () => {
   return (
-    <>
+    <div style={{ height: '100vh', paddingLeft: '115px', paddingRight: '115px' }}>
       <S.Container>
         <S.TitleContainer>
           <S.Title>Contact</S.Title>
@@ -46,7 +46,10 @@ const Contact: React.FC = () => {
           </S.ButtonContainer>
         </S.TextContainer>
       </S.Container>
-    </>
+      <S.ContactButtonContainer>
+        <S.ContactButton>회고 무료로 시작하기</S.ContactButton>
+      </S.ContactButtonContainer>
+    </div>
   );
 };
 
