@@ -1,7 +1,10 @@
 export interface RetrospectivesTemplateResponse {
   code: number;
-  message: string;
-  data: [{ id: number; name: string }];
+  message: string | null;
+  data: Array<{
+    id: number;
+    name: string;
+  }>;
 }
 
 export interface retrospectivesTemplateClient {

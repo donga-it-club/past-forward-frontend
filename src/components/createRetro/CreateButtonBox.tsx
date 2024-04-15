@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDisclosure } from '@chakra-ui/react';
 import PersonalRetroCreateButton from '@/components/createRetro/PersonalRetroCreateButton';
 import TeamRetroCreateButton from '@/components/createRetro/TeamRetroCreateButton';
@@ -7,18 +7,32 @@ import * as S from '@/styles/createRetro/CreateButtonBox.style';
 
 const CreateButtonBox: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [templateId, setTemplateId] = useState<number | null>(null);
+  const [type, setType] = useState<'TEAM' | 'PERSONAL'>('TEAM');
+
+  const handleTeamButtonClick = () => {
+    setTemplateId(1);
+    setType('TEAM'); // TEAM으로 type 설정
+    onOpen();
+  };
+
+  const handlePersonalButtonClick = () => {
+    setTemplateId(2);
+    setType('PERSONAL'); // PERSONAL로 type 설정
+    onOpen();
+  };
 
   return (
     <>
       <S.ButtonListContainer>
-        <S.SpacedButton onClick={onOpen}>
+        <S.SpacedButton onClick={handleTeamButtonClick}>
           <TeamRetroCreateButton />
         </S.SpacedButton>
-        <S.SpacedButton onClick={onOpen}>
+        <S.SpacedButton onClick={handlePersonalButtonClick}>
           <PersonalRetroCreateButton />
         </S.SpacedButton>
       </S.ButtonListContainer>
-      <CreateModal isOpen={isOpen} onClose={onClose} />
+      <CreateModal isOpen={isOpen} onClose={onClose} templateId={templateId} type={type} />
     </>
   );
 };
