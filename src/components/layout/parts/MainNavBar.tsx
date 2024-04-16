@@ -1,9 +1,11 @@
 import { PersonCircle } from 'react-bootstrap-icons';
+import { GiHamburgerMenu } from 'react-icons/gi';
 import { useNavigate } from 'react-router-dom';
-import { Button } from '@chakra-ui/react';
+import { Button, Drawer, DrawerContent, DrawerOverlay, useDisclosure } from '@chakra-ui/react';
 import { useRecoilState } from 'recoil';
 import LogoBox from './LogoBox';
 import MenuBar from './MenuBar';
+import PageSideBar from './PageSideBar';
 import UserNickname from '@/components/user/UserNickname';
 import { useAuth } from '@/hooks/useAuth';
 import { userNicknameState } from '@/recoil/user/userAtom';
@@ -12,6 +14,7 @@ import * as S from '@/styles/layout/layout.style';
 const MainNavBar = () => {
   const { isLoggedIn, handleLoginOrLogout } = useAuth();
   const [userNickname, setUserNickname] = useRecoilState(userNicknameState);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const navigate = useNavigate();
 
@@ -27,6 +30,15 @@ const MainNavBar = () => {
     <>
       <div style={{ backgroundColor: 'white', zIndex: 1 }}>
         <S.Container>
+          <Button colorScheme="brand" onClick={onOpen} margin="0 10px">
+            <GiHamburgerMenu />
+          </Button>
+          <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
+            <DrawerOverlay />
+            <DrawerContent>
+              <PageSideBar />
+            </DrawerContent>
+          </Drawer>
           <MenuBar />
           <LogoBox />
 

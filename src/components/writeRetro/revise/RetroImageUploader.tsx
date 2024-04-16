@@ -31,7 +31,7 @@ const RetroImageUploader: FC<Props> = ({ image, setImage }) => {
     <>
       <Image
         src={image ?? '/Home.png'}
-        maxWidth={300}
+        maxWidth={400}
         margin="20px auto"
         h="auto"
         aspectRatio="1/1"

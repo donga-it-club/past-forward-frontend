@@ -13,7 +13,7 @@ export const BottomText = styled.p`
 `;
 
 export const BrandContainer = styled.div`
-  clip-path: polygon(0 0, 100% 48%, 100% 100%, 0 56%);
+  clip-path: polygon(15% 0%, 100% 67%, 100% 100%, 80% 100%, 0 40%, 0 0);
   background: rgb(2, 0, 36);
   background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(28, 28, 101, 1) 37%, rgba(36, 123, 218, 1) 100%);
   padding: 10% 5%;
