@@ -8,7 +8,7 @@ export const MockRetrospective: RetrospectiveResponse = {
     id: 0,
     title: 'hee',
     userId: 0,
-    teamId: 0,
+    teamId: 1,
     templateId: 1,
     status: Status.NOT_STARTED,
     isBookmarked: true,

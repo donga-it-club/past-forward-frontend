@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { MdPeopleAlt } from 'react-icons/md';
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 import { onlyGetRetrospectiveResponse } from '@/api/@types/Retrospectives';
+import { MockRetrospective } from '@/api/__mock__/retrospective';
 import { RetrospectiveService } from '@/api/services/Retrospectives';
 import ManageTeamMembers from '@/components/writeRetro/revise/ManageTeamMembers';
 import NotTeamMemberModal from '@/components/writeRetro/revise/NotTeamMemberModal';
@@ -46,7 +47,9 @@ const RetroRevisePage = () => {
             <TabPanel>
               <ReviseSetting />
             </TabPanel>
-            <TabPanel>{retro && retro.data.teamId ? <ManageTeamMembers /> : <NotTeamMemberModal />}</TabPanel>
+            <TabPanel>
+              {MockRetrospective && MockRetrospective.data.teamId ? <ManageTeamMembers /> : <NotTeamMemberModal />}
+            </TabPanel>
           </TabPanels>
         </Tabs>
       </S.SettingMenuStyle>

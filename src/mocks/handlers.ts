@@ -65,4 +65,21 @@ export const SectionHandlers: RequestHandler[] = [
     return HttpResponse.json(mockLikes);
   }),
 ];
-export const mswWorker = setupWorker();
+
+//teamMembers
+const TEAMS_ROUTE = 'teams';
+export const TeamHandlers: RequestHandler[] = [
+  http.get(`${TEAMS_ROUTE}/1/users`, () => {
+    const mockMembers = {
+      code: 0,
+      message: '22',
+      data: {
+        userId: 1,
+        username: 'hope',
+        profileImage: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+      },
+    };
+    return HttpResponse.json(mockMembers);
+  }),
+];
+export const mswWorker = setupWorker(...RetrospectiveHandlers, ...TeamHandlers);

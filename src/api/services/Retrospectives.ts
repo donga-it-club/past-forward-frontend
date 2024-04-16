@@ -6,7 +6,7 @@ const ROUTE = 'retrospectives';
 
 export const RetrospectiveService: RetrospectivesClient = {
   onlyGet: async ({ retrospectiveId }) => {
-    return await axiosInstance.get(`${ROUTE}/${retrospectiveId}`);
+    return await mswInstance.get(`${ROUTE}/${retrospectiveId}`);
   },
   create: async request => {
     return await mswInstance.post(`${ROUTE}/`, request);
