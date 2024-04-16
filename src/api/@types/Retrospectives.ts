@@ -1,5 +1,28 @@
 import { TRetrospective, TStatus } from './@asConst';
 
+
+//onlyGet
+export interface onlyGetRetrospectiveRequest {
+  retrospectiveId: number;
+}
+
+export interface onlyGetRetrospectiveResponse {
+  code: number;
+  message: string;
+  data: RetrospectiveData;
+}
+
+export interface RetrospectiveData {
+  retrospectiveId: number;
+  title: string;
+  templateId: number;
+  teamId: number;
+  userId: number;
+  description: string;
+  status: keyof TStatus;
+  thumbnail: string;
+}
+
 // get
 export interface GetRetrospectiveRequest {
   page: number;
@@ -75,6 +98,7 @@ export interface RetrospectiveResponse {
 }
 
 export interface RetrospectivesClient {
+  onlyGet(request: onlyGetRetrospectiveRequest): Promise<onlyGetRetrospectiveResponse>;
   create(request: PostRetrospectivesRequest): Promise<PostRetrospectivesResponse>;
   get(request: GetRetrospectiveRequest): Promise<GetRetrospectiveData>;
   delete(request: DeleteRetrospectiveRequest): Promise<void>;

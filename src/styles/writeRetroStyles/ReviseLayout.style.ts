@@ -211,7 +211,7 @@ export const SettingContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 20px auto;
-  width: 500px;
+  width: 600px;
 `;
 
 export const ManageTitleStyle = styled.p`

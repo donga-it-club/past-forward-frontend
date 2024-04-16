@@ -108,7 +108,7 @@ const TeamTask: FC<Props> = ({ name }) => {
           </S.SubTaskBox>
         </S.TaskMainStyle>
 
-        {isVisible && <TeamTaskMessage />}
+        {isVisible && <TeamTaskMessage name={name} />}
       </S.TaskBox>
     </>
   );

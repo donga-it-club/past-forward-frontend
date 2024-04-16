@@ -1,9 +1,13 @@
 import { RetrospectivesClient } from '../@types/Retrospectives';
+import axiosInstance from '../axiosConfig';
 import { mswInstance } from '../client';
 
 const ROUTE = 'retrospectives';
 
 export const RetrospectiveService: RetrospectivesClient = {
+  onlyGet: async ({ retrospectiveId }) => {
+    return await axiosInstance.get(`${ROUTE}/${retrospectiveId}`);
+  },
   create: async request => {
     return await mswInstance.post(`${ROUTE}/`, request);
   },
@@ -12,10 +16,10 @@ export const RetrospectiveService: RetrospectivesClient = {
       params: request,
     });
   },
-  delete: async id => {
-    return await mswInstance.delete(`${ROUTE}/${id}`);
+  delete: async ({ retrospectiveId }) => {
+    return await mswInstance.delete(`${ROUTE}/${retrospectiveId}`);
   },
-  put: async (retrospectiveId, ...request) => {
-    return await mswInstance.put(`${ROUTE}/${retrospectiveId}`, request);
+  put: async ({ retrospectiveId }, ...request) => {
+    return await axiosInstance.put(`${ROUTE}/${retrospectiveId}`, request);
   },
 };

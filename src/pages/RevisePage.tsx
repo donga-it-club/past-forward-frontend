@@ -1,34 +1,23 @@
 import { useEffect, useState } from 'react';
 import { MdPeopleAlt } from 'react-icons/md';
-import { useParams } from 'react-router-dom';
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
-import { RetrospectiveResponse } from '@/api/@types/Retrospectives';
+import { onlyGetRetrospectiveResponse } from '@/api/@types/Retrospectives';
 import { RetrospectiveService } from '@/api/services/Retrospectives';
 import ManageTeamMembers from '@/components/writeRetro/revise/ManageTeamMembers';
+import NotTeamMemberModal from '@/components/writeRetro/revise/NotTeamMemberModal';
 import ReviseSetting from '@/components/writeRetro/revise/ReviseSetting';
 import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/writeRetroStyles/ReviseLayout.style';
 
 const RetroRevisePage = () => {
-  const { id } = useParams();
-  console.log({ id });
-  const [retro, setRetro] = useState<RetrospectiveResponse>();
-
+  const [retro, setRetro] = useState<onlyGetRetrospectiveResponse>();
   const toast = useCustomToast();
-
   const FetchRetrospective = async () => {
     try {
-      const data = await RetrospectiveService.put({
-        retrospectiveId: 1,
-        title: 'gg',
-        teamId: 1,
-        description: 'ggggg',
-        status: 'COMPLETED',
-        thumbnail: '/Home.png',
-      });
+      const data = await RetrospectiveService.onlyGet({ retrospectiveId: 8 });
       if (!data) return;
       setRetro(data);
-      console.log(retro);
+      console.log('retro', retro);
     } catch (e) {
       toast.error(e);
     }
@@ -57,9 +46,7 @@ const RetroRevisePage = () => {
             <TabPanel>
               <ReviseSetting />
             </TabPanel>
-            <TabPanel>
-              <ManageTeamMembers />
-            </TabPanel>
+            <TabPanel>{retro && retro.data.teamId ? <ManageTeamMembers /> : <NotTeamMemberModal />}</TabPanel>
           </TabPanels>
         </Tabs>
       </S.SettingMenuStyle>
