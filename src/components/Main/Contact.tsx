@@ -1,22 +1,32 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { PostMail } from '@/api/mailApi/postMail';
 import RadioCheck from '@/assets/RadioCheck.png';
 import * as S from '@/styles/Main/Contact.styles';
 
 const Contact: React.FC = () => {
+  const navigate = useNavigate();
+  const navigateToCreate = () => {
+    navigate('/create');
+  };
+
+  const handleSendButtonClick = () => {
+    handleSend();
+  };
+
   const handleSend = async () => {
+    console.log({ email, subject, content, mailStatus });
     try {
-      const MailResponse = await PostMail({
+      const MailRequest = await PostMail({
         from: email,
         subject: subject,
         content: content,
         mailStatus: mailStatus,
       });
-
-      console.log('메일 전송 성공', MailResponse);
+      console.log('메일 전송 성공', MailRequest);
       alert('문의가 전송되었습니다.');
     } catch (error) {
-      console.error('실패', error);
+      console.error('실패입니다.', error);
     }
   };
 
@@ -61,7 +71,7 @@ const Contact: React.FC = () => {
               <S.RadioInput
                 type="radio"
                 name="inquiryType"
-                value="radio1"
+                value="SITE"
                 onChange={handleMailStatusChange}
                 imageURL={RadioCheck}
               />
@@ -69,7 +79,7 @@ const Contact: React.FC = () => {
               <S.RadioInput
                 type="radio"
                 name="inquiryType"
-                value="radio2"
+                value="CREATOR"
                 onChange={handleMailStatusChange}
                 imageURL={RadioCheck}
               />
@@ -77,7 +87,7 @@ const Contact: React.FC = () => {
               <S.RadioInput
                 type="radio"
                 name="inquiryType"
-                value="radio3"
+                value="ERROR"
                 onChange={handleMailStatusChange}
                 imageURL={RadioCheck}
               />
@@ -85,7 +95,7 @@ const Contact: React.FC = () => {
               <S.RadioInput
                 type="radio"
                 name="inquiryType"
-                value="radio4"
+                value="OTHER"
                 onChange={handleMailStatusChange}
                 imageURL={RadioCheck}
               />
@@ -109,13 +119,13 @@ const Contact: React.FC = () => {
             ></S.ContentTextBox>
           </S.ContentTextBoxContainer>
           <S.ButtonContainer>
-            <S.Button onClick={handleSend}>Send Message</S.Button>
+            <S.Button onClick={handleSendButtonClick}>Send Message</S.Button>
             <S.ButtonText>· 답변은 작성하신 이메일로 전송됩니다.</S.ButtonText>
           </S.ButtonContainer>
         </S.TextContainer>
       </S.Container>
       <S.ContactButtonContainer>
-        <S.ContactButton>회고 무료로 시작하기</S.ContactButton>
+        <S.ContactButton onClick={navigateToCreate}>회고 무료로 시작하기</S.ContactButton>
       </S.ContactButtonContainer>
     </div>
   );
