@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { GetUsersResponse } from '@/api/@types/User';
+import getUser from '@/api/imageApi/getUser';
 import postImageToS3 from '@/api/imageApi/postImageToS3';
 import putUserThumbnail from '@/api/imageApi/putUserThumbnail';
 import DeleteAccountButton from '@/components/my/DeleteAccountBox';
@@ -6,11 +8,14 @@ import EmailBox from '@/components/my/EmailBox';
 import NicknameBox from '@/components/my/NicknameBox';
 import PasswordBox from '@/components/my/PasswordBox';
 import ImageUploader from '@/components/my/component/ImageUploader';
+// import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/my/myPage.style';
 
 const MyPage = () => {
   const [image, setImage] = useState<string>('');
+  const [userData, setUserData] = useState<GetUsersResponse | null>(null);
 
+  // 사진 등록
   const handleSave = async () => {
     try {
       const s3Response = await postImageToS3({
@@ -30,6 +35,19 @@ const MyPage = () => {
     }
   };
 
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await getUser(1);
+        console.log('유저 정보', response);
+        setUserData(response);
+      } catch (error) {
+        console.error('에러', error);
+      }
+    };
+    fetchUserData();
+  }, []);
+
   return (
     <>
       <S.ProfileContainer>
@@ -38,6 +56,7 @@ const MyPage = () => {
 
       <S.MyPageBGContainer>
         <S.MyPageContainer>
+          {userData?.thumbnail}
           <ImageUploader image={image} setImage={setImage} />
           <NicknameBox />
           <EmailBox />
