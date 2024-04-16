@@ -6,14 +6,12 @@ import Template2 from '@/components/Main/Template2';
 import Template3 from '@/components/Main/Template3';
 import Template4 from '@/components/Main/Template4';
 import MainDesign from '@/components/home/MainDesign';
-import * as S from '@/styles/Main/HomaPage.styles';
 
 interface AppProps {}
 
 const App: React.FC<AppProps> = () => {
   const options = {
     anchors: ['Home', 'Template', 'Template2', 'Template3', 'Template4', 'AboutUs', 'Contact'],
-    scrollBar: false,
   };
 
   return (
@@ -22,6 +20,7 @@ const App: React.FC<AppProps> = () => {
         <Section>
           <MainDesign />
         </Section>
+        {/* <S.Container> */}
         <Section>
           <Template1 />
         </Section>
@@ -39,10 +38,8 @@ const App: React.FC<AppProps> = () => {
         </Section>
         <Section>
           <Contact />
-          <S.ButtonContainer>
-            <S.Button>회고 무료로 시작하기</S.Button>
-          </S.ButtonContainer>
         </Section>
+        {/* </S.Container> */}
       </SectionsContainer>
     </>
   );

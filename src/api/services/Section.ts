@@ -1,11 +1,11 @@
 import { SectionClient } from '../@types/Section';
-import { axiosInstance } from '../client';
+import axiosInstance from '../axiosConfig';
 
 const ROUTE = 'sections';
 
 export const SectionServices: SectionClient = {
   get: async request => {
-    return await axiosInstance.get(`${ROUTE}/`, { params: request });
+    return await axiosInstance.get(`${ROUTE}`, { params: request });
   },
   create: async request => {
     return await axiosInstance.post(`${ROUTE}/`, request);

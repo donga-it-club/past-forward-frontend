@@ -3,7 +3,6 @@ import { BiLike, BiSolidLike } from 'react-icons/bi';
 import { CgProfile } from 'react-icons/cg';
 import { MdAccessAlarm, MdMessage } from 'react-icons/md';
 import { Flex, Modal, ModalCloseButton, ModalContent, ModalOverlay, useDisclosure } from '@chakra-ui/react';
-import TeamTaskMessage from './taskMessage/TeamTaskMessage';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 
 export const TeamActionItemsTask = () => {
@@ -15,10 +14,10 @@ export const TeamActionItemsTask = () => {
   };
 
   const [messaged, setMessaged] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
+  // const [isVisible, setIsVisible] = useState(false);
   const handleMessaged = () => {
     setMessaged(messaged => !messaged);
-    setIsVisible(isVisible => !isVisible);
+    // setIsVisible(isVisible => !isVisible);
   };
 
   return (
@@ -90,7 +89,7 @@ export const TeamActionItemsTask = () => {
           </S.SubTaskBox>
         </S.TaskMainStyle>
 
-        {isVisible && <TeamTaskMessage />}
+        {/* {isVisible && <TeamTaskMessage />} */}
       </S.TaskBox>
     </>
   );
