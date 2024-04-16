@@ -49,7 +49,7 @@ const ManageTeamMembers = () => {
       </div>
       <div style={{ display: 'flex', marginTop: '20px' }}>
         <S.ManageSearchInput
-          placeholder="이름 또는 이메일 주소를 검색"
+          placeholder="검색할 이름을 입력하세요."
           value={searchTerm}
           onChange={e => setSearchTerm(e.target.value.toLowerCase())}
         />

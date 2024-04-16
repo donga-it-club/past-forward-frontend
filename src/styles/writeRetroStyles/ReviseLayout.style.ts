@@ -249,7 +249,7 @@ export const LinkExpirationText = styled.p`
 export const ManageSearchInput = styled.input`
   width: 253px;
   height: 33px;
-  font-size: 13px;
+  font-size: 20px;
   font-weight: 500;
   background-color: #ffffff;
   border: 0.3px solid rgba(0, 0, 0, 0.5);
