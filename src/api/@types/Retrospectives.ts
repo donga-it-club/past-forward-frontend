@@ -1,6 +1,5 @@
 import { TRetrospective, TStatus } from './@asConst';
 
-
 //onlyGet
 export interface onlyGetRetrospectiveRequest {
   retrospectiveId: number;
