@@ -18,10 +18,7 @@ const RetroTeamPage = () => {
 
   const FetchSection = async () => {
     try {
-      const data = await SectionServices.get({
-        retrospectiveId: 3,
-        teamId: 1,
-      });
+      const data = await SectionServices.get({ retrospectiveId: 1, teamId: 1 });
       if (!data) return;
       if (data) {
         setSection(data);

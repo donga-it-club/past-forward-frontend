@@ -1,5 +1,5 @@
 import { Status } from '../@types/@asConst';
-import { RetrospectiveResponse } from '../@types/Retrospectives';
+import { onlyGetRetrospectiveResponse, RetrospectiveResponse } from '../@types/Retrospectives';
 
 export const MockRetrospective: RetrospectiveResponse = {
   code: 202,
@@ -16,5 +16,20 @@ export const MockRetrospective: RetrospectiveResponse = {
     startDate: '2024-04-12T04:20:54.835Z',
     createdDate: '2024-04-12T04:20:54.835Z',
     updatedDate: '2024-04-12T04:20:54.835Z',
+  },
+};
+
+export const MockOnlyGetRetrospective: onlyGetRetrospectiveResponse = {
+  code: 202,
+  message: 'string',
+  data: {
+    retrospectiveId: 1,
+    title: 'heeeeee',
+    templateId: 2,
+    teamId: 1,
+    userId: 1,
+    description: 'heeee',
+    status: Status.COMPLETED,
+    thumbnail: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
   },
 };

@@ -1,11 +1,14 @@
 import { http, RequestHandler, HttpResponse } from 'msw';
 import { setupWorker } from 'msw/browser';
-import { MockRetrospective } from '@/api/__mock__/retrospective';
+import { MockOnlyGetRetrospective, MockRetrospective } from '@/api/__mock__/retrospective';
 import { mockSection } from '@/api/__mock__/section';
 
 //Retro
 const RETRO_ROUTE = 'retrospectives';
 export const RetrospectiveHandlers: RequestHandler[] = [
+  http.get(`/${RETRO_ROUTE}/1`, () => {
+    return HttpResponse.json(MockOnlyGetRetrospective);
+  }),
   http.post(`/${RETRO_ROUTE}`, () => {
     const mock = {
       code: 0,
@@ -62,4 +65,4 @@ export const SectionHandlers: RequestHandler[] = [
     return HttpResponse.json(mockLikes);
   }),
 ];
-export const mswWorker = setupWorker(...RetrospectiveHandlers);
+export const mswWorker = setupWorker();

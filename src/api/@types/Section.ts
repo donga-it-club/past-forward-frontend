@@ -8,9 +8,16 @@ export interface sectionData {
   sectionId: number;
   username: string;
   content: string;
-  createdDate: string;
   likeCnt: number;
   sectionName: string;
+  createdDate: string;
+  comments: CommentData[];
+}
+
+export interface CommentData {
+  commentId: number;
+  content: string;
+  username: string;
 }
 
 export interface GetSectionResponse {

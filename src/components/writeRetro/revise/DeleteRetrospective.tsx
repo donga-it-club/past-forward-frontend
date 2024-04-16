@@ -1,10 +1,15 @@
+import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Popover, PopoverTrigger, PopoverContent, PopoverBody, PopoverFooter, Portal } from '@chakra-ui/react';
 import { MockRetrospective } from '@/api/__mock__/retrospective';
 import { RetrospectiveService } from '@/api/services/Retrospectives';
 import { useCustomToast } from '@/hooks/useCustomToast';
 
-const DeleteRetrospective = () => {
+// interface Props {
+//   fetch: RetrospectiveData;
+// }
+
+const DeleteRetrospective: FC = () => {
   const toast = useCustomToast();
   const navigate = useNavigate();
   const handleDeleteRetrospective = async () => {

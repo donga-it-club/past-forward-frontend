@@ -1,9 +1,14 @@
 import { ChangeEvent, FC, useState } from 'react';
 import { CgProfile } from 'react-icons/cg';
 import { Flex, Modal, ModalCloseButton, ModalContent, ModalOverlay, useDisclosure } from '@chakra-ui/react';
+import { sectionData } from '@/api/@types/Section';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 
-const TeamTaskMessage: FC = () => {
+interface Props {
+  name: sectionData;
+}
+
+const TeamTaskMessage: FC<Props> = ({ name }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [value, setValue] = useState('');
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -25,41 +30,43 @@ const TeamTaskMessage: FC = () => {
         {/* TaskMessages */}
         <div>
           <S.TaskMessageStyle>
-            <Flex flexDirection="column">
-              {/* TaskMessageTop */}
-              <S.MessageTopStyle>
-                <CgProfile size={40} color="#DADEE5" />
-                <S.MessageUserName>김체리</S.MessageUserName>
-                <S.MessageTime>1일 전</S.MessageTime>
-                <div style={{ margin: 'auto 0' }}>
-                  <Flex>
-                    <S.TaskRevise>삭제</S.TaskRevise>
-                  </Flex>
-                </div>
-              </S.MessageTopStyle>
-              {/* TaskMessageMain */}
-              <S.MessageText onClick={onOpen}>
-                맥락까지 꼼꼼하게 문서에 기재해주셔서 너무 좋아요!
-                <S.ReviseMessageText>(수정됨)</S.ReviseMessageText>
-              </S.MessageText>
-              {/* MessageModal */}
-              <Modal isOpen={isOpen} onClose={onClose}>
-                <ModalOverlay />
-                <ModalContent sx={{ borderRadius: '30px', position: 'relative' }}>
-                  <ModalCloseButton
-                    sx={{
-                      width: '30px',
-                      height: '30px',
-                      fontSize: '18px',
-                      color: '#8B8B8B',
-                      position: 'absolute',
-                      top: '31px',
-                      left: '600px',
-                    }}
-                  />
-                </ModalContent>
-              </Modal>
-            </Flex>
+            {name.comments.map(data => (
+              <Flex flexDirection="column">
+                {/* TaskMessageTop */}
+                <S.MessageTopStyle>
+                  <CgProfile size={40} color="#DADEE5" />
+                  <S.MessageUserName>{data.username}</S.MessageUserName>
+                  {/* <S.MessageTime>1일 전</S.MessageTime> */}
+                  <div style={{ margin: 'auto 0' }}>
+                    <Flex>
+                      <S.TaskRevise>삭제</S.TaskRevise>
+                    </Flex>
+                  </div>
+                </S.MessageTopStyle>
+                {/* TaskMessageMain */}
+                <S.MessageText onClick={onOpen}>
+                  {data.content}
+                  {/* TeamActionItemsTask */}
+                </S.MessageText>
+                {/* MessageModal */}
+                <Modal isOpen={isOpen} onClose={onClose}>
+                  <ModalOverlay />
+                  <ModalContent sx={{ borderRadius: '30px', position: 'relative' }}>
+                    <ModalCloseButton
+                      sx={{
+                        width: '30px',
+                        height: '30px',
+                        fontSize: '18px',
+                        color: '#8B8B8B',
+                        position: 'absolute',
+                        top: '31px',
+                        left: '600px',
+                      }}
+                    />
+                  </ModalContent>
+                </Modal>
+              </Flex>
+            ))}
           </S.TaskMessageStyle>
         </div>
 

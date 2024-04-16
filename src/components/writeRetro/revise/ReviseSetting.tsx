@@ -21,7 +21,7 @@ import {
 } from '@chakra-ui/react';
 import DeleteRetrospective from './DeleteRetrospective';
 import RetroImageUploader from './RetroImageUploader';
-import { RetrospectiveResponse } from '@/api/@types/Retrospectives';
+import { onlyGetRetrospectiveResponse, RetrospectiveResponse } from '@/api/@types/Retrospectives';
 import { MockRetrospective } from '@/api/__mock__/retrospective';
 import { RetrospectiveService } from '@/api/services/Retrospectives';
 import { useCustomToast } from '@/hooks/useCustomToast';
@@ -35,8 +35,20 @@ const ReviseSetting = () => {
   const navigate = useNavigate();
   const [retro, setRetro] = useState<RetrospectiveResponse>();
   const [image, setImage] = useState<string>('/Home.png');
+  const [fetch, setFetch] = useState<onlyGetRetrospectiveResponse>();
 
   const FetchRetrospective = async () => {
+    try {
+      const data = await RetrospectiveService.onlyGet({ retrospectiveId: 1 });
+      if (!data) return;
+      setFetch(data);
+      console.log(fetch);
+    } catch (e) {
+      toast.error(e);
+    }
+  };
+
+  const handlePutRetrospective = async () => {
     try {
       const data = await RetrospectiveService.put({
         retrospectiveId: 1,
@@ -90,6 +102,7 @@ const ReviseSetting = () => {
   }
 
   useEffect(() => {
+    handlePutRetrospective();
     FetchRetrospective();
   }, []);
 
@@ -144,7 +157,7 @@ const ReviseSetting = () => {
         <FormControl display="flex" alignItems="center" onChange={SwitchStatus}>
           <FormLabel htmlFor="email-alerts" mb="0" margin="20px 10px" display="flex">
             <IoIosInformationCircle color="#FF4646" size={20} style={{ margin: 'auto 0' }} />
-            <S.SettingDetailText>최종 완료 시, Done으로 표시되며 참여자는 수정이 불가합니다.</S.SettingDetailText>
+            <S.SettingDetailText>회고가 최종 완료 단계로 처리되며 더이상 수정이 불가합니다.</S.SettingDetailText>
           </FormLabel>
           <Switch colorScheme="orange" size="lg" isRequired isInvalid={isChecked} />
         </FormControl>
