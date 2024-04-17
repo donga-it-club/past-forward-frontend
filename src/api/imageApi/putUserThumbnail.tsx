@@ -8,7 +8,7 @@ const putUserThumbnail = async (requestData: PutThumbnailRequest): Promise<PutTh
     console.log('프로필 사진 등록 성공', response.data);
     return response.data;
   } catch (error) {
-    throw new Error('실패');
+    throw new Error('프로필 사진 등록 실패');
   }
 };
 

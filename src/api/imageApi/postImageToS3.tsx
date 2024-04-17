@@ -8,7 +8,7 @@ const postImageToS3 = async (requestData: PostImageToS3Request): Promise<PostIma
     console.log('사진 s3 업로드 성공', response.data);
     return response.data;
   } catch (error) {
-    throw new Error('실패');
+    throw new Error('s3 업로드 실패');
   }
 };
 
