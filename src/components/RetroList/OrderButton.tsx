@@ -5,7 +5,11 @@ import NewestIcon from '@/assets/Newest.png';
 import OldestIcon from '@/assets/Oldest.png';
 import * as S from '@/styles/RetroList/OrderButton.styles';
 
-const OrderButton: React.FC = () => {
+interface OrderButtonProps {
+  handleOrder: (option: 'NEWEST' | 'OLDEST') => void;
+}
+
+const OrderButton: React.FC<OrderButtonProps> = ({ handleOrder }) => {
   const order = ['Newest', 'Oldest'];
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(order[0]);
@@ -20,7 +24,12 @@ const OrderButton: React.FC = () => {
   };
 
   const handleOptionClick = (option: string) => {
+    const order: { [key: string]: string } = {
+      Newest: 'NEWEST',
+      Oldest: 'OLDEST',
+    };
     setSelectedOrder(option);
+    handleOrder(order[option] as 'NEWEST' | 'OLDEST');
     setIsOpen(false);
   };
 

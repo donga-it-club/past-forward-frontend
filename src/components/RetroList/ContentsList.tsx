@@ -1,4 +1,8 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { PatchRetrospectiveRequest } from '@/api/@types/Retrospectives';
+import { patchRetrospective } from '@/api/retrospectivesApi/patchRetrospective';
 import BookmarkIcon_N from '@/assets/BookmarkIcon_N.png';
 import BookmarkIcon_Y from '@/assets/BookmarkIcon_Y.png';
 import MoreIcon from '@/assets/MoreIcon.png';
@@ -9,6 +13,9 @@ import ProgressIng from '@/assets/Progress_Ing.png';
 import TeamIcon from '@/assets/TeamIcon.png';
 import Thumbnail from '@/assets/Thumbnail.png';
 import Modal from '@/components/RetroList/Modal';
+import UserNickname from '@/components/user/UserNickname';
+import { useCustomToast } from '@/hooks/useCustomToast';
+import { userNicknameState } from '@/recoil/user/userAtom';
 import * as S from '@/styles/RetroList/ContentsList.styles';
 
 interface Content {
@@ -29,10 +36,28 @@ interface ContentListProps {
   data: Content[];
   viewMode: string;
   searchData: string;
+  setBookmarkUpdate: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData }) => {
+const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, setBookmarkUpdate }) => {
+  // const [contentData, setContentData] = useState<Content[]>(data); 받아온데이터
+  const [userNickname, setUserNickname] = useRecoilState(userNicknameState);
   const [openModalId, setOpenModalId] = useState<number | null>(null);
+  const toast = useCustomToast();
+
+  const handleBookmark = async (itemId: number) => {
+    try {
+      const requestData: PatchRetrospectiveRequest = {
+        retrospectiveId: itemId,
+      };
+      const response = await patchRetrospective(requestData);
+      console.log('북마크 patch 요청 완료', response);
+      setBookmarkUpdate(prev => !prev);
+    } catch (error) {
+      // console.error('북마크 patch 요청 실패:', error);
+      toast.error(error);
+    }
+  };
 
   const openModalForItem = (itemId: number) => {
     setOpenModalId(itemId);
@@ -43,6 +68,8 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData })
   };
 
   const filteredData = data.filter(item => item.title.toLowerCase().includes(searchData.toLowerCase()));
+  console.log('filter', filteredData);
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -57,16 +84,37 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData })
               <S.InfoBox>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <S.TeamIcon src={item.teamId ? TeamIcon : PersonalIcon} />
-                  <S.RetroTitle>{item.title}</S.RetroTitle>
+                  <S.RetroTitle onClick={() => navigate(`/section?retrospectiveId=${item.id}&teamId=${item.teamId}`)}>
+                    {item.title}
+                  </S.RetroTitle>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <S.BookmarkIcon src={item.isBookmarked ? BookmarkIcon_Y : BookmarkIcon_N} /> {/* 북마크 patch */}
-                  <S.MoreIcon src={MoreIcon} onClick={() => openModalForItem(item.id)} />
+                  <S.BookmarkIcon
+                    src={item.isBookmarked ? BookmarkIcon_Y : BookmarkIcon_N}
+                    onClick={() => handleBookmark(item.id)}
+                  />
+                  <S.MoreIcon
+                    src={MoreIcon}
+                    onClick={() => openModalForItem(item.id)}
+                    // onClick={() => {
+                    //   if(유저아이디 !== item.id) { // 수정 권한 없을 때(생성자가 아닐 때)
+                    //     openModalForItem(item.id)
+                    //   } else {
+                    //   navigate(`/revise?retrospectiveId=${item.id}&teamId=${item.teamId}`);
+                    //   }
+                    // }}
+                  />
                 </div>
-                <S.RetroUser>{item.userId}</S.RetroUser>
+                <S.RetroUser>
+                  <UserNickname setUserNickname={setUserNickname} /> {/* 생성자 이름(유저 식별 필요) */}
+                  {userNickname}
+                </S.RetroUser>
                 <div></div>
-                <S.RetroDate> {item.createdDate} 수정</S.RetroDate>
-                {/* 수정하면 수정 시각으로 변경*/}
+                <S.RetroDate>
+                  {item.updatedDate && item.updatedDate !== item.startDate
+                    ? `${item.updatedDate} 수정`
+                    : item.startDate}
+                </S.RetroDate>
                 <S.ProgressIcon
                   src={
                     item.status === 'NOT_STARTED'
@@ -96,15 +144,22 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData })
             <div>
               {filteredData.map(item => (
                 <S.ItemBox key={item.id}>
-                  <S.ListTitleBox> {item.title}</S.ListTitleBox>
+                  <S.ListTitleBox onClick={() => navigate(`/section?retrospectiveId=${item.id}&teamId=${item.teamId}`)}>
+                    {item.title}
+                  </S.ListTitleBox>
                   <S.ListUserBox>
-                    <text></text> {/* 생성자 이름 */}
+                    <UserNickname setUserNickname={setUserNickname} /> {/* 생성자이름(유저 식별 필요) */}
+                    {userNickname}
                   </S.ListUserBox>
                   <S.ListTimeBox>
-                    {item.createdDate} {/* 수정하면 수정 시각으로 변경*/}
+                    {item.updatedDate && item.updatedDate !== item.startDate ? `${item.updatedDate}` : item.startDate}
                   </S.ListTimeBox>
                   <S.ListBookmarkBox>
-                    <S.Icon src={item.isBookmarked ? BookmarkIcon_Y : BookmarkIcon_N} />
+                    <S.Icon
+                      src={item.isBookmarked ? BookmarkIcon_Y : BookmarkIcon_N}
+                      onClick={() => handleBookmark(item.id)}
+                    />
+                    {/* 북마크 patch */}
                   </S.ListBookmarkBox>
                   <S.ListProgressBox>
                     <S.Icon
@@ -118,7 +173,17 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData })
                     />
                   </S.ListProgressBox>
                   <S.ListLinkBox>
-                    <S.MoreIconListView src={MoreIcon} onClick={() => openModalForItem(item.id)} />
+                    <S.MoreIconListView
+                      src={MoreIcon}
+                      onClick={() => openModalForItem(item.id)}
+                      // onClick={() => {
+                      //   if(유저아이디 !== item.id) { // 수정 권한 없을 때(생성자가 아닐 때)
+                      //     openModalForItem(item.id)
+                      //   } else {
+                      //   navigate(`/revise?retrospectiveId=${item.id}&teamId=${item.teamId}`);
+                      //   }
+                      // }}
+                    />
                     <Modal onClose={closeModalForItem} isOpen={openModalId === item.id} />
                   </S.ListLinkBox>
                 </S.ItemBox>

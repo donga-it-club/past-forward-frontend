@@ -111,6 +111,9 @@ export const ItemBox = styled.li`
 
 export const ListTitleBox = styled.div`
   flex: 1;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 export const ListUserBox = styled.div`
   flex: 1;
@@ -131,4 +134,7 @@ export const ListProgressBox = styled.div`
 export const Icon = styled.img`
   width: 20px;
   height: 20px;
+  &:hover {
+    cursor: pointer;
+  }
 `;

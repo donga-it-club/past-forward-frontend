@@ -22,4 +22,7 @@ export const RetrospectiveService: RetrospectivesClient = {
   put: async ({ retrospectiveId }, ...request) => {
     return await axiosInstance.put(`${ROUTE}/${retrospectiveId}`, request);
   },
+  patch: async (retrospectiveId, ...request) => {
+    return await mswInstance.patch(`${ROUTE}/${retrospectiveId}/bookmark`, request);
+  },
 };

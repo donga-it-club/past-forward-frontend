@@ -18,7 +18,6 @@ export const MockRetrospective: RetrospectiveResponse = {
     updatedDate: '2024-04-12T04:20:54.835Z',
   },
 };
-
 export const MockOnlyGetRetrospective: onlyGetRetrospectiveResponse = {
   code: 202,
   message: 'string',
