@@ -4,7 +4,7 @@ import { FaCheck } from 'react-icons/fa';
 import { IoIosInformationCircle } from 'react-icons/io';
 import { IoClose } from 'react-icons/io5';
 import { MdModeEdit } from 'react-icons/md';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
   Button,
   ButtonGroup,
@@ -21,28 +21,32 @@ import {
 } from '@chakra-ui/react';
 import DeleteRetrospective from './DeleteRetrospective';
 import RetroImageUploader from './RetroImageUploader';
-import { onlyGetRetrospectiveResponse, RetrospectiveResponse } from '@/api/@types/Retrospectives';
-import { MockRetrospective } from '@/api/__mock__/retrospective';
+import { RetrospectiveData, RetrospectiveResponse } from '@/api/@types/Retrospectives';
 import { RetrospectiveService } from '@/api/services/Retrospectives';
 import { useCustomToast } from '@/hooks/useCustomToast';
 import * as L from '@/styles/writeRetroStyles/Layout.style';
 import * as S from '@/styles/writeRetroStyles/ReviseLayout.style';
 
 const ReviseSetting = () => {
+  const { search } = useLocation();
+  const query = search.split(/[=,&]/);
+  const retrospectiveId = Number(query[1]);
+  const teamId = Number(query[3]);
+
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [status, setStatus] = useState<string>();
   const toast = useCustomToast();
   const navigate = useNavigate();
   const [retro, setRetro] = useState<RetrospectiveResponse>();
   const [image, setImage] = useState<string>('/Home.png');
-  const [fetch, setFetch] = useState<onlyGetRetrospectiveResponse>();
+  const [fetch, setFetch] = useState<RetrospectiveData>();
+  const [title, setTitle] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
 
   const FetchRetrospective = async () => {
     try {
-      const data = await RetrospectiveService.onlyGet({ retrospectiveId: 1 });
-      if (!data) return;
-      setFetch(data);
-      console.log(fetch);
+      const data = await RetrospectiveService.onlyGet({ retrospectiveId: retrospectiveId });
+      setFetch(data.data);
     } catch (e) {
       toast.error(e);
     }
@@ -51,18 +55,17 @@ const ReviseSetting = () => {
   const handlePutRetrospective = async () => {
     try {
       const data = await RetrospectiveService.put({
-        retrospectiveId: 1,
-        title: 'gg',
-        teamId: 1,
-        description: 'ggggg',
+        retrospectiveId: retrospectiveId,
+        title: title,
+        teamId: teamId,
+        description: description,
         status: 'COMPLETED',
-        thumbnail: '/Home.png',
+        thumbnail: image,
       });
-      if (!data) return;
       setRetro(data);
       console.log(retro);
     } catch (e) {
-      console.error(e);
+      toast.error(e);
     }
   };
 
@@ -77,12 +80,12 @@ const ReviseSetting = () => {
     setIsChecked(!isChecked);
     if (isChecked) {
       toast.info('회고 완료 처리를 취소하였습니다.');
-      console.log('취소');
-      setStatus('COMPLETED');
       console.log(status);
+      setStatus('IN_PROGRESS');
     } else {
       toast.success('해당 회고는 최종 완료 처리되었습니다.');
-      console.log('성공 ');
+
+      setStatus('COMPLETED');
     }
   };
 
@@ -102,57 +105,66 @@ const ReviseSetting = () => {
   }
 
   useEffect(() => {
-    handlePutRetrospective();
     FetchRetrospective();
   }, []);
 
+  if (!fetch) return;
+
   return (
     <S.SettingContainer>
-      <RetroImageUploader image={image} setImage={setImage} />
+      <RetroImageUploader image={fetch.thumbnail} setImage={setImage} />
       {/* 회고명 */}
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <L.TaskText style={{ fontSize: '20px' }}>회고명 </L.TaskText>
-        <Input placeholder={MockRetrospective.data.title} />
+      <Flex flexDirection="column">
+        <L.reviseTitleText>회고명 </L.reviseTitleText>
+        <Input
+          placeholder={fetch?.title}
+          value={title}
+          onChange={e => {
+            setTitle(e.target.value);
+          }}
+          marginBottom="20px"
+          marginTop="5px"
+        />
 
         {/* 회고 유형 */}
-        <div style={{ display: 'flex', margin: '10px 0' }}>
-          <L.TaskText style={{ fontSize: '20px', minWidth: 'auto', margin: 'auto 0' }}>회고 유형 </L.TaskText>
+        <Flex margin="10px 0">
+          <L.reviseTitleText>회고 유형 </L.reviseTitleText>
           <S.NoteChangeText>변경 불가</S.NoteChangeText>
-        </div>
-        <S.NotTextInput>{MockRetrospective.data.templateId}</S.NotTextInput>
+        </Flex>
+        <S.NotTextInput>{fetch.templateId}</S.NotTextInput>
 
         {/* 회고 템플릿 유형 */}
-        <div style={{ display: 'flex', margin: '10px 0' }}>
-          <L.TaskText style={{ fontSize: '20px', minWidth: 'auto', margin: 'auto 0' }}>회고 템플릿 유형 </L.TaskText>
+        <Flex margin="10px 0">
+          <L.reviseTitleText>회고 템플릿 유형 </L.reviseTitleText>
           <S.NoteChangeText>변경 불가</S.NoteChangeText>
-        </div>
-        <S.NotTextInput>{MockRetrospective.data.templateId}</S.NotTextInput>
+        </Flex>
+        <S.NotTextInput>{fetch.status}</S.NotTextInput>
 
         {/* 회고리더 */}
-        <div style={{ display: 'flex', margin: '10px 0' }}>
-          <L.TaskText style={{ fontSize: '20px', minWidth: 'auto', margin: 'auto 0' }}>회고 리더 </L.TaskText>
+        <Flex margin="10px 0">
+          <L.reviseTitleText>회고 리더 </L.reviseTitleText>
           <S.NoteChangeText>변경 불가</S.NoteChangeText>
-        </div>
+        </Flex>
         <S.ReaderBox>
           <BsPersonCircle size={30} style={{ margin: '5px' }} />
-          <p style={{ margin: 'auto 0' }}>{MockRetrospective.data.userId}</p>
+          <p style={{ margin: 'auto 0' }}>{fetch.teamId}</p>
         </S.ReaderBox>
 
         {/* 회고 설명 */}
         <Editable
           textAlign="center"
-          defaultValue={MockRetrospective.data.createdDate}
+          defaultValue={fetch?.description}
           fontSize="xl"
           isPreviewFocusable={false}
           margin="10px 0"
         >
           <EditablePreview />
-          <Input as={EditableInput} />
+          <Input as={EditableInput} value={description} onChange={e => setDescription(e.target.value)} />
           <EditableControls />
         </Editable>
 
         {/* 최종완료 */}
-        <L.TaskText style={{ fontSize: '20px' }}>회고 최종완료</L.TaskText>
+        <L.reviseTitleText>회고 최종완료</L.reviseTitleText>
         <S.SettingLine />
         <FormControl display="flex" alignItems="center" onChange={SwitchStatus}>
           <FormLabel htmlFor="email-alerts" mb="0" margin="20px 10px" display="flex">
@@ -163,15 +175,7 @@ const ReviseSetting = () => {
         </FormControl>
 
         {/* 회고 삭제 */}
-        <L.TaskText style={{ fontSize: '20px' }}>회고 삭제</L.TaskText>
-        <S.SettingLine />
-        <div style={{ margin: '20px 10px', display: 'flex' }}>
-          <IoIosInformationCircle color="#FF4646" size={20} style={{ margin: 'auto 0' }} />
-          <S.SettingDetailText>삭제 후 복구할 수 없습니다.</S.SettingDetailText>
-        </div>
-        <Flex flexDirection="row-reverse" margin="30px">
-          <DeleteRetrospective />
-        </Flex>
+        <DeleteRetrospective retrospectiveId={retrospectiveId} />
 
         {/* save, cancel */}
         <Flex flexDirection="row-reverse">
@@ -180,6 +184,7 @@ const ReviseSetting = () => {
             variant="outline"
             onClick={() => {
               handleNavigate('회고 수정이 정상 처리되었습니다.');
+              handlePutRetrospective();
             }}
           >
             SAVE
@@ -195,7 +200,7 @@ const ReviseSetting = () => {
             CANCEL
           </Button>
         </Flex>
-      </div>
+      </Flex>
     </S.SettingContainer>
   );
 };

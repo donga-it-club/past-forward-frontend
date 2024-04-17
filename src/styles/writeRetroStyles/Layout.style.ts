@@ -155,6 +155,18 @@ export const TaskRevise = styled.div`
   }
 `;
 
+export const reviseTitleText = styled.p`
+  font-size: 20px;
+  max-width: 500px;
+  font-weight: 700;
+  color: #6b7a99;
+  line-height: 20px;
+  vertical-align: top;
+  display: inline-block;
+
+  margin: 'auto 0';
+`;
+
 export const TaskText = styled.p`
   font-size: 15px;
   min-width: 200px;

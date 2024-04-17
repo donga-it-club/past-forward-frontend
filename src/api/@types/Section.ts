@@ -86,6 +86,6 @@ export interface SectionClient {
   get(request: GetSectionRequest): Promise<GetSectionResponse>;
   create(request: CreateSectionRequest): Promise<PostSectionResponse>;
   patch(request: PatchSectionRequest): Promise<PatchSectionResponse>;
-  delete(request: DeleteSectionRequest): Promise<void>;
+  delete(request: DeleteSectionRequest): Promise<DeleteSectionResponse>;
   likePost(request: PostLikesSectionRequest): Promise<PostLikeSectionResponse>;
 }

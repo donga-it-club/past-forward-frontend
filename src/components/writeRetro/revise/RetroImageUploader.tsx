@@ -27,16 +27,15 @@ const RetroImageUploader: FC<Props> = ({ image, setImage }) => {
   const DeleteImage: MouseEventHandler<HTMLButtonElement> = () => {
     setImage('');
   };
+
   return (
     <>
-      <Image
-        src={image ?? '/Home.png'}
-        maxWidth={400}
-        margin="20px auto"
-        h="auto"
-        aspectRatio="1/1"
-        objectFit="contain"
-      ></Image>
+      {image ? (
+        <Image src={image} maxWidth={400} margin="20px auto" h="auto" aspectRatio="1/1" objectFit="contain" />
+      ) : (
+        <Image src="/Home.png" maxWidth={400} margin="20px auto" h="auto" aspectRatio="1/1" objectFit="contain" />
+      )}
+
       <div style={{ margin: '0 auto' }}>
         <Button colorScheme="brand" variant="outline" margin="0 30px" onClick={handleUploadButtonClick}>
           <MdOutlineFileUpload style={{ margin: '0 5px' }} />

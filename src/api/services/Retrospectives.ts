@@ -1,25 +1,60 @@
-import { RetrospectivesClient } from '../@types/Retrospectives';
+import {
+  DeleteRetrospectiveRequest,
+  GetRetrospectiveData,
+  GetRetrospectiveRequest,
+  onlyGetRetrospectiveRequest,
+  onlyGetRetrospectiveResponse,
+  PostRetrospectivesRequest,
+  PostRetrospectivesResponse,
+  RetrospectivesClient,
+} from '../@types/Retrospectives';
 import axiosInstance from '../axiosConfig';
 import { mswInstance } from '../client';
 
 const ROUTE = 'retrospectives';
 
 export const RetrospectiveService: RetrospectivesClient = {
-  onlyGet: async ({ retrospectiveId }) => {
-    return await axiosInstance.get(`${ROUTE}/${retrospectiveId}`);
+  onlyGet: async ({ retrospectiveId }: onlyGetRetrospectiveRequest): Promise<onlyGetRetrospectiveResponse> => {
+    try {
+      const response = await axiosInstance.get<onlyGetRetrospectiveResponse>(`${ROUTE}/${retrospectiveId}`);
+      return response.data;
+    } catch (error) {
+      throw new Error('템플릿 조회 실패');
+    }
   },
-  create: async request => {
-    return await mswInstance.post(`${ROUTE}/`, request);
+  create: async (request: PostRetrospectivesRequest): Promise<PostRetrospectivesResponse> => {
+    try {
+      const response = await axiosInstance.post<PostRetrospectivesResponse>(`${ROUTE}/`, request);
+      return response.data;
+    } catch (error) {
+      throw new Error(error as string);
+    }
   },
-  get: async request => {
-    return await mswInstance.get(`${ROUTE}/`, {
-      params: request,
-    });
+  get: async (request: GetRetrospectiveRequest): Promise<GetRetrospectiveData> => {
+    try {
+      const response = await mswInstance.get(`${ROUTE}/`, {
+        params: request,
+      });
+      return response.data;
+    } catch (error) {
+      throw new Error(error as string);
+    }
   },
-  delete: async ({ retrospectiveId }) => {
-    return await mswInstance.delete(`${ROUTE}/${retrospectiveId}`);
+
+  delete: async ({ retrospectiveId }: DeleteRetrospectiveRequest): Promise<void> => {
+    try {
+      const response = await mswInstance.delete(`${ROUTE}/${retrospectiveId}`);
+      return response.data;
+    } catch (error) {
+      throw new Error(error as string);
+    }
   },
   put: async ({ retrospectiveId }, ...request) => {
-    return await axiosInstance.put(`${ROUTE}/${retrospectiveId}`, request);
+    try {
+      const response = await axiosInstance.put(`${ROUTE}/${retrospectiveId}`, request);
+      return response.data;
+    } catch (error) {
+      throw new Error(error as string);
+    }
   },
 };
