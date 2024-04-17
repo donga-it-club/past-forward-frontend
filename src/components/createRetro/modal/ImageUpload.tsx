@@ -30,6 +30,9 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onChange }) => {
   const handleRemoveImage = () => {
     setImagePreview(null);
     setImageUUID(null);
+    if (onChange) {
+      onChange('', '');
+    }
   };
 
   return (
