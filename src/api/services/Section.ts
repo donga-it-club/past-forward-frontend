@@ -10,6 +10,7 @@ import {
   SectionClient,
 } from '../@types/Section';
 import axiosInstance from '../axiosConfig';
+import { mswInstance } from '../client';
 
 const ROUTE = 'sections';
 
@@ -48,7 +49,7 @@ export const SectionServices: SectionClient = {
   },
   likePost: async ({ sectionId }: PostLikesSectionRequest): Promise<PostLikeSectionResponse> => {
     try {
-      const response = await axiosInstance.post<PostLikeSectionResponse>(`${ROUTE}/${sectionId}/likes`);
+      const response = await mswInstance.post<PostLikeSectionResponse>(`${ROUTE}/${sectionId}/likes`);
       return response.data;
     } catch (error) {
       throw new Error(error as string);
