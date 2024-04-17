@@ -28,7 +28,7 @@ const MainNavBar = () => {
 
   return (
     <>
-      <div style={{ backgroundColor: 'white', zIndex: 1 }}>
+      <div style={{ backgroundColor: 'white', zIndex: 1, borderBottom: '1px solid rgba(184, 184, 184, 0.5)' }}>
         <S.Container>
           <Button colorScheme="brand" onClick={onOpen} margin="0 10px">
             <GiHamburgerMenu />

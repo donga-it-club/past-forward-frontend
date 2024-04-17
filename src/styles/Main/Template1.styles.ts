@@ -4,7 +4,7 @@ export const Container = styled.div`
   height: 100vh;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: 120px 30px 60px auto;
+  grid-template-rows: 90px 30px 60px auto;
   overflow-x: hidden;
   padding-left: 115px;
   padding-right: 115px;
