@@ -7,7 +7,11 @@ import ProgressDone from '@/assets/Progress_Done.png';
 import ProgressIng from '@/assets/Progress_Ing.png';
 import * as S from '@/styles/RetroList/ProgressButton.style';
 
-const ProgressButton: React.FC = () => {
+interface StatusProps {
+  handleStatus: (option: 'ALL' | 'NOT_STARTED' | 'IN_PROGRESS' | 'COMPLETED') => void;
+}
+
+const ProgressButton: React.FC<StatusProps> = ({ handleStatus }) => {
   const options = ['ALL', 'Before', 'Ing', 'Done'];
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(options[0]);
@@ -24,7 +28,14 @@ const ProgressButton: React.FC = () => {
   };
 
   const handleOptionClick = (option: string) => {
+    const status: { [key: string]: string } = {
+      ALL: 'ALL',
+      Before: 'NOT_STARTED',
+      Ing: 'IN_PROGRESS',
+      Done: 'COMPLETED',
+    };
     setSelectedOption(option);
+    handleStatus(status[option] as 'ALL' | 'NOT_STARTED' | 'IN_PROGRESS' | 'COMPLETED');
     setIsOpen(false);
   };
 

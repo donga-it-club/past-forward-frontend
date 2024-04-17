@@ -28,3 +28,15 @@ export const Box = styled.div`
   padding-left: 40px;
   padding-right: 40px;
 `;
+
+export const ControBarContainer = styled.div`
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 15px;
+  display: flex;
+`;
+
+export const PageContainer = styled.div`
+  margin-top: 40px;
+  margin-bottom: 20px;
+`;

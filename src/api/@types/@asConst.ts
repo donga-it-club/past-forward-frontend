@@ -1,9 +1,10 @@
 export const Order = {
-  RECENTLY: 'RECENTLY',
-  PREVIOUSLY: 'PREVIOUSLY',
+  NEWEST: 'NEWEST',
+  OLDEST: 'OLDEST',
 } as const;
 
 export const Status = {
+  ALL: 'ALL',
   NOT_STARTED: 'NOT_STARTED',
   IN_PROGRESS: 'IN_PROGRESS',
   COMPLETED: 'COMPLETED',

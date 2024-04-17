@@ -57,4 +57,7 @@ export const RetrospectiveService: RetrospectivesClient = {
       throw new Error(error as string);
     }
   },
+  patch: async (retrospectiveId, ...request) => {
+    return await mswInstance.patch(`${ROUTE}/${retrospectiveId}/bookmark`, request);
+  },
 };

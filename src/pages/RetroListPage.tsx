@@ -1,86 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { GetRetrospectiveRequest, GetRetrospectiveResponseNodes } from '@/api/@types/Retrospectives';
+import { GetRetrospectiveData } from '@/api/@types/Retrospectives';
+import { queryGetRetrospective } from '@/api/retrospectivesApi/getRetrospective';
+import BookmarkButton from '@/components/RetroList/BookmarkButton';
 import ContentsFilter from '@/components/RetroList/ContentsFilter';
 import ContentList from '@/components/RetroList/ContentsList';
-import ControlBar from '@/components/RetroList/ControlBar';
+import OrderButton from '@/components/RetroList/OrderButton';
+import Pagination from '@/components/RetroList/Pagination';
+import ProgressButton from '@/components/RetroList/ProgressButton';
 import Search from '@/components/RetroList/Search';
 import ViewButton from '@/components/RetroList/ViewButton';
+import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/RetroList/RetroListPage.style';
-
-// 예시 데이터
-const dummy = {
-  code: 200,
-  message: null,
-  data: {
-    totalCount: 5,
-    nodes: [
-      {
-        id: 1,
-        title: 'Sample Title 1',
-        userId: 100,
-        teamId: 200, // team
-        templateId: 0,
-        status: 'NOT_STARTED',
-        isBookmarked: false,
-        thumbnail: '',
-        startDate: '2024-04-10T09:22:51.538Z',
-        createdDate: '2024-04-10T09:22:51.538Z',
-        updatedDate: '2024-04-10T09:22:51.538Z',
-      },
-      {
-        id: 2,
-        title: 'Sample Title 2',
-        userId: 101,
-        teamId: 300, // team
-        templateId: 0,
-        status: 'NOT_STARTED',
-        isBookmarked: true,
-        thumbnail: '',
-        startDate: '2024-04-11T09:22:51.538Z',
-        createdDate: '2024-04-11T09:22:51.538Z',
-        updatedDate: '2024-04-11T09:22:51.538Z',
-      },
-      {
-        id: 3,
-        title: 'Sample Title 3',
-        userId: 102,
-        teamId: 400, // team
-        templateId: 0,
-        status: 'IN_PROGRESS',
-        isBookmarked: false,
-        thumbnail: 'https://example.com/thumbnail3.jpg',
-        startDate: '2024-04-12T09:22:51.538Z',
-        createdDate: '2024-04-12T09:22:51.538Z',
-        updatedDate: '2024-04-12T09:22:51.538Z',
-      },
-      {
-        id: 4,
-        title: 'Sample Title 4',
-        userId: 103,
-        teamId: null, // personal
-        templateId: 0,
-        status: 'IN_PROGRESS',
-        isBookmarked: true,
-        thumbnail: 'https://example.com/thumbnail4.jpg',
-        startDate: '2024-04-13T09:22:51.538Z',
-        createdDate: '2024-04-13T09:22:51.538Z',
-        updatedDate: '2024-04-13T09:22:51.538Z',
-      },
-      {
-        id: 5,
-        title: 'Sample Title 5',
-        userId: 104,
-        teamId: null, // personal
-        templateId: 0,
-        status: 'COMPLETED',
-        isBookmarked: false,
-        thumbnail: 'https://example.com/thumbnail5.jpg',
-        startDate: '2024-04-14T09:22:51.538Z',
-        createdDate: '2024-04-14T09:22:51.538Z',
-        updatedDate: '2024-04-14T09:22:51.538Z',
-      },
-    ],
-  },
-};
 
 const formatDate = (isoDateString: string) => {
   const date = new Date(isoDateString);
@@ -89,51 +20,148 @@ const formatDate = (isoDateString: string) => {
   const day = String(date.getDate()).padStart(2, '0');
   const hours = String(date.getHours()).padStart(2, '0');
   const minutes = String(date.getMinutes()).padStart(2, '0');
-
   return `${year}-${month}-${day} ${hours}:${minutes}`;
 };
 
 const RetroListPage = () => {
-  // data 부분만 가져오기
-  const { nodes } = dummy.data;
+  const [data, setData] = useState<GetRetrospectiveData['data']>({ totalCount: 0, nodes: [] });
+  const toast = useCustomToast();
+  const [page, setPage] = useState<number>(Math.ceil(data.totalCount / 10));
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [bookmarkUpdate, setBookmarkUpdate] = useState<boolean>(false);
 
-  const rawData = nodes.map(item => ({
-    id: item.id,
-    title: item.title,
-    userId: item.userId,
-    teamId: item.teamId,
-    templateId: item.templateId,
-    status: item.status,
-    isBookmarked: item.isBookmarked,
-    thumbnail: item.thumbnail,
-    startDate: formatDate(item.startDate),
-    createdDate: formatDate(item.createdDate),
-    updatedDate: formatDate(item.updatedDate),
-  }));
+  const [query, setQuery] = useState<GetRetrospectiveRequest>({
+    page: 0,
+    size: 10,
+    order: 'NEWEST',
+    status: 'NOT_STARTED',
+    keyword: '',
+    isBookmarked: false,
+  });
 
-  // useEffect(() => {
-  //   fetch(''); // url
-  // });
+  useEffect(() => {
+    setPage(Math.ceil(data.totalCount / 10));
+  }, [data]);
 
-  const [retroData, setRetroData] = useState(rawData);
+  useEffect(() => {
+    setQuery(prev => {
+      return { ...prev, page: currentPage - 1 };
+    });
+  }, [currentPage]);
+
+  useEffect(() => {
+    const fetchRetrolist = async () => {
+      // console.log(query);
+      try {
+        const responseData = await queryGetRetrospective(query);
+        // console.log(query);
+        // console.log('회고 조회 성공');
+        setData(responseData.data);
+      } catch (error) {
+        // console.error('회고 데이터를 가져오는 도중 오류가 발생했습니다:', error);
+        toast.error(error);
+      }
+    };
+    fetchRetrolist();
+  }, [query, bookmarkUpdate]);
+
+  const [retroData, setRetroData] = useState<Array<GetRetrospectiveResponseNodes>>([]);
   const [viewMode, setViewMode] = useState<string>('board');
   const [searchData, setSearchData] = useState('');
 
+  useEffect(() => {
+    // data 부분만 저장
+    const rawData = data.nodes.map(item => ({
+      id: item.id,
+      title: item.title,
+      userId: item.userId,
+      teamId: item.teamId,
+      templateId: item.templateId,
+      status: item.status,
+      isBookmarked: item.isBookmarked,
+      thumbnail: item.thumbnail,
+      startDate: formatDate(item.startDate),
+      createdDate: formatDate(item.createdDate),
+      updatedDate: formatDate(item.updatedDate),
+    }));
+    setRetroData(rawData);
+  }, [data]);
+
+  // console.log(retroData);
   const handleContentsFilter = (filterType: string) => {
     if (filterType === 'Personal') {
-      const filtered = rawData.filter(item => item.teamId === null);
+      const filtered = data.nodes
+        .filter(item => item.teamId === null)
+        .map(item => ({
+          id: item.id,
+          title: item.title,
+          userId: item.userId,
+          teamId: item.teamId,
+          templateId: item.templateId,
+          status: item.status,
+          isBookmarked: item.isBookmarked,
+          thumbnail: item.thumbnail,
+          startDate: formatDate(item.startDate),
+          createdDate: formatDate(item.createdDate),
+          updatedDate: formatDate(item.updatedDate),
+        }));
       setRetroData(filtered);
     } else if (filterType === 'Teams') {
-      const filtered = rawData.filter(item => item.teamId !== null);
+      const filtered = data.nodes
+        .filter(item => item.teamId !== null)
+        .map(item => ({
+          id: item.id,
+          title: item.title,
+          userId: item.userId,
+          teamId: item.teamId,
+          templateId: item.templateId,
+          status: item.status,
+          isBookmarked: item.isBookmarked,
+          thumbnail: item.thumbnail,
+          startDate: formatDate(item.startDate),
+          createdDate: formatDate(item.createdDate),
+          updatedDate: formatDate(item.updatedDate),
+        }));
       setRetroData(filtered);
     } else if (filterType === 'ALL') {
+      const rawData = data.nodes.map(item => ({
+        id: item.id,
+        title: item.title,
+        userId: item.userId,
+        teamId: item.teamId,
+        templateId: item.templateId,
+        status: item.status,
+        isBookmarked: item.isBookmarked,
+        thumbnail: item.thumbnail,
+        startDate: formatDate(item.startDate),
+        createdDate: formatDate(item.createdDate),
+        updatedDate: formatDate(item.updatedDate),
+      }));
       setRetroData(rawData);
     }
+  };
+
+  const handleStatus = (option: 'ALL' | 'NOT_STARTED' | 'IN_PROGRESS' | 'COMPLETED') => {
+    setQuery(prev => {
+      return { ...prev, status: option };
+    });
+  };
+  const handleOrder = (option: 'NEWEST' | 'OLDEST') => {
+    setQuery(prev => {
+      return { ...prev, order: option };
+    });
+  };
+
+  const handleBookmarkButton = (option: boolean) => {
+    setQuery(prev => {
+      return { ...prev, isBookmarked: option };
+    });
   };
 
   const handleViewModeChange = (newStatus: string) => {
     setViewMode(newStatus);
   };
+
   const handleSearch = (searchTerm: string) => {
     setSearchData(searchTerm);
   };
@@ -152,10 +180,22 @@ const RetroListPage = () => {
             <ViewButton viewMode={viewMode} onViewModeChange={handleViewModeChange} />
           </S.SortButtonContainer>
         </S.Container>
-        <ControlBar />
+        <S.ControBarContainer>
+          <ProgressButton handleStatus={handleStatus} />
+          <OrderButton handleOrder={handleOrder} />
+          <BookmarkButton handleBookmarkButton={handleBookmarkButton} />
+        </S.ControBarContainer>
         <S.Box>
-          <ContentList data={retroData} viewMode={viewMode} searchData={searchData} />
+          <ContentList
+            data={retroData}
+            viewMode={viewMode}
+            searchData={searchData}
+            setBookmarkUpdate={setBookmarkUpdate}
+          />
         </S.Box>
+        <S.PageContainer>
+          <Pagination totalPage={page} limit={5} page={currentPage} setPage={setCurrentPage} />
+        </S.PageContainer>
       </div>
     </>
   );

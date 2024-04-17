@@ -1,4 +1,4 @@
-import { TRetrospective, TStatus } from './@asConst';
+import { TRetrospective, TStatus, TOrder } from './@asConst';
 
 //onlyGet
 export interface onlyGetRetrospectiveRequest {
@@ -26,10 +26,25 @@ export interface RetrospectiveData {
 export interface GetRetrospectiveRequest {
   page: number;
   size: number;
-  order: keyof TStatus;
+  order: keyof TOrder;
   status: keyof TStatus;
   keyword: string;
   isBookmarked: boolean;
+}
+
+export interface GetRetrospectiveResponseNodes {
+  // 추가
+  id: number;
+  title: string;
+  userId: number;
+  teamId: number | null;
+  templateId: number;
+  status: keyof TStatus;
+  isBookmarked: boolean;
+  thumbnail: string;
+  startDate: string;
+  createdDate: string;
+  updatedDate: string;
 }
 
 export interface GetRetrospectiveData {
@@ -37,10 +52,9 @@ export interface GetRetrospectiveData {
   message: string;
   data: {
     totalCount: number;
-    nodes: Array<RetrospectiveResponse>;
+    nodes: Array<GetRetrospectiveResponseNodes>; //RetrospectiveResponse 에서 변경
   };
 }
-
 //post
 export interface PostRetrospectivesRequest {
   title: string;
@@ -85,7 +99,7 @@ export interface RetrospectiveResponse {
     id: number;
     title: string;
     userId: number;
-    teamId: number;
+    teamId: number | null;
     templateId: number;
     status: keyof TStatus;
     isBookmarked: boolean;
@@ -96,10 +110,22 @@ export interface RetrospectiveResponse {
   };
 }
 
+export interface PatchRetrospectiveRequest {
+  retrospectiveId: number;
+  // userId: number;
+}
+
+export interface PatchRetrospectiveResponse {
+  code: number;
+  message: string;
+  data: boolean;
+}
+
 export interface RetrospectivesClient {
   onlyGet(request: onlyGetRetrospectiveRequest): Promise<onlyGetRetrospectiveResponse>;
   create(request: PostRetrospectivesRequest): Promise<PostRetrospectivesResponse>;
   get(request: GetRetrospectiveRequest): Promise<GetRetrospectiveData>;
   delete(request: DeleteRetrospectiveRequest): Promise<void>;
   put(request: PutRetrospectiveRequest): Promise<RetrospectiveResponse>;
+  patch(request: PatchRetrospectiveRequest): Promise<PatchRetrospectiveResponse>;
 }
