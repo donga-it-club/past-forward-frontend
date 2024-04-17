@@ -25,8 +25,6 @@ const ManageTeamMembers: FC<Props> = ({ teamId, retrospectiveId }) => {
       if (data.username.includes(searchTerm)) {
         filterData.push(data);
         setSearchList(filterData);
-        console.log(searchTerm);
-        console.log(searchList);
       } else {
       }
     });
@@ -45,6 +43,9 @@ const ManageTeamMembers: FC<Props> = ({ teamId, retrospectiveId }) => {
   useEffect(() => {
     fetchTeamMembers();
   }, []);
+
+  // if (!members) return;
+
   return (
     <S.ManageStyle>
       <Flex height="46px">

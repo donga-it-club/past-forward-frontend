@@ -11,6 +11,7 @@ import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/writeRetroStyles/ReviseLayout.style';
 
 const RetroRevisePage = () => {
+  //query
   const { search } = useLocation();
   const query = search.split(/[=,&]/);
   const retrospectiveId = Number(query[1]);
@@ -35,6 +36,7 @@ const RetroRevisePage = () => {
   }, [retro?.status]);
 
   if (!retro) return;
+
   return (
     <>
       <S.TitleBox>

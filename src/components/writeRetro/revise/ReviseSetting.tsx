@@ -22,7 +22,6 @@ import {
 import DeleteRetrospective from './DeleteRetrospective';
 import RetroImageUploader from './RetroImageUploader';
 import { RetrospectiveData, RetrospectiveResponse } from '@/api/@types/Retrospectives';
-import { MockRetrospective } from '@/api/__mock__/retrospective';
 import { RetrospectiveService } from '@/api/services/Retrospectives';
 import { useCustomToast } from '@/hooks/useCustomToast';
 import * as L from '@/styles/writeRetroStyles/Layout.style';
@@ -46,15 +45,12 @@ const ReviseSetting = () => {
 
   const FetchRetrospective = async () => {
     try {
-      const data = await RetrospectiveService.onlyGet({ retrospectiveId: 57 });
+      const data = await RetrospectiveService.onlyGet({ retrospectiveId: retrospectiveId });
       setFetch(data.data);
     } catch (e) {
       toast.error(e);
     }
   };
-  useEffect(() => {
-    FetchRetrospective();
-  }, [fetch?.status]);
 
   const handlePutRetrospective = async () => {
     try {
@@ -69,7 +65,7 @@ const ReviseSetting = () => {
       setRetro(data);
       console.log(retro);
     } catch (e) {
-      console.error(e);
+      toast.error(e);
     }
   };
 
@@ -84,12 +80,11 @@ const ReviseSetting = () => {
     setIsChecked(!isChecked);
     if (isChecked) {
       toast.info('회고 완료 처리를 취소하였습니다.');
-      console.log('취소');
       console.log(status);
       setStatus('IN_PROGRESS');
     } else {
       toast.success('해당 회고는 최종 완료 처리되었습니다.');
-      console.log('성공 ');
+
       setStatus('COMPLETED');
     }
   };
@@ -110,7 +105,7 @@ const ReviseSetting = () => {
   }
 
   useEffect(() => {
-    handlePutRetrospective();
+    FetchRetrospective();
   }, []);
 
   if (!fetch) return;
@@ -136,7 +131,7 @@ const ReviseSetting = () => {
           <L.reviseTitleText>회고 유형 </L.reviseTitleText>
           <S.NoteChangeText>변경 불가</S.NoteChangeText>
         </Flex>
-        <S.NotTextInput>{MockRetrospective.data.templateId}</S.NotTextInput>
+        <S.NotTextInput>{fetch.templateId}</S.NotTextInput>
 
         {/* 회고 템플릿 유형 */}
         <Flex margin="10px 0">
@@ -152,7 +147,7 @@ const ReviseSetting = () => {
         </Flex>
         <S.ReaderBox>
           <BsPersonCircle size={30} style={{ margin: '5px' }} />
-          <p style={{ margin: 'auto 0' }}>{MockRetrospective.data.userId}</p>
+          <p style={{ margin: 'auto 0' }}>{fetch.teamId}</p>
         </S.ReaderBox>
 
         {/* 회고 설명 */}
@@ -189,6 +184,7 @@ const ReviseSetting = () => {
             variant="outline"
             onClick={() => {
               handleNavigate('회고 수정이 정상 처리되었습니다.');
+              handlePutRetrospective();
             }}
           >
             SAVE
