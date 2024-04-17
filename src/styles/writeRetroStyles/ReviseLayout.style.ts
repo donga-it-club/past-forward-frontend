@@ -338,7 +338,8 @@ export const NotTextInput = styled.div`
   border-radius: 5px;
   font-size: 20px;
   padding: 3px;
-  margin: 20px 0;
+  margin-top: 5px;
+  margin-bottom: 20px;
   color: #989898;
 `;
 
@@ -361,6 +362,7 @@ export const ReaderBox = styled.div`
 export const SettingLine = styled.div`
   border: 1px solid black;
   width: 100%;
+  margin: 10px 0;
 `;
 
 export const SettingDetailText = styled.p`

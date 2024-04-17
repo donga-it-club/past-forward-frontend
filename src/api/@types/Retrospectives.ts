@@ -1,6 +1,5 @@
 import { TRetrospective, TStatus } from './@asConst';
 
-
 //onlyGet
 export interface onlyGetRetrospectiveRequest {
   retrospectiveId: number;
@@ -13,14 +12,14 @@ export interface onlyGetRetrospectiveResponse {
 }
 
 export interface RetrospectiveData {
-  retrospectiveId: number;
-  title: string;
-  templateId: number;
-  teamId: number;
-  userId: number;
   description: string;
+  retrospectiveId: number;
   status: keyof TStatus;
+  teamId: number;
+  templateId: number;
   thumbnail: string;
+  title: string;
+  userId: number;
 }
 
 // get

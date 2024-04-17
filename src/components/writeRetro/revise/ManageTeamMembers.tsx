@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { BsPersonCircle } from 'react-icons/bs';
 import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Flex, Button } from '@chakra-ui/react';
 import { GetTeamMembersResponse, TeamMembersData } from '@/api/@types/TeamController';
@@ -7,7 +7,12 @@ import { TeamControllerServices } from '@/api/services/TeamController';
 import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/writeRetroStyles/ReviseLayout.style';
 
-const ManageTeamMembers = () => {
+interface Props {
+  teamId: number;
+  retrospectiveId: number;
+}
+
+const ManageTeamMembers: FC<Props> = ({ teamId, retrospectiveId }) => {
   const [members, setMembers] = useState<GetTeamMembersResponse>();
   const toast = useCustomToast();
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -29,7 +34,7 @@ const ManageTeamMembers = () => {
 
   const fetchTeamMembers = async () => {
     try {
-      const data = await TeamControllerServices.get({ teamId: 1, retrospectiveId: 1 });
+      const data = await TeamControllerServices.get({ teamId: teamId, retrospectiveId: retrospectiveId });
       setMembers(data);
       console.log('members', members);
     } catch (e) {
@@ -42,12 +47,12 @@ const ManageTeamMembers = () => {
   }, []);
   return (
     <S.ManageStyle>
-      <div style={{ height: '46px', display: 'flex' }}>
+      <Flex height="46px">
         <S.ManageTitleStyle>팀원 관리</S.ManageTitleStyle>
         <S.InvitationLinkButton>팀원 초대 링크</S.InvitationLinkButton>
         <S.LinkExpirationText>링크는 2시간 후에 만료됩니다.</S.LinkExpirationText>
-      </div>
-      <div style={{ display: 'flex', marginTop: '20px' }}>
+      </Flex>
+      <Flex marginTop="20px">
         <S.ManageSearchInput
           placeholder="검색할 이름을 입력하세요."
           value={searchTerm}
@@ -60,7 +65,7 @@ const ManageTeamMembers = () => {
         >
           검색
         </S.ManageSearchButton>
-      </div>
+      </Flex>
       <TableContainer marginTop="40px">
         <Table variant="simple">
           <Thead>
