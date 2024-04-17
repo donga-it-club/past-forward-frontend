@@ -55,7 +55,7 @@ const RetroListPage = () => {
       try {
         const responseData = await queryGetRetrospective(query);
         // console.log(query);
-        console.log('회고 조회 성공');
+        // console.log('회고 조회 성공');
         setData(responseData.data);
       } catch (error) {
         // console.error('회고 데이터를 가져오는 도중 오류가 발생했습니다:', error);
@@ -64,7 +64,6 @@ const RetroListPage = () => {
     };
     fetchRetrolist();
   }, [query, bookmarkUpdate]);
-  // console.log(data.nodes);
 
   const [retroData, setRetroData] = useState<Array<GetRetrospectiveResponseNodes>>([]);
   const [viewMode, setViewMode] = useState<string>('board');
@@ -194,7 +193,9 @@ const RetroListPage = () => {
             setBookmarkUpdate={setBookmarkUpdate}
           />
         </S.Box>
-        <Pagination totalPage={page} limit={5} page={currentPage} setPage={setCurrentPage} />
+        <S.PageContainer>
+          <Pagination totalPage={page} limit={5} page={currentPage} setPage={setCurrentPage} />
+        </S.PageContainer>
       </div>
     </>
   );

@@ -94,6 +94,7 @@ export const ProgressIcon = styled.img`
 
 export const ListContainer = styled.div`
   padding-top: 10px;
+  padding-bottom: 20px;
 `;
 
 export const ListTopBox = styled.div`

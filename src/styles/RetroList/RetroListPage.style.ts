@@ -35,3 +35,8 @@ export const ControBarContainer = styled.div`
   margin-top: 15px;
   display: flex;
 `;
+
+export const PageContainer = styled.div`
+  margin-top: 40px;
+  margin-bottom: 20px;
+`;

@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import * as S from '@/styles/RetroList/Pagination.styles';
 
 interface PaginationProps {
   totalPage: number;
@@ -33,21 +34,27 @@ const Pagination: React.FC<PaginationProps> = ({ totalPage, limit, page, setPage
   }, [totalPage, limit]);
 
   return (
-    <div>
-      <button onClick={() => setPage(page - 1)} disabled={page === 1}>
-        {'<'}
-      </button>
-      <div>
-        {currentPageArray?.map(i => (
-          <button key={i + 1} onClick={() => setPage(i + 1)} aria-current={page === i + 1 ? true : undefined}>
-            {i + 1}
-          </button>
-        ))}
-      </div>
-      <button onClick={() => setPage(page + 1)} disabled={page === totalPage}>
-        {'>'}
-      </button>
-    </div>
+    <S.Conatiner>
+      <S.ButtonContainer>
+        <button onClick={() => setPage(page - 1)} disabled={page === 1}>
+          <S.LeftArrow>&#x3008;</S.LeftArrow>
+        </button>
+        <div>
+          {currentPageArray?.map(i => (
+            <S.PageNumberContainer
+              key={i + 1}
+              onClick={() => setPage(i + 1)}
+              aria-current={page === i + 1 ? true : undefined}
+            >
+              <S.PageNumber active={page === i + 1}>{i + 1}</S.PageNumber>
+            </S.PageNumberContainer>
+          ))}
+        </div>
+        <button onClick={() => setPage(page + 1)} disabled={page === totalPage}>
+          <S.RightArrow>&#x3009;</S.RightArrow>
+        </button>
+      </S.ButtonContainer>
+    </S.Conatiner>
   );
 };
 
