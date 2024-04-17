@@ -5,7 +5,6 @@ import { getCurrentUser } from 'aws-amplify/auth';
 import { RecoilRoot } from 'recoil';
 import RetroTeamPage from './pages/RetroTeamPage';
 import RetroRevisePage from './pages/RevisePage';
-import InviteTeamModal from '@/components/inviteTeam/InviteTeamModal';
 import MainLayout from '@/components/layout/MainLayout';
 import ProfileLayout from '@/components/layout/ProfileLayout';
 import AuthPage from '@/pages/AuthPage';
@@ -81,14 +80,6 @@ const App = () => {
                 element={
                   <PrivateRoute>
                     <CreateRetroPage />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path="/invite"
-                element={
-                  <PrivateRoute>
-                    <InviteTeamModal />
                   </PrivateRoute>
                 }
               />

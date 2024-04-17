@@ -4,6 +4,7 @@ import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Flex, Button } from '@
 import { GetTeamMembersResponse, TeamMembersData } from '@/api/@types/TeamController';
 import { MockTeamMembers } from '@/api/__mock__/teamMembers';
 import { TeamControllerServices } from '@/api/services/TeamController';
+import InviteTeamModal from '@/components/inviteTeam/InviteTeamModal';
 import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/writeRetroStyles/ReviseLayout.style';
 
@@ -17,6 +18,7 @@ const ManageTeamMembers: FC<Props> = ({ teamId, retrospectiveId }) => {
   const toast = useCustomToast();
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [searchList, setSearchList] = useState<TeamMembersData[]>();
+  const [isInviteModalOpen, setInviteModalOpen] = useState<boolean>(false);
 
   const searchTeamMembers = (searchTerm: string) => {
     const filterData: TeamMembersData[] = [];
@@ -50,7 +52,7 @@ const ManageTeamMembers: FC<Props> = ({ teamId, retrospectiveId }) => {
     <S.ManageStyle>
       <Flex height="46px">
         <S.ManageTitleStyle>팀원 관리</S.ManageTitleStyle>
-        <S.InvitationLinkButton>팀원 초대 링크</S.InvitationLinkButton>
+        <S.InvitationLinkButton onClick={() => setInviteModalOpen(true)}>팀원 초대 링크</S.InvitationLinkButton>
         <S.LinkExpirationText>링크는 2시간 후에 만료됩니다.</S.LinkExpirationText>
       </Flex>
       <Flex marginTop="20px">
@@ -126,6 +128,8 @@ const ManageTeamMembers: FC<Props> = ({ teamId, retrospectiveId }) => {
           </Tbody>
         </Table>
       </TableContainer>
+
+      <InviteTeamModal isOpen={isInviteModalOpen} onClose={() => setInviteModalOpen(false)} teamId={teamId} />
     </S.ManageStyle>
   );
 };
