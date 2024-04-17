@@ -1,6 +1,6 @@
 // get
 export interface GetUsersRequest {
-  userId: number;
+  // userId: number;
 }
 
 export interface GetUsersResponse {

@@ -38,7 +38,7 @@ const MyPage = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await getUser(1);
+        const response = await getUser();
         console.log('유저 정보', response);
         setUserData(response);
       } catch (error) {

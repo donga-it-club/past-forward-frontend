@@ -9,6 +9,47 @@ const axiosInstance = axios.create({
   },
 });
 
+// Axios 응답을 받은 후 실행
+axiosInstance.interceptors.response.use(
+  response => {
+    return response;
+  },
+  async error => {
+    const originalRequest = error.config;
+
+    // 401 에러일 경우
+    if (error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+
+      try {
+        // 세션 새로 고치기
+        await refreshSession();
+
+        // 새로운 토큰으로 재시도
+        const authToken = (await fetchAuthSession()).tokens?.idToken?.toString();
+        originalRequest.headers.Authorization = `Bearer ${authToken}`;
+        return axiosInstance(originalRequest);
+      } catch (refreshError) {
+        console.error('Refresh 토큰 실패', refreshError);
+        return Promise.reject(refreshError);
+      }
+    }
+
+    return Promise.reject(error);
+  },
+);
+
+// 세션 새로 고치는 함수
+async function refreshSession() {
+  try {
+    const { tokens } = await fetchAuthSession({ forceRefresh: true });
+    console.log('새로운 세션:', tokens);
+  } catch (err) {
+    console.error('세션 새로 고치기 실패:', err);
+    throw err; // 예외를 다시 던져서 호출하는 곳에서 처리하도록 함
+  }
+}
+
 // Axios 요청을 보내기 전에 실행
 axiosInstance.interceptors.request.use(
   async config => {
@@ -23,8 +64,8 @@ axiosInstance.interceptors.request.use(
       }
 
       // 헤더에 토큰 추가
-      config.headers.Authorization = `${authToken}`;
-      // console.log('헤더에 토큰 추가 확인', config.headers.Authorization);
+      config.headers.Authorization = `Bearer ${authToken}`;
+      console.log('헤더에 토큰 추가 확인', config.headers.Authorization);
       return config;
     } catch (err) {
       console.error('에러', err);
@@ -36,45 +77,4 @@ axiosInstance.interceptors.request.use(
   },
 );
 
-// Axios 응답을 받은 후 실행
-axiosInstance.interceptors.response.use(
-  response => {
-    return response;
-  },
-  async error => {
-    const originalRequest = error.config;
-
-    // 401 에러일 경우
-    if (error.response.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
-
-      try {
-        // 세션 새로 고침
-        await currentSession();
-
-        // 새로운 토큰으로 재시도
-        const authToken = (await fetchAuthSession()).tokens?.idToken?.toString();
-        originalRequest.headers.Authorization = `${authToken}`;
-        return axiosInstance(originalRequest);
-      } catch (refreshError) {
-        console.error('Refresh 토큰 실패', refreshError);
-        return Promise.reject(refreshError);
-      }
-    }
-
-    return Promise.reject(error);
-  },
-);
-
 export default axiosInstance;
-
-// 세션 새로 고치는 함수
-async function currentSession() {
-  try {
-    const { tokens } = await fetchAuthSession({ forceRefresh: true });
-    console.log('새로운 세션:', tokens);
-  } catch (err) {
-    console.log('세션 새로 고치기 실패:', err);
-    throw err; // 예외를 다시 던져서 호출하는 곳에서 처리하도록 함
-  }
-}
