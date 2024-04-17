@@ -64,6 +64,8 @@ const ReviseSetting = () => {
       });
       setRetro(data);
       console.log(retro);
+      navigate('/retrolist');
+      toast.info('회고 수정이 정상 처리되었습니다.');
     } catch (e) {
       toast.error(e);
     }
@@ -183,7 +185,6 @@ const ReviseSetting = () => {
             colorScheme="grey"
             variant="outline"
             onClick={() => {
-              handleNavigate('회고 수정이 정상 처리되었습니다.');
               handlePutRetrospective();
             }}
           >
