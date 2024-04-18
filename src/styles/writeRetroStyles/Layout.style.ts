@@ -414,6 +414,7 @@ export const ManagerButton = styled.button`
   &:hover {
     cursor: pointer;
   }
+  position: relative;
 `;
 
 export const ReviseModalStyle = styled.div`
@@ -478,4 +479,16 @@ export const ReviseModalButton = styled.button`
   border: 1px solid #c8c8c8;
   border-radius: 4px;
   margin-right: 30px;
+`;
+
+export const HoverUser = styled.span`
+  position: absolute;
+  width: 40px;
+  left: -5px; /* 원하는 만큼의 왼쪽 이동 값 설정 */
+  top: 100%;
+`;
+
+export const ActionItemsUserImg = styled.img`
+  width: 24px;
+  height: 24px;
 `;
