@@ -27,8 +27,9 @@ const TeamTask: FC<Props> = ({ name }) => {
     try {
       const data = await SectionServices.likePost({ sectionId: name.sectionId });
       setLiked(data.data.likeCnt);
+      console.log('like', liked);
     } catch (e) {
-      console.error(e);
+      toast.error(e);
     }
   };
 

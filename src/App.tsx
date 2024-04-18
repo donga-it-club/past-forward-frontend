@@ -12,7 +12,6 @@ import CreateRetroPage from '@/pages/CreateRetroPage';
 import HomePage from '@/pages/HomePage';
 import MyPage from '@/pages/MyPage';
 import RetroListPage from '@/pages/RetroListPage';
-import RetroPersonalPage from '@/pages/RetroPersonalPage';
 import SurveyPage from '@/pages/SurveyPage';
 
 interface PrivateRouteProps {
@@ -99,14 +98,14 @@ const App = () => {
                   </PrivateRoute>
                 }
               />
-              <Route
+              {/* <Route
                 path="/personal"
                 element={
                   <PrivateRoute>
                     <RetroPersonalPage />
                   </PrivateRoute>
                 }
-              />
+              /> */}
               <Route
                 path="/revise"
                 element={
