@@ -84,7 +84,7 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
               <S.InfoBox>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <S.TeamIcon src={item.teamId ? TeamIcon : PersonalIcon} />
-                  <S.RetroTitle onClick={() => navigate(`/section?retrospectiveId=${item.id}&teamId=${item.teamId}`)}>
+                  <S.RetroTitle onClick={() => navigate(`/sections?retrospectiveId=${item.id}&teamId=${item.teamId}`)}>
                     {item.title}
                   </S.RetroTitle>
                 </div>
@@ -95,14 +95,15 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
                   />
                   <S.MoreIcon
                     src={MoreIcon}
-                    onClick={() => openModalForItem(item.id)}
-                    // onClick={() => {
-                    //   if(유저아이디 !== item.id) { // 수정 권한 없을 때(생성자가 아닐 때)
-                    //     openModalForItem(item.id)
-                    //   } else {
-                    //   navigate(`/revise?retrospectiveId=${item.id}&teamId=${item.teamId}`);
-                    //   }
-                    // }}
+                    // onClick={() => openModalForItem(item.id)}
+                    onClick={() => {
+                      if (item.userId === item.id) {
+                        // 수정 권한 없을 때(생성자가 아닐 때 확인하고 고치기)
+                        openModalForItem(item.id);
+                      } else {
+                        navigate(`/revise?retrospectiveId=${item.id}&teamId=${item.teamId}`);
+                      }
+                    }}
                   />
                 </div>
                 <S.RetroUser>
@@ -175,14 +176,15 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
                   <S.ListLinkBox>
                     <S.MoreIconListView
                       src={MoreIcon}
-                      onClick={() => openModalForItem(item.id)}
-                      // onClick={() => {
-                      //   if(유저아이디 !== item.id) { // 수정 권한 없을 때(생성자가 아닐 때)
-                      //     openModalForItem(item.id)
-                      //   } else {
-                      //   navigate(`/revise?retrospectiveId=${item.id}&teamId=${item.teamId}`);
-                      //   }
-                      // }}
+                      // onClick={() => openModalForItem(item.id)}
+                      onClick={() => {
+                        if (item.userId === item.id) {
+                          // 수정 권한 없을 때(생성자가 아닐 때 확인하고 고치기)
+                          openModalForItem(item.id);
+                        } else {
+                          navigate(`/revise?retrospectiveId=${item.id}&teamId=${item.teamId}`);
+                        }
+                      }}
                     />
                     <Modal onClose={closeModalForItem} isOpen={openModalId === item.id} />
                   </S.ListLinkBox>

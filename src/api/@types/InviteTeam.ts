@@ -1,3 +1,4 @@
+// get
 export interface GetInviteTeamRequest {
   // teamId: number;
 }
@@ -14,3 +15,9 @@ export interface InviteTeamData {
   expirationTime: string;
   qrCodeImage: string;
 }
+
+// post
+export interface PostInviteTeamRequest {
+  invitationCode: string;
+}
+export interface PostInviteTeamResponse {}
