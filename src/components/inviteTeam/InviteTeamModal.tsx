@@ -19,7 +19,7 @@ import {
 } from '@chakra-ui/react';
 import QRCode from 'qrcode.react';
 import { GetInviteTeamResponse, InviteTeamData } from '@/api/@types/InviteTeam';
-import getInviteTeam from '@/api/retrospectivesApi/getInviteTeam';
+import getInviteTeam from '@/api/inviteTeamApi/getInviteTeam';
 import * as S from '@/styles/inviteTeam/InviteTeamModal.style';
 
 interface InviteTeamModalProps {

@@ -3,6 +3,9 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { getCurrentUser } from 'aws-amplify/auth';
 import { RecoilRoot } from 'recoil';
+
+import AcceptInvite from './components/inviteTeam/AcceptInvite';
+
 import RetroRevisePage from './pages/RevisePage';
 import RetroTeamPage from './pages/SectionPage';
 import MainLayout from '@/components/layout/MainLayout';
@@ -130,6 +133,7 @@ const App = () => {
                 </PrivateRoute>
               }
             />
+            <Route path="/invitations/:invitationId" Component={AcceptInvite} />
           </Routes>
         </Router>
       </RecoilRoot>
