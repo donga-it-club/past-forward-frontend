@@ -3,6 +3,8 @@ import {
   GetTemplateNameRequest,
   GetTemplateNameResponse,
   TeamControllerClient,
+  PutActionItemsRequest,
+  PutActionItemsResponse,
 } from '../@types/TeamController';
 import axiosInstance from '../axiosConfig';
 
@@ -21,6 +23,14 @@ export const TeamControllerServices: TeamControllerClient = {
   TemplateNameGet: async ({ templateId }: GetTemplateNameRequest): Promise<GetTemplateNameResponse> => {
     try {
       const response = await axiosInstance.get(`${TEMPLATE_ROUTE}/${templateId}/template-sections`);
+      return response.data;
+    } catch (error) {
+      throw new Error(error as string);
+    }
+  },
+  ActionItemsMemberPatch: async (request: PutActionItemsRequest): Promise<PutActionItemsResponse> => {
+    try {
+      const response = await axiosInstance.patch(`/sections/action-itmes`, request);
       return response.data;
     } catch (error) {
       throw new Error(error as string);
