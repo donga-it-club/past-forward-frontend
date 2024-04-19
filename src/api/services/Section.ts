@@ -25,7 +25,7 @@ export const SectionServices: SectionClient = {
   },
   create: async (request: CreateSectionRequest): Promise<PostSectionResponse> => {
     try {
-      const response = await axiosInstance.post<PostSectionResponse>(`${ROUTE}/`, request);
+      const response = await axiosInstance.post<PostSectionResponse>(`${ROUTE}`, request);
       return response.data;
     } catch (error) {
       throw new Error(error as string);

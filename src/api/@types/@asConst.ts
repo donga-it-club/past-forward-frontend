@@ -13,7 +13,7 @@ export const Status = {
 export const RetrospectiveType = {
   TEAM: 'TEAM',
   PERSONAL: 'PERSONAL',
-};
+} as const;
 
 export const Template = {
   1: 'Keep',

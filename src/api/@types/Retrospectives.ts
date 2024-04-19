@@ -15,8 +15,9 @@ export interface RetrospectiveData {
   retrospectiveId: number;
   title: string;
   templateId: number;
-  teamId: number;
+  type: keyof TRetrospective;
   userId: number;
+  leaderName: string;
   description: string;
   status: keyof TStatus;
   thumbnail: string;
