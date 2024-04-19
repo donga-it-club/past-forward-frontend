@@ -1,7 +1,7 @@
-import { PutActionItemsRequest, PutActionItemsResponse } from '../@types/TeamController';
+import { PutActionItemsRequest, PutActionItemsResponse } from '@/api/@types/TeamController';
 import axiosInstance from '@/api/axiosConfig';
 
-export const patchActionItemsMember = async (requestData: PutActionItemsRequest): Promise<PutActionItemsResponse> => {
+export const putActionItemsMember = async (requestData: PutActionItemsRequest): Promise<PutActionItemsResponse> => {
   try {
     console.log(requestData);
     const response = await axiosInstance.put<PutActionItemsResponse>(`/sections/action-items`);

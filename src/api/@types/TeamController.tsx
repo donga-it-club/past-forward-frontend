@@ -51,5 +51,5 @@ export interface PutActionItemsResponse {
 export interface TeamControllerClient {
   TeamMemberGet(request: GetTeamMembersRequest): Promise<GetTeamMembersResponse>;
   TemplateNameGet(request: GetTemplateNameRequest): Promise<GetTemplateNameResponse>;
-  ActionItemsMemberPatch(requenst: PutActionItemsRequest): Promise<PutActionItemsResponse>;
+  ActionItemsMemberPut(request: PutActionItemsRequest): Promise<PutActionItemsResponse>;
 }

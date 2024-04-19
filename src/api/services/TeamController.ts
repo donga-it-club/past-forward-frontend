@@ -5,8 +5,8 @@ import {
   TeamControllerClient,
   PutActionItemsRequest,
   PutActionItemsResponse,
-} from '../@types/TeamController';
-import axiosInstance from '../axiosConfig';
+} from '@/api/@types/TeamController';
+import axiosInstance from '@/api/axiosConfig';
 
 const TEAMS_ROUTE = 'teams';
 const TEMPLATE_ROUTE = 'retrospective-templates';
@@ -28,9 +28,9 @@ export const TeamControllerServices: TeamControllerClient = {
       throw new Error(error as string);
     }
   },
-  ActionItemsMemberPatch: async (request: PutActionItemsRequest): Promise<PutActionItemsResponse> => {
+  ActionItemsMemberPut: async (request: PutActionItemsRequest): Promise<PutActionItemsResponse> => {
     try {
-      const response = await axiosInstance.patch(`/sections/action-itmes`, request);
+      const response = await axiosInstance.put(`/sections/action-itmes`, request);
       return response.data;
     } catch (error) {
       throw new Error(error as string);
