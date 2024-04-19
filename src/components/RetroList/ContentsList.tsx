@@ -84,7 +84,7 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
               <S.InfoBox>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <S.TeamIcon src={item.teamId ? TeamIcon : PersonalIcon} />
-                  <S.RetroTitle onClick={() => navigate(`/section?retrospectiveId=${item.id}&teamId=${item.teamId}`)}>
+                  <S.RetroTitle onClick={() => navigate(`/sections?retrospectiveId=${item.id}&teamId=${item.teamId}`)}>
                     {item.title}
                   </S.RetroTitle>
                 </div>

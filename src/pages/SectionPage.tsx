@@ -50,6 +50,7 @@ const RetroTeamPage = () => {
       if (retro) {
         const data = await TeamControllerServices.TemplateNameGet({ templateId: retro.templateId });
         setTemplate(data.data);
+        console.log(template);
       }
     } catch (e) {
       toast.error(e);
@@ -74,20 +75,25 @@ const RetroTeamPage = () => {
           <Flex>
             {template
               ? template.map(title => (
-                  <S.FrameStyle>
-                    <Label
-                      labelName={title.name}
-                      labelType="dark"
-                      taskCount={section.filter(data => data.sectionName === title.name).length}
-                    />
+                  <>
+                    <S.FrameStyle>
+                      <Label
+                        labelName={title.name}
+                        labelType="dark"
+                        taskCount={section.filter(data => data.sectionName === title.name).length}
+                      />
 
-                    <AddTask template={title.id} retrospectiveId={retro?.retrospectiveId} />
-                    {section
-                      .filter(key => key.sectionName === title.name)
-                      .map(section => (
-                        <TeamTask section={section} />
-                      ))}
-                  </S.FrameStyle>
+                      <AddTask template={title.id} retrospectiveId={retro?.retrospectiveId} />
+                      {section
+                        .filter(key => key.sectionName === title.name)
+                        .map(section => (
+                          <>
+                            <TeamTask section={section} />
+                          </>
+                        ))}
+                      {/* <ActionItemTask section={section} /> */}
+                    </S.FrameStyle>
+                  </>
                 ))
               : PersonalSectionTitleName.map(title => (
                   <S.FrameStyle>
@@ -96,13 +102,12 @@ const RetroTeamPage = () => {
                       labelType="dark"
                       taskCount={section.filter(data => data.sectionName === title.title).length}
                     />
-                    {/* {section
-                      .filter(key => key.sectionName === title.title)
-                      .map(name => (
-                        <TeamTask name={name} />
-                      ))} */}
                   </S.FrameStyle>
                 ))}
+            <S.FrameStyle>
+              <Label labelName="Action Items" labelType="dark" taskCount={0} />
+              <AddTask template={3} retrospectiveId={retro?.retrospectiveId} />
+            </S.FrameStyle>
           </Flex>
         </Flex>
       </S.SectionBox>

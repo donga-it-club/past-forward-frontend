@@ -40,8 +40,7 @@ const ReviseSetting: FC<Props> = ({ retro }) => {
   const retrospectiveId = Number(query[1]);
   const teamId = Number(query[3]);
   const [isChecked, setIsChecked] = useState<boolean>(false);
-  const [status, setStatus] = useState<string>('');
-  // const [retroName, setRetroName] = useState<RetrospectiveResponse>();
+  const [status, setStatus] = useState<string>();
   const [image, setImage] = useState<string>(retro.thumbnail);
   const [title, setTitle] = useState<string>('');
   const [templateName, setTemplateName] = useState<TemplateNameData[]>();
@@ -54,7 +53,6 @@ const ReviseSetting: FC<Props> = ({ retro }) => {
       try {
         const data = await postImageToS3({ filename: retro.thumbnail, method: 'GET' });
         setImage(data.preSignedUrl);
-        console.log('image', image);
       } catch (e) {
         toast.error(e);
       }
@@ -64,8 +62,7 @@ const ReviseSetting: FC<Props> = ({ retro }) => {
   const fetchRetrospectiveTemplate = async () => {
     try {
       if (retro) {
-        const data = await TeamControllerServices.TemplateNameGet({ templateId: 2 });
-        console.log('retro.templateId', data);
+        const data = await TeamControllerServices.TemplateNameGet({ templateId: retro.templateId });
         setTemplateName(data.data);
       }
     } catch (error) {
@@ -80,8 +77,8 @@ const ReviseSetting: FC<Props> = ({ retro }) => {
         title: title,
         teamId: teamId,
         description: description,
-        status: 'COMPLETED',
         thumbnail: image,
+        status: 'COMPLETED',
       });
       console.log('put data', data);
       navigate('/retrolist');
@@ -101,7 +98,6 @@ const ReviseSetting: FC<Props> = ({ retro }) => {
       } else {
         toast.success('해당 회고는 최종 완료 처리되었습니다.');
         setStatus(retro.status);
-        console.log(status);
       }
     }
   };
@@ -165,7 +161,9 @@ const ReviseSetting: FC<Props> = ({ retro }) => {
         </Flex>
         <S.ReaderBox>
           <BsPersonCircle size={30} style={{ margin: '5px' }} />
-          <p style={{ margin: 'auto 0' }}>{retro.leaderName}</p>
+          <p style={{ margin: 'auto 0' }}>
+            {retro.leaderName ?? <S.NotMemberInfo> (회고 리더 이름없음)</S.NotMemberInfo>}
+          </p>
         </S.ReaderBox>
 
         {/* 회고 설명 */}

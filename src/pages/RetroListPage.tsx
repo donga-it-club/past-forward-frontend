@@ -85,7 +85,7 @@ const RetroListPage = () => {
       updatedDate: formatDate(item.updatedDate),
     }));
     setRetroData(rawData);
-  }, [data]);
+  }, [data.nodes]);
 
   // console.log(retroData);
   const handleContentsFilter = (filterType: string) => {
