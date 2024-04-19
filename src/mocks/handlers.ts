@@ -82,4 +82,4 @@ export const TeamHandlers: RequestHandler[] = [
     return HttpResponse.json(mockMembers);
   }),
 ];
-export const mswWorker = setupWorker(...TeamHandlers, ...SectionHandlers);
+export const mswWorker = setupWorker();

@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { getCurrentUser } from 'aws-amplify/auth';
 import { RecoilRoot } from 'recoil';
 import AcceptInvite from './components/inviteTeam/AcceptInvite';
-import RetroTeamPage from './pages/RetroTeamPage';
 import RetroRevisePage from './pages/RevisePage';
+import RetroTeamPage from './pages/SectionPage';
 import MainLayout from '@/components/layout/MainLayout';
 import ProfileLayout from '@/components/layout/ProfileLayout';
 import AuthPage from '@/pages/AuthPage';
@@ -99,14 +99,6 @@ const App = () => {
                   </PrivateRoute>
                 }
               />
-              {/* <Route
-                path="/personal"
-                element={
-                  <PrivateRoute>
-                    <RetroPersonalPage />
-                  </PrivateRoute>
-                }
-              /> */}
               <Route
                 path="/revise"
                 element={
@@ -115,7 +107,6 @@ const App = () => {
                   </PrivateRoute>
                 }
               />
-
               <Route
                 path="/retrolist"
                 element={
@@ -125,7 +116,6 @@ const App = () => {
                 }
               />
             </Route>
-
             {/* MainLayout */}
             <Route element={<MainLayout />}>
               <Route path="/" element={<HomePage />} />
