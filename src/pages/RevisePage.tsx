@@ -20,12 +20,14 @@ const RetroRevisePage = () => {
   const teamId = Number(query[3]);
   const [retro, setRetro] = useState<RetrospectiveData>();
   const [members, setMembers] = useState<TeamMembersData[]>();
+  const [status, setStatus] = useState<string>();
   const toast = useCustomToast();
 
   const FetchRetrospective = async () => {
     try {
       const data = await RetrospectiveService.onlyGet({ retrospectiveId: retrospectiveId });
       setRetro(data.data);
+      setStatus(retro?.status);
     } catch (e) {
       toast.error(e);
     }
@@ -33,8 +35,11 @@ const RetroRevisePage = () => {
 
   const fetchTeamMembers = async () => {
     try {
-      const data = await TeamControllerServices.TeamMemberGet({ teamId: teamId, retrospectiveId: retrospectiveId });
-      setMembers(data.data);
+      if (teamId) {
+        const data = await TeamControllerServices.TeamMemberGet({ teamId: teamId, retrospectiveId: retrospectiveId });
+        setMembers(data.data);
+      }
+      return;
     } catch (e) {
       toast.error(e);
     }
@@ -46,7 +51,6 @@ const RetroRevisePage = () => {
   }, [retro?.status]);
 
   if (!retro) return;
-  if (!members) return;
 
   return (
     <>
@@ -65,10 +69,10 @@ const RetroRevisePage = () => {
 
           <TabPanels>
             <TabPanel>
-              <ReviseSetting retro={retro} />
+              <ReviseSetting retro={retro} status={status} setStatus={setStatus} />
             </TabPanel>
             <TabPanel>
-              {retro.type === 'TEAM' ? <ManageTeamMembers members={members} teamId={teamId} /> : <NotTeamMemberModal />}
+              {members ? <ManageTeamMembers members={members} teamId={teamId} /> : <NotTeamMemberModal />}
             </TabPanel>
           </TabPanels>
         </Tabs>

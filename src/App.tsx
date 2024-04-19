@@ -98,14 +98,6 @@ const App = () => {
                   </PrivateRoute>
                 }
               />
-              {/* <Route
-                path="/personal"
-                element={
-                  <PrivateRoute>
-                    <RetroPersonalPage />
-                  </PrivateRoute>
-                }
-              /> */}
               <Route
                 path="/revise"
                 element={
@@ -114,7 +106,6 @@ const App = () => {
                   </PrivateRoute>
                 }
               />
-
               <Route
                 path="/retrolist"
                 element={
@@ -124,7 +115,6 @@ const App = () => {
                 }
               />
             </Route>
-
             {/* MainLayout */}
             <Route element={<MainLayout />}>
               <Route path="/" element={<HomePage />} />

@@ -21,7 +21,6 @@ const RetroTeamPage = () => {
   const query = search.split(/[=,&]/);
   const retrospectiveId = Number(query[1]);
   const teamId = Number(query[3]);
-
   const [section, setSection] = useState<sectionData[]>([]);
   const [retro, setRetro] = useState<RetrospectiveData>();
   const [template, setTemplate] = useState<TemplateNameData[]>();
@@ -38,8 +37,13 @@ const RetroTeamPage = () => {
 
   const fetchSection = async () => {
     try {
-      const data = await SectionServices.get({ retrospectiveId: retrospectiveId, teamId: teamId });
-      setSection(data.data);
+      if (!teamId) {
+        const data = await SectionServices.PersonalGet({ retrospectiveId: retrospectiveId });
+        setSection(data.data);
+      } else {
+        const data = await SectionServices.TeamGet({ retrospectiveId: retrospectiveId, teamId: teamId });
+        setSection(data.data);
+      }
     } catch (e) {
       toast.error(e);
     }
@@ -50,7 +54,7 @@ const RetroTeamPage = () => {
       if (retro) {
         const data = await TeamControllerServices.TemplateNameGet({ templateId: retro.templateId });
         setTemplate(data.data);
-        console.log(template);
+        console.log('template', template);
       }
     } catch (e) {
       toast.error(e);
@@ -61,7 +65,7 @@ const RetroTeamPage = () => {
     fetchSection();
     fetchRetrospective();
     fetchTemplate();
-  }, [retro?.status, template?.values]);
+  }, [retro?.status, template?.values, section]);
 
   return (
     <S.Container>
@@ -91,7 +95,6 @@ const RetroTeamPage = () => {
                             <TeamTask section={section} />
                           </>
                         ))}
-                      {/* <ActionItemTask section={section} /> */}
                     </S.FrameStyle>
                   </>
                 ))

@@ -31,7 +31,7 @@ export const Box = styled.div`
   width: 1000px;
 `;
 
-export const ControBarContainer = styled.div`
+export const ControlBarContainer = styled.div`
   margin-left: 50px;
   margin-right: 50px;
   margin-top: 15px;

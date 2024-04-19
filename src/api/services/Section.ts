@@ -2,19 +2,28 @@ import {
   CreateSectionRequest,
   DeleteSectionRequest,
   DeleteSectionResponse,
-  GetSectionRequest,
+  TeamGetSectionRequest,
   GetSectionResponse,
   PostLikeSectionResponse,
   PostLikesSectionRequest,
   PostSectionResponse,
   SectionClient,
+  PersonalGetSectionRequest,
 } from '../@types/Section';
 import axiosInstance from '../axiosConfig';
 
 const ROUTE = 'sections';
 
 export const SectionServices: SectionClient = {
-  get: async (request: GetSectionRequest): Promise<GetSectionResponse> => {
+  TeamGet: async (request: TeamGetSectionRequest): Promise<GetSectionResponse> => {
+    try {
+      const response = await axiosInstance.get<GetSectionResponse>(`${ROUTE}`, { params: request });
+      return response.data;
+    } catch (error) {
+      throw new Error(error as string);
+    }
+  },
+  PersonalGet: async (request: PersonalGetSectionRequest): Promise<GetSectionResponse> => {
     try {
       const response = await axiosInstance.get<GetSectionResponse>(`${ROUTE}`, { params: request });
       return response.data;

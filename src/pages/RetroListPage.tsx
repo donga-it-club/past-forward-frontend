@@ -180,11 +180,11 @@ const RetroListPage = () => {
             <ViewButton viewMode={viewMode} onViewModeChange={handleViewModeChange} />
           </S.SortButtonContainer>
         </S.Container>
-        <S.ControBarContainer>
+        <S.ControlBarContainer>
           <ProgressButton handleStatus={handleStatus} />
           <OrderButton handleOrder={handleOrder} />
           <BookmarkButton handleBookmarkButton={handleBookmarkButton} />
-        </S.ControBarContainer>
+        </S.ControlBarContainer>
         <S.Box>
           <ContentList
             data={retroData}
