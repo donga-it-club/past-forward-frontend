@@ -23,7 +23,7 @@ const TeamTaskMessage: FC<Props> = ({ section }) => {
       <S.TaskMessageBoxStyle>
         {/* TaskMessageTop */}
         <Flex>
-          <S.TaskMessageCount>5개의 댓글</S.TaskMessageCount>
+          <S.TaskMessageCount>0개의 댓글</S.TaskMessageCount>
           <S.TaskMessageLine></S.TaskMessageLine>
         </Flex>
 

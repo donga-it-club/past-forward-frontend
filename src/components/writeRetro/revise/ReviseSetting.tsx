@@ -165,7 +165,7 @@ const ReviseSetting: FC<Props> = ({ retro }) => {
         </Flex>
         <S.ReaderBox>
           <BsPersonCircle size={30} style={{ margin: '5px' }} />
-          <p style={{ margin: 'auto 0' }}>{retro.userId}</p>
+          <p style={{ margin: 'auto 0' }}>{retro.leaderName}</p>
         </S.ReaderBox>
 
         {/* 회고 설명 */}
