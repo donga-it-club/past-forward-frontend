@@ -64,7 +64,7 @@ export interface PostRetrospectivesRequest {
   templateId: number;
   status: keyof TStatus;
   thumbnail: string | null;
-  startDate: string;
+  startDate: Date | string;
   description: string;
 }
 
