@@ -1,18 +1,29 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, FC, useState } from 'react';
 import { AiFillPlusCircle } from 'react-icons/ai';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 
-type AddTaskProps = {
-  color: 'dark' | 'light';
-};
+// interface Props {
+//   retro: RetrospectiveData;
+//   template: TemplateNameData[];
+// }
 
-export const AddTask = ({ color }: AddTaskProps) => {
-  const buttonColor = color === 'dark' ? '#111B47' : '#DADEE5';
+export const AddTask: FC = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [value, setValue] = useState('');
+
   const handleClick = () => {
     setIsVisible(isVisible => !isVisible);
   };
-  const [value, setValue] = useState('');
+
+  // const handleAddSection = async () => {
+  //   try{
+  //     const data = await SectionServices.create({  retrospectiveId: retro.retrospectiveId,
+  //       templateSectionId: template;
+  //       sectionContent: string;
+  //     }})
+  //   }
+  // }
+
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
     e.target.style.height = 'auto';
@@ -25,7 +36,7 @@ export const AddTask = ({ color }: AddTaskProps) => {
       <S.AddTaskButtonStyle>
         <S.AddTaskButtonBox onClick={handleClick}>
           <S.AddTaskButtonImage>
-            <AiFillPlusCircle size={'21px'} color={buttonColor} />
+            <AiFillPlusCircle size={'21px'} />
           </S.AddTaskButtonImage>
         </S.AddTaskButtonBox>
         {/* AddTaskInput */}

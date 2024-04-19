@@ -5,10 +5,10 @@ import { SectionServices } from '@/api/services/Section';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 
 interface Props {
-  name: sectionData;
+  section: sectionData;
 }
 
-const ReviseModal: FC<Props> = ({ name }) => {
+const ReviseModal: FC<Props> = ({ section }) => {
   // Input 높이 자동 조절
   const [value, setValue] = useState('');
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -19,7 +19,7 @@ const ReviseModal: FC<Props> = ({ name }) => {
 
   const ChangeContent = async () => {
     try {
-      const data = await SectionServices.patch({ sectionId: name.sectionId, sectionContent: value });
+      const data = await SectionServices.patch({ sectionId: section.sectionId, sectionContent: value });
       console.log(data);
     } catch (e) {
       console.error(e);
@@ -34,7 +34,7 @@ const ReviseModal: FC<Props> = ({ name }) => {
         <S.ReviseModalInput
           value={value}
           onChange={handleChange}
-          placeholder={name.content}
+          placeholder={section.content}
           rows={1}
         ></S.ReviseModalInput>
 

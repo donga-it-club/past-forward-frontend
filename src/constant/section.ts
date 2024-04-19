@@ -3,18 +3,37 @@ type sectionTitle = {
   title: string;
 }[];
 
-export const sectionTitleName: sectionTitle = [
+export const PersonalSectionTitleName: sectionTitle = [
   {
     id: 1,
-    title: 'Keep',
+    title: '',
   },
   {
     id: 2,
-    title: 'Problem',
+    title: '',
   },
   {
     id: 3,
-    title: 'Try',
+    title: '',
+  },
+  {
+    id: 4,
+    title: '',
+  },
+];
+
+export const TeamSectionTitleName: sectionTitle = [
+  {
+    id: 1,
+    title: 'Kudos',
+  },
+  {
+    id: 2,
+    title: 'Went Well',
+  },
+  {
+    id: 3,
+    title: 'To Improve',
   },
   {
     id: 4,

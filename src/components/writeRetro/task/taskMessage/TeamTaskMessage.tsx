@@ -5,10 +5,10 @@ import { sectionData } from '@/api/@types/Section';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 
 interface Props {
-  name: sectionData;
+  section: sectionData;
 }
 
-const TeamTaskMessage: FC<Props> = ({ name }) => {
+const TeamTaskMessage: FC<Props> = ({ section }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [value, setValue] = useState('');
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -30,7 +30,7 @@ const TeamTaskMessage: FC<Props> = ({ name }) => {
         {/* TaskMessages */}
         <div>
           <S.TaskMessageStyle>
-            {name.comments.map(data => (
+            {section.comments.map(data => (
               <Flex flexDirection="column">
                 {/* TaskMessageTop */}
                 <S.MessageTopStyle>

@@ -5,11 +5,10 @@ import { Flex } from '@chakra-ui/react';
 import { GetSectionResponse } from '@/api/@types/Section';
 import { mockSection } from '@/api/__mock__/section';
 import { SectionServices } from '@/api/services/Section';
-import { AddTask } from '@/components/writeRetro/layout/AddTask';
 import Label from '@/components/writeRetro/layout/Label';
 import Title from '@/components/writeRetro/layout/Title';
 import PersonalTask from '@/components/writeRetro/task/PersonalTask';
-import { sectionTitleName } from '@/constant/section';
+import { PersonalSectionTitleName } from '@/constant/section';
 import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 
@@ -51,19 +50,18 @@ const RetroPersonalPage = () => {
             <p style={{ fontSize: '20px', margin: '5px' }}>수정을 원한다면, 해당 텍스트를 선택하세요!</p>
           </Flex>
           <Flex>
-            {sectionTitleName.map(title => (
+            {PersonalSectionTitleName.map(title => (
               <S.FrameStyle>
                 <Label
                   labelName={title.title}
                   labelType="dark"
                   taskCount={mockSection.data.filter(data => data.sectionName === title.title).length}
                 />
-                {mockSection.data
+                {section.data
                   .filter(key => key.sectionName === title.title)
                   .map(name => (
                     <PersonalTask name={name} />
                   ))}
-                <AddTask color="dark" />
               </S.FrameStyle>
             ))}
           </Flex>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { BsPersonCircle } from 'react-icons/bs';
 import { FaCheck } from 'react-icons/fa';
 import { IoIosInformationCircle } from 'react-icons/io';
@@ -21,34 +21,55 @@ import {
 } from '@chakra-ui/react';
 import DeleteRetrospective from './DeleteRetrospective';
 import RetroImageUploader from './RetroImageUploader';
-import { RetrospectiveData, RetrospectiveResponse } from '@/api/@types/Retrospectives';
+import { RetrospectiveData } from '@/api/@types/Retrospectives';
+import { TemplateNameData } from '@/api/@types/TeamController';
+import postImageToS3 from '@/api/imageApi/postImageToS3';
 import { RetrospectiveService } from '@/api/services/Retrospectives';
+import { TeamControllerServices } from '@/api/services/TeamController';
 import { useCustomToast } from '@/hooks/useCustomToast';
 import * as L from '@/styles/writeRetroStyles/Layout.style';
 import * as S from '@/styles/writeRetroStyles/ReviseLayout.style';
 
-const ReviseSetting = () => {
+interface Props {
+  retro: RetrospectiveData;
+}
+
+const ReviseSetting: FC<Props> = ({ retro }) => {
   const { search } = useLocation();
   const query = search.split(/[=,&]/);
   const retrospectiveId = Number(query[1]);
   const teamId = Number(query[3]);
-
   const [isChecked, setIsChecked] = useState<boolean>(false);
-  const [status, setStatus] = useState<string>();
+  const [status, setStatus] = useState<string>('');
+  // const [retroName, setRetroName] = useState<RetrospectiveResponse>();
+  const [image, setImage] = useState<string>(retro.thumbnail);
+  const [title, setTitle] = useState<string>('');
+  const [templateName, setTemplateName] = useState<TemplateNameData[]>();
+  const [description, setDescription] = useState<string>('');
   const toast = useCustomToast();
   const navigate = useNavigate();
-  const [retro, setRetro] = useState<RetrospectiveResponse>();
-  const [image, setImage] = useState<string>('/Home.png');
-  const [fetch, setFetch] = useState<RetrospectiveData>();
-  const [title, setTitle] = useState<string>('');
-  const [description, setDescription] = useState<string>('');
 
-  const FetchRetrospective = async () => {
+  const fetchRetrospectiveImage = async () => {
+    if (retro) {
+      try {
+        const data = await postImageToS3({ filename: retro.thumbnail, method: 'GET' });
+        setImage(data.preSignedUrl);
+        console.log('image', image);
+      } catch (e) {
+        toast.error(e);
+      }
+    }
+  };
+
+  const fetchRetrospectiveTemplate = async () => {
     try {
-      const data = await RetrospectiveService.onlyGet({ retrospectiveId: retrospectiveId });
-      setFetch(data.data);
-    } catch (e) {
-      toast.error(e);
+      if (retro) {
+        const data = await TeamControllerServices.TemplateNameGet({ templateId: 2 });
+        console.log('retro.templateId', data);
+        setTemplateName(data.data);
+      }
+    } catch (error) {
+      toast.error(error);
     }
   };
 
@@ -62,8 +83,7 @@ const ReviseSetting = () => {
         status: 'COMPLETED',
         thumbnail: image,
       });
-      setRetro(data);
-      console.log(retro);
+      console.log('put data', data);
       navigate('/retrolist');
       toast.info('회고 수정이 정상 처리되었습니다.');
     } catch (e) {
@@ -71,25 +91,27 @@ const ReviseSetting = () => {
     }
   };
 
-  const handleNavigate = (props: string) => {
-    setTimeout(() => {
-      navigate('/retrolist');
-      toast.info(props);
-    }, 1000);
-  };
-
   const SwitchStatus = () => {
     setIsChecked(!isChecked);
-    if (isChecked) {
-      toast.info('회고 완료 처리를 취소하였습니다.');
-      console.log(status);
-      setStatus('IN_PROGRESS');
-    } else {
-      toast.success('해당 회고는 최종 완료 처리되었습니다.');
-
-      setStatus('COMPLETED');
+    if (retro) {
+      if (isChecked) {
+        toast.info('회고 완료 처리를 취소하였습니다.');
+        setStatus('COMPLETED');
+        console.log(status);
+      } else {
+        toast.success('해당 회고는 최종 완료 처리되었습니다.');
+        setStatus(retro.status);
+        console.log(status);
+      }
     }
   };
+
+  useEffect(() => {
+    fetchRetrospectiveTemplate();
+    fetchRetrospectiveImage();
+  }, []);
+
+  if (!fetch) return;
 
   function EditableControls() {
     const { isEditing, getSubmitButtonProps, getCancelButtonProps, getEditButtonProps } = useEditableControls();
@@ -106,20 +128,14 @@ const ReviseSetting = () => {
     );
   }
 
-  useEffect(() => {
-    FetchRetrospective();
-  }, []);
-
-  if (!fetch) return;
-
   return (
     <S.SettingContainer>
-      <RetroImageUploader image={fetch.thumbnail} setImage={setImage} />
+      <RetroImageUploader image={image} setImage={setImage} />
       {/* 회고명 */}
       <Flex flexDirection="column">
         <L.reviseTitleText>회고명 </L.reviseTitleText>
         <Input
-          placeholder={fetch?.title}
+          placeholder={retro.title}
           value={title}
           onChange={e => {
             setTitle(e.target.value);
@@ -133,14 +149,14 @@ const ReviseSetting = () => {
           <L.reviseTitleText>회고 유형 </L.reviseTitleText>
           <S.NoteChangeText>변경 불가</S.NoteChangeText>
         </Flex>
-        <S.NotTextInput>{fetch.templateId}</S.NotTextInput>
+        <S.NotTextInput>{retro.teamId !== null ? '팀' : '개인'}</S.NotTextInput>
 
         {/* 회고 템플릿 유형 */}
         <Flex margin="10px 0">
           <L.reviseTitleText>회고 템플릿 유형 </L.reviseTitleText>
           <S.NoteChangeText>변경 불가</S.NoteChangeText>
         </Flex>
-        <S.NotTextInput>{fetch.status}</S.NotTextInput>
+        <S.NotTextInput>{templateName && templateName[0].name}</S.NotTextInput>
 
         {/* 회고리더 */}
         <Flex margin="10px 0">
@@ -149,13 +165,13 @@ const ReviseSetting = () => {
         </Flex>
         <S.ReaderBox>
           <BsPersonCircle size={30} style={{ margin: '5px' }} />
-          <p style={{ margin: 'auto 0' }}>{fetch.teamId}</p>
+          <p style={{ margin: 'auto 0' }}>{retro.userId}</p>
         </S.ReaderBox>
 
         {/* 회고 설명 */}
         <Editable
           textAlign="center"
-          defaultValue={fetch?.description}
+          defaultValue={retro?.description}
           fontSize="xl"
           isPreviewFocusable={false}
           margin="10px 0"
@@ -195,7 +211,10 @@ const ReviseSetting = () => {
             variant="outline"
             margin="auto 20px"
             onClick={() => {
-              handleNavigate('회고 수정이 취소되었습니다.');
+              setTimeout(() => {
+                navigate('/retrolist');
+                toast.info('회고 수정이 취소되었습니다.');
+              }, 1000);
             }}
           >
             CANCEL

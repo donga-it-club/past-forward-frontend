@@ -1,24 +1,34 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import { BsPersonCircle } from 'react-icons/bs';
 import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Flex, Button } from '@chakra-ui/react';
-import { GetTeamMembersResponse, TeamMembersData } from '@/api/@types/TeamController';
+import { formattedDate } from '../task/PersonalTask';
+import { TeamMembersData } from '@/api/@types/TeamController';
 import { MockTeamMembers } from '@/api/__mock__/teamMembers';
-import { TeamControllerServices } from '@/api/services/TeamController';
 import InviteTeamModal from '@/components/inviteTeam/InviteTeamModal';
-import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/writeRetroStyles/ReviseLayout.style';
 
 interface Props {
+  members: TeamMembersData[];
   teamId: number;
-  retrospectiveId: number;
 }
 
-const ManageTeamMembers: FC<Props> = ({ teamId, retrospectiveId }) => {
-  const [members, setMembers] = useState<GetTeamMembersResponse>();
-  const toast = useCustomToast();
+const ManageTeamMembers: FC<Props> = ({ members, teamId }) => {
+  // const [members, setMembers] = useState<TeamMembersData[]>();
+  // const toast = useCustomToast();
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [searchList, setSearchList] = useState<TeamMembersData[]>();
   const [isInviteModalOpen, setInviteModalOpen] = useState<boolean>(false);
+
+  // const fetchTeamMembers = async () => {
+  //   try {
+  //     const data = await TeamControllerServices.TeamMemberGet({ teamId: teamId, retrospectiveId: retrospectiveId });
+  //     console.log('data.members', data);
+  //     setMembers(data.data);
+  //     console.log('members', members);
+  //   } catch (e) {
+  //     toast.error(e);
+  //   }
+  // };
 
   const searchTeamMembers = (searchTerm: string) => {
     const filterData: TeamMembersData[] = [];
@@ -32,19 +42,9 @@ const ManageTeamMembers: FC<Props> = ({ teamId, retrospectiveId }) => {
     });
   };
 
-  const fetchTeamMembers = async () => {
-    try {
-      const data = await TeamControllerServices.get({ teamId: teamId, retrospectiveId: retrospectiveId });
-      setMembers(data);
-      console.log('members', members);
-    } catch (e) {
-      toast.error(e);
-    }
-  };
-
-  useEffect(() => {
-    fetchTeamMembers();
-  }, []);
+  // useEffect(() => {
+  //   fetchTeamMembers();
+  // }, [teamId, retrospectiveId]);
 
   // if (!members) return;
 
@@ -108,16 +108,16 @@ const ManageTeamMembers: FC<Props> = ({ teamId, retrospectiveId }) => {
                     </Tr>
                   );
                 })
-              : MockTeamMembers.data.map(name => (
+              : members.map(name => (
                   <Tr>
                     <Td>
                       <Flex>
-                        <BsPersonCircle style={{ margin: 'auto 10px' }} size={30} />
-                        <p style={{ margin: 'auto 0' }}>{name.username}</p>
+                        {name.profileImage ?? <BsPersonCircle style={{ margin: 'auto 10px' }} size={30} />}
+                        {name.username ?? <S.NotMemberInfo> (닉네임 없음)</S.NotMemberInfo>}
                       </Flex>
                     </Td>
-                    <Td>2115891@donga.ac.kr</Td>
-                    <Td>2024-03-12 12:50</Td>
+                    <Td>{name.email ?? <S.NotMemberInfo> (이메일 없음)</S.NotMemberInfo>}</Td>
+                    <Td>{formattedDate(name.joinedAt)}</Td>
                     <Td>
                       <Button colorScheme="red" fontSize={15}>
                         제거

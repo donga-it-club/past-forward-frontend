@@ -12,14 +12,14 @@ export interface onlyGetRetrospectiveResponse {
 }
 
 export interface RetrospectiveData {
-  description: string;
   retrospectiveId: number;
-  status: keyof TStatus;
-  teamId: number;
-  templateId: number;
-  thumbnail: string;
   title: string;
+  templateId: number;
+  teamId: number;
   userId: number;
+  description: string;
+  status: keyof TStatus;
+  thumbnail: string;
 }
 
 // get

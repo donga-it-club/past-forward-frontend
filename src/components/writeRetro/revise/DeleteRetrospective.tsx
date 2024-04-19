@@ -26,8 +26,10 @@ const DeleteRetrospective: FC<Props> = ({ retrospectiveId }) => {
   const handleDeleteRetrospective = async () => {
     try {
       await RetrospectiveService.delete({ retrospectiveId: retrospectiveId });
-      navigate('/retrolist');
-      toast.info('회고가 삭제되었습니다.');
+      setTimeout(() => {
+        navigate('/retrolist');
+        toast.info('회고가 삭제되었습니다.');
+      }, 1000);
     } catch (e) {
       toast.error(e);
     }

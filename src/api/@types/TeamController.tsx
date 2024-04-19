@@ -13,8 +13,29 @@ export interface TeamMembersData {
   userId: number;
   username: string;
   profileImage: string;
+  email: string;
+  joinedAt: string;
+}
+
+//getTemplateName
+export interface GetTemplateNameRequest {
+  templateId: number;
+}
+
+export interface GetTemplateNameResponse {
+  code: number;
+  message: string;
+  data: TemplateNameData[];
+}
+
+export interface TemplateNameData {
+  id: number;
+  name: string;
+  templateId: number;
+  sequence: number;
 }
 
 export interface TeamControllerClient {
-  get(request: GetTeamMembersRequest): Promise<GetTeamMembersResponse>;
+  TeamMemberGet(request: GetTeamMembersRequest): Promise<GetTeamMembersResponse>;
+  TemplateNameGet(request: GetTemplateNameRequest): Promise<GetTemplateNameResponse>;
 }

@@ -19,7 +19,7 @@ export const RetrospectiveService: RetrospectivesClient = {
       const response = await axiosInstance.get<onlyGetRetrospectiveResponse>(`${ROUTE}/${retrospectiveId}`);
       return response.data;
     } catch (error) {
-      throw new Error('템플릿 조회 실패');
+      throw new Error(error as string);
     }
   },
   create: async (request: PostRetrospectivesRequest): Promise<PostRetrospectivesResponse> => {
