@@ -64,7 +64,7 @@ const RetroRevisePage = () => {
         <Tabs colorScheme="brand" isLazy isFitted>
           <TabList margin="0 40px" fontSize={60}>
             <Tab>회고 설정</Tab>
-            {retro.teamId !== null ? <Tab>팀원 관리</Tab> : null}
+            {retro.type === 'TEAM' ? <Tab>팀원 관리</Tab> : null}
           </TabList>
 
           <TabPanels>
@@ -72,7 +72,7 @@ const RetroRevisePage = () => {
               <ReviseSetting retro={retro} />
             </TabPanel>
             <TabPanel>
-              {retro.teamId !== null ? <ManageTeamMembers members={members} teamId={teamId} /> : <NotTeamMemberModal />}
+              {retro.type === 'TEAM' ? <ManageTeamMembers members={members} teamId={teamId} /> : <NotTeamMemberModal />}
             </TabPanel>
           </TabPanels>
         </Tabs>

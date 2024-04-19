@@ -35,12 +35,14 @@ export interface CreateSectionRequest {
 export interface PostSectionResponse {
   code: number;
   message: string;
-  data: {
-    id: number;
-    userId: number;
-    retrospectiveId: number;
-    sectionContent: string;
-  };
+  data: PostSectionData;
+}
+
+export interface PostSectionData {
+  id: number;
+  userId: number;
+  retrospectiveId: number;
+  sectionContent: string;
 }
 
 //patch

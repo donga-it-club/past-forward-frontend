@@ -149,7 +149,7 @@ const ReviseSetting: FC<Props> = ({ retro }) => {
           <L.reviseTitleText>회고 유형 </L.reviseTitleText>
           <S.NoteChangeText>변경 불가</S.NoteChangeText>
         </Flex>
-        <S.NotTextInput>{retro.teamId !== null ? '팀' : '개인'}</S.NotTextInput>
+        <S.NotTextInput>{retro.type === 'TEAM' ? '팀' : '개인'}</S.NotTextInput>
 
         {/* 회고 템플릿 유형 */}
         <Flex margin="10px 0">

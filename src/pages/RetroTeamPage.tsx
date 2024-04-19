@@ -30,18 +30,18 @@ const RetroTeamPage = () => {
   const fetchRetrospective = async () => {
     try {
       const data = await RetrospectiveService.onlyGet({ retrospectiveId: retrospectiveId });
+      console.log('retro.data', data.data);
       setRetro(data.data);
+      console.log('retro', retro);
     } catch (e) {
       toast.error(e);
     }
   };
 
-  const FetchSection = async () => {
+  const fetchSection = async () => {
     try {
       const data = await SectionServices.get({ retrospectiveId: retrospectiveId, teamId: teamId });
-      console.log(data.data);
       setSection(data.data);
-      console.log('section', section);
     } catch (e) {
       toast.error(e);
     }
@@ -60,12 +60,10 @@ const RetroTeamPage = () => {
   };
 
   useEffect(() => {
-    FetchSection();
+    fetchSection();
     fetchRetrospective();
     fetchTemplate();
-  }, []);
-
-  if (!section) return;
+  }, [retro?.status, template?.values, section]);
 
   return (
     <S.Container>
@@ -91,7 +89,7 @@ const RetroTeamPage = () => {
                       .map(section => (
                         <TeamTask section={section} />
                       ))}
-                    <AddTask />
+                    <AddTask template={title.id} retrospectiveId={retro?.retrospectiveId} />
                   </S.FrameStyle>
                 ))
               : PersonalSectionTitleName.map(title => (
