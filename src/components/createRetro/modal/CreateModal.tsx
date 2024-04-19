@@ -9,6 +9,7 @@ import {
   ModalCloseButton,
   Button,
 } from '@chakra-ui/react';
+import axios from 'axios';
 import { Status, TRetrospective } from '@/api/@types/@asConst';
 import { PostRetrospectivesRequest } from '@/api/@types/Retrospectives';
 import postImageToS3 from '@/api/imageApi/postImageToS3';
@@ -64,7 +65,24 @@ const CreateModal: React.FC<CreateModalProps> = ({ isOpen, onClose, templateId, 
           filename: requestData.thumbnail, // imageUUID를 filename으로 설정
           method: 'PUT',
         });
-        console.log('사진 S3 업로드 성공', imageResponse);
+        console.log('사진 S3 업로드 성공 및 url 확인', imageResponse.data.preSignedUrl);
+
+        const imageUrl = imageResponse.data.preSignedUrl;
+
+        const formData = new FormData();
+        formData.append('file', requestData.thumbnail); // uuid로 변환된 이미지를 formdata로
+
+        const uploadResponse = await axios.put(imageUrl, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+
+        if (uploadResponse.status === 200) {
+          console.log('사진 form-data 성공', uploadResponse);
+        } else {
+          console.error('사진 업로드 실패');
+        }
       }
 
       console.log('회고 생성 성공', retrospectiveResponse);

@@ -5,8 +5,12 @@ export interface PostImageToS3Request {
 }
 
 export interface PostImageToS3Response {
-  filename: string;
-  preSignedUrl: string;
+  code: number;
+  data: {
+    filename: string;
+    preSignedUrl: string;
+  };
+  message: string | null;
 }
 
 // 유저 프로필 사진
