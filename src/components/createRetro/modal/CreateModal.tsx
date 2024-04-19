@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalCloseButton,
   Button,
+  Modal,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
 } from '@chakra-ui/react';
 import axios from 'axios';
 import { Status, TRetrospective } from '@/api/@types/@asConst';
+
 import { PostRetrospectivesRequest } from '@/api/@types/Retrospectives';
 import postImageToS3 from '@/api/imageApi/postImageToS3';
 import postRetrospective from '@/api/retrospectivesApi/postRetrospective';
@@ -31,6 +32,9 @@ interface CreateModalProps {
 const CreateModal: React.FC<CreateModalProps> = ({ isOpen, onClose, templateId, type }) => {
   const size = 'xl';
   const navigate = useNavigate();
+  //파일 상태 관리
+  const [image, setImage] = useState<Blob | null>(null);
+
   const [requestData, setRequestData] = useState<PostRetrospectivesRequest>({
     title: '',
     type: type,
@@ -69,12 +73,9 @@ const CreateModal: React.FC<CreateModalProps> = ({ isOpen, onClose, templateId, 
 
         const imageUrl = imageResponse.data.preSignedUrl;
 
-        const formData = new FormData();
-        formData.append('file', requestData.thumbnail); // uuid로 변환된 이미지를 formdata로
-
-        const uploadResponse = await axios.put(imageUrl, formData, {
+        const uploadResponse = await axios.put(imageUrl, image, {
           headers: {
-            'Content-Type': 'multipart/form-data',
+            'Content-Type': image?.type,
           },
         });
 
@@ -107,7 +108,10 @@ const CreateModal: React.FC<CreateModalProps> = ({ isOpen, onClose, templateId, 
         <S.CustomModalBody>
           <S.LeftColumn>
             <ImageUpload
-              onChange={(_thumbnail, imageUUID) => setRequestData({ ...requestData, thumbnail: imageUUID })}
+              onChange={(file, imageUUID) => {
+                setRequestData({ ...requestData, thumbnail: imageUUID });
+                setImage(file);
+              }}
             />
           </S.LeftColumn>
           <S.RightColumn>

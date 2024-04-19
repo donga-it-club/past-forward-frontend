@@ -1,4 +1,4 @@
-import { TRetrospective, TStatus, TOrder } from './@asConst';
+import { TOrder, TRetrospective, TStatus } from './@asConst';
 
 //onlyGet
 export interface onlyGetRetrospectiveRequest {

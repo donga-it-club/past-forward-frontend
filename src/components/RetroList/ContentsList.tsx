@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { PatchRetrospectiveRequest } from '@/api/@types/Retrospectives';
@@ -104,7 +105,7 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
           {filteredData.map(item => (
             <S.Box key={item.id}>
               <S.ImgBox>
-                <S.Thumbnail src={item.thumbnail ? image : Thumbnail} />
+                <S.Thumbnail src={item.thumbnail ? image[item.id] : Thumbnail} />
               </S.ImgBox>
               <hr />
               <S.InfoBox>
