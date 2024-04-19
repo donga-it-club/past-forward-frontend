@@ -29,9 +29,11 @@ const RetroTeamPage = () => {
   const fetchRetrospective = async () => {
     try {
       const data = await RetrospectiveService.onlyGet({ retrospectiveId: retrospectiveId });
+
       console.log('retro.data', data.data);
       setRetro(data.data);
       console.log('retro', retro);
+
     } catch (e) {
       toast.error(e);
     }
