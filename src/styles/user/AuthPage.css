@@ -1,0 +1,32 @@
+.amplify-tabs__item--active {
+  color: var(--amplify-colors-blue-90);
+  border-color: var(--amplify-colors-blue-90);
+}
+
+.amplify-tabs__item:hover {
+  color: var(--amplify-colors-blue-90);
+  cursor: pointer;
+}
+
+.amplify-button--primary {
+  background-color: var(--amplify-colors-blue-90);
+}
+
+.amplify-button--small {
+  color: var(--amplify-colors-blue-90);
+}
+
+/* MyPage 관련 */
+.amplify-card {
+  background-color: var(--amplify-internal-button-disabled-background-color);
+}
+
+.amplify-card .amplify-flex {
+  display: flex;
+  align-items: flex-end;
+}
+
+.amplify-input--quiet {
+  margin-bottom: 1rem;
+  /* width: 85%; */
+}

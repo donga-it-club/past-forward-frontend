@@ -32,9 +32,13 @@ export const RightBox = styled.div`
   text-align: center;
 `;
 
-export const IconStyle = styled.div<{ borderRadius: string }>`
+interface IconProps {
+  'border-radius': string;
+}
+
+export const IconStyle = styled.button<IconProps>`
   width: auto;
-  border-radius: ${props => props.borderRadius};
+  border-radius: ${props => props['border-radius']};
   display: inline-block;
   border: 2px solid black;
   padding: 5px;
@@ -64,6 +68,7 @@ export const SideBarBGContainer = styled.div`
   flex-direction: column;
   position: relative;
   width: 400px;
+  min-width: 300px;
   height: 120vh;
   color: white;
   background-color: #f8f8f8;
@@ -72,14 +77,18 @@ export const SideBarBGContainer = styled.div`
 
 export const LogoBox = styled.div``;
 
-export const LogoText = styled.a`
+interface ColorProps {
+  color: string;
+}
+
+export const LogoText = styled.a<ColorProps>`
   display: flex;
   width: 40vh;
-  color: #111b47;
+  color: ${props => props['color']};
   font-size: 30px;
   font-weight: bold;
   border: 20px;
-  padding: 10px 5px;
+  padding: 10px 20px;
   text-decoration: none;
   padding-top: 10px;
 `;
@@ -110,10 +119,11 @@ export const MainName = styled.h1`
   font-size: 20px;
   font-weight: bold;
   padding: 10px 0;
+  text-align: center;
 `;
 
 export const MailName = styled.h2`
-  color: #d2d2d2;
+  color: #939393;
 `;
 
 export const DivingLine = styled.div`
@@ -129,4 +139,19 @@ export const GetStaredButton = styled.button`
   background-color: #111b47;
   color: white;
   border-radius: 5px;
+`;
+
+export const MenuText = styled.a`
+  color: #111b47;
+  font-weight: 600;
+  text-decoration: none;
+`;
+
+export const AlarmContents = styled.div`
+  background-color: #f8f8f8;
+  width: 90%;
+  height: auto;
+  border-radius: 10px;
+  padding: 2px 5px;
+  margin-bottom: 20px;
 `;

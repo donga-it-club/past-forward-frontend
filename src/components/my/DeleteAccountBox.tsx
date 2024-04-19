@@ -1,6 +1,7 @@
 import { InfoCircle } from 'react-bootstrap-icons';
+import { useNavigate } from 'react-router-dom';
+import { AccountSettings } from '@aws-amplify/ui-react';
 import {
-  Button,
   Modal,
   ModalCloseButton,
   ModalContent,
@@ -9,10 +10,27 @@ import {
   ModalOverlay,
   useDisclosure,
 } from '@chakra-ui/react';
+import { deleteUser } from 'aws-amplify/auth';
 import * as S from '@/styles/my/myPage.style';
+import '@/styles/user/AuthPage.css';
 
 const DeleteAccountButton = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onClose } = useDisclosure();
+  const navigate = useNavigate();
+
+  const handleSuccess = () => {
+    alert('성공적으로 탈퇴되었습니다.');
+    localStorage.removeItem('surveyVisited');
+    navigate('/');
+  };
+
+  async function handleDelete() {
+    try {
+      await deleteUser();
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <>
@@ -24,23 +42,25 @@ const DeleteAccountButton = () => {
           삭제 후 복구 할 수 없습니다.
         </div>
       </S.SubName>
-      <div style={{ display: 'flex', flexDirection: 'row-reverse', margin: '10px' }}>
-        <S.OrdinaryButton id="mypage_rmacc" color="orange" onClick={onOpen}>
-          계정 삭제
-        </S.OrdinaryButton>
-      </div>
+      <S.deleteContainer>
+        <AccountSettings.DeleteUser
+          onSuccess={handleSuccess}
+          handleDelete={handleDelete}
+          displayText={{
+            deleteAccountButtonText: '계정 삭제',
+            cancelButtonText: '취소',
+            confirmDeleteButtonText: '삭제',
+            warningText: '계정을 삭제하시겠습니까? 관련 데이터도 함께 삭제됩니다.',
+          }}
+        />
+      </S.deleteContainer>
       <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader margin="auto auto">진심이지?</ModalHeader>
+          <ModalHeader margin="auto auto">계정을 삭제하시겠습니까?</ModalHeader>
           <ModalCloseButton />
 
-          <ModalFooter>
-            <Button colorScheme="red" mr={3}>
-              삭제하기
-            </Button>
-            <Button onClick={onClose}>취소하기</Button>
-          </ModalFooter>
+          <ModalFooter></ModalFooter>
         </ModalContent>
       </Modal>
     </>

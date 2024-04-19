@@ -19,6 +19,12 @@ module.exports = (env, argv) => {
       port: 3000,
       hot: true,
       historyApiFallback: true,
+      proxy: [
+        {
+          context: ['/api'],
+          target: 'https://api.pastforward.link/',
+        },
+      ],
     },
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx'],

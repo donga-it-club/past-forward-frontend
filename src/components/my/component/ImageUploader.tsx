@@ -1,11 +1,12 @@
 import { ChangeEventHandler, FC, MouseEventHandler, useRef } from 'react';
 import { PersonCircle } from 'react-bootstrap-icons';
 import styled from 'styled-components';
+import { v4 as uuidv4 } from 'uuid';
 import * as S from '@/styles/my/myPage.style';
 
 interface Props {
   image: string;
-  setImage: (image: string) => void;
+  setImage: (image: string, uuid: string) => void;
 }
 
 const ImageUploader: FC<Props> = ({ image, setImage }) => {
@@ -26,12 +27,14 @@ const ImageUploader: FC<Props> = ({ image, setImage }) => {
       const file = files[0];
       const imageUrl = URL.createObjectURL(file);
       const imageUrlString: string = imageUrl;
-      setImage(imageUrlString);
+      const uuid = uuidv4();
+
+      setImage(imageUrlString, uuid);
     }
   };
 
   const DeleteImage: MouseEventHandler<HTMLButtonElement> = () => {
-    setImage('');
+    setImage('', '');
   };
 
   return (

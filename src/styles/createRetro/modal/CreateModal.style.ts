@@ -13,6 +13,13 @@ export const CustomModalBody = styled(ModalBody)`
   width: 100%;
 `;
 
+export const BottomModalBody = styled(ModalBody)`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+`;
+
 export const LeftColumn = styled.div`
   flex: 1;
   display: flex;

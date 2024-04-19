@@ -1,24 +1,20 @@
-import { useState } from 'react';
+import React from 'react';
+import { Input } from '@chakra-ui/react';
 import 'react-datepicker/dist/react-datepicker.css';
-import { ko } from 'date-fns/locale/ko';
-import * as S from '@/styles/createRetro/modal/StartDateCalendar.style';
 import '@/styles/createRetro/modal/Calendar.css';
 
-const StartDateCalendar: React.FC = () => {
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+interface StartDateCalendarProps {
+  onDateChange: (date: Date) => void;
+}
 
-  return (
-    <>
-      <div>Start Date</div>
-      <S.DateInput
-        selected={selectedDate}
-        onChange={(date: Date | null) => setSelectedDate(date)}
-        locale={ko}
-        dateFormat="yyyy-MM-dd"
-        showPopperArrow={false}
-      />
-    </>
-  );
+const StartDateCalendar: React.FC<StartDateCalendarProps> = ({ onDateChange }) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const dateString = event.target.value; // 사용자가 입력한 날짜 문자열
+    const selectedDate = new Date(dateString); // 문자열을 Date 객체로 변환
+    onDateChange(selectedDate); // 부모 컴포넌트로 전달
+  };
+
+  return <Input placeholder="회고 시작일 선택" size="md" type="date" onChange={handleChange} />;
 };
 
 export default StartDateCalendar;

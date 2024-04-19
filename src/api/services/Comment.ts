@@ -4,7 +4,13 @@ import { mswInstance } from '../client';
 const ROUTE = '/comments';
 
 export const CommentService: CommentClient = {
-  getComment: async () => {
-    return await mswInstance.get(`${ROUTE}/get`);
+  getComment: async id => {
+    return await mswInstance.get(`/api/${ROUTE}/${id}`);
+  },
+  delete: async id => {
+    return await mswInstance.delete(`/api/${ROUTE}/${id}`);
+  },
+  getAllComment: async () => {
+    return await mswInstance.get(`api/${ROUTE}`);
   },
 };
