@@ -1,3 +1,4 @@
+import { FaStar } from 'react-icons/fa';
 import styled from 'styled-components';
 
 interface ButtonProps {
@@ -26,4 +27,12 @@ export const Icon = styled.img`
 export const Text = styled.text`
   justify-self: start;
   align-self: center;
+`;
+
+export const StarIcon = styled(FaStar)`
+  width: 15px;
+  height: 15px;
+  justify-self: center;
+  align-self: center;
+  color: #fcea12;
 `;
