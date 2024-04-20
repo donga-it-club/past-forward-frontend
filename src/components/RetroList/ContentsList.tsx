@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react';
 import { CgTimelapse } from 'react-icons/cg'; // ing
-import { CiStar } from 'react-icons/ci';
-import { FaStar } from 'react-icons/fa';
 import { FaRegCircleCheck } from 'react-icons/fa6'; // done
-import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { IoMdPerson } from 'react-icons/io';
 import { MdPeople } from 'react-icons/md';
 import { RxCounterClockwiseClock } from 'react-icons/rx'; //before
@@ -73,7 +70,14 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
   const convertToLocalTime = (dateString: string | number | Date) => {
     const date = new Date(dateString);
     const localTime = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
-    return localTime.toLocaleString(); // 로컬 타임존으로 변환하여 문자열로 반환
+    const options: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+    };
+    return localTime.toLocaleString(undefined, options); // 로컬 타임존으로 변환하여 문자열로 반환
   };
 
   useEffect(() => {
@@ -124,10 +128,10 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
                   }}
                 >
                   {item.isBookmarked && (
-                    <FaStar onClick={() => handleBookmark(item.id)} style={{ color: '#fcea12' }} size="19" />
+                    <S.StyledFaStar onClick={() => handleBookmark(item.id)} style={{ color: '#fcea12' }} size="19" />
                   )}
-                  {!item.isBookmarked && <CiStar onClick={() => handleBookmark(item.id)} size={20} />}
-                  <HiOutlineDotsHorizontal
+                  {!item.isBookmarked && <S.StyledCiStar onClick={() => handleBookmark(item.id)} size={20} />}
+                  <S.StyledHiOutlineDotsHorizontal
                     style={{ color: '#33363F' }}
                     size={20}
                     // onClick={() => openModalForItem(item.id)}
@@ -190,13 +194,13 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
                   </S.ListTimeBox>
                   <S.ListBookmarkBox>
                     {item.isBookmarked && (
-                      <FaStar onClick={() => handleBookmark(item.id)} style={{ color: '#fcea12' }} size="19" />
+                      <S.StyledFaStar onClick={() => handleBookmark(item.id)} style={{ color: '#fcea12' }} size="19" />
                     )}
-                    {!item.isBookmarked && <CiStar onClick={() => handleBookmark(item.id)} size={20} />}
+                    {!item.isBookmarked && <S.StyledCiStar onClick={() => handleBookmark(item.id)} size={20} />}
                   </S.ListBookmarkBox>
                   <S.ListProgressBox>
                     {item.status === 'NOT_STARTED' && (
-                      <FaRegCircleCheck
+                      <RxCounterClockwiseClock
                         size={20}
                         style={{ alignItems: 'start', justifySelf: 'end', color: '#5B5B5B' }}
                       />
@@ -212,7 +216,7 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
                     )}
                   </S.ListProgressBox>
                   <S.ListLinkBox>
-                    <HiOutlineDotsHorizontal
+                    <S.StyledHiOutlineDotsHorizontal
                       style={{ color: '#33363F' }}
                       size={20}
                       // onClick={() => openModalForItem(item.id)}
