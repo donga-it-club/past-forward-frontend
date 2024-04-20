@@ -7,7 +7,6 @@ interface Gender {
 }
 
 const GenderRadio: React.FC<Gender> = ({ onGenderChange }) => {
-
   const [gender, setGender] = useState<string>('FEMALE');
 
   const handleGenderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,12 +22,10 @@ const GenderRadio: React.FC<Gender> = ({ onGenderChange }) => {
         <S.RadioContainer>
           <RadioGroup onChange={setGender} value={gender}>
             <Stack direction="row">
-
               <Radio colorScheme="brand" value="FEMALE" onChange={handleGenderChange}>
                 여성
               </Radio>
               <Radio colorScheme="brand" value="MALE" onChange={handleGenderChange}>
-
                 남성
               </Radio>
             </Stack>
