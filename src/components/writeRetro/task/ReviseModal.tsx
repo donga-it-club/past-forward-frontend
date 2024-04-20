@@ -2,7 +2,6 @@ import { ChangeEvent, FC, useState } from 'react';
 import { Button } from '@chakra-ui/react';
 import { sectionData } from '@/api/@types/Section';
 import { SectionServices } from '@/api/services/Section';
-import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 
 interface Props {
@@ -11,9 +10,7 @@ interface Props {
 
 const ReviseModal: FC<Props> = ({ section }) => {
   // Input 높이 자동 조절
-  const [value, setValue] = useState<string>('');
-  const toast = useCustomToast();
-
+  const [value, setValue] = useState('');
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
     e.target.style.height = 'auto';
@@ -22,9 +19,10 @@ const ReviseModal: FC<Props> = ({ section }) => {
 
   const ChangeContent = async () => {
     try {
-      await SectionServices.patch({ sectionId: section.sectionId, sectionContent: value });
+      const data = await SectionServices.patch({ sectionId: section.sectionId, sectionContent: value });
+      console.log(data);
     } catch (e) {
-      toast.error(e);
+      console.error(e);
     }
   };
   return (
