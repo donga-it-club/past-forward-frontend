@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { PutActionItemsRequest } from '@/api/@types/TeamController';
 import { putActionItemsMember } from '@/api/teamControllerApi/putActionItemsMember';
 import UserProfile from '@/assets/UserProfile1.png';
@@ -9,31 +8,27 @@ interface UserListProps {
   users: { name: string; image: string }[];
   onSelectUserImg: (image: string) => void;
   onSelectUserName: (name: string) => void;
-  // team: number;
-  //   retrospective: number;
-  //   section: number;
+  tId: number;
+  rId: number;
+  sId: number;
 }
 
-export const Members: React.FC<UserListProps> = ({ users, onSelectUserImg, onSelectUserName }) => {
-  const [teamId, setTeamId] = useState<number>(133); // teamId 값 받아오기
-  const [retrospectiveId, setRetrospectiveId] = useState<number>(187); // retrospectiveId값 받아오기
-  const [sectionId, setSectionId] = useState<number>(77); // sectionId 값 받아오기
+export const Members: React.FC<UserListProps> = ({ users, onSelectUserImg, onSelectUserName, tId, rId, sId }) => {
+  const teamId: number = tId;
+  const retrospectiveId: number = rId;
+  const sectionId: number = sId;
+
   const toast = useCustomToast();
 
   const putActionItemMember = async () => {
     try {
-      setTeamId(65);
-      setRetrospectiveId(100);
-      setSectionId(77);
       const requestData: PutActionItemsRequest = {
         teamId: teamId,
         retrospectiveId: retrospectiveId,
         sectionId: sectionId,
       };
-      const response = await putActionItemsMember(requestData);
-      console.log('담당자 지정 성공', response);
+      await putActionItemsMember(requestData);
     } catch (e) {
-      console.log('담당자 지정 실패');
       toast.error('담당자 지정 실패');
     }
   };
