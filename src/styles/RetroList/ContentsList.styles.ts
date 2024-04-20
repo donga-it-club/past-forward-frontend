@@ -85,13 +85,6 @@ export const BookmarkIcon = styled.img`
   }
 `;
 
-export const ProgressIcon = styled.img`
-  align-self: start;
-  justify-self: end;
-  width: 15px;
-  height: 15px;
-`;
-
 export const ListContainer = styled.div`
   padding-top: 10px;
   padding-bottom: 20px;

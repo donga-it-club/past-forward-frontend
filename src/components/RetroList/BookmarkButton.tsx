@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import BookmarkIcon from '@/assets/BookmarkIcon_Y.png';
 import * as S from '@/styles/RetroList/BookmarkButton.styles';
 
 interface BookmarkButtonProps {
@@ -17,7 +16,7 @@ const BookmarkButton: React.FC<BookmarkButtonProps> = ({ handleBookmarkButton })
   return (
     <>
       <S.Button onClick={handleBookmark} isBookmarked={isBookmarked}>
-        <S.Icon src={BookmarkIcon} />
+        <S.StarIcon />
         <S.Text>Bookmark</S.Text>
       </S.Button>
     </>
