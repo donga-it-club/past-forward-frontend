@@ -1,3 +1,6 @@
+import { CiStar } from 'react-icons/ci';
+import { FaStar } from 'react-icons/fa';
+import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import styled from 'styled-components';
 
 export const BoardContainer = styled.div`
@@ -130,6 +133,23 @@ export const ListProgressBox = styled.div`
 export const Icon = styled.img`
   width: 20px;
   height: 20px;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+export const StyledCiStar = styled(CiStar)`
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const StyledHiOutlineDotsHorizontal = styled(HiOutlineDotsHorizontal)`
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const StyledFaStar = styled(FaStar)`
   &:hover {
     cursor: pointer;
   }
