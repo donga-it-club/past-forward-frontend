@@ -177,7 +177,7 @@ export const TaskText = styled.p`
   vertical-align: top;
   display: inline-block;
   margin: 20px 0;
-  margin-top: 5px;
+  margin-top: 20px;
   &:hover {
     cursor: pointer;
   }
@@ -242,16 +242,12 @@ export const TaskMessageLine = styled.div`
 
 export const TaskMessageStyle = styled.div`
   min-height: 35px;
-  display: flex;
   margin-top: 10px;
 `;
 
 export const MessageUserProfile = styled.div``;
 
-export const MessageTopStyle = styled.div`
-  display: flex;
-  position: relative;
-`;
+export const MessageTopStyle = styled.div``;
 
 export const MessageUserName = styled.p`
   font-size: 15px;

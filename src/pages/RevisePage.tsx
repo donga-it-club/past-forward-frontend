@@ -27,7 +27,10 @@ const RetroRevisePage = () => {
     try {
       const data = await RetrospectiveService.onlyGet({ retrospectiveId: retrospectiveId });
       setRetro(data.data);
-      setStatus(retro?.status);
+      console.log(retro);
+      if (retro) {
+        setStatus(retro.status.toString);
+      }
     } catch (e) {
       toast.error(e);
     }

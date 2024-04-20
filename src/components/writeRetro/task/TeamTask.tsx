@@ -123,7 +123,7 @@ const TeamTask: FC<Props> = ({ section }) => {
               <S.SubTaskIcon onClick={handleMessaged}>
                 {messaged ? <MdMessage size="20px" color="#111B47" /> : <MdMessage size="20px" color="#DADEE5" />}
               </S.SubTaskIcon>
-              <S.SubTaskCount>0</S.SubTaskCount>
+              <S.SubTaskCount>{section.comments.length}</S.SubTaskCount>
             </S.SubTaskStyle>
             {/* DaysLeft */}
             <S.SubTaskStyle>

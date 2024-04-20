@@ -74,17 +74,30 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
 
   const handlePutRetrospective = async () => {
     try {
-      const data = await RetrospectiveService.put({
-        retrospectiveId: 102,
-        title: title,
-        teamId: teamId,
-        description: description,
-        thumbnail: image,
-        status: 'COMPLETED',
-      });
-      console.log('put data', data);
-      navigate('/retrolist');
-      toast.info('회고 수정이 정상 처리되었습니다.');
+      if (teamId) {
+        const data = await RetrospectiveService.putTeam({
+          retrospectiveId: 102,
+          title: title ?? retro.title,
+          teamId: teamId,
+          description: description ?? retro.description,
+          thumbnail: image ?? retro.thumbnail,
+          status: 'COMPLETED',
+        });
+        console.log('put data', data);
+        navigate('/retrolist');
+        toast.info('회고 수정이 정상 처리되었습니다.');
+      } else {
+        const data = await RetrospectiveService.putPersonal({
+          retrospectiveId: 102,
+          title: title ?? retro.title,
+          description: description ?? retro.description,
+          thumbnail: image ?? retro.thumbnail,
+          status: 'COMPLETED',
+        });
+        console.log('put data', data);
+        navigate('/retrolist');
+        toast.info('회고 수정이 정상 처리되었습니다.');
+      }
     } catch (e) {
       toast.error(e);
     }
@@ -131,7 +144,12 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
 
   return (
     <S.SettingContainer>
-      <RetroImageUploader image={image} setImage={setImage} />
+      <RetroImageUploader
+        image={image}
+        setImage={(file, imageUUID) => {
+          setImage(imageUUID);
+        }}
+      />
       {/* 회고명 */}
       <Flex flexDirection="column">
         <L.reviseTitleText>회고명 </L.reviseTitleText>
@@ -157,7 +175,7 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
           <L.reviseTitleText>회고 템플릿 유형 </L.reviseTitleText>
           <S.NoteChangeText>변경 불가</S.NoteChangeText>
         </Flex>
-        <S.NotTextInput>{templateName && templateName[0].name}</S.NotTextInput>
+        <S.NotTextInput>{templateName && templateName[0].name === 'Keep' ? 'KPT' : 'KUDOS'}</S.NotTextInput>
 
         {/* 회고리더 */}
         <Flex margin="10px 0">

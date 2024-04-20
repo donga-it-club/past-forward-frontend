@@ -19,7 +19,7 @@ export interface RetrospectiveData {
   userId: number;
   leaderName: string;
   description: string;
-  status: keyof TStatus;
+  status: string;
   thumbnail: string;
 }
 
@@ -84,10 +84,18 @@ export interface DeleteRetrospectiveRequest {
 }
 
 //put
-export interface PutRetrospectiveRequest {
+export interface PutTeamRetrospectiveRequest {
   retrospectiveId: number;
   title: string;
   teamId?: number;
+  description: string;
+  status: keyof TStatus;
+  thumbnail?: string;
+}
+
+export interface PutPersonalRetrospectiveRequest {
+  retrospectiveId: number;
+  title: string;
   description: string;
   status: keyof TStatus;
   thumbnail?: string;
@@ -127,6 +135,7 @@ export interface RetrospectivesClient {
   create(request: PostRetrospectivesRequest): Promise<PostRetrospectivesResponse>;
   get(request: GetRetrospectiveRequest): Promise<GetRetrospectiveData>;
   delete(request: DeleteRetrospectiveRequest): Promise<void>;
-  put(request: PutRetrospectiveRequest): Promise<RetrospectiveResponse>;
+  putTeam(request: PutTeamRetrospectiveRequest): Promise<RetrospectiveResponse>;
+  putPersonal(request: PutPersonalRetrospectiveRequest): Promise<RetrospectiveResponse>;
   patch(request: PatchRetrospectiveRequest): Promise<PatchRetrospectiveResponse>;
 }

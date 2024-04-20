@@ -1,16 +1,31 @@
-import { CommentClient } from '../@types/Comment';
-import { mswInstance } from '../client';
+import { CommentClient, DeleteCommentRequest, PostCommentRequest, PostCommentResponse } from '../@types/Comment';
+import axiosInstance from '../axiosConfig';
 
 const ROUTE = '/comments';
 
 export const CommentService: CommentClient = {
-  getComment: async id => {
-    return await mswInstance.get(`/api/${ROUTE}/${id}`);
+  post: async (request: PostCommentRequest): Promise<PostCommentResponse> => {
+    try {
+      const response = await axiosInstance.post(`${ROUTE}`, request);
+      return response.data;
+    } catch (error) {
+      throw new Error(error as string);
+    }
   },
-  delete: async id => {
-    return await mswInstance.delete(`/api/${ROUTE}/${id}`);
+  delete: async ({ commentId }: DeleteCommentRequest) => {
+    try {
+      const response = await axiosInstance.delete(`${ROUTE}/${commentId}`);
+      return response.data;
+    } catch (error) {
+      throw new Error(error as string);
+    }
   },
-  getAllComment: async () => {
-    return await mswInstance.get(`api/${ROUTE}`);
+  put: async ({ commentId, ...request }) => {
+    try {
+      const response = await axiosInstance.put(`${ROUTE}/${commentId}`, request);
+      return response.data;
+    } catch (error) {
+      throw new Error(error as string);
+    }
   },
 };

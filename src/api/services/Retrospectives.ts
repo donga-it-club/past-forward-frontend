@@ -49,7 +49,16 @@ export const RetrospectiveService: RetrospectivesClient = {
     }
   },
 
-  put: async ({ retrospectiveId }, ...request) => {
+  putTeam: async ({ retrospectiveId, ...request }) => {
+    try {
+      const response = await axiosInstance.put(`${ROUTE}/${retrospectiveId}`, request);
+      return response.data;
+    } catch (error) {
+      throw new Error(error as string);
+    }
+  },
+
+  putPersonal: async ({ retrospectiveId, ...request }) => {
     try {
       const response = await axiosInstance.put(`${ROUTE}/${retrospectiveId}`, request);
       return response.data;
