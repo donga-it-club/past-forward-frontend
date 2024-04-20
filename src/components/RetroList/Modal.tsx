@@ -1,4 +1,4 @@
-import ModalClose from '@/assets/modalClose.png';
+import { IoIosClose } from 'react-icons/io';
 import * as S from '@/styles/RetroList/Modal.styles';
 
 interface ModalProps {
@@ -12,7 +12,7 @@ const Modal: React.FC<ModalProps> = ({ onClose, isOpen }) => {
       <S.ModalContent>
         <div>
           <S.CloseBox>
-            <S.CloseImg src={ModalClose} onClick={onClose} />
+            <IoIosClose onClick={onClose} />
           </S.CloseBox>
           <S.Text>생성자가 아닌 참여자는 수정 권한이 없습니다.</S.Text>
         </div>
