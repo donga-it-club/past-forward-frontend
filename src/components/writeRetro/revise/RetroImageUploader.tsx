@@ -1,40 +1,51 @@
-import { ChangeEventHandler, FC, MouseEventHandler, useRef } from 'react';
+import { ChangeEventHandler, FC, MouseEventHandler, useRef, useState } from 'react';
 import { MdOutlineFileUpload } from 'react-icons/md';
 import { Button, Image } from '@chakra-ui/react';
+import { v4 as uuidv4 } from 'uuid';
 
 interface Props {
-  image: string;
-  setImage: (image: string) => void;
+  image: string | undefined;
+  onChange: (image: File | null, uuid: string) => void;
 }
 
-const RetroImageUploader: FC<Props> = ({ image, setImage }) => {
+const RetroImageUploader: FC<Props> = ({ image, onChange }) => {
+  const [preview, setPreview] = useState<string | null>(null);
+  const [_, setImageUUID] = useState<string | null>(null); // 상태를 활용할 수 있도록 수정
+
   const inputRef = useRef<HTMLInputElement>(null);
   const handleUploadButtonClick: MouseEventHandler<HTMLButtonElement> = () => {
     inputRef.current?.click();
   };
 
   const handleImageChange: ChangeEventHandler<HTMLInputElement> = async event => {
-    const files = event.target.files;
-    if (!files) return;
+    const files = event.target.files?.[0];
+
     if (files) {
-      const file = files[0];
-      const imageUrl = URL.createObjectURL(file);
-      const imageUrlString: string = imageUrl;
-      setImage(imageUrlString);
+      const reader = new FileReader();
+      // const imageUrl = URL.createObjectURL(files);
+      // const imageUrlString: string = imageUrl;
+      const uuid = uuidv4();
+      // const fix_uuid = uuid.replace(/\n/gi, '\\n');
+      onChange(files, uuid);
+
+      reader.onloadend = () => {
+        const result = reader.result as string;
+        setPreview(result);
+        setImageUUID(uuid);
+      };
+      reader.readAsDataURL(files);
     }
   };
 
   const DeleteImage: MouseEventHandler<HTMLButtonElement> = () => {
-    setImage('');
+    setPreview(null);
+    setImageUUID(null);
+    onChange(null, '');
   };
 
   return (
     <>
-      {image ? (
-        <Image src={image} maxWidth={400} margin="20px auto" h="auto" aspectRatio="1/1" objectFit="contain" />
-      ) : (
-        <Image src="/Home.png" maxWidth={400} margin="20px auto" h="auto" aspectRatio="1/1" objectFit="contain" />
-      )}
+      <Image src={preview ?? image} maxWidth={400} margin="20px auto" h="auto" aspectRatio="1/1" objectFit="contain" />
 
       <div style={{ margin: '0 auto' }}>
         <Button colorScheme="brand" variant="outline" margin="0 30px" onClick={handleUploadButtonClick}>

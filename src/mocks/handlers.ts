@@ -64,6 +64,14 @@ export const SectionHandlers: RequestHandler[] = [
     };
     return HttpResponse.json(mockLikes);
   }),
+  http.put(`${SECTION_ROUTE}/action-items`, () => {
+    const mockActionItems = {
+      code: 0,
+      message: 'string',
+      data: {},
+    };
+    return HttpResponse.json(mockActionItems);
+  }),
 ];
 
 //teamMembers
@@ -82,4 +90,4 @@ export const TeamHandlers: RequestHandler[] = [
     return HttpResponse.json(mockMembers);
   }),
 ];
-export const mswWorker = setupWorker(...TeamHandlers);
+export const mswWorker = setupWorker();

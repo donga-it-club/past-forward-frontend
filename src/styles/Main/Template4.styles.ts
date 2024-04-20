@@ -77,7 +77,8 @@ export const DotContainer = styled.div`
   transform: translateX(-50%);
   display: flex;
   z-index: 2;
-  top: 3%;
+  top: 3.5%;
+  left: 50%;
 `;
 
 export const Dot = styled.div<{ active: boolean }>`

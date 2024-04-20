@@ -1,3 +1,6 @@
+import { CiStar } from 'react-icons/ci';
+import { FaStar } from 'react-icons/fa';
+import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import styled from 'styled-components';
 
 export const BoardContainer = styled.div`
@@ -53,6 +56,8 @@ export const RetroDate = styled.span`
 export const Thumbnail = styled.img`
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  aspect-ratio: 1/1;
 `;
 
 export const TeamIcon = styled.img`
@@ -85,15 +90,9 @@ export const BookmarkIcon = styled.img`
   }
 `;
 
-export const ProgressIcon = styled.img`
-  align-self: start;
-  justify-self: end;
-  width: 15px;
-  height: 15px;
-`;
-
 export const ListContainer = styled.div`
   padding-top: 10px;
+  padding-bottom: 20px;
 `;
 
 export const ListTopBox = styled.div`
@@ -111,6 +110,9 @@ export const ItemBox = styled.li`
 
 export const ListTitleBox = styled.div`
   flex: 1;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 export const ListUserBox = styled.div`
   flex: 1;
@@ -131,4 +133,24 @@ export const ListProgressBox = styled.div`
 export const Icon = styled.img`
   width: 20px;
   height: 20px;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+export const StyledCiStar = styled(CiStar)`
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const StyledHiOutlineDotsHorizontal = styled(HiOutlineDotsHorizontal)`
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const StyledFaStar = styled(FaStar)`
+  &:hover {
+    cursor: pointer;
+  }
 `;

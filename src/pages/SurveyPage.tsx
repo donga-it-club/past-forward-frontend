@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import { useNavigate } from 'react-router-dom';
 import { Text, Button, Divider } from '@chakra-ui/react';
 import { PostSurvey } from '@/api/survey/postSurvey';
@@ -15,6 +16,7 @@ const SurveyPage: React.FC = () => {
     localStorage.setItem('surveyVisited', 'true');
   }, []);
 
+
   const navigate = useNavigate();
 
   const handleSurveyButtonClick = () => {
@@ -23,6 +25,7 @@ const SurveyPage: React.FC = () => {
 
   const handleSurvey = async () => {
     try {
+
       console.log(
         '나이는:',
         age,
@@ -36,34 +39,31 @@ const SurveyPage: React.FC = () => {
         path,
         '/목적은(복수선택):',
         purpose,
-      );
-      const SurveyRequest = await PostSurvey({
-        age: numAge,
-        gender: gender,
-        occupation: job,
-        region: city,
-        source: path,
-        purposes: purpose,
-      });
+
       console.log('설문조사 전송 성공', SurveyRequest);
       alert('설문조사가 전송되었습니다.');
       navigate('/');
+
     } catch (error) {
       console.error('실패입니다.', error);
     }
   };
 
   const [age, setAge] = useState<string>('');
+
   const [gender, setGender] = useState<string>('FEMALE');
   const [job, setJob] = useState<string>('');
   const [city, setCity] = useState<string>('서울');
   const [path, setPath] = useState<string>('');
   const [purpose, setPurpose] = useState<string[]>();
 
+
   const handleAgeChange = (age: string) => {
     setAge(age);
   };
+
   const numAge: number = parseInt(age, 10);
+
   const handleGenderChange = (gender: string) => {
     setGender(gender);
   };
@@ -76,9 +76,11 @@ const SurveyPage: React.FC = () => {
   const handlePathChange = (path: string) => {
     setPath(path);
   };
+
   const handlePurposeChange = (purpose: string[]) => {
     setPurpose(purpose);
   };
+
 
   return (
     <>
@@ -97,7 +99,9 @@ const SurveyPage: React.FC = () => {
           <Divider />
           <PathRadio onPathChange={handlePathChange} />
           <Divider />
+
           <PurposeCheckbox onPurposeChange={handlePurposeChange} />
+
           <Button onClick={handleSurveyButtonClick} colorScheme="brand" width="80%" style={{ marginBottom: '4rem' }}>
             제출
           </Button>

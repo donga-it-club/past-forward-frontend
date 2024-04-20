@@ -177,7 +177,7 @@ export const TaskText = styled.p`
   vertical-align: top;
   display: inline-block;
   margin: 20px 0;
-  margin-top: 5px;
+  margin-top: 20px;
   &:hover {
     cursor: pointer;
   }
@@ -242,16 +242,12 @@ export const TaskMessageLine = styled.div`
 
 export const TaskMessageStyle = styled.div`
   min-height: 35px;
-  display: flex;
   margin-top: 10px;
 `;
 
 export const MessageUserProfile = styled.div``;
 
-export const MessageTopStyle = styled.div`
-  display: flex;
-  position: relative;
-`;
+export const MessageTopStyle = styled.div``;
 
 export const MessageUserName = styled.p`
   font-size: 15px;
@@ -414,6 +410,7 @@ export const ManagerButton = styled.button`
   &:hover {
     cursor: pointer;
   }
+  position: relative;
 `;
 
 export const ReviseModalStyle = styled.div`
@@ -478,4 +475,22 @@ export const ReviseModalButton = styled.button`
   border: 1px solid #c8c8c8;
   border-radius: 4px;
   margin-right: 30px;
+`;
+
+export const HoverUser = styled.span`
+  position: absolute;
+  width: 40px;
+  left: -5px; /* 원하는 만큼의 왼쪽 이동 값 설정 */
+  top: 100%;
+`;
+
+export const ActionItemsUserImg = styled.img`
+  width: 24px;
+  height: 24px;
+`;
+
+export const DeleteSectionText = styled.p`
+  margin: 20px;
+  color: #111b47;
+  font-size: 15px;
 `;

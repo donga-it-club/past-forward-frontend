@@ -1,9 +1,10 @@
 export const Order = {
-  RECENTLY: 'RECENTLY',
-  PREVIOUSLY: 'PREVIOUSLY',
+  NEWEST: 'NEWEST',
+  OLDEST: 'OLDEST',
 } as const;
 
 export const Status = {
+  ALL: 'ALL',
   NOT_STARTED: 'NOT_STARTED',
   IN_PROGRESS: 'IN_PROGRESS',
   COMPLETED: 'COMPLETED',
@@ -12,7 +13,7 @@ export const Status = {
 export const RetrospectiveType = {
   TEAM: 'TEAM',
   PERSONAL: 'PERSONAL',
-};
+} as const;
 
 export const Template = {
   1: 'Keep',

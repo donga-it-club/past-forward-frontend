@@ -143,6 +143,7 @@ export const GetStaredButton = styled.button`
 
 export const MenuText = styled.a`
   color: #111b47;
+  font-weight: 600;
   text-decoration: none;
 `;
 

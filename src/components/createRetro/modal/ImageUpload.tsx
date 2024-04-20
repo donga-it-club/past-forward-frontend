@@ -3,24 +3,24 @@ import { Input, Box, Image, Button, Center } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
 
 interface ImageUploadProps {
-  onChange: (image: string, uuid: string) => void; // 이미지 파일의 URL, uuid를 외부로 전달하는 함수
+  onChange: (file: File | null, uuid: string) => void; // 파일 객체, uuid 함께 전달
 }
 
 const ImageUpload: React.FC<ImageUploadProps> = ({ onChange }) => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [, setImageUUID] = useState<string | null>(null);
+  const [_, setImageUUID] = useState<string | null>(null); // 상태를 활용할 수 있도록 수정
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
+      const uuid = uuidv4();
+      onChange(file, uuid); // 파일 객체, 이미지 미리보기 URL, UUID를 전달
+
       reader.onloadend = () => {
         const result = reader.result as string;
-        const uuid = uuidv4(); // UUID 생성
-        setImageUUID(uuid); // 생성된 UUID 설정
-        setImagePreview(result); // 이미지 미리보기 업데이트
-        onChange(result, uuid);
-        console.log(uuid);
+        setImagePreview(result);
+        setImageUUID(uuid);
       };
       reader.readAsDataURL(file);
     }
@@ -30,9 +30,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onChange }) => {
   const handleRemoveImage = () => {
     setImagePreview(null);
     setImageUUID(null);
-    if (onChange) {
-      onChange('', '');
-    }
+    onChange(null, ''); // 이미지 제거 시 null 및 빈 문자열 전달
   };
 
   return (
@@ -47,7 +45,6 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onChange }) => {
             </Button>
           </label>
         </Center>
-
         {/* 이미지 미리보기 */}
         <Center>
           {imagePreview && (

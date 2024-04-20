@@ -18,7 +18,6 @@ export const MockRetrospective: RetrospectiveResponse = {
     updatedDate: '2024-04-12T04:20:54.835Z',
   },
 };
-
 export const MockOnlyGetRetrospective: onlyGetRetrospectiveResponse = {
   code: 202,
   message: 'string',
@@ -26,10 +25,11 @@ export const MockOnlyGetRetrospective: onlyGetRetrospectiveResponse = {
     retrospectiveId: 1,
     title: 'heeeeee',
     templateId: 2,
-    teamId: 1,
-    userId: 1,
-    description: 'heeee',
-    status: Status.COMPLETED,
+    type: 'TEAM',
+    userId: 0,
+    leaderName: 'string',
+    description: 'string',
+    status: Status.NOT_STARTED,
     thumbnail: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
   },
 };

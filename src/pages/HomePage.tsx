@@ -20,7 +20,6 @@ const App: React.FC<AppProps> = () => {
         <Section>
           <MainDesign />
         </Section>
-        {/* <S.Container> */}
         <Section>
           <Template1 />
         </Section>
@@ -39,7 +38,6 @@ const App: React.FC<AppProps> = () => {
         <Section>
           <Contact />
         </Section>
-        {/* </S.Container> */}
       </SectionsContainer>
     </>
   );

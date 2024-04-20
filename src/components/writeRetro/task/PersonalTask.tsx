@@ -9,7 +9,7 @@ import { PersonalTaskMessage } from './taskMessage/PersonalTaskMessage';
 import { sectionData } from '@/api/@types/Section';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 
-const formattedDate = (name: any) => dayjs(name).format('YYYY/MM/DD HH:MM');
+export const formattedDate = (name: any) => dayjs(name).format('YYYY/MM/DD HH:MM');
 
 interface Props {
   name: sectionData;

@@ -3,7 +3,9 @@ import { MdPeopleAlt } from 'react-icons/md';
 import { useLocation } from 'react-router-dom';
 import { Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 import { RetrospectiveData } from '@/api/@types/Retrospectives';
+import { TeamMembersData } from '@/api/@types/TeamController';
 import { RetrospectiveService } from '@/api/services/Retrospectives';
+import { TeamControllerServices } from '@/api/services/TeamController';
 import ManageTeamMembers from '@/components/writeRetro/revise/ManageTeamMembers';
 import NotTeamMemberModal from '@/components/writeRetro/revise/NotTeamMemberModal';
 import ReviseSetting from '@/components/writeRetro/revise/ReviseSetting';
@@ -16,16 +18,30 @@ const RetroRevisePage = () => {
   const query = search.split(/[=,&]/);
   const retrospectiveId = Number(query[1]);
   const teamId = Number(query[3]);
-
   const [retro, setRetro] = useState<RetrospectiveData>();
+  const [members, setMembers] = useState<TeamMembersData[]>();
+  const [status, setStatus] = useState<string>('NOT_STARTED');
   const toast = useCustomToast();
 
   const FetchRetrospective = async () => {
     try {
       const data = await RetrospectiveService.onlyGet({ retrospectiveId: retrospectiveId });
-      console.log('data56', data);
       setRetro(data.data);
-      console.log('retro', retro);
+      if (retro) {
+        setStatus(retro.status);
+      }
+    } catch (e) {
+      toast.error(e);
+    }
+  };
+
+  const fetchTeamMembers = async () => {
+    try {
+      if (teamId) {
+        const data = await TeamControllerServices.TeamMemberGet({ teamId: teamId, retrospectiveId: retrospectiveId });
+        setMembers(data.data);
+      }
+      return;
     } catch (e) {
       toast.error(e);
     }
@@ -33,6 +49,7 @@ const RetroRevisePage = () => {
 
   useEffect(() => {
     FetchRetrospective();
+    fetchTeamMembers();
   }, [retro?.status]);
 
   if (!retro) return;
@@ -45,24 +62,19 @@ const RetroRevisePage = () => {
           <S.TitleText>FistRetro</S.TitleText>
         </Flex>
       </S.TitleBox>
-      {/* <SettingMenu></SettingMenu> */}
       <S.SettingMenuStyle>
         <Tabs colorScheme="brand" isLazy isFitted>
           <TabList margin="0 40px" fontSize={60}>
             <Tab>회고 설정</Tab>
-            {retro.teamId ? <Tab>팀원 관리</Tab> : null}
+            {retro.type === 'TEAM' ? <Tab>팀원 관리</Tab> : null}
           </TabList>
 
           <TabPanels>
             <TabPanel>
-              <ReviseSetting />
+              <ReviseSetting retro={retro} status={status} setStatus={setStatus} />
             </TabPanel>
             <TabPanel>
-              {retro.teamId ? (
-                <ManageTeamMembers teamId={teamId} retrospectiveId={retrospectiveId} />
-              ) : (
-                <NotTeamMemberModal />
-              )}
+              {members ? <ManageTeamMembers members={members} teamId={teamId} /> : <NotTeamMemberModal />}
             </TabPanel>
           </TabPanels>
         </Tabs>
