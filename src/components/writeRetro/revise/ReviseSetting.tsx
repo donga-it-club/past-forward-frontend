@@ -54,7 +54,7 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
     if (retro) {
       try {
         const data = await postImageToS3({ filename: retro.thumbnail, method: 'GET' });
-        setImage(data.preSignedUrl);
+        setImage(data.data.preSignedUrl);
       } catch (e) {
         toast.error(e);
       }

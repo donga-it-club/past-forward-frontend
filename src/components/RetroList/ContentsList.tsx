@@ -1,15 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { CgTimelapse } from 'react-icons/cg'; // ing
 import { CiStar } from 'react-icons/ci';
 import { FaStar } from 'react-icons/fa';
 import { FaRegCircleCheck } from 'react-icons/fa6'; // done
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { IoMdPerson } from 'react-icons/io';
 import { MdPeople } from 'react-icons/md';
-import { RiProgress2Line } from 'react-icons/ri'; // ing
 import { RxCounterClockwiseClock } from 'react-icons/rx'; //before
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { PatchRetrospectiveRequest } from '@/api/@types/Retrospectives';
+import postImageToS3 from '@/api/imageApi/postImageToS3';
 import { patchRetrospective } from '@/api/retrospectivesApi/patchRetrospective';
 import Thumbnail from '@/assets/Thumbnail.png';
 import Modal from '@/components/RetroList/Modal';
@@ -44,6 +45,7 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
   const [userNickname, setUserNickname] = useRecoilState(userNicknameState);
   const [openModalId, setOpenModalId] = useState<number | null>(null);
   const toast = useCustomToast();
+  const [image, setImage] = useState<{ [key: number]: string }>({});
 
   const handleBookmark = async (itemId: number) => {
     try {
@@ -71,6 +73,28 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
   console.log('filter', filteredData);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const fetchThumbnailsData = async (item: Content) => {
+      try {
+        if (item.thumbnail) {
+          const imageResponse = await postImageToS3({
+            filename: item.thumbnail,
+            method: 'GET',
+          });
+          console.log('s3 사진 받아오기 성공', imageResponse.data.preSignedUrl);
+          setImage(prevImage => ({
+            ...prevImage,
+            [item.id]: imageResponse.data.preSignedUrl,
+          }));
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    data.forEach(item => fetchThumbnailsData(item));
+  }, [data]);
+
   return (
     <div>
       {viewMode === 'board' && (
@@ -78,7 +102,7 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
           {filteredData.map(item => (
             <S.Box key={item.id}>
               <S.ImgBox>
-                <S.Thumbnail src={item.thumbnail ? item.thumbnail : Thumbnail} />
+                <S.Thumbnail src={item.thumbnail ? image[item.id] : Thumbnail} />
               </S.ImgBox>
               <hr />
               <S.InfoBox>
@@ -103,7 +127,7 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
                   <HiOutlineDotsHorizontal
                     style={{ color: '#33363F' }}
                     size={20}
-                     // onClick={() => openModalForItem(item.id)}
+                    // onClick={() => openModalForItem(item.id)}
                     onClick={() => {
                       if (item.userId === item.id) {
                         // 수정 권한 없을 때(생성자가 아닐 때 확인하고 고치기)
@@ -131,7 +155,7 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
                   />
                 )}
                 {item.status === 'IN_PROGRESS' && (
-                  <RiProgress2Line size={15} style={{ alignItems: 'start', justifySelf: 'end', color: '#57AD5A' }} />
+                  <CgTimelapse size={15} style={{ alignItems: 'start', justifySelf: 'end', color: '#57AD5A' }} />
                 )}
                 {item.status === 'COMPLETED' && (
                   <FaRegCircleCheck size={15} style={{ alignItems: 'start', justifySelf: 'end', color: '#FF1818' }} />
@@ -180,10 +204,7 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
                       />
                     )}
                     {item.status === 'IN_PROGRESS' && (
-                      <RiProgress2Line
-                        size={20}
-                        style={{ alignItems: 'start', justifySelf: 'end', color: '#57AD5A' }}
-                      />
+                      <CgTimelapse size={20} style={{ alignItems: 'start', justifySelf: 'end', color: '#57AD5A' }} />
                     )}
                     {item.status === 'COMPLETED' && (
                       <FaRegCircleCheck
