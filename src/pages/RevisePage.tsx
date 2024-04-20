@@ -20,16 +20,15 @@ const RetroRevisePage = () => {
   const teamId = Number(query[3]);
   const [retro, setRetro] = useState<RetrospectiveData>();
   const [members, setMembers] = useState<TeamMembersData[]>();
-  const [status, setStatus] = useState<string>();
+  const [status, setStatus] = useState<string>('NOT_STARTED');
   const toast = useCustomToast();
 
   const FetchRetrospective = async () => {
     try {
       const data = await RetrospectiveService.onlyGet({ retrospectiveId: retrospectiveId });
       setRetro(data.data);
-      console.log(retro);
       if (retro) {
-        setStatus(retro.status.toString);
+        setStatus(retro.status);
       }
     } catch (e) {
       toast.error(e);

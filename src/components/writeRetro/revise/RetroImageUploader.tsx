@@ -4,11 +4,11 @@ import { Button, Image } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
 
 interface Props {
-  image: string;
-  setImage: (image: File | null, uuid: string) => void;
+  image: string | undefined;
+  onChange: (image: File | null, uuid: string) => void;
 }
 
-const RetroImageUploader: FC<Props> = ({ image, setImage }) => {
+const RetroImageUploader: FC<Props> = ({ image, onChange }) => {
   const [preview, setPreview] = useState<string | null>(null);
   const [_, setImageUUID] = useState<string | null>(null); // 상태를 활용할 수 있도록 수정
 
@@ -22,8 +22,11 @@ const RetroImageUploader: FC<Props> = ({ image, setImage }) => {
 
     if (files) {
       const reader = new FileReader();
+      // const imageUrl = URL.createObjectURL(files);
+      // const imageUrlString: string = imageUrl;
       const uuid = uuidv4();
-      setImage(files, uuid);
+      // const fix_uuid = uuid.replace(/\n/gi, '\\n');
+      onChange(files, uuid);
 
       reader.onloadend = () => {
         const result = reader.result as string;
@@ -37,7 +40,7 @@ const RetroImageUploader: FC<Props> = ({ image, setImage }) => {
   const DeleteImage: MouseEventHandler<HTMLButtonElement> = () => {
     setPreview(null);
     setImageUUID(null);
-    setImage(null, '');
+    onChange(null, '');
   };
 
   return (
