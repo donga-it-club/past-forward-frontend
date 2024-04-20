@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+
+import { useNavigate } from 'react-router-dom';
 import { Text, Button, Divider } from '@chakra-ui/react';
-// import { PostSurvey } from '@/api/survey/postSurvey';
+import { PostSurvey } from '@/api/survey/postSurvey';
 import AgeInput from '@/components/survey/AgeInput';
 import CityRadio from '@/components/survey/CityRadio';
 import GenderRadio from '@/components/survey/GenderRadio';
@@ -14,13 +16,16 @@ const SurveyPage: React.FC = () => {
     localStorage.setItem('surveyVisited', 'true');
   }, []);
 
+
+  const navigate = useNavigate();
+
   const handleSurveyButtonClick = () => {
     handleSurvey();
   };
 
   const handleSurvey = async () => {
     try {
-      //  + path 기타 + purpose 기타 + purpose 복수 답안 + 직업 value
+
       console.log(
         '나이는:',
         age,
@@ -34,36 +39,31 @@ const SurveyPage: React.FC = () => {
         path,
         '/목적은(복수선택):',
         purpose,
-        '/기타 목적은:',
-        otherPurpose,
-      );
-      // const SurveyRequest = await PostSurvey({
-      //   age: age,
-      //   gender: gender,
-      //   occupation: job,
-      //   region: city,
-      //   source: path,
-      //   purpose: purpose,
-      //   otherPurpose: otherPurpose
-      // });
-      // console.log('설문조사 전송 성공', SurveyRequest);
-      // alert('설문조사가 전송되었습니다.');
+
+      console.log('설문조사 전송 성공', SurveyRequest);
+      alert('설문조사가 전송되었습니다.');
+      navigate('/');
+
     } catch (error) {
       console.error('실패입니다.', error);
     }
   };
 
   const [age, setAge] = useState<string>('');
-  const [gender, setGender] = useState<string>('female');
+
+  const [gender, setGender] = useState<string>('FEMALE');
   const [job, setJob] = useState<string>('');
   const [city, setCity] = useState<string>('서울');
   const [path, setPath] = useState<string>('');
-  const [purpose, setPurpose] = useState<string>();
-  const [otherPurpose, setOtherPurpose] = useState<string>();
+  const [purpose, setPurpose] = useState<string[]>();
+
 
   const handleAgeChange = (age: string) => {
     setAge(age);
   };
+
+  const numAge: number = parseInt(age, 10);
+
   const handleGenderChange = (gender: string) => {
     setGender(gender);
   };
@@ -76,12 +76,12 @@ const SurveyPage: React.FC = () => {
   const handlePathChange = (path: string) => {
     setPath(path);
   };
-  const handlePurposeChange = (purpose: string) => {
+
+  const handlePurposeChange = (purpose: string[]) => {
     setPurpose(purpose);
   };
-  const handleOtherPurposeChange = (otherPurpose: string) => {
-    setOtherPurpose(otherPurpose);
-  };
+
+
   return (
     <>
       <S.Background>
@@ -99,7 +99,9 @@ const SurveyPage: React.FC = () => {
           <Divider />
           <PathRadio onPathChange={handlePathChange} />
           <Divider />
-          <PurposeCheckbox onPurposeChange={handlePurposeChange} onOtherPurposeChange={handleOtherPurposeChange} />
+
+          <PurposeCheckbox onPurposeChange={handlePurposeChange} />
+
           <Button onClick={handleSurveyButtonClick} colorScheme="brand" width="80%" style={{ marginBottom: '4rem' }}>
             제출
           </Button>

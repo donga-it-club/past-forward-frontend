@@ -1,15 +1,28 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
+
 import { Checkbox, Stack, Input, Text } from '@chakra-ui/react';
 import * as S from '@/styles/survey/PurposeCheckbox.style';
 
 interface Purpose {
-  onPurposeChange: (purpose: string) => void;
-  onOtherPurposeChange: (otherPurpose: string) => void;
-  // onPurposeChange: (purpose: string[]) => void;
+
+  onPurposeChange: (purpose: string[]) => void;
 }
 
-const PurposeCheckbox: React.FC<Purpose> = ({ onPurposeChange, onOtherPurposeChange }) => {
+const PurposeCheckbox: React.FC<Purpose> = ({ onPurposeChange }) => {
   const [checkedPurposes, setCheckedPurposes] = useState<string[]>([]);
+  const [otherPurpose, setOtherPurpose] = useState<string>('');
+  const [isOtherSelected, setIsOtherSelected] = useState<boolean>(false);
+
+  useEffect(() => {
+    const updatedPurposes = [...checkedPurposes];
+    if (isOtherSelected) {
+      updatedPurposes.push(otherPurpose);
+    }
+    onPurposeChange(updatedPurposes);
+  }, [checkedPurposes, otherPurpose, isOtherSelected, onPurposeChange]);
+
+  // purposes
 
   const handlePurposeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const isChecked = event.target.checked;
@@ -17,20 +30,21 @@ const PurposeCheckbox: React.FC<Purpose> = ({ onPurposeChange, onOtherPurposeCha
     let updatedPurposes: string[];
 
     if (isChecked) {
-      updatedPurposes = [...checkedPurposes, purpose]; // 체크된 경우 배열에 추가
+
+      updatedPurposes = [...checkedPurposes, purpose];
     } else {
-      updatedPurposes = checkedPurposes.filter(item => item !== purpose); // 체크 해제된 경우 배열에서 제거
+      updatedPurposes = checkedPurposes.filter(item => item !== purpose);
     }
 
-    setCheckedPurposes(updatedPurposes); // 최종 업데이트 한번만 수행
-    onPurposeChange(updatedPurposes.join(', ')); // 선택된 목적들을 문자열로 변환하여 전달
+    setCheckedPurposes(updatedPurposes);
   };
 
-  const [otherPurpose, setOtherPurpose] = useState<string>('');
+  // otherPurpose
   const handleOtherPurposeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newOtherPurpose = event.target.value;
     setOtherPurpose(newOtherPurpose);
-    onOtherPurposeChange(newOtherPurpose);
+    setIsOtherSelected(!!newOtherPurpose);
+
   };
 
   return (
@@ -58,7 +72,11 @@ const PurposeCheckbox: React.FC<Purpose> = ({ onPurposeChange, onOtherPurposeCha
               </Checkbox>
             </Stack>
             <Stack direction="row">
-              <Checkbox colorScheme="brand">기타</Checkbox>
+
+              <Checkbox colorScheme="brand" isChecked={isOtherSelected}>
+                기타
+              </Checkbox>
+
               <Input
                 width="20rem"
                 placeholder="직접 입력해주세요."
