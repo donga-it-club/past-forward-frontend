@@ -71,7 +71,7 @@ const InviteTeamModal: React.FC<InviteTeamModalProps> = ({ isOpen, onClose, team
         <ModalBody>
           {inviteData && (
             <S.CustomModalBody>
-              <QRCode value={inviteData.qrCodeImage} />
+              <QRCode value={inviteData.invitationUrl} />
               <S.LinkContainer>
                 <Text fontSize="sm">QR과 Link를 통해 팀원을 초대하여 회고를 함께하세요!</Text>
                 <S.LinkBox>

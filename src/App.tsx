@@ -131,6 +131,7 @@ const App = () => {
                 </PrivateRoute>
               }
             />
+            {/* 발급 될 초대 링크 */}
             <Route path="/invitations/:invitationId" Component={AcceptInvite} />
           </Routes>
         </Router>
