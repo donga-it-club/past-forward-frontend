@@ -20,4 +20,3 @@ export interface InviteTeamData {
 export interface PostInviteTeamRequest {
   invitationCode: string;
 }
-export interface PostInviteTeamResponse {}

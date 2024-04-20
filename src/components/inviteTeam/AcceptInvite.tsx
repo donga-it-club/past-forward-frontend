@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import postInviteTeam from '@/api/inviteTeamApi/postInviteTeam';
 
 const AcceptInvite: React.FC = () => {
-  const { invitationId } = useParams<{ invitationId?: string }>();
+  const location = useLocation();
   const navigate = useNavigate();
   const [inviteSuccess, setInviteSuccess] = useState(false);
 
   useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const invitationCode = searchParams.get('invitationId');
+
     const acceptInvitation = async () => {
       try {
-        if (invitationId) {
-          const response = await postInviteTeam(invitationId);
+        if (invitationCode) {
+          const response = await postInviteTeam(invitationCode);
           // 백엔드에서 204 반환해줌
           if (response.status === 204) {
             setInviteSuccess(true); // 초대 요청이 성공했을 때 상태를 true로 변경
@@ -19,7 +22,7 @@ const AcceptInvite: React.FC = () => {
             console.error('초대 수락 실패');
           }
         } else {
-          console.error('InvitationId 추출 실패');
+          console.error('invitationCode 추출 실패');
         }
       } catch (error) {
         console.error('에러', error);
@@ -27,7 +30,7 @@ const AcceptInvite: React.FC = () => {
     };
 
     acceptInvitation();
-  }, [invitationId]);
+  }, [location.search]);
 
   useEffect(() => {
     if (inviteSuccess) {
