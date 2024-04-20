@@ -21,7 +21,6 @@ const RetroTeamPage = () => {
   const query = search.split(/[=,&]/);
   const retrospectiveId = Number(query[1]);
   const teamId = Number(query[3]);
-
   const [section, setSection] = useState<sectionData[]>([]);
   const [retro, setRetro] = useState<RetrospectiveData>();
   const [template, setTemplate] = useState<TemplateNameData[]>();
@@ -40,8 +39,13 @@ const RetroTeamPage = () => {
 
   const fetchSection = async () => {
     try {
-      const data = await SectionServices.get({ retrospectiveId: retrospectiveId, teamId: teamId });
-      setSection(data.data);
+      if (!teamId) {
+        const data = await SectionServices.PersonalGet({ retrospectiveId: retrospectiveId });
+        setSection(data.data);
+      } else {
+        const data = await SectionServices.TeamGet({ retrospectiveId: retrospectiveId, teamId: teamId });
+        setSection(data.data);
+      }
     } catch (e) {
       toast.error(e);
     }
@@ -77,20 +81,24 @@ const RetroTeamPage = () => {
           <Flex>
             {template
               ? template.map(title => (
-                  <S.FrameStyle>
-                    <Label
-                      labelName={title.name}
-                      labelType="dark"
-                      taskCount={section.filter(data => data.sectionName === title.name).length}
-                    />
+                  <>
+                    <S.FrameStyle>
+                      <Label
+                        labelName={title.name}
+                        labelType="dark"
+                        taskCount={section.filter(data => data.sectionName === title.name).length}
+                      />
 
-                    {section
-                      .filter(key => key.sectionName === title.name)
-                      .map(section => (
-                        <TeamTask section={section} />
-                      ))}
-                    <AddTask template={title.id} retrospectiveId={retro?.retrospectiveId} />
-                  </S.FrameStyle>
+                      <AddTask template={title.id} retrospectiveId={retro?.retrospectiveId} />
+                      {section
+                        .filter(key => key.sectionName === title.name)
+                        .map(section => (
+                          <>
+                            <TeamTask section={section} />
+                          </>
+                        ))}
+                    </S.FrameStyle>
+                  </>
                 ))
               : PersonalSectionTitleName.map(title => (
                   <S.FrameStyle>
@@ -99,11 +107,6 @@ const RetroTeamPage = () => {
                       labelType="dark"
                       taskCount={section.filter(data => data.sectionName === title.title).length}
                     />
-                    {/* {section
-                      .filter(key => key.sectionName === title.title)
-                      .map(name => (
-                        <TeamTask name={name} />
-                      ))} */}
                   </S.FrameStyle>
                 ))}
           </Flex>

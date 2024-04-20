@@ -13,22 +13,9 @@ interface Props {
 }
 
 const ManageTeamMembers: FC<Props> = ({ members, teamId }) => {
-  // const [members, setMembers] = useState<TeamMembersData[]>();
-  // const toast = useCustomToast();
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [searchList, setSearchList] = useState<TeamMembersData[]>();
   const [isInviteModalOpen, setInviteModalOpen] = useState<boolean>(false);
-
-  // const fetchTeamMembers = async () => {
-  //   try {
-  //     const data = await TeamControllerServices.TeamMemberGet({ teamId: teamId, retrospectiveId: retrospectiveId });
-  //     console.log('data.members', data);
-  //     setMembers(data.data);
-  //     console.log('members', members);
-  //   } catch (e) {
-  //     toast.error(e);
-  //   }
-  // };
 
   const searchTeamMembers = (searchTerm: string) => {
     const filterData: TeamMembersData[] = [];
@@ -41,12 +28,6 @@ const ManageTeamMembers: FC<Props> = ({ members, teamId }) => {
       }
     });
   };
-
-  // useEffect(() => {
-  //   fetchTeamMembers();
-  // }, [teamId, retrospectiveId]);
-
-  // if (!members) return;
 
   return (
     <S.ManageStyle>

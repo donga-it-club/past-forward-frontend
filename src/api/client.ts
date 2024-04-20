@@ -6,7 +6,6 @@ import { unwrapResponse } from './interceptors/response';
 // import { logAndProcessError, logResponse, unwrapResponse } from './interceptors/response';
 // import { flow } from '@/utils/flow';
 
-
 export const mswInstance = axios.create({
   baseURL: '/',
   timeout: 4000,
@@ -20,10 +19,7 @@ export const mswInstance = axios.create({
 //   withCredentials: true,
 // });
 
-
-
 axiosInstance.interceptors.request.use(logRequest);
 // axiosInstance.interceptors.response.use(flow([logResponse, unwrapResponse]), logAndProcessError);
-
 
 mswInstance.interceptors.response.use(unwrapResponse);

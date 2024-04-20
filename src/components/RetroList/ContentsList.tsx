@@ -1,16 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { CgTimelapse } from 'react-icons/cg'; // ing
+import { CiStar } from 'react-icons/ci';
+import { FaStar } from 'react-icons/fa';
+import { FaRegCircleCheck } from 'react-icons/fa6'; // done
+import { HiOutlineDotsHorizontal } from 'react-icons/hi';
+import { IoMdPerson } from 'react-icons/io';
+import { MdPeople } from 'react-icons/md';
+import { RxCounterClockwiseClock } from 'react-icons/rx'; //before
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { PatchRetrospectiveRequest } from '@/api/@types/Retrospectives';
+import postImageToS3 from '@/api/imageApi/postImageToS3';
 import { patchRetrospective } from '@/api/retrospectivesApi/patchRetrospective';
-import BookmarkIcon_N from '@/assets/BookmarkIcon_N.png';
-import BookmarkIcon_Y from '@/assets/BookmarkIcon_Y.png';
-import MoreIcon from '@/assets/MoreIcon.png';
-import PersonalIcon from '@/assets/PersonalIcon.png';
-import ProgressBefore from '@/assets/Progress_Before.png';
-import ProgressDone from '@/assets/Progress_Done.png';
-import ProgressIng from '@/assets/Progress_Ing.png';
-import TeamIcon from '@/assets/TeamIcon.png';
 import Thumbnail from '@/assets/Thumbnail.png';
 import Modal from '@/components/RetroList/Modal';
 import UserNickname from '@/components/user/UserNickname';
@@ -44,6 +45,7 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
   const [userNickname, setUserNickname] = useRecoilState(userNicknameState);
   const [openModalId, setOpenModalId] = useState<number | null>(null);
   const toast = useCustomToast();
+  const [image, setImage] = useState<{ [key: number]: string }>({});
 
   const handleBookmark = async (itemId: number) => {
     try {
@@ -71,6 +73,28 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
   console.log('filter', filteredData);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const fetchThumbnailsData = async (item: Content) => {
+      try {
+        if (item.thumbnail) {
+          const imageResponse = await postImageToS3({
+            filename: item.thumbnail,
+            method: 'GET',
+          });
+          console.log('s3 사진 받아오기 성공', imageResponse.data.preSignedUrl);
+          setImage(prevImage => ({
+            ...prevImage,
+            [item.id]: imageResponse.data.preSignedUrl,
+          }));
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    data.forEach(item => fetchThumbnailsData(item));
+  }, [data]);
+
   return (
     <div>
       {viewMode === 'board' && (
@@ -78,31 +102,40 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
           {filteredData.map(item => (
             <S.Box key={item.id}>
               <S.ImgBox>
-                <S.Thumbnail src={item.thumbnail ? item.thumbnail : Thumbnail} />
+                <S.Thumbnail src={item.thumbnail ? image[item.id] : Thumbnail} />
               </S.ImgBox>
               <hr />
               <S.InfoBox>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <S.TeamIcon src={item.teamId ? TeamIcon : PersonalIcon} />
-                  <S.RetroTitle onClick={() => navigate(`/section?retrospectiveId=${item.id}&teamId=${item.teamId}`)}>
+                  {item.teamId && <MdPeople size={20} />} {!item.teamId && <IoMdPerson size={20} />}
+                  <S.RetroTitle onClick={() => navigate(`/sections?retrospectiveId=${item.id}&teamId=${item.teamId}`)}>
                     {item.title}
                   </S.RetroTitle>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <S.BookmarkIcon
-                    src={item.isBookmarked ? BookmarkIcon_Y : BookmarkIcon_N}
-                    onClick={() => handleBookmark(item.id)}
-                  />
-                  <S.MoreIcon
-                    src={MoreIcon}
-                    onClick={() => openModalForItem(item.id)}
-                    // onClick={() => {
-                    //   if(유저아이디 !== item.id) { // 수정 권한 없을 때(생성자가 아닐 때)
-                    //     openModalForItem(item.id)
-                    //   } else {
-                    //   navigate(`/revise?retrospectiveId=${item.id}&teamId=${item.teamId}`);
-                    //   }
-                    // }}
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 1fr',
+                    justifyContent: 'center',
+                    justifyItems: 'center',
+                  }}
+                >
+                  {item.isBookmarked && (
+                    <FaStar onClick={() => handleBookmark(item.id)} style={{ color: '#fcea12' }} size="19" />
+                  )}
+                  {!item.isBookmarked && <CiStar onClick={() => handleBookmark(item.id)} size={20} />}
+                  <HiOutlineDotsHorizontal
+                    style={{ color: '#33363F' }}
+                    size={20}
+                    // onClick={() => openModalForItem(item.id)}
+                    onClick={() => {
+                      if (item.userId === item.id) {
+                        // 수정 권한 없을 때(생성자가 아닐 때 확인하고 고치기)
+                        openModalForItem(item.id);
+                      } else {
+                        navigate(`/revise?retrospectiveId=${item.id}&teamId=${item.teamId}`);
+                      }
+                    }}
                   />
                 </div>
                 <S.RetroUser>
@@ -115,15 +148,18 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
                     ? `${item.updatedDate} 수정`
                     : item.startDate}
                 </S.RetroDate>
-                <S.ProgressIcon
-                  src={
-                    item.status === 'NOT_STARTED'
-                      ? ProgressBefore
-                      : item.status === 'IN_PROGRESS'
-                        ? ProgressIng
-                        : ProgressDone
-                  }
-                />
+                {item.status === 'NOT_STARTED' && (
+                  <RxCounterClockwiseClock
+                    size={15}
+                    style={{ alignItems: 'start', justifySelf: 'end', color: '#5B5B5B' }}
+                  />
+                )}
+                {item.status === 'IN_PROGRESS' && (
+                  <CgTimelapse size={15} style={{ alignItems: 'start', justifySelf: 'end', color: '#57AD5A' }} />
+                )}
+                {item.status === 'COMPLETED' && (
+                  <FaRegCircleCheck size={15} style={{ alignItems: 'start', justifySelf: 'end', color: '#FF1818' }} />
+                )}
                 <Modal onClose={closeModalForItem} isOpen={openModalId === item.id} />
               </S.InfoBox>
             </S.Box>
@@ -155,34 +191,41 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
                     {item.updatedDate && item.updatedDate !== item.startDate ? `${item.updatedDate}` : item.startDate}
                   </S.ListTimeBox>
                   <S.ListBookmarkBox>
-                    <S.Icon
-                      src={item.isBookmarked ? BookmarkIcon_Y : BookmarkIcon_N}
-                      onClick={() => handleBookmark(item.id)}
-                    />
-                    {/* 북마크 patch */}
+                    {item.isBookmarked && (
+                      <FaStar onClick={() => handleBookmark(item.id)} style={{ color: '#fcea12' }} size="19" />
+                    )}
+                    {!item.isBookmarked && <CiStar onClick={() => handleBookmark(item.id)} size={20} />}
                   </S.ListBookmarkBox>
                   <S.ListProgressBox>
-                    <S.Icon
-                      src={
-                        item.status === 'NOT_STARTED'
-                          ? ProgressBefore
-                          : item.status === 'IN_PROGRESS'
-                            ? ProgressIng
-                            : ProgressDone
-                      }
-                    />
+                    {item.status === 'NOT_STARTED' && (
+                      <FaRegCircleCheck
+                        size={20}
+                        style={{ alignItems: 'start', justifySelf: 'end', color: '#5B5B5B' }}
+                      />
+                    )}
+                    {item.status === 'IN_PROGRESS' && (
+                      <CgTimelapse size={20} style={{ alignItems: 'start', justifySelf: 'end', color: '#57AD5A' }} />
+                    )}
+                    {item.status === 'COMPLETED' && (
+                      <FaRegCircleCheck
+                        size={20}
+                        style={{ alignItems: 'start', justifySelf: 'end', color: '#FF1818' }}
+                      />
+                    )}
                   </S.ListProgressBox>
                   <S.ListLinkBox>
-                    <S.MoreIconListView
-                      src={MoreIcon}
-                      onClick={() => openModalForItem(item.id)}
-                      // onClick={() => {
-                      //   if(유저아이디 !== item.id) { // 수정 권한 없을 때(생성자가 아닐 때)
-                      //     openModalForItem(item.id)
-                      //   } else {
-                      //   navigate(`/revise?retrospectiveId=${item.id}&teamId=${item.teamId}`);
-                      //   }
-                      // }}
+                    <HiOutlineDotsHorizontal
+                      style={{ color: '#33363F' }}
+                      size={20}
+                      // onClick={() => openModalForItem(item.id)}
+                      onClick={() => {
+                        if (item.userId === item.id) {
+                          // 수정 권한 없을 때(생성자가 아닐 때 확인하고 고치기)
+                          openModalForItem(item.id);
+                        } else {
+                          navigate(`/revise?retrospectiveId=${item.id}&teamId=${item.teamId}`);
+                        }
+                      }}
                     />
                     <Modal onClose={closeModalForItem} isOpen={openModalId === item.id} />
                   </S.ListLinkBox>
