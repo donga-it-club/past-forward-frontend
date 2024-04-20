@@ -492,3 +492,9 @@ export const ActionItemsUserImg = styled.img`
   width: 24px;
   height: 24px;
 `;
+
+export const DeleteSectionText = styled.p`
+  margin: 20px;
+  color: #111b47;
+  font-size: 15px;
+`;

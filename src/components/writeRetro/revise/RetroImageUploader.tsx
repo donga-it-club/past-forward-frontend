@@ -33,7 +33,7 @@ const RetroImageUploader: FC<Props> = ({ image, setImage }) => {
       {image ? (
         <Image src={image} maxWidth={400} margin="20px auto" h="auto" aspectRatio="1/1" objectFit="contain" />
       ) : (
-        <Image src="/Home.png" maxWidth={400} margin="20px auto" h="auto" aspectRatio="1/1" objectFit="contain" />
+        <Image src="/logo.svg" maxWidth={400} margin="20px auto" h="auto" aspectRatio="1/1" objectFit="contain" />
       )}
 
       <div style={{ margin: '0 auto' }}>

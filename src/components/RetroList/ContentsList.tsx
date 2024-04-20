@@ -103,14 +103,15 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
                   <HiOutlineDotsHorizontal
                     style={{ color: '#33363F' }}
                     size={20}
-                    onClick={() => openModalForItem(item.id)}
-                    // onClick={() => {
-                    //   if(유저아이디 !== item.id) { // 수정 권한 없을 때(생성자가 아닐 때)
-                    //     openModalForItem(item.id)
-                    //   } else {
-                    //   navigate(`/revise?retrospectiveId=${item.id}&teamId=${item.teamId}`);
-                    //   }
-                    // }}
+                     // onClick={() => openModalForItem(item.id)}
+                    onClick={() => {
+                      if (item.userId === item.id) {
+                        // 수정 권한 없을 때(생성자가 아닐 때 확인하고 고치기)
+                        openModalForItem(item.id);
+                      } else {
+                        navigate(`/revise?retrospectiveId=${item.id}&teamId=${item.teamId}`);
+                      }
+                    }}
                   />
                 </div>
                 <S.RetroUser>
@@ -195,14 +196,15 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
                     <HiOutlineDotsHorizontal
                       style={{ color: '#33363F' }}
                       size={20}
-                      onClick={() => openModalForItem(item.id)}
-                      // onClick={() => {
-                      //   if(유저아이디 !== item.id) { // 수정 권한 없을 때(생성자가 아닐 때)
-                      //     openModalForItem(item.id)
-                      //   } else {
-                      //   navigate(`/revise?retrospectiveId=${item.id}&teamId=${item.teamId}`);
-                      //   }
-                      // }}
+                      // onClick={() => openModalForItem(item.id)}
+                      onClick={() => {
+                        if (item.userId === item.id) {
+                          // 수정 권한 없을 때(생성자가 아닐 때 확인하고 고치기)
+                          openModalForItem(item.id);
+                        } else {
+                          navigate(`/revise?retrospectiveId=${item.id}&teamId=${item.teamId}`);
+                        }
+                      }}
                     />
                     <Modal onClose={closeModalForItem} isOpen={openModalId === item.id} />
                   </S.ListLinkBox>
