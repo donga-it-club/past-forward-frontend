@@ -71,7 +71,7 @@ const TeamTaskMessage: FC<Props> = ({ section }) => {
                 <Flex>
                   <S.TaskUserProfile>
                     <CgProfile size="40px" color="#DADEE5" />
-                    <S.TaskUserName>{section.username ?? '닉네임 없음'}</S.TaskUserName>
+                    <S.TaskUserName>{section.username}</S.TaskUserName>
                   </S.TaskUserProfile>
                   {/* <S.MessageTime>1일 전</S.MessageTime> */}
                   <Popover>

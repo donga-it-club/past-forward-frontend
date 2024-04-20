@@ -24,13 +24,14 @@ const RetroTeamPage = () => {
   const [section, setSection] = useState<sectionData[]>([]);
   const [retro, setRetro] = useState<RetrospectiveData>();
   const [template, setTemplate] = useState<TemplateNameData[]>();
-
   const toast = useCustomToast();
 
   const fetchRetrospective = async () => {
     try {
       const data = await RetrospectiveService.onlyGet({ retrospectiveId: retrospectiveId });
+      console.log('retro.data', data.data);
       setRetro(data.data);
+      console.log('retro', retro);
     } catch (e) {
       toast.error(e);
     }
@@ -41,9 +42,10 @@ const RetroTeamPage = () => {
       if (!teamId) {
         const data = await SectionServices.PersonalGet({ retrospectiveId: retrospectiveId });
         setSection(data.data);
+      } else {
+        const data = await SectionServices.TeamGet({ retrospectiveId: retrospectiveId, teamId: teamId });
+        setSection(data.data);
       }
-      const data = await SectionServices.TeamGet({ retrospectiveId: retrospectiveId, teamId: teamId });
-      setSection(data.data);
     } catch (e) {
       toast.error(e);
     }
@@ -54,6 +56,7 @@ const RetroTeamPage = () => {
       if (retro) {
         const data = await TeamControllerServices.TemplateNameGet({ templateId: retro.templateId });
         setTemplate(data.data);
+        console.log('template', template);
       }
     } catch (e) {
       toast.error(e);
@@ -64,7 +67,7 @@ const RetroTeamPage = () => {
     fetchSection();
     fetchRetrospective();
     fetchTemplate();
-  }, [retro?.description, template?.values]);
+  }, [retro?.status, template?.values]);
 
   return (
     <S.Container>
@@ -90,7 +93,9 @@ const RetroTeamPage = () => {
                       {section
                         .filter(key => key.sectionName === title.name)
                         .map(section => (
-                          <TeamTask section={section} like={section.likeCnt} content={section.content} />
+                          <>
+                            <TeamTask section={section} />
+                          </>
                         ))}
                     </S.FrameStyle>
                   </>
