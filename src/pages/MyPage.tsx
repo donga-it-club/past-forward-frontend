@@ -56,7 +56,7 @@ const MyPage = () => {
 
       <S.MyPageBGContainer>
         <S.MyPageContainer>
-          {userData?.thumbnail}
+          {userData?.data.thumbnail}
           <ImageUploader image={image} setImage={setImage} />
           <NicknameBox />
           <EmailBox />

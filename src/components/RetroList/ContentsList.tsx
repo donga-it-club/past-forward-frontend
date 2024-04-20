@@ -8,15 +8,12 @@ import { IoMdPerson } from 'react-icons/io';
 import { MdPeople } from 'react-icons/md';
 import { RxCounterClockwiseClock } from 'react-icons/rx'; //before
 import { useNavigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
 import { PatchRetrospectiveRequest } from '@/api/@types/Retrospectives';
 import postImageToS3 from '@/api/imageApi/postImageToS3';
 import { patchRetrospective } from '@/api/retrospectivesApi/patchRetrospective';
 import Thumbnail from '@/assets/Thumbnail.png';
 import Modal from '@/components/RetroList/Modal';
-import UserNickname from '@/components/user/UserNickname';
 import { useCustomToast } from '@/hooks/useCustomToast';
-import { userNicknameState } from '@/recoil/user/userAtom';
 import * as S from '@/styles/RetroList/ContentsList.styles';
 
 interface Content {
@@ -31,6 +28,7 @@ interface Content {
   startDate: string;
   createdDate: string;
   updatedDate: string;
+  username: string;
 }
 
 interface ContentListProps {
@@ -42,7 +40,6 @@ interface ContentListProps {
 
 const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, setBookmarkUpdate }) => {
   // const [contentData, setContentData] = useState<Content[]>(data); 받아온데이터
-  const [userNickname, setUserNickname] = useRecoilState(userNicknameState);
   const [openModalId, setOpenModalId] = useState<number | null>(null);
   const toast = useCustomToast();
   const [image, setImage] = useState<{ [key: number]: string }>({});
@@ -72,6 +69,12 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
   const filteredData = data.filter(item => item.title.toLowerCase().includes(searchData.toLowerCase()));
   console.log('filter', filteredData);
   const navigate = useNavigate();
+
+  const convertToLocalTime = (dateString: string | number | Date) => {
+    const date = new Date(dateString);
+    const localTime = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+    return localTime.toLocaleString(); // 로컬 타임존으로 변환하여 문자열로 반환
+  };
 
   useEffect(() => {
     const fetchThumbnailsData = async (item: Content) => {
@@ -138,15 +141,13 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
                     }}
                   />
                 </div>
-                <S.RetroUser>
-                  <UserNickname setUserNickname={setUserNickname} /> {/* 생성자 이름(유저 식별 필요) */}
-                  {userNickname}
-                </S.RetroUser>
+                <S.RetroUser>{item.username}</S.RetroUser>
                 <div></div>
                 <S.RetroDate>
-                  {item.updatedDate && item.updatedDate !== item.startDate
-                    ? `${item.updatedDate} 수정`
-                    : item.startDate}
+                  {item.updatedDate !== item.createdDate
+                    ? `${convertToLocalTime(item.updatedDate)} 수정`
+                    : convertToLocalTime(item.createdDate)}
+                  {/* {item.updatedDate !== item.createdDate ? `${item.updatedDate} 수정` : item.createdDate} */}
                 </S.RetroDate>
                 {item.status === 'NOT_STARTED' && (
                   <RxCounterClockwiseClock
@@ -183,10 +184,7 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
                   <S.ListTitleBox onClick={() => navigate(`/section?retrospectiveId=${item.id}&teamId=${item.teamId}`)}>
                     {item.title}
                   </S.ListTitleBox>
-                  <S.ListUserBox>
-                    <UserNickname setUserNickname={setUserNickname} /> {/* 생성자이름(유저 식별 필요) */}
-                    {userNickname}
-                  </S.ListUserBox>
+                  <S.ListUserBox>{item.username}</S.ListUserBox>
                   <S.ListTimeBox>
                     {item.updatedDate && item.updatedDate !== item.startDate ? `${item.updatedDate}` : item.startDate}
                   </S.ListTimeBox>

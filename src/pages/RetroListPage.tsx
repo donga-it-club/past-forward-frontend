@@ -83,6 +83,7 @@ const RetroListPage = () => {
       startDate: formatDate(item.startDate),
       createdDate: formatDate(item.createdDate),
       updatedDate: formatDate(item.updatedDate),
+      username: item.username,
     }));
     setRetroData(rawData);
   }, [data.nodes]);
@@ -104,6 +105,7 @@ const RetroListPage = () => {
           startDate: formatDate(item.startDate),
           createdDate: formatDate(item.createdDate),
           updatedDate: formatDate(item.updatedDate),
+          username: item.username,
         }));
       setRetroData(filtered);
     } else if (filterType === 'Teams') {
@@ -121,6 +123,7 @@ const RetroListPage = () => {
           startDate: formatDate(item.startDate),
           createdDate: formatDate(item.createdDate),
           updatedDate: formatDate(item.updatedDate),
+          username: item.username,
         }));
       setRetroData(filtered);
     } else if (filterType === 'ALL') {
@@ -136,6 +139,7 @@ const RetroListPage = () => {
         startDate: formatDate(item.startDate),
         createdDate: formatDate(item.createdDate),
         updatedDate: formatDate(item.updatedDate),
+        username: item.username,
       }));
       setRetroData(rawData);
     }
