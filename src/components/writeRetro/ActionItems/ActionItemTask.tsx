@@ -6,15 +6,22 @@ import Members from '@/components/writeRetro/ActionItems/Members';
 import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 
+// interface ActionItemTaskProps {
+//   team: number;
+//   retrospective: number;
+//   section: number;
+// }
+
 const ActionItemTask: FC = () => {
-  // action items 담당자 지정
   const [hoveredUser, setHoveredUser] = useState<string | null>(null);
   const [showPopup, setShowPopup] = useState<boolean>(false);
   const [selectedUserName, setSelectedUserName] = useState<string | null>(null);
   const [selectedUserImg, setSelectedUserImg] = useState<string | null>(null);
 
-  const [teamId, setTeamId] = useState<number>(65); // teamId 값 받아오기
-  const [retrospectiveId, setRetrospectiveId] = useState<number>(100); // retrospectiveId값 받아오기
+  const [teamId, setTeamId] = useState<number>(133); // teamId 값 받아오기
+  const [retrospectiveId, setRetrospectiveId] = useState<number>(187); // retrospectiveId값 받아오기
+  // const [sectionId, setSectionId] = useState<number>(1); // sectionId 값 받아오기
+
   const [member, setMember] = useState<TeamMembersData[]>();
   const [users, setUsers] = useState<{ name: string; image: string }[]>([]);
   const toast = useCustomToast();
@@ -22,8 +29,8 @@ const ActionItemTask: FC = () => {
   const fetchTeamMember = async () => {
     try {
       if (teamId) {
-        setTeamId(65);
-        setRetrospectiveId(100);
+        setTeamId(133);
+        setRetrospectiveId(187);
         const data = await TeamControllerServices.TeamMemberGet({ teamId: teamId, retrospectiveId: retrospectiveId });
         setMember(data.data);
         const userData = data.data.map(member => ({
@@ -40,7 +47,9 @@ const ActionItemTask: FC = () => {
 
   useEffect(() => {
     fetchTeamMember();
-  }, [member]);
+  }, []);
+
+  console.log('멤버', member);
 
   const togglePopup = () => {
     setShowPopup(!showPopup);
