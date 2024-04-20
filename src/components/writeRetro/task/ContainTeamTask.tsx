@@ -61,7 +61,7 @@ export const ContainTeamTask = () => {
     fetchSection();
     fetchRetrospective();
     fetchTemplate();
-  }, [retro?.description, template?.values, section.values]);
+  }, [retro?.description, template?.values, section.reduce((acc, cur) => acc + cur.sectionId, 0)]);
 
   return (
     <Flex>
