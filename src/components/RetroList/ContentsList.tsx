@@ -35,6 +35,19 @@ interface ContentListProps {
   setBookmarkUpdate: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+export const convertToLocalTime = (dateString: string | number | Date) => {
+  const date = new Date(dateString);
+  const localTime = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+  const options: Intl.DateTimeFormatOptions = {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+  };
+  return localTime.toLocaleString(undefined, options); // 로컬 타임존으로 변환하여 문자열로 반환
+};
+
 const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, setBookmarkUpdate }) => {
   // const [contentData, setContentData] = useState<Content[]>(data); 받아온데이터
   const [openModalId, setOpenModalId] = useState<number | null>(null);
@@ -66,19 +79,6 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
   const filteredData = data.filter(item => item.title.toLowerCase().includes(searchData.toLowerCase()));
   console.log('filter', filteredData);
   const navigate = useNavigate();
-
-  const convertToLocalTime = (dateString: string | number | Date) => {
-    const date = new Date(dateString);
-    const localTime = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
-    const options: Intl.DateTimeFormatOptions = {
-      year: 'numeric',
-      month: 'numeric',
-      day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-    };
-    return localTime.toLocaleString(undefined, options); // 로컬 타임존으로 변환하여 문자열로 반환
-  };
 
   useEffect(() => {
     const fetchThumbnailsData = async (item: Content) => {

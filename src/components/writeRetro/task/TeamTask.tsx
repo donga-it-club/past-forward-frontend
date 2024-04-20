@@ -1,8 +1,9 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { BiLike, BiSolidLike } from 'react-icons/bi';
 import { CgProfile } from 'react-icons/cg';
 import { FaRegTrashAlt } from 'react-icons/fa';
 import { MdAccessAlarm, MdMessage } from 'react-icons/md';
+import { useLocation } from 'react-router-dom';
 import {
   Button,
   Flex,
@@ -15,20 +16,25 @@ import {
   PopoverTrigger,
   Portal,
 } from '@chakra-ui/react';
-import { formattedDate } from './PersonalTask';
 import TeamTaskMessage from './taskMessage/TeamTaskMessage';
 import { sectionData } from '@/api/@types/Section';
 import { SectionServices } from '@/api/services/Section';
-
+import { convertToLocalTime } from '@/components/RetroList/ContentsList';
 import ReviseModal from '@/components/writeRetro/task/ReviseModal';
 import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 
 interface Props {
   section: sectionData;
+  like: number;
+  content: string;
 }
 
-const TeamTask: FC<Props> = ({ section }) => {
+const TeamTask: FC<Props> = ({ section, like, content }) => {
+  const { search } = useLocation();
+  const query = search.split(/[=,&]/);
+  const retrospectiveId = Number(query[1]);
+  const teamId = Number(query[3]);
   const toast = useCustomToast();
   const [liked, setLiked] = useState<number>(0);
   const [messaged, setMessaged] = useState<boolean>(false);
@@ -38,7 +44,6 @@ const TeamTask: FC<Props> = ({ section }) => {
     try {
       const data = await SectionServices.likePost({ sectionId: section.sectionId });
       setLiked(data.data.likeCnt);
-      console.log('like', liked);
     } catch (e) {
       toast.error(e);
     }
@@ -57,6 +62,22 @@ const TeamTask: FC<Props> = ({ section }) => {
     }
   };
 
+  const fetchSection = async () => {
+    try {
+      if (!teamId) {
+        await SectionServices.PersonalGet({ retrospectiveId: retrospectiveId });
+      } else {
+        await SectionServices.TeamGet({ retrospectiveId: retrospectiveId, teamId: teamId });
+      }
+    } catch (e) {
+      toast.error(e);
+    }
+  };
+
+  useEffect(() => {
+    fetchSection();
+  }, [like, content]);
+
   return (
     <>
       <S.TaskBox>
@@ -65,7 +86,7 @@ const TeamTask: FC<Props> = ({ section }) => {
           <Flex margin="10px auto">
             <S.TaskUserProfile>
               <CgProfile size="40px" color="#DADEE5" />
-              <S.TaskUserName>{section.username}</S.TaskUserName>
+              <S.TaskUserName>{section.username ?? '닉네임 없음'}</S.TaskUserName>
             </S.TaskUserProfile>
 
             <Popover>
@@ -103,8 +124,6 @@ const TeamTask: FC<Props> = ({ section }) => {
               </S.TaskText>
             </PopoverTrigger>
             <PopoverContent>
-              {/* TaskTextModal */}
-
               <ReviseModal section={section} />
             </PopoverContent>
           </Popover>
@@ -130,7 +149,7 @@ const TeamTask: FC<Props> = ({ section }) => {
               <S.SubTaskIcon>
                 <MdAccessAlarm size="20px" color="#DADEE5" />
               </S.SubTaskIcon>
-              <S.SubTaskCount>{formattedDate(section.createdDate)}</S.SubTaskCount>
+              <S.SubTaskCount>{convertToLocalTime(section.createdDate)}</S.SubTaskCount>
             </S.SubTaskStyle>
           </S.SubTaskBox>
         </S.TaskMainStyle>
