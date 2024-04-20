@@ -45,16 +45,21 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onChange }) => {
             </Button>
           </label>
         </Center>
-
         {/* 이미지 미리보기 */}
-        {imagePreview && (
-          <Center mt={4}>
-            <Image src={imagePreview} alt="Selected Image" maxH="200px" />
-            <Button variant="outline" borderColor="gray.700" size="md" width="15rem" onClick={handleRemoveImage}>
-              이미지 제거
-            </Button>
-          </Center>
-        )}
+        <Center>
+          {imagePreview && (
+            <Box mt={4}>
+              <Center>
+                <Image src={imagePreview} alt="Selected Image" maxH="200px" />
+              </Center>
+              <Center mt={2}>
+                <Button variant="outline" borderColor="gray.700" size="md" width="15rem" onClick={handleRemoveImage}>
+                  이미지 제거
+                </Button>
+              </Center>
+            </Box>
+          )}
+        </Center>
       </Box>
     </>
   );

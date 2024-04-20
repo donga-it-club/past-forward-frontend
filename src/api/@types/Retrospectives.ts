@@ -46,6 +46,7 @@ export interface GetRetrospectiveResponseNodes {
   startDate: string;
   createdDate: string;
   updatedDate: string;
+  username: string;
 }
 
 export interface GetRetrospectiveData {
