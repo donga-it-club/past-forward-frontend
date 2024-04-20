@@ -1,3 +1,4 @@
+import UserProfile1 from '@/assets/UserProfile1.png'; // 기본 이미지 user.image가 null 일때
 import * as S from '@/styles/writeRetroStyles/Members.styles';
 
 interface UserListProps {
@@ -11,7 +12,6 @@ export const Members: React.FC<UserListProps> = ({ users, onSelectUserImg, onSel
     onSelectUserName(name);
     onSelectUserImg(image);
   };
-
   return (
     <>
       <S.ListConatiner>
@@ -20,8 +20,8 @@ export const Members: React.FC<UserListProps> = ({ users, onSelectUserImg, onSel
         </S.TitleContainer>
         <ul>
           {users.map((user, index) => (
-            <S.ListItem key={index} onClick={() => handleUserClick(user.name, user.image)}>
-              <S.ProfileImage src={user.image} /> <S.UserName>{user.name}</S.UserName>
+            <S.ListItem key={index} onClick={() => handleUserClick(user.name, user.image || UserProfile1)}>
+              <S.ProfileImage src={user.image || UserProfile1} /> <S.UserName>{user.name}</S.UserName>
             </S.ListItem>
           ))}
         </ul>
