@@ -67,7 +67,7 @@ const RetroTeamPage = () => {
     fetchSection();
     fetchRetrospective();
     fetchTemplate();
-  }, [retro?.status, template?.values, section]);
+  }, [retro?.status, template?.values]);
 
   return (
     <S.Container>
