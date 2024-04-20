@@ -9,6 +9,7 @@ import {
   ModalCloseButton,
   Button,
 } from '@chakra-ui/react';
+import axios from 'axios';
 import { TRetrospective, TStatus } from '@/api/@types/@asConst';
 import { PostRetrospectivesRequest } from '@/api/@types/Retrospectives';
 import postImageToS3 from '@/api/imageApi/postImageToS3';
@@ -41,6 +42,7 @@ const CreateModal: React.FC<CreateModalProps> = ({ isOpen, onClose, templateId, 
     startDate: new Date(),
     description: '',
   });
+  const [image, setImage] = useState<Blob | null>(null);
 
   useEffect(() => {
     setRequestData(prevData => ({
@@ -80,7 +82,21 @@ const CreateModal: React.FC<CreateModalProps> = ({ isOpen, onClose, templateId, 
           filename: requestData.thumbnail, // imageUUID를 filename으로 설정
           method: 'PUT',
         });
-        console.log('사진 S3 업로드 성공', imageResponse);
+        console.log('사진 S3 업로드 성공 및 url 확인', imageResponse.data.preSignedUrl);
+
+        const imageUrl = imageResponse.data.preSignedUrl;
+
+        const uploadResponse = await axios.put(imageUrl, image, {
+          headers: {
+            'Content-Type': image?.type,
+          },
+        });
+
+        if (uploadResponse.status === 200) {
+          console.log('사진 form-data 성공', uploadResponse);
+        } else {
+          console.error('사진 업로드 실패');
+        }
       }
 
       console.log('회고 생성 성공', retrospectiveResponse);
@@ -110,7 +126,10 @@ const CreateModal: React.FC<CreateModalProps> = ({ isOpen, onClose, templateId, 
         <S.CustomModalBody>
           <S.LeftColumn>
             <ImageUpload
-              onChange={(_thumbnail, imageUUID) => setRequestData({ ...requestData, thumbnail: imageUUID })}
+              onChange={(file, imageUUID) => {
+                setRequestData({ ...requestData, thumbnail: imageUUID });
+                setImage(file);
+              }}
             />
           </S.LeftColumn>
           <S.RightColumn>

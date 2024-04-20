@@ -109,10 +109,6 @@ const RetroTeamPage = () => {
                     />
                   </S.FrameStyle>
                 ))}
-            <S.FrameStyle>
-              <Label labelName="Action Items" labelType="dark" taskCount={0} />
-              <AddTask template={3} retrospectiveId={retro?.retrospectiveId} />
-            </S.FrameStyle>
           </Flex>
         </Flex>
       </S.SectionBox>

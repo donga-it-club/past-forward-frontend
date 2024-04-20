@@ -53,6 +53,8 @@ export const RetroDate = styled.span`
 export const Thumbnail = styled.img`
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  aspect-ratio: 1/1;
 `;
 
 export const TeamIcon = styled.img`
@@ -83,13 +85,6 @@ export const BookmarkIcon = styled.img`
   &:hover {
     cursor: pointer;
   }
-`;
-
-export const ProgressIcon = styled.img`
-  align-self: start;
-  justify-self: end;
-  width: 15px;
-  height: 15px;
 `;
 
 export const ListContainer = styled.div`
