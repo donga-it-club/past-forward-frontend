@@ -20,6 +20,8 @@ import TeamTaskMessage from './taskMessage/TeamTaskMessage';
 import { sectionData } from '@/api/@types/Section';
 import { SectionServices } from '@/api/services/Section';
 import { convertToLocalTime } from '@/components/RetroList/ContentsList';
+import ActionItemTask from '@/components/writeRetro/ActionItems/ActionItemTask';
+
 import ReviseModal from '@/components/writeRetro/task/ReviseModal';
 import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
@@ -39,6 +41,12 @@ const TeamTask: FC<Props> = ({ section, like, content }) => {
   const [liked, setLiked] = useState<number>(0);
   const [messaged, setMessaged] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState<boolean>(false);
+  const { search } = useLocation();
+
+  const query = search.split(/[=,&]/);
+  const rId = Number(query[1]); // action-items로 넘겨줄 Id값들
+  const tId = Number(query[3]);
+  const sId: number = section.sectionId;
 
   const handleLike = async () => {
     try {
@@ -121,6 +129,12 @@ const TeamTask: FC<Props> = ({ section, like, content }) => {
               <S.TaskText>
                 {section.content}
                 {/* <S.ReviseText>(수정됨)</S.ReviseText> */}
+                <S.ManagerStyle>
+                  <div>
+                    <ActionItemTask tId={tId} rId={rId} sId={sId} />
+                  </div>
+                  <S.ManagerText>담당자</S.ManagerText>
+                </S.ManagerStyle>
               </S.TaskText>
             </PopoverTrigger>
             <PopoverContent>

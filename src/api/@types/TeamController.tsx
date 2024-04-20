@@ -1,3 +1,4 @@
+// 팀원 조회
 export interface GetTeamMembersRequest {
   teamId: number;
   retrospectiveId: number;
@@ -35,7 +36,20 @@ export interface TemplateNameData {
   sequence: number;
 }
 
+// put 담당자
+export interface PutActionItemsRequest {
+  teamId: number;
+  retrospectiveId: number;
+  sectionId: number;
+}
+
+export interface PutActionItemsResponse {
+  code: number;
+  message: string;
+  data: object;
+}
 export interface TeamControllerClient {
   TeamMemberGet(request: GetTeamMembersRequest): Promise<GetTeamMembersResponse>;
   TemplateNameGet(request: GetTemplateNameRequest): Promise<GetTemplateNameResponse>;
+  ActionItemsMemberPut(request: PutActionItemsRequest): Promise<PutActionItemsResponse>;
 }

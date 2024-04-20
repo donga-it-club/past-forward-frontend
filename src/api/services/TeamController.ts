@@ -3,8 +3,10 @@ import {
   GetTemplateNameRequest,
   GetTemplateNameResponse,
   TeamControllerClient,
-} from '../@types/TeamController';
-import axiosInstance from '../axiosConfig';
+  PutActionItemsRequest,
+  PutActionItemsResponse,
+} from '@/api/@types/TeamController';
+import axiosInstance from '@/api/axiosConfig';
 
 const TEAMS_ROUTE = 'teams';
 const TEMPLATE_ROUTE = 'retrospective-templates';
@@ -21,6 +23,14 @@ export const TeamControllerServices: TeamControllerClient = {
   TemplateNameGet: async ({ templateId }: GetTemplateNameRequest): Promise<GetTemplateNameResponse> => {
     try {
       const response = await axiosInstance.get(`${TEMPLATE_ROUTE}/${templateId}/template-sections`);
+      return response.data;
+    } catch (error) {
+      throw new Error(error as string);
+    }
+  },
+  ActionItemsMemberPut: async (request: PutActionItemsRequest): Promise<PutActionItemsResponse> => {
+    try {
+      const response = await axiosInstance.put(`/sections/action-itmes`, request);
       return response.data;
     } catch (error) {
       throw new Error(error as string);
