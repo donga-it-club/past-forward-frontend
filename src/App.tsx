@@ -8,6 +8,7 @@ import RetroRevisePage from './pages/RevisePage';
 import RetroTeamPage from './pages/SectionPage';
 import MainLayout from '@/components/layout/MainLayout';
 import ProfileLayout from '@/components/layout/ProfileLayout';
+// import AcceptInvitePage from '@/pages/AccpetInvitePage';
 import AuthPage from '@/pages/AuthPage';
 import CreateRetroPage from '@/pages/CreateRetroPage';
 import HomePage from '@/pages/HomePage';
@@ -131,7 +132,9 @@ const App = () => {
                 </PrivateRoute>
               }
             />
-            <Route path="/invitations/:invitationId" Component={AcceptInvite} />
+            {/* 발급 될 초대 링크 */}
+            <Route path="/invitations" Component={AcceptInvite} />
+            {/* <Route path={`/invitations?invitationId=${invitationId}`} element={<AcceptInvitePage />} /> */}
           </Routes>
         </Router>
       </RecoilRoot>
