@@ -40,7 +40,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onChange }) => {
         <Input type="file" onChange={handleImageChange} accept="image/*" display="none" id="image-upload" />
         <Center>
           <label htmlFor="image-upload">
-            <Button as="span" mt={4} variant="outline" borderColor="gray.700" size="md" width="15rem">
+            <Button as="span" mt={4} variant="outline" borderColor="gray.700" size="md" width="15rem" id="cr_loadpc">
               PC에서 이미지 선택
             </Button>
           </label>

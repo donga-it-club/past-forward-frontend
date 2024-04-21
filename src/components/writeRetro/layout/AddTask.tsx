@@ -44,7 +44,7 @@ export const AddTask: FC<Props> = ({ retrospectiveId, template, setRendering }) 
     <>
       {/* AddTaskButton */}
       <S.AddTaskButtonStyle>
-        <S.AddTaskButtonBox onClick={handleClick}>
+        <S.AddTaskButtonBox onClick={handleClick} id="wr_add">
           <S.AddTaskButtonImage>
             <AiFillPlusCircle size={'21px'} />
           </S.AddTaskButtonImage>

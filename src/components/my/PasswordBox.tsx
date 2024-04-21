@@ -28,24 +28,6 @@ const PasswordBox = () => {
             updatePasswordButtonText: '비밀번호 변경',
           }}
         />
-
-        {/* <S.PWFont>
-          <div style={{ display: 'flex' }}>
-            <Asterisk style={{ width: '5px', color: 'red', margin: '0 2px' }} />
-            <a>현재 비밀번호</a>
-          </div>
-        </S.PWFont>
-        <CurrentPasswordInput />
-        <S.PWFont>
-          <div style={{ display: 'flex' }}>
-            <Asterisk style={{ width: '5px', color: 'red', margin: '0 2px' }} />새 비밀번호
-          </div>
-        </S.PWFont>
-        <NewPasswordInput />
-
-        <div style={{ display: 'flex', flexDirection: 'row-reverse', margin: '10px' }}>
-          <ChangePWButton />
-        </div> */}
       </S.PWBox>
     </>
   );

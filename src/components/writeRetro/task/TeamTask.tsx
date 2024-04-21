@@ -128,14 +128,14 @@ const TeamTask: FC<Props> = ({ section, setRendering }) => {
           <S.SubTaskBox>
             {/* Like */}
             <S.SubTaskStyle>
-              <S.SubTaskIcon onClick={handleLike}>
+              <S.SubTaskIcon onClick={handleLike} id="wr_like">
                 {liked ? <BiSolidLike size="20px" color="#111B47" /> : <BiLike size="20px" color="#DADEE5" />}
               </S.SubTaskIcon>
               <S.SubTaskCount>{section.likeCnt}</S.SubTaskCount>
             </S.SubTaskStyle>
             {/* Message */}
             <S.SubTaskStyle>
-              <S.SubTaskIcon onClick={handleMessaged}>
+              <S.SubTaskIcon onClick={handleMessaged} id="wr_cmt">
                 {messaged ? <MdMessage size="20px" color="#111B47" /> : <MdMessage size="20px" color="#DADEE5" />}
               </S.SubTaskIcon>
               <S.SubTaskCount>{section.comments.length}</S.SubTaskCount>

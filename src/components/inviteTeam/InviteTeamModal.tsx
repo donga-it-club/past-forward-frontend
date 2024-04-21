@@ -83,7 +83,13 @@ const InviteTeamModal: React.FC<InviteTeamModalProps> = ({ isOpen, onClose, team
                 <Text fontSize="sm">QR과 Link를 통해 팀원을 초대하여 회고를 함께하세요!</Text>
                 <S.LinkBox>
                   <Input value={generateInvitationUrl(inviteData.invitationCode)} isReadOnly />
-                  <Button onClick={copyToClipboard} colorScheme="brand" leftIcon={<FaCopy />} marginLeft="0.2rem">
+                  <Button
+                    onClick={copyToClipboard}
+                    colorScheme="brand"
+                    leftIcon={<FaCopy />}
+                    marginLeft="0.2rem"
+                    id="inv_url"
+                  >
                     Copy
                   </Button>
                 </S.LinkBox>

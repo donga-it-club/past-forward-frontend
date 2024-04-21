@@ -38,7 +38,7 @@ const OrderButton: React.FC<OrderButtonProps> = ({ handleOrder }) => {
     <>
       <S.Container>
         <S.Box isOpen={isOpen}>
-          <S.Button onClick={handleToggle}>
+          <S.Button onClick={handleToggle} id="rl_recently">
             <S.OrderIcon src={orderImage[selectedOrder]} /> <S.Text>{selectedOrder}</S.Text>
             <S.ArrowIcon src={isOpen ? ArrowUp : ArrowDown} />
           </S.Button>

@@ -44,7 +44,7 @@ const ProgressButton: React.FC<StatusProps> = ({ handleStatus }) => {
   return (
     <div>
       <S.Box isOpen={isOpen}>
-        <S.Button onClick={handleToggle}>
+        <S.Button onClick={handleToggle} id="rl_all">
           <S.ProgressIcon src={progressImage[selectedOption]} />
           <S.Text>{selectedOption}</S.Text>
           <S.ArrowIcon src={isOpen ? ArrowUp : ArrowDown} />

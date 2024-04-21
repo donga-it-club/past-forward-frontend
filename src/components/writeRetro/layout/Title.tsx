@@ -32,6 +32,7 @@ const Title: FC<Props> = ({ name }) => {
         <S.SaveSettingBox style={{ flex: 1 }}>
           <S.SaveButton>SAVE</S.SaveButton>
           <S.SettingButton
+            id="wr_edit"
             onClick={() => {
               navigate(`/revise?retrospectiveId=${retrospectiveId}&teamId=${teamId}`);
             }}

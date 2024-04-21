@@ -37,7 +37,9 @@ const MainDesign = () => {
             Past
           </L.LogoText>
         </S.BrandTextBox>
-        <S.StartedFreeButton onClick={navigateToCreate}>Get Started for Free</S.StartedFreeButton>
+        <S.StartedFreeButton onClick={navigateToCreate} id="home_startpf">
+          Get Started for Free
+        </S.StartedFreeButton>
       </S.BrandContainer>
     </div>
   );
