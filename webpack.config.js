@@ -22,7 +22,7 @@ module.exports = (env, argv) => {
       proxy: [
         {
           context: ['/api'],
-          target: 'https://api.pastforward.link/',
+          target: 'https://api.pastforward.link',
         },
       ],
     },
