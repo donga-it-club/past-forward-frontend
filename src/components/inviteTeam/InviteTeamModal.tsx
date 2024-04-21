@@ -46,10 +46,17 @@ const InviteTeamModal: React.FC<InviteTeamModalProps> = ({ isOpen, onClose, team
     fetchInviteData();
   }, []);
 
+  const generateInvitationUrl = (invitationCode: string) => {
+    // const domain = 'http://localhost:3000'; // 로컬 테스트용
+    const domain = 'https://www.pastforward.link'; // 배포용
+    return `${domain}/invitations?invitationId=${invitationCode}`;
+  };
+
   const copyToClipboard = () => {
     if (inviteData) {
       // inviteData가 null이 아닐 때만 실행
-      navigator.clipboard.writeText(inviteData.invitationUrl).then(
+      const invitationUrl = generateInvitationUrl(inviteData.invitationCode);
+      navigator.clipboard.writeText(invitationUrl).then(
         () => {
           setShowAlert(true); // 알림 표시
         },
@@ -71,11 +78,11 @@ const InviteTeamModal: React.FC<InviteTeamModalProps> = ({ isOpen, onClose, team
         <ModalBody>
           {inviteData && (
             <S.CustomModalBody>
-              <QRCode value={inviteData.qrCodeImage} />
+              <QRCode value={generateInvitationUrl(inviteData.invitationCode)} />
               <S.LinkContainer>
                 <Text fontSize="sm">QR과 Link를 통해 팀원을 초대하여 회고를 함께하세요!</Text>
                 <S.LinkBox>
-                  <Input value={inviteData.invitationUrl} isReadOnly />
+                  <Input value={generateInvitationUrl(inviteData.invitationCode)} isReadOnly />
                   <Button onClick={copyToClipboard} colorScheme="brand" leftIcon={<FaCopy />} marginLeft="0.2rem">
                     Copy
                   </Button>

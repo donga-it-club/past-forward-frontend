@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { PeopleFill, Person, PersonCircle, PersonFill, PlusCircleFill } from 'react-bootstrap-icons';
+import { IoArrowUndoSharp } from 'react-icons/io5';
 import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Flex } from '@chakra-ui/react';
 import { useRecoilState } from 'recoil';
 import Search_SideBar from './Search_SideBar';
@@ -91,6 +92,16 @@ const PageSideBar = () => {
           </AccordionPanel>
 
           {/* Create New Retro */}
+        </AccordionItem>
+        <AccordionItem border="1px solid gray">
+          <AccordionButton>
+            <Flex alignItems="center" padding="2px 10px">
+              <IoArrowUndoSharp style={{ marginRight: '10px' }} size={15} />
+              <a href="/retrolist" style={{ color: '#111b47', textDecoration: 'none' }}>
+                Move to the List
+              </a>
+            </Flex>
+          </AccordionButton>
         </AccordionItem>
         <AccordionItem border="1px solid gray">
           <AccordionButton>

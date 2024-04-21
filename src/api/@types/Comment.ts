@@ -1,48 +1,50 @@
-export interface GetCommentRequest {
-  id: string;
+//post
+export interface PostCommentRequest {
+  sectionId: number;
+  commentContent: string;
 }
 
-export interface GetCommentResponse {
+export interface PostCommentResponse {
   code: number;
   message: string;
-  data: {
-    id: number;
-    content: string;
-  };
+  data: PostCommentData;
+}
+
+export interface PostCommentData {
+  id: number;
+  userId: number;
+  sectionId: number;
+  commentContent: string;
 }
 
 //put
 export interface PutCommentRequest {
-  id: number;
+  commentId: number;
+  commentContent: string;
+}
+
+export interface PutCommentResponse {
+  code: number;
+  message: string;
+  data: PutCommentData;
+}
+
+export interface PutCommentData {
+  commentId: number;
+  content: string;
 }
 
 //delete
 export interface DeleteCommentRequest {
-  id: number;
+  commentId: number;
 }
 
 export interface DeleteCommentResponse {
   code: number;
-  message: string;
-  data: object;
 }
-
-//GetAllComment
-export interface AllGetCommentResponse {
-  code: number;
-  message: string;
-  data: CommentData[];
-}
-
-export interface CommentData {
-  id: number;
-  comment: string;
-}
-
-//Post
 
 export interface CommentClient {
-  getComment(request: GetCommentRequest): Promise<GetCommentResponse>;
+  post(request: PostCommentRequest): Promise<PostCommentResponse>;
   delete(request: DeleteCommentRequest): Promise<DeleteCommentResponse>;
-  getAllComment(): Promise<AllGetCommentResponse>;
+  put(request: PutCommentRequest): Promise<PutCommentResponse>;
 }

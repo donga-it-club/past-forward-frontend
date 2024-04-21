@@ -1,7 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import { BsPersonCircle } from 'react-icons/bs';
 import { FaCheck } from 'react-icons/fa';
-import { IoIosInformationCircle } from 'react-icons/io';
 import { IoClose } from 'react-icons/io5';
 import { MdModeEdit } from 'react-icons/md';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -13,12 +12,14 @@ import {
   EditablePreview,
   Flex,
   FormControl,
-  FormLabel,
   IconButton,
   Input,
-  Switch,
+  Radio,
+  RadioGroup,
+  Stack,
   useEditableControls,
 } from '@chakra-ui/react';
+import axios from 'axios';
 import DeleteRetrospective from './DeleteRetrospective';
 import RetroImageUploader from './RetroImageUploader';
 import { RetrospectiveData } from '@/api/@types/Retrospectives';
@@ -32,7 +33,7 @@ import * as S from '@/styles/writeRetroStyles/ReviseLayout.style';
 
 interface Props {
   retro: RetrospectiveData;
-  status: string | undefined;
+  status: string;
   setStatus: (status: string) => void;
 }
 
@@ -41,9 +42,8 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
   const query = search.split(/[=,&]/);
   const retrospectiveId = Number(query[1]);
   const teamId = Number(query[3]);
-  const [isChecked, setIsChecked] = useState<boolean>(false);
-
-  const [image, setImage] = useState<string>(retro.thumbnail);
+  const [image, setImage] = useState<Blob | null>(null);
+  const [imageURL, setImageURL] = useState<string>();
   const [title, setTitle] = useState<string>('');
   const [templateName, setTemplateName] = useState<TemplateNameData[]>();
   const [description, setDescription] = useState<string>('');
@@ -54,7 +54,7 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
     if (retro) {
       try {
         const data = await postImageToS3({ filename: retro.thumbnail, method: 'GET' });
-        setImage(data.data.preSignedUrl);
+        setImageURL(data.data.preSignedUrl);
       } catch (e) {
         toast.error(e);
       }
@@ -74,36 +74,47 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
 
   const handlePutRetrospective = async () => {
     try {
-      const data = await RetrospectiveService.put({
-        retrospectiveId: 102,
-        title: title,
-        teamId: teamId,
-        description: description,
-        thumbnail: image,
-        status: 'COMPLETED',
-      });
-      console.log('put data', data);
-      navigate('/retrolist');
-      toast.info('회고 수정이 정상 처리되었습니다.');
-    } catch (e) {
-      toast.error(e);
-    }
-  };
-
-  const SwitchStatus = () => {
-    setIsChecked(true);
-    if (retro) {
-      if (isChecked) {
-        toast.info('회고 완료 처리를 취소하였습니다.');
-        setStatus('COMPLETED');
-        setIsChecked(false);
-        console.log(status);
+      if (teamId) {
+        const data = await RetrospectiveService.putTeam({
+          retrospectiveId: retro.retrospectiveId,
+          title: title ?? retro.title,
+          teamId: teamId,
+          description: description ?? retro.description,
+          thumbnail: imageURL ?? retro.thumbnail,
+          status: status,
+        });
+        console.log('put data', data);
+        navigate('/retrolist');
+        toast.info('회고 수정이 정상 처리되었습니다.');
       } else {
-        toast.success('해당 회고는 최종 완료 처리되었습니다.');
-        setStatus(retro.status);
-        console.log(status);
-        setIsChecked(true);
+        const data = await RetrospectiveService.putPersonal({
+          retrospectiveId: retro.retrospectiveId,
+          title: title ?? retro.title,
+          description: description ?? retro.description,
+          thumbnail: imageURL ?? retro.thumbnail,
+          status: status,
+        });
+        console.log('put data', data);
+        navigate('/retrolist');
+        toast.info('회고 수정이 정상 처리되었습니다.');
       }
+
+      if (imageURL && retro.thumbnail !== imageURL) {
+        const response = await postImageToS3({
+          filename: imageURL,
+          method: 'PUT',
+        });
+
+        const uploadResponse = await axios.put(response.data.preSignedUrl, image, {
+          headers: {
+            'Content-Type': image?.type,
+          },
+        });
+
+        console.log(uploadResponse.status);
+      }
+    } catch {
+      toast.error('회고 수정이 정상 처리되지 않았습니다.');
     }
   };
 
@@ -131,7 +142,16 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
 
   return (
     <S.SettingContainer>
-      <RetroImageUploader image={image} setImage={setImage} />
+      <div style={{ margin: '0 auto' }}>
+        <p>회고 제목, 회고 상세 설명을 반드시 입력해야 회고 수정이 가능합니다 :)</p>
+      </div>
+      <RetroImageUploader
+        image={imageURL}
+        onChange={(files, imageUUID) => {
+          imageUUID && setImageURL(imageUUID);
+          setImage(files);
+        }}
+      />
       {/* 회고명 */}
       <Flex flexDirection="column">
         <L.reviseTitleText>회고명 </L.reviseTitleText>
@@ -157,7 +177,7 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
           <L.reviseTitleText>회고 템플릿 유형 </L.reviseTitleText>
           <S.NoteChangeText>변경 불가</S.NoteChangeText>
         </Flex>
-        <S.NotTextInput>{templateName && templateName[0].name}</S.NotTextInput>
+        <S.NotTextInput>{templateName && templateName[0].name === 'Keep' ? 'KPT' : 'KUDOS'}</S.NotTextInput>
 
         {/* 회고리더 */}
         <Flex margin="10px 0">
@@ -185,14 +205,18 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
         </Editable>
 
         {/* 최종완료 */}
-        <L.reviseTitleText>회고 최종완료</L.reviseTitleText>
+        <L.reviseTitleText>회고 진행 단계</L.reviseTitleText>
         <S.SettingLine />
-        <FormControl display="flex" alignItems="center" onChange={SwitchStatus}>
-          <FormLabel htmlFor="email-alerts" mb="0" margin="20px 10px" display="flex">
-            <IoIosInformationCircle color="#FF4646" size={20} style={{ margin: 'auto 0' }} />
-            <S.SettingDetailText>회고가 최종 완료 단계로 처리되며 더이상 수정이 불가합니다.</S.SettingDetailText>
-          </FormLabel>
-          <Switch colorScheme="orange" size="lg" isRequired isInvalid={isChecked} />
+        <FormControl display="flex" alignItems="center" flexDirection="column" margin="20px auto">
+          <Flex>
+            <RadioGroup onChange={setStatus} value={status} colorScheme="brand">
+              <Stack direction="row" spacing="24px">
+                <Radio value="NOT_STARTED">진행 전</Radio>
+                <Radio value="IN_PROGRESS">진행 중</Radio>
+                <Radio value="COMPLETED">진행 완료</Radio>
+              </Stack>
+            </RadioGroup>
+          </Flex>
         </FormControl>
 
         {/* 회고 삭제 */}

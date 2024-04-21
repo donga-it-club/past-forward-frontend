@@ -3,6 +3,7 @@ import { BiLike, BiSolidLike } from 'react-icons/bi';
 import { CgProfile } from 'react-icons/cg';
 import { FaRegTrashAlt } from 'react-icons/fa';
 import { MdAccessAlarm, MdMessage } from 'react-icons/md';
+import { useLocation } from 'react-router-dom';
 import {
   Button,
   Flex,
@@ -19,7 +20,7 @@ import { formattedDate } from './PersonalTask';
 import TeamTaskMessage from './taskMessage/TeamTaskMessage';
 import { sectionData } from '@/api/@types/Section';
 import { SectionServices } from '@/api/services/Section';
-
+import ActionItemTask from '@/components/writeRetro/ActionItems/ActionItemTask';
 import ReviseModal from '@/components/writeRetro/task/ReviseModal';
 import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
@@ -33,6 +34,12 @@ const TeamTask: FC<Props> = ({ section }) => {
   const [liked, setLiked] = useState<number>(0);
   const [messaged, setMessaged] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState<boolean>(false);
+  const { search } = useLocation();
+
+  const query = search.split(/[=,&]/);
+  const rId = Number(query[1]); // action-items로 넘겨줄 Id값들
+  const tId = Number(query[3]);
+  const sId: number = section.sectionId;
 
   const handleLike = async () => {
     try {
@@ -100,6 +107,12 @@ const TeamTask: FC<Props> = ({ section }) => {
               <S.TaskText>
                 {section.content}
                 {/* <S.ReviseText>(수정됨)</S.ReviseText> */}
+                <S.ManagerStyle>
+                  <div>
+                    <ActionItemTask tId={tId} rId={rId} sId={sId} />
+                  </div>
+                  <S.ManagerText>담당자</S.ManagerText>
+                </S.ManagerStyle>
               </S.TaskText>
             </PopoverTrigger>
             <PopoverContent>
@@ -123,7 +136,7 @@ const TeamTask: FC<Props> = ({ section }) => {
               <S.SubTaskIcon onClick={handleMessaged}>
                 {messaged ? <MdMessage size="20px" color="#111B47" /> : <MdMessage size="20px" color="#DADEE5" />}
               </S.SubTaskIcon>
-              <S.SubTaskCount>0</S.SubTaskCount>
+              <S.SubTaskCount>{section.comments.length}</S.SubTaskCount>
             </S.SubTaskStyle>
             {/* DaysLeft */}
             <S.SubTaskStyle>
