@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect, useState } from 'react';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { getCurrentUser } from 'aws-amplify/auth';
 import { RecoilRoot } from 'recoil';
@@ -22,7 +22,6 @@ interface PrivateRouteProps {
 
 // 로그인 상태 확인, 로그인 안 되어있는데 접근하면 "/" 로 리다이렉트함
 const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
-  const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isChecking, setIsChecking] = useState(true);
 
@@ -36,17 +35,16 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
       setIsLoggedIn(true);
     } catch (error) {
       setIsLoggedIn(false);
-      navigate('/');
     } finally {
       setIsChecking(false);
     }
   };
 
-  if (isChecking) return <div>로딩 중...</div>; // 로그인 상태 확인 중
+  if (isChecking) {
+    return <div>로딩 중...</div>; // 로그인 상태 확인 중
+  }
 
-  if (!isLoggedIn) return null;
-
-  return children;
+  return isLoggedIn ? children : <Navigate to="/" replace state={{ from: location }} />;
 };
 
 const App = () => {
