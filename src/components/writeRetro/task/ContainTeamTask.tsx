@@ -74,7 +74,6 @@ export const ContainTeamTask = () => {
                   labelType="dark"
                   taskCount={section.filter(data => data.sectionName === title.name).length}
                 />
-
                 <AddTask template={title.id} retrospectiveId={retro?.retrospectiveId} />
                 {section
                   .filter(key => key.sectionName === title.name)
