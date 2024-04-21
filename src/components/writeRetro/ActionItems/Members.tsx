@@ -41,7 +41,7 @@ export const Members: React.FC<UserListProps> = ({ users, onSelectUserImg, onSel
 
   return (
     <>
-      <S.ListConatiner>
+      <S.ListContainer>
         <S.TitleContainer>
           <S.Title>해당 업무의 담당자를 지정해주세요</S.Title>
         </S.TitleContainer>
@@ -52,7 +52,7 @@ export const Members: React.FC<UserListProps> = ({ users, onSelectUserImg, onSel
             </S.ListItem>
           ))}
         </ul>
-      </S.ListConatiner>
+      </S.ListContainer>
     </>
   );
 };

@@ -14,7 +14,6 @@ import {
   Portal,
 } from '@chakra-ui/react';
 import ReviseCommentModal from '../ReviseCommentModal';
-import { PostCommentData } from '@/api/@types/Comment';
 import { sectionData } from '@/api/@types/Section';
 import { CommentService } from '@/api/services/Comment';
 import { useCustomToast } from '@/hooks/useCustomToast';
@@ -22,12 +21,13 @@ import * as S from '@/styles/writeRetroStyles/Layout.style';
 
 interface Props {
   section: sectionData;
+  setRendering: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const TeamTaskMessage: FC<Props> = ({ section }) => {
+const TeamTaskMessage: FC<Props> = ({ section, setRendering }) => {
   const [value, setValue] = useState('');
-  const [comment, setComment] = useState<PostCommentData>();
   const toast = useCustomToast();
+
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
     e.target.style.height = 'auto';
@@ -36,9 +36,8 @@ const TeamTaskMessage: FC<Props> = ({ section }) => {
 
   const handlePostComment = async () => {
     try {
-      const response = await CommentService.post({ sectionId: section.sectionId, commentContent: value });
-      setComment(response.data);
-      console.log(comment);
+      await CommentService.post({ sectionId: section.sectionId, commentContent: value });
+      setRendering(prev => !prev);
     } catch (e) {
       toast.error(e);
     }
@@ -47,6 +46,7 @@ const TeamTaskMessage: FC<Props> = ({ section }) => {
   const handleDeleteComment = async (id: number) => {
     try {
       await CommentService.delete({ commentId: id });
+      setRendering(prev => !prev);
     } catch (e) {
       toast.error(e);
     }
@@ -113,7 +113,7 @@ const TeamTaskMessage: FC<Props> = ({ section }) => {
                     </S.TaskText>
                   </PopoverTrigger>
                   <PopoverContent>
-                    <ReviseCommentModal comment={section} />
+                    <ReviseCommentModal comment={section} setRendering={setRendering} />
                     {/* TaskTextModal */}
                   </PopoverContent>
                 </Popover>

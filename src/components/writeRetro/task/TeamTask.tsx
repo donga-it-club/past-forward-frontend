@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import { BiLike, BiSolidLike } from 'react-icons/bi';
 import { CgProfile } from 'react-icons/cg';
 import { FaRegTrashAlt } from 'react-icons/fa';
@@ -27,19 +27,16 @@ import * as S from '@/styles/writeRetroStyles/Layout.style';
 
 interface Props {
   section: sectionData;
-  like: number;
-  content: string;
+  setRendering: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const TeamTask: FC<Props> = ({ section, like, content }) => {
+const TeamTask: FC<Props> = ({ section, setRendering }) => {
   const { search } = useLocation();
   const query = search.split(/[=,&]/);
-  const retrospectiveId = Number(query[1]);
-  const teamId = Number(query[3]);
   const toast = useCustomToast();
-  const [liked, setLiked] = useState<number>(0);
   const [messaged, setMessaged] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [liked, setLiked] = useState<number>(0);
 
   const rId = Number(query[1]); // action-items로 넘겨줄 Id값들
   const tId = Number(query[3]);
@@ -49,6 +46,7 @@ const TeamTask: FC<Props> = ({ section, like, content }) => {
     try {
       const data = await SectionServices.likePost({ sectionId: section.sectionId });
       setLiked(data.data.likeCnt);
+      setRendering(prev => !prev);
     } catch (e) {
       toast.error(e);
     }
@@ -62,26 +60,11 @@ const TeamTask: FC<Props> = ({ section, like, content }) => {
   const DeleteSection = async () => {
     try {
       await SectionServices.delete({ sectionId: section.sectionId });
+      setRendering(prev => !prev);
     } catch (e) {
       toast.error(e);
     }
   };
-
-  const fetchSection = async () => {
-    try {
-      if (!teamId) {
-        await SectionServices.PersonalGet({ retrospectiveId: retrospectiveId });
-      } else {
-        await SectionServices.TeamGet({ retrospectiveId: retrospectiveId, teamId: teamId });
-      }
-    } catch (e) {
-      toast.error(e);
-    }
-  };
-
-  useEffect(() => {
-    fetchSection();
-  }, [like, content]);
 
   return (
     <>
@@ -123,21 +106,21 @@ const TeamTask: FC<Props> = ({ section, like, content }) => {
           {/* TaskCenter */}
           <Popover>
             <PopoverTrigger>
-              <S.TaskText>
-                {section.content}
-                {/* <S.ReviseText>(수정됨)</S.ReviseText> */}
-                {section.sectionName === 'Action Items' && (
-                  <S.ManagerStyle>
-                    <div>
-                      <ActionItemTask tId={tId} rId={rId} sId={sId} />
-                    </div>
-                    <S.ManagerText>담당자</S.ManagerText>
-                  </S.ManagerStyle>
-                )}
-              </S.TaskText>
+              <div>
+                <S.TaskText>
+                  {section.content}
+                  {/* <S.ReviseText>(수정됨)</S.ReviseText> */}
+                </S.TaskText>
+              </div>
             </PopoverTrigger>
+            {section.sectionName === 'Action Items' && (
+              <S.ManagerStyle>
+                <ActionItemTask tId={tId} rId={rId} sId={sId} />
+                <S.ManagerText>담당자</S.ManagerText>
+              </S.ManagerStyle>
+            )}
             <PopoverContent>
-              <ReviseModal section={section} />
+              <ReviseModal section={section} setRendering={setRendering} />
             </PopoverContent>
           </Popover>
 
@@ -167,7 +150,7 @@ const TeamTask: FC<Props> = ({ section, like, content }) => {
           </S.SubTaskBox>
         </S.TaskMainStyle>
 
-        {isVisible && <TeamTaskMessage section={section} />}
+        {isVisible && <TeamTaskMessage section={section} setRendering={setRendering} />}
       </S.TaskBox>
     </>
   );
