@@ -24,11 +24,6 @@ const RetroTeamPage = () => {
   const [section, setSection] = useState<sectionData[]>([]);
   const [retro, setRetro] = useState<RetrospectiveData>();
   const [template, setTemplate] = useState<TemplateNameData[]>();
-  // const [liked, setLiked] = useState<boolean>(false);
-  // const [commentBoolean, setCommentBoolean] = useState<boolean>(false);
-  // const [deleteValue, setDeleteValue] = useState<boolean>(false);
-  // const [add, setAdd] = useState<boolean>(false);
-  // const [changeContent, setChangeContent] = useState<boolean>(false);
   const [rendering, setRendering] = useState<boolean>(false);
   const toast = useCustomToast();
 
@@ -73,7 +68,8 @@ const RetroTeamPage = () => {
 
   return (
     <S.Container>
-      <Title />
+      <Title name={retro?.title} />
+
       <S.SectionBox>
         <Flex flexDirection="column" margin="0 auto">
           <Flex>
