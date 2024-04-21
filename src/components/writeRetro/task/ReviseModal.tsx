@@ -7,9 +7,10 @@ import * as S from '@/styles/writeRetroStyles/Layout.style';
 
 interface Props {
   section: sectionData;
+  setRendering: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ReviseModal: FC<Props> = ({ section }) => {
+const ReviseModal: FC<Props> = ({ section, setRendering }) => {
   // Input 높이 자동 조절
   const [value, setValue] = useState<string>('');
   const toast = useCustomToast();
@@ -23,6 +24,7 @@ const ReviseModal: FC<Props> = ({ section }) => {
   const ChangeContent = async () => {
     try {
       await SectionServices.patch({ sectionId: section.sectionId, sectionContent: value });
+      setRendering(prev => !prev);
     } catch (e) {
       toast.error(e);
     }
