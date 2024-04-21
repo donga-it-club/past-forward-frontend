@@ -241,7 +241,7 @@ export const TaskMessageLine = styled.div`
 `;
 
 export const TaskMessageStyle = styled.div`
-  min-height: 35px;
+  min-height: 10px;
   margin-top: 10px;
 `;
 
