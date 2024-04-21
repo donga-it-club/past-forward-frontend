@@ -19,7 +19,7 @@ const Title = () => {
 
         <S.SaveSettingBox style={{ flex: 1 }}>
           <S.SaveButton>SAVE</S.SaveButton>
-          <S.SettingButton>
+          <S.SettingButton id="wr_edit">
             <IoIosMore size={'40px'} color="#B1B2B2" />
           </S.SettingButton>
         </S.SaveSettingBox>

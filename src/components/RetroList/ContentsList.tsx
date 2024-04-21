@@ -185,7 +185,9 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
             <div>
               {filteredData.map(item => (
                 <S.ItemBox key={item.id}>
-                  <S.ListTitleBox onClick={() => navigate(`/section?retrospectiveId=${item.id}&teamId=${item.teamId}`)}>
+                  <S.ListTitleBox
+                    onClick={() => navigate(`/sections?retrospectiveId=${item.id}&teamId=${item.teamId}`)}
+                  >
                     {item.title}
                   </S.ListTitleBox>
                   <S.ListUserBox>{item.username}</S.ListUserBox>

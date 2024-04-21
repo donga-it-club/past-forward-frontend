@@ -56,7 +56,7 @@ const NicknameBox = () => {
             onChange={handleNewNicknameChange}
           />
           <S.UpdateButton>
-            <Button size="small" onClick={() => handleUpdateNicknameAttributes(newNickname)}>
+            <Button size="small" onClick={() => handleUpdateNicknameAttributes(newNickname)} id="mypage_nick">
               닉네임 변경
             </Button>
           </S.UpdateButton>

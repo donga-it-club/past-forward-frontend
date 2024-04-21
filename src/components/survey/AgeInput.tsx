@@ -41,7 +41,7 @@ const AgeInput: React.FC<Age> = ({ onAgeChange }) => {
         <S.CustomInput>
           <Text>만</Text>
           <NumberInput>
-            <NumberInputField value={age} onChange={handleAgeChange} />
+            <NumberInputField value={age} onChange={handleAgeChange} id="survey_age" />
             <NumberInputStepper>
               <NumberIncrementStepper onClick={handleIncrement} />
               <NumberDecrementStepper onClick={handleDecrement} />

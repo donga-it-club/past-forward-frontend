@@ -34,6 +34,7 @@ const ContentsFilter: React.FC<ContentsFilterProps> = ({ onFilter }) => {
           handleActive();
         }}
         className={activeFilter === 'ALL' ? 'active' : ''}
+        id="rl_allfiles"
       >
         ALL files
       </S.ContentsFilterButton>
@@ -44,6 +45,7 @@ const ContentsFilter: React.FC<ContentsFilterProps> = ({ onFilter }) => {
           handleActive();
         }}
         className={activeFilter === 'Teams' ? 'active' : ''}
+        id="rl_teams"
       >
         Teams
       </S.ContentsFilterButton>
@@ -54,6 +56,7 @@ const ContentsFilter: React.FC<ContentsFilterProps> = ({ onFilter }) => {
           handleActive();
         }}
         className={activeFilter === 'Personal' ? 'active' : ''}
+        id="rl_personal"
       >
         Personal
       </S.ContentsFilterButton>

@@ -32,6 +32,7 @@ const TemplateSelect: React.FC<TemplateSelectProps> = ({ onChange, defaultTempla
         placeholder="Select option"
         onChange={e => onChange(Number(e.target.value))}
         defaultValue={defaultTemplateId !== null ? defaultTemplateId.toString() : '1'}
+        id="cr_template"
       >
         {templates.map(template => (
           <option key={template.id} value={template.id}>

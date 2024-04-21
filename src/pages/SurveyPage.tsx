@@ -98,7 +98,13 @@ const SurveyPage: React.FC = () => {
           <PathRadio onPathChange={handlePathChange} />
           <Divider />
           <PurposeCheckbox onPurposeChange={handlePurposeChange} />
-          <Button onClick={handleSurveyButtonClick} colorScheme="brand" width="80%" style={{ marginBottom: '4rem' }}>
+          <Button
+            onClick={handleSurveyButtonClick}
+            colorScheme="brand"
+            width="80%"
+            style={{ marginBottom: '4rem' }}
+            id="survey_submit"
+          >
             제출
           </Button>
         </S.WhiteContainer>
