@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // Axios 인스턴스 생성
 const axiosInstance = axios.create({
-  baseURL: 'https://api.pastforward.link/',
+  baseURL: 'https://api.pastforward.link',
   headers: {
     'Content-Type': 'application/json;charset=UTF-8',
   },

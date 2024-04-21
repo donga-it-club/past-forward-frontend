@@ -2,15 +2,19 @@ import { ChangeEvent, FC, useState } from 'react';
 import { Button } from '@chakra-ui/react';
 import { sectionData } from '@/api/@types/Section';
 import { SectionServices } from '@/api/services/Section';
+import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 
 interface Props {
   section: sectionData;
+  setRendering: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ReviseModal: FC<Props> = ({ section }) => {
+const ReviseModal: FC<Props> = ({ section, setRendering }) => {
   // Input 높이 자동 조절
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState<string>('');
+  const toast = useCustomToast();
+
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
     e.target.style.height = 'auto';
@@ -19,10 +23,10 @@ const ReviseModal: FC<Props> = ({ section }) => {
 
   const ChangeContent = async () => {
     try {
-      const data = await SectionServices.patch({ sectionId: section.sectionId, sectionContent: value });
-      console.log(data);
+      await SectionServices.patch({ sectionId: section.sectionId, sectionContent: value });
+      setRendering(prev => !prev);
     } catch (e) {
-      console.error(e);
+      toast.error(e);
     }
   };
   return (

@@ -1,6 +1,5 @@
 import { FC, useState } from 'react';
 import { AiFillPlusCircle } from 'react-icons/ai';
-import { PostSectionData } from '@/api/@types/Section';
 import { SectionServices } from '@/api/services/Section';
 import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
@@ -8,11 +7,11 @@ import * as S from '@/styles/writeRetroStyles/Layout.style';
 interface Props {
   retrospectiveId: number | undefined;
   template: number;
+  setRendering: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const AddTask: FC<Props> = ({ retrospectiveId, template }) => {
+export const AddTask: FC<Props> = ({ retrospectiveId, template, setRendering }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const [result, setResult] = useState<PostSectionData>();
   const toast = useCustomToast();
   const [content, setContent] = useState<string>('');
 
@@ -23,14 +22,13 @@ export const AddTask: FC<Props> = ({ retrospectiveId, template }) => {
   const handleAddSection = async () => {
     try {
       if (retrospectiveId) {
-        const data = await SectionServices.create({
+        await SectionServices.create({
           retrospectiveId: retrospectiveId,
           templateSectionId: template.valueOf(),
           sectionContent: content,
         });
-        setResult(data.data);
-        console.log(result);
       }
+      setRendering(prev => !prev);
     } catch (e) {
       toast.error(e);
     }

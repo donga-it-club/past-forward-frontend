@@ -175,7 +175,6 @@ export const TaskText = styled.p`
   color: #6b7a99;
   line-height: 20px;
   vertical-align: top;
-  display: inline-block;
   margin: 20px 0;
   margin-top: 20px;
   &:hover {
@@ -241,7 +240,7 @@ export const TaskMessageLine = styled.div`
 `;
 
 export const TaskMessageStyle = styled.div`
-  min-height: 35px;
+  min-height: 10px;
   margin-top: 10px;
 `;
 
@@ -393,7 +392,7 @@ export const ManagerText = styled.p`
   font-weight: 500;
   color: #1a265c;
   line-height: 28px;
-  margin: 0 5px;
+  margin: auto 5px;
 `;
 
 export const ManagerButton = styled.button`

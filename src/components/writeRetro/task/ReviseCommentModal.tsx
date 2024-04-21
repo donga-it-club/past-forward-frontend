@@ -2,15 +2,18 @@ import { ChangeEvent, FC, useState } from 'react';
 import { Button } from '@chakra-ui/react';
 import { CommentData } from '@/api/@types/Section';
 import { CommentService } from '@/api/services/Comment';
+import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 
 interface Props {
   comment: CommentData;
+  setRendering: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ReviseCommentModal: FC<Props> = ({ comment }) => {
+const ReviseCommentModal: FC<Props> = ({ comment, setRendering }) => {
   // Input 높이 자동 조절
   const [value, setValue] = useState('');
+  const toast = useCustomToast();
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
     e.target.style.height = 'auto';
@@ -19,10 +22,10 @@ const ReviseCommentModal: FC<Props> = ({ comment }) => {
 
   const ChangeContent = async () => {
     try {
-      const data = await CommentService.put({ commentId: comment.commentId, commentContent: value });
-      console.log(data);
+      await CommentService.put({ commentId: comment.commentId, commentContent: value });
+      setRendering(prev => !prev);
     } catch (e) {
-      console.error(e);
+      toast.error(e);
     }
   };
   return (

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const ListConatiner = styled.div`
+export const ListContainer = styled.div`
   position: absolute;
   z-index: 1;
   width: 280px;
