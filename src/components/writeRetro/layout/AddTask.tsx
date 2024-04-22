@@ -56,7 +56,7 @@ export const AddTask: FC<Props> = ({ retrospectiveId, template, setRendering }) 
               placeholder="내용을 입력해주세요"
               rows={1}
             ></S.InputTask>
-            <S.InputButton style={{ marginTop: '10px', marginLeft: '55%' }} onClick={handleAddSection}>
+            <S.InputButton style={{ marginTop: '10px', marginLeft: '60%' }} onClick={handleAddSection}>
               확인
             </S.InputButton>
           </S.InputTaskBox>
