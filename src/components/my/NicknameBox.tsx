@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Input, Button } from '@aws-amplify/ui-react';
+import { Input, Button, Text } from '@aws-amplify/ui-react';
 import { fetchUserAttributes, updateUserAttributes } from 'aws-amplify/auth';
 import { useRecoilState } from 'recoil';
+import { PutUsersRequest } from '@/api/@types/User';
+import putUser from '@/api/imageApi/putUser';
 import { userNicknameState } from '@/recoil/user/userAtom';
 import * as S from '@/styles/my/myPage.style';
 
@@ -26,11 +28,19 @@ const NicknameBox = () => {
 
   async function handleUpdateNicknameAttributes(updatedNickname: string) {
     try {
+      const requestData: PutUsersRequest = {
+        thumbnail: null,
+        username: updatedNickname,
+      };
+
       await updateUserAttributes({
         userAttributes: {
           nickname: newNickname,
         },
       });
+
+      await putUser(requestData);
+
       alert('닉네임이 수정되었습니다.');
       setUserNickname(updatedNickname);
       setNewNickname('');
@@ -55,6 +65,9 @@ const NicknameBox = () => {
             value={newNickname}
             onChange={handleNewNicknameChange}
           />
+          <S.NicknameDescription>
+            <Text fontSize="xs">닉네임 작성 후 해당 버튼을 누를 시 닉네임이 변경됩니다.</Text>
+          </S.NicknameDescription>
           <S.UpdateButton>
             <Button size="small" onClick={() => handleUpdateNicknameAttributes(newNickname)} id="mypage_nick">
               닉네임 변경

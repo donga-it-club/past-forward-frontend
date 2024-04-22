@@ -12,3 +12,19 @@ export interface GetUsersResponse {
   };
   message: string | null;
 }
+
+// put
+export interface PutUsersRequest {
+  thumbnail: string | null;
+  username: string;
+}
+
+export interface PutUsersResponse {
+  code: number;
+  data: {
+    userId: number;
+    email: string;
+    thumbnail: string;
+    username: string;
+  };
+}
