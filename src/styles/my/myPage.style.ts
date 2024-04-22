@@ -97,6 +97,12 @@ export const UpdateButton = styled.div`
   justify-content: flex-end;
 `;
 
+export const NicknameDescription = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.5rem;
+`;
+
 export const SubName = styled.h2<{ fontSize: string }>`
   color: #111b47;
   padding: 10px 5px;
