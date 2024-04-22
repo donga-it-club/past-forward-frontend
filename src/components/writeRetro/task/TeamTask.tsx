@@ -61,8 +61,8 @@ const TeamTask: FC<Props> = ({ section, setRendering }) => {
     try {
       await SectionServices.delete({ sectionId: section.sectionId });
       setRendering(prev => !prev);
-    } catch (e) {
-      toast.error(e);
+    } catch {
+      toast.error('존재하지 않는 회고 카드입니다.');
     }
   };
 

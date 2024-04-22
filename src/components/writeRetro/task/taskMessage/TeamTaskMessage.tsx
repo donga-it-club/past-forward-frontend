@@ -30,14 +30,13 @@ const TeamTaskMessage: FC<Props> = ({ section, setRendering }) => {
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
-    e.target.style.height = 'auto';
-    e.target.style.height = `${e.target.scrollHeight}px`;
   };
 
   const handlePostComment = async () => {
     try {
       await CommentService.post({ sectionId: section.sectionId, commentContent: value });
       setRendering(prev => !prev);
+      setValue('');
     } catch (e) {
       toast.error(e);
     }
@@ -87,7 +86,7 @@ const TeamTaskMessage: FC<Props> = ({ section, setRendering }) => {
                         </PopoverHeader>
 
                         <PopoverBody>
-                          <S.DeleteSectionText>선택한 회고 카드를 삭제하시겠습니까?</S.DeleteSectionText>
+                          <S.DeleteSectionText>선택한 댓글을 삭제하시겠습니까?</S.DeleteSectionText>
                           <Flex flexDirection="row-reverse">
                             <Button
                               colorScheme="brand"

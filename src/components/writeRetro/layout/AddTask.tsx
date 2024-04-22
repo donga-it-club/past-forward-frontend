@@ -29,16 +29,11 @@ export const AddTask: FC<Props> = ({ retrospectiveId, template, setRendering }) 
         });
       }
       setRendering(prev => !prev);
+      setContent('');
     } catch (e) {
       toast.error(e);
     }
   };
-
-  // const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-  //   setValue(e.target.value);
-  //   e.target.style.height = 'auto';
-  //   e.target.style.height = `${e.target.scrollHeight}px`;
-  // };
 
   return (
     <>
@@ -55,7 +50,9 @@ export const AddTask: FC<Props> = ({ retrospectiveId, template, setRendering }) 
           <S.InputTaskBox>
             <S.InputTask
               value={content}
-              onChange={e => setContent(e.target.value)}
+              onChange={e => {
+                setContent(e.target.value);
+              }}
               placeholder="내용을 입력해주세요"
               rows={1}
             ></S.InputTask>
