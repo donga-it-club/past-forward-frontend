@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect, useState } from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { getCurrentUser } from 'aws-amplify/auth';
 import { RecoilRoot } from 'recoil';
@@ -20,7 +20,7 @@ interface PrivateRouteProps {
   children: ReactElement;
 }
 
-// 로그인 상태 확인, 로그인 안 되어있는데 접근하면 "/" 로 리다이렉트함
+// 로그인 상태 확인, 로그인 안 되어있는데 접근하면 "/login" 로 리다이렉트함
 const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isChecking, setIsChecking] = useState(true);
@@ -44,7 +44,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
     return <div>로딩 중...</div>; // 로그인 상태 확인 중
   }
 
-  return isLoggedIn ? children : <Navigate to="/" replace state={{ from: location }} />;
+  return isLoggedIn ? children : <Navigate to="/login" replace state={{ from: location.pathname }} />;
 };
 
 const App = () => {
@@ -54,12 +54,6 @@ const App = () => {
       const visited = localStorage.getItem('surveyVisited');
       return visited !== null ? visited === 'true' : false;
     };
-
-    const location = useLocation();
-
-    useEffect(() => {
-      // 추가적인 페이지 접근 로직이 필요하면 여기에 구현
-    }, [location]);
 
     // surveyVisited 값이 'true'인 경우, 홈 페이지로 리다이렉트
     if (checkSurveyVisited()) {
@@ -134,7 +128,6 @@ const App = () => {
             />
             {/* 발급 될 초대 링크 */}
             <Route path="/invitations" Component={AcceptInvite} />
-            {/* <Route path={`/invitations?invitationId=${invitationId}`} element={<AcceptInvitePage />} /> */}
           </Routes>
         </Router>
       </RecoilRoot>
