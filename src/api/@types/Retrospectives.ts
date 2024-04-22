@@ -91,7 +91,7 @@ export interface PutTeamRetrospectiveRequest {
   teamId?: number;
   description: string;
   status: string;
-  thumbnail?: string;
+  thumbnail?: string | null;
 }
 
 export interface PutPersonalRetrospectiveRequest {
@@ -99,7 +99,7 @@ export interface PutPersonalRetrospectiveRequest {
   title: string;
   description: string;
   status: string;
-  thumbnail?: string;
+  thumbnail?: string | null;
 }
 
 export interface RetrospectiveResponse {

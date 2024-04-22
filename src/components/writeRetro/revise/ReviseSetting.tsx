@@ -43,10 +43,12 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
   const retrospectiveId = Number(query[1]);
   const teamId = Number(query[3]);
   const [image, setImage] = useState<Blob | null>(null);
-  const [imageURL, setImageURL] = useState<string>();
+  const [imageURL, setImageURL] = useState<string>('');
   const [title, setTitle] = useState<string>('');
   const [templateName, setTemplateName] = useState<TemplateNameData[]>();
   const [description, setDescription] = useState<string>('');
+  const [imageUUID, setImageUUID] = useState<string | null>(null); // 상태를 활용할 수 있도록 수정
+  const [preview, setPreview] = useState<string | null>('DefaultImage.png');
   const toast = useCustomToast();
   const navigate = useNavigate();
 
@@ -56,7 +58,7 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
         const data = await postImageToS3({ filename: retro.thumbnail, method: 'GET' });
         setImageURL(data.data.preSignedUrl);
       } catch (e) {
-        toast.error(e);
+        console.error(e);
       }
     }
   };
@@ -75,26 +77,24 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
   const handlePutRetrospective = async () => {
     try {
       if (teamId) {
-        const data = await RetrospectiveService.putTeam({
+        await RetrospectiveService.putTeam({
           retrospectiveId: retro.retrospectiveId,
-          title: title ?? retro.title,
+          title: title ? title : retro.title,
           teamId: teamId,
-          description: description ?? retro.description,
-          thumbnail: imageURL ?? retro.thumbnail,
+          description: description ? description : retro.description,
+          thumbnail: imageUUID,
           status: status,
         });
-        console.log('put data', data);
         navigate('/retrolist');
         toast.info('회고 수정이 정상 처리되었습니다.');
       } else {
-        const data = await RetrospectiveService.putPersonal({
+        await RetrospectiveService.putPersonal({
           retrospectiveId: retro.retrospectiveId,
-          title: title ?? retro.title,
-          description: description ?? retro.description,
-          thumbnail: imageURL ?? retro.thumbnail,
+          title: title ? title : retro.title,
+          description: description ? description : retro.description,
+          thumbnail: imageUUID,
           status: status,
         });
-        console.log('put data', data);
         navigate('/retrolist');
         toast.info('회고 수정이 정상 처리되었습니다.');
       }
@@ -142,15 +142,15 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
 
   return (
     <S.SettingContainer>
-      <div style={{ margin: '0 auto' }}>
-        <p>회고 제목, 회고 상세 설명을 반드시 입력해야 회고 수정이 가능합니다 :)</p>
-      </div>
       <RetroImageUploader
         image={imageURL}
         onChange={(files, imageUUID) => {
           imageUUID && setImageURL(imageUUID);
           setImage(files);
         }}
+        setImageUUID={setImageUUID}
+        preview={preview}
+        setPreview={setPreview}
       />
       {/* 회고명 */}
       <Flex flexDirection="column">
