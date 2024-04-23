@@ -48,8 +48,19 @@ export interface PutActionItemsResponse {
   message: string;
   data: object;
 }
+
+//delete
+export interface DeleteTeamMembersRequest {
+  teamId: number;
+  userId: number;
+}
+
+export interface DeleteTeamMembersResponse {
+  code: number;
+}
 export interface TeamControllerClient {
   TeamMemberGet(request: GetTeamMembersRequest): Promise<GetTeamMembersResponse>;
   TemplateNameGet(request: GetTemplateNameRequest): Promise<GetTemplateNameResponse>;
   ActionItemsMemberPut(request: PutActionItemsRequest): Promise<PutActionItemsResponse>;
+  DeleteTeamMembers(request: DeleteTeamMembersRequest): Promise<DeleteTeamMembersResponse>;
 }
