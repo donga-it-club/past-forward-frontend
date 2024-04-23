@@ -70,7 +70,7 @@ const RetroTeamPage = () => {
 
   return (
     <S.Container>
-      {retro && <Title name={retro.title} description={retro.description} />}
+      {retro && <Title name={retro.title} description={retro.description} thumbnail={retro.thumbnail} retro={retro} />}
 
       <S.SectionBox>
         <Flex flexDirection="column" margin="0 auto">
