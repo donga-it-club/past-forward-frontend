@@ -57,7 +57,7 @@ const SurveyPage: React.FC = () => {
   const [gender, setGender] = useState<string>('FEMALE');
   const [job, setJob] = useState<string>('');
   const [city, setCity] = useState<string>('서울');
-  const [path, setPath] = useState<string>('');
+  const [path, setPath] = useState<string>('블라인드');
   const [purpose, setPurpose] = useState<string[]>();
 
   const handleAgeChange = (age: string) => {

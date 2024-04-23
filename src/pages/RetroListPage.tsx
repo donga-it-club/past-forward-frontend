@@ -34,7 +34,7 @@ const RetroListPage = () => {
     page: 0,
     size: 10,
     order: 'NEWEST',
-    status: 'NOT_STARTED',
+    status: 'ALL',
     keyword: '',
     isBookmarked: false,
   });
@@ -46,6 +46,13 @@ const RetroListPage = () => {
   useEffect(() => {
     setQuery(prev => {
       return { ...prev, page: currentPage - 1 };
+    });
+  }, [currentPage]);
+
+  useEffect(() => {
+    const newStatus = 'IN_PROGRESS';
+    setQuery(prev => {
+      return { ...prev, status: newStatus };
     });
   }, [currentPage]);
 
