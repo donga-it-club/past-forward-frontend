@@ -17,9 +17,10 @@ import * as S from '@/styles/writeRetroStyles/Layout.style';
 interface Props {
   section: sectionData;
   setRendering: React.Dispatch<React.SetStateAction<boolean>>;
+  teamId: number;
 }
 
-const TeamTask: FC<Props> = ({ section, setRendering }) => {
+const TeamTask: FC<Props> = ({ section, setRendering, teamId }) => {
   const { search } = useLocation();
   const query = search.split(/[=,&]/);
   const toast = useCustomToast();
@@ -36,8 +37,8 @@ const TeamTask: FC<Props> = ({ section, setRendering }) => {
       const data = await SectionServices.likePost({ sectionId: section.sectionId });
       setLiked(data.data.likeCnt);
       setRendering(prev => !prev);
-    } catch (e) {
-      toast.error(e);
+    } catch {
+      toast.error('회고 카드 좋아요 요청에 실패하였습니다.');
     }
   };
 
@@ -50,10 +51,13 @@ const TeamTask: FC<Props> = ({ section, setRendering }) => {
     try {
       await SectionServices.delete({ sectionId: section.sectionId });
       setRendering(prev => !prev);
+      toast.info('회고 카드가 삭제되었습니다.');
     } catch {
       toast.error('존재하지 않는 회고 카드입니다.');
     }
   };
+
+  const actionCondition = teamId && section.sectionName === 'Action Items';
 
   return (
     <>
@@ -70,21 +74,19 @@ const TeamTask: FC<Props> = ({ section, setRendering }) => {
           </Flex>
 
           {/* TaskCenter */}
+
           <Popover>
             <PopoverTrigger>
               <div>
-                <S.TaskText>
-                  {section.content}
-                  {/* <S.ReviseText>(수정됨)</S.ReviseText> */}
-                </S.TaskText>
+                <S.TaskText>{section.content}</S.TaskText>
               </div>
             </PopoverTrigger>
-            {section.sectionName === 'Action Items' && (
+            {actionCondition ? (
               <S.ManagerStyle>
                 <ActionItemTask tId={tId} rId={rId} sId={sId} />
                 <S.ManagerText>담당자</S.ManagerText>
               </S.ManagerStyle>
-            )}
+            ) : null}
             <PopoverContent>
               <ReviseModal section={section} setRendering={setRendering} />
             </PopoverContent>

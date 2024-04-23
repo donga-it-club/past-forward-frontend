@@ -62,6 +62,7 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
       try {
         const data = await postImageToS3({ filename: retro.thumbnail, method: 'GET' });
         setImageURL(data.data.preSignedUrl);
+        setPreview(data.data.preSignedUrl);
       } catch (e) {
         console.error(e);
       }
@@ -123,13 +124,7 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
     }
   };
 
-  useEffect(() => {
-    fetchRetrospectiveTemplate();
-    fetchRetrospectiveImage();
-  }, []);
-
-  if (!fetch) return;
-
+  //description edit icon
   function EditableControls() {
     const { isEditing, getSubmitButtonProps, getCancelButtonProps, getEditButtonProps } = useEditableControls();
 
@@ -144,6 +139,13 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
       </Flex>
     );
   }
+
+  useEffect(() => {
+    fetchRetrospectiveTemplate();
+    fetchRetrospectiveImage();
+  }, [imageURL]);
+
+  if (!fetch) return;
 
   return (
     <S.SettingContainer>
