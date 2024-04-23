@@ -1,18 +1,7 @@
 import { ChangeEvent, FC, useState } from 'react';
 import { CgProfile } from 'react-icons/cg';
-import { FaRegTrashAlt } from 'react-icons/fa';
-import {
-  Button,
-  Flex,
-  Popover,
-  PopoverArrow,
-  PopoverBody,
-  PopoverCloseButton,
-  PopoverContent,
-  PopoverHeader,
-  PopoverTrigger,
-  Portal,
-} from '@chakra-ui/react';
+import { Flex, Popover, PopoverContent, PopoverTrigger } from '@chakra-ui/react';
+import DeleteData from '../DeleteData';
 import ReviseCommentModal from '../ReviseCommentModal';
 import { sectionData } from '@/api/@types/Section';
 import { CommentService } from '@/api/services/Comment';
@@ -30,14 +19,13 @@ const TeamTaskMessage: FC<Props> = ({ section, setRendering }) => {
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
-    e.target.style.height = 'auto';
-    e.target.style.height = `${e.target.scrollHeight}px`;
   };
 
   const handlePostComment = async () => {
     try {
       await CommentService.post({ sectionId: section.sectionId, commentContent: value });
       setRendering(prev => !prev);
+      setValue('');
     } catch (e) {
       toast.error(e);
     }
@@ -74,36 +62,12 @@ const TeamTaskMessage: FC<Props> = ({ section, setRendering }) => {
                     <S.TaskUserName>{section.username ?? '닉네임 없음'}</S.TaskUserName>
                   </S.TaskUserProfile>
                   {/* <S.MessageTime>1일 전</S.MessageTime> */}
-                  <Popover>
-                    <PopoverTrigger>
-                      <S.TaskRevise>삭제</S.TaskRevise>
-                    </PopoverTrigger>
-                    <Portal>
-                      <PopoverContent>
-                        <PopoverArrow />
-                        <PopoverHeader display="flex">
-                          <FaRegTrashAlt style={{ margin: 'auto 0', marginRight: '10px' }} />
-                          삭제요청
-                        </PopoverHeader>
-
-                        <PopoverBody>
-                          <S.DeleteSectionText>선택한 회고 카드를 삭제하시겠습니까?</S.DeleteSectionText>
-                          <Flex flexDirection="row-reverse">
-                            <Button
-                              colorScheme="brand"
-                              margin="0 10px"
-                              onClick={() => {
-                                handleDeleteComment(section.commentId);
-                              }}
-                            >
-                              <PopoverCloseButton hidden />
-                              삭제
-                            </Button>
-                          </Flex>
-                        </PopoverBody>
-                      </PopoverContent>
-                    </Portal>
-                  </Popover>
+                  <DeleteData
+                    value="댓글"
+                    handleDeleteValue={() => {
+                      handleDeleteComment(section.commentId);
+                    }}
+                  />
                 </Flex>
                 <Popover>
                   <PopoverTrigger>

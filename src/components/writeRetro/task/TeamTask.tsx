@@ -1,21 +1,10 @@
 import { FC, useState } from 'react';
 import { BiLike, BiSolidLike } from 'react-icons/bi';
 import { CgProfile } from 'react-icons/cg';
-import { FaRegTrashAlt } from 'react-icons/fa';
 import { MdAccessAlarm, MdMessage } from 'react-icons/md';
 import { useLocation } from 'react-router-dom';
-import {
-  Button,
-  Flex,
-  Popover,
-  PopoverArrow,
-  PopoverBody,
-  PopoverCloseButton,
-  PopoverContent,
-  PopoverHeader,
-  PopoverTrigger,
-  Portal,
-} from '@chakra-ui/react';
+import { Flex, Popover, PopoverContent, PopoverTrigger } from '@chakra-ui/react';
+import DeleteData from './DeleteData';
 import TeamTaskMessage from './taskMessage/TeamTaskMessage';
 import { sectionData } from '@/api/@types/Section';
 import { SectionServices } from '@/api/services/Section';
@@ -61,8 +50,8 @@ const TeamTask: FC<Props> = ({ section, setRendering }) => {
     try {
       await SectionServices.delete({ sectionId: section.sectionId });
       setRendering(prev => !prev);
-    } catch (e) {
-      toast.error(e);
+    } catch {
+      toast.error('존재하지 않는 회고 카드입니다.');
     }
   };
 
@@ -77,30 +66,7 @@ const TeamTask: FC<Props> = ({ section, setRendering }) => {
               <S.TaskUserName>{section.username ?? '닉네임 없음'}</S.TaskUserName>
             </S.TaskUserProfile>
 
-            <Popover>
-              <PopoverTrigger>
-                <S.TaskRevise>삭제</S.TaskRevise>
-              </PopoverTrigger>
-              <Portal>
-                <PopoverContent>
-                  <PopoverArrow />
-                  <PopoverHeader display="flex">
-                    <FaRegTrashAlt style={{ margin: 'auto 0', marginRight: '10px' }} />
-                    삭제요청
-                  </PopoverHeader>
-
-                  <PopoverBody>
-                    <S.DeleteSectionText>선택한 회고 카드를 삭제하시겠습니까?</S.DeleteSectionText>
-                    <Flex flexDirection="row-reverse">
-                      <Button colorScheme="brand" onClick={DeleteSection} margin="0 10px">
-                        <PopoverCloseButton hidden />
-                        삭제
-                      </Button>
-                    </Flex>
-                  </PopoverBody>
-                </PopoverContent>
-              </Portal>
-            </Popover>
+            <DeleteData value="회고 카드" handleDeleteValue={DeleteSection} />
           </Flex>
 
           {/* TaskCenter */}

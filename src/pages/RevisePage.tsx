@@ -7,13 +7,11 @@ import { TeamMembersData } from '@/api/@types/TeamController';
 import { RetrospectiveService } from '@/api/services/Retrospectives';
 import { TeamControllerServices } from '@/api/services/TeamController';
 import ManageTeamMembers from '@/components/writeRetro/revise/ManageTeamMembers';
-import NotTeamMemberModal from '@/components/writeRetro/revise/NotTeamMemberModal';
 import ReviseSetting from '@/components/writeRetro/revise/ReviseSetting';
 import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/writeRetroStyles/ReviseLayout.style';
 
 const RetroRevisePage = () => {
-  //query
   const { search } = useLocation();
   const query = search.split(/[=,&]/);
   const retrospectiveId = Number(query[1]);
@@ -23,7 +21,7 @@ const RetroRevisePage = () => {
   const [status, setStatus] = useState<string>('NOT_STARTED');
   const toast = useCustomToast();
 
-  const FetchRetrospective = async () => {
+  const fetchRetrospective = async () => {
     try {
       const data = await RetrospectiveService.onlyGet({ retrospectiveId: retrospectiveId });
       setRetro(data.data);
@@ -48,7 +46,7 @@ const RetroRevisePage = () => {
   };
 
   useEffect(() => {
-    FetchRetrospective();
+    fetchRetrospective();
     fetchTeamMembers();
   }, [retro?.status]);
 
@@ -73,9 +71,7 @@ const RetroRevisePage = () => {
             <TabPanel>
               <ReviseSetting retro={retro} status={status} setStatus={setStatus} />
             </TabPanel>
-            <TabPanel>
-              {members ? <ManageTeamMembers members={members} teamId={teamId} /> : <NotTeamMemberModal />}
-            </TabPanel>
+            <TabPanel>{members && <ManageTeamMembers members={members} teamId={teamId} />}</TabPanel>
           </TabPanels>
         </Tabs>
       </S.SettingMenuStyle>

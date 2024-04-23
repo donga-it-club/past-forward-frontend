@@ -1,10 +1,13 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { BsPersonCircle } from 'react-icons/bs';
 import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Flex, Button } from '@chakra-ui/react';
 import { formattedDate } from '../task/PersonalTask';
 import { TeamMembersData } from '@/api/@types/TeamController';
-import { MockTeamMembers } from '@/api/__mock__/teamMembers';
+import { UserData } from '@/api/@types/Users';
+import { TeamControllerServices } from '@/api/services/TeamController';
+import { UserServices } from '@/api/services/User';
 import InviteTeamModal from '@/components/inviteTeam/InviteTeamModal';
+import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/writeRetroStyles/ReviseLayout.style';
 
 interface Props {
@@ -16,11 +19,23 @@ const ManageTeamMembers: FC<Props> = ({ members, teamId }) => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [searchList, setSearchList] = useState<TeamMembersData[]>();
   const [isInviteModalOpen, setInviteModalOpen] = useState<boolean>(false);
+  const [user, setUser] = useState<UserData>();
+  // const [deleteData, setDeleteData] = useState<DeleteTeamMembersResponse>;
+  const toast = useCustomToast();
+
+  const fetchUser = async () => {
+    try {
+      const data = await UserServices.get();
+      setUser(data.data);
+    } catch (error) {
+      toast.error(error);
+    }
+  };
 
   const searchTeamMembers = (searchTerm: string) => {
     const filterData: TeamMembersData[] = [];
 
-    MockTeamMembers.data.forEach(data => {
+    members.forEach(data => {
       if (data.username.includes(searchTerm)) {
         filterData.push(data);
         setSearchList(filterData);
@@ -28,6 +43,20 @@ const ManageTeamMembers: FC<Props> = ({ members, teamId }) => {
       }
     });
   };
+
+  const DeleteTeamMember = async () => {
+    try {
+      if (user && user.userId) {
+        await TeamControllerServices.DeleteTeamMembers({ teamId: teamId, userId: user.userId });
+      }
+    } catch (e) {
+      toast.error(e);
+    }
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   return (
     <S.ManageStyle>
@@ -69,43 +98,29 @@ const ManageTeamMembers: FC<Props> = ({ members, teamId }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {searchList
-              ? searchList.map(item => {
-                  return (
-                    <Tr>
-                      <Td>
-                        <Flex>
-                          <BsPersonCircle style={{ margin: 'auto 10px' }} size={30} />
-                          <p style={{ margin: 'auto 0' }}>{item.username}</p>
-                        </Flex>
-                      </Td>
-                      <Td>2115891@donga.ac.kr</Td>
-                      <Td>2024-03-12 12:50</Td>
-                      <Td>
-                        <Button colorScheme="red" fontSize={15}>
-                          제거
-                        </Button>
-                      </Td>
-                    </Tr>
-                  );
-                })
-              : members.map(name => (
-                  <Tr>
-                    <Td>
-                      <Flex>
-                        {name.profileImage ?? <BsPersonCircle style={{ margin: 'auto 10px' }} size={30} />}
-                        {name.username ?? <S.NotMemberInfo> (닉네임 없음)</S.NotMemberInfo>}
-                      </Flex>
-                    </Td>
-                    <Td>{name.email ?? <S.NotMemberInfo> (이메일 없음)</S.NotMemberInfo>}</Td>
-                    <Td>{formattedDate(name.joinedAt)}</Td>
-                    <Td>
-                      <Button colorScheme="red" fontSize={15}>
+            {(searchList ?? members).map(item => {
+              return (
+                <Tr>
+                  <Td>
+                    <Flex>
+                      {item.profileImage ?? <BsPersonCircle style={{ margin: 'auto 10px' }} size={30} />}
+                      {item.username ?? <S.NotMemberInfo> (닉네임 없음)</S.NotMemberInfo>}
+                    </Flex>
+                  </Td>
+                  <Td>{item.email ?? <S.NotMemberInfo>(이메일 없음)</S.NotMemberInfo>}</Td>
+                  <Td>{formattedDate(item.joinedAt)}</Td>
+                  <Td>
+                    {user?.userId !== item.userId ? (
+                      <Button colorScheme="red" fontSize={15} onClick={DeleteTeamMember}>
                         제거
                       </Button>
-                    </Td>
-                  </Tr>
-                ))}
+                    ) : (
+                      <S.NotMemberInfo style={{ fontSize: '15px' }}>팀장은 나갈 수 없음</S.NotMemberInfo>
+                    )}
+                  </Td>
+                </Tr>
+              );
+            })}
           </Tbody>
         </Table>
       </TableContainer>

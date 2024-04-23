@@ -1,8 +1,10 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { IoIosMore } from 'react-icons/io';
 import { MdPeopleAlt } from 'react-icons/md';
 import { useLocation, useNavigate } from 'react-router-dom';
+import InviteTeamModal from '@/components/inviteTeam/InviteTeamModal';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
+import * as L from '@/styles/writeRetroStyles/ReviseLayout.style';
 
 interface Props {
   name: string | undefined;
@@ -13,6 +15,8 @@ const Title: FC<Props> = ({ name }) => {
   const query = search.split(/[=,&]/);
   const retrospectiveId = Number(query[1]);
   const teamId = Number(query[3]);
+  const [isInviteModalOpen, setInviteModalOpen] = useState<boolean>(false);
+
   const navigate = useNavigate();
   return (
     <>
@@ -22,6 +26,8 @@ const Title: FC<Props> = ({ name }) => {
             <MdPeopleAlt size="40px" color="#434343" style={{ margin: 'auto 0' }} />
 
             <S.TitleText>{name}</S.TitleText>
+            <L.InvitationLinkButton onClick={() => setInviteModalOpen(true)}>팀원 초대 링크</L.InvitationLinkButton>
+            <L.LinkExpirationText>링크는 2시간 후에 만료됩니다.</L.LinkExpirationText>
           </div>
 
           <S.SubTitleText>
@@ -30,7 +36,6 @@ const Title: FC<Props> = ({ name }) => {
         </div>
 
         <S.SaveSettingBox style={{ flex: 1 }}>
-          <S.SaveButton>SAVE</S.SaveButton>
           <S.SettingButton
             id="wr_edit"
             onClick={() => {
@@ -40,6 +45,7 @@ const Title: FC<Props> = ({ name }) => {
             <IoIosMore size={'40px'} color="#B1B2B2" />
           </S.SettingButton>
         </S.SaveSettingBox>
+        <InviteTeamModal isOpen={isInviteModalOpen} onClose={() => setInviteModalOpen(false)} teamId={teamId} />
       </S.TitleBox>
     </>
   );

@@ -1,17 +1,17 @@
-import { ChangeEventHandler, FC, MouseEventHandler, useRef, useState } from 'react';
+import { ChangeEventHandler, FC, MouseEventHandler, useRef } from 'react';
 import { MdOutlineFileUpload } from 'react-icons/md';
 import { Button, Image } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
 
 interface Props {
-  image: string | undefined;
+  image: string;
   onChange: (image: File | null, uuid: string) => void;
+  setImageUUID: (uuid: string | null) => void;
+  setPreview: (preview: string | null) => void;
+  preview: string | null;
 }
 
-const RetroImageUploader: FC<Props> = ({ image, onChange }) => {
-  const [preview, setPreview] = useState<string | null>(null);
-  const [_, setImageUUID] = useState<string | null>(null); // 상태를 활용할 수 있도록 수정
-
+const RetroImageUploader: FC<Props> = ({ image, onChange, setImageUUID, setPreview, preview }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const handleUploadButtonClick: MouseEventHandler<HTMLButtonElement> = () => {
     inputRef.current?.click();
@@ -22,10 +22,7 @@ const RetroImageUploader: FC<Props> = ({ image, onChange }) => {
 
     if (files) {
       const reader = new FileReader();
-      // const imageUrl = URL.createObjectURL(files);
-      // const imageUrlString: string = imageUrl;
       const uuid = uuidv4();
-      // const fix_uuid = uuid.replace(/\n/gi, '\\n');
       onChange(files, uuid);
 
       reader.onloadend = () => {
@@ -38,14 +35,14 @@ const RetroImageUploader: FC<Props> = ({ image, onChange }) => {
   };
 
   const DeleteImage: MouseEventHandler<HTMLButtonElement> = () => {
-    setPreview(null);
+    setPreview('DefaultImage.png');
     setImageUUID(null);
     onChange(null, '');
   };
 
   return (
     <>
-      <Image src={preview ?? image} maxWidth={400} margin="20px auto" h="auto" aspectRatio="1/1" objectFit="contain" />
+      <Image src={preview ?? image} maxWidth={200} margin="20px auto" h="auto" aspectRatio="1/1" objectFit="contain" />
 
       <div style={{ margin: '0 auto' }}>
         <Button colorScheme="brand" variant="outline" margin="0 30px" onClick={handleUploadButtonClick}>
