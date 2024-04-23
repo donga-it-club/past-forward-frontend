@@ -45,7 +45,7 @@ const RetroTeamPage = () => {
       const data = await SectionServices.TeamGet({ retrospectiveId: retrospectiveId, teamId: teamId });
       setSection(data.data);
     } catch (e) {
-      toast.error(e);
+      console.error(e);
     }
   };
 
@@ -66,9 +66,11 @@ const RetroTeamPage = () => {
     fetchTemplate();
   }, [retro?.description, template?.values, section.values, rendering]);
 
+  if (!retro) return;
+
   return (
     <S.Container>
-      <Title name={retro?.title} />
+      {retro && <Title name={retro.title} description={retro.description} />}
 
       <S.SectionBox>
         <Flex flexDirection="column" margin="0 auto">
@@ -94,7 +96,7 @@ const RetroTeamPage = () => {
                       {section
                         .filter(key => key.sectionName === title.name)
                         .map(section => (
-                          <TeamTask section={section} setRendering={setRendering} />
+                          <TeamTask section={section} setRendering={setRendering} teamId={teamId} />
                         ))}
                     </S.FrameStyle>
                   </>

@@ -26,8 +26,9 @@ const TeamTaskMessage: FC<Props> = ({ section, setRendering }) => {
       await CommentService.post({ sectionId: section.sectionId, commentContent: value });
       setRendering(prev => !prev);
       setValue('');
-    } catch (e) {
-      toast.error(e);
+      toast.success('댓글이 추가되었습니다.');
+    } catch {
+      toast.error('댓글 추가에 실패했습니다.');
     }
   };
 
@@ -35,8 +36,9 @@ const TeamTaskMessage: FC<Props> = ({ section, setRendering }) => {
     try {
       await CommentService.delete({ commentId: id });
       setRendering(prev => !prev);
-    } catch (e) {
-      toast.error(e);
+      toast.info('해당 댓글이 삭제되었습니다.');
+    } catch {
+      toast.error('댓글 삭제에 실패하였습니다.');
     }
   };
 

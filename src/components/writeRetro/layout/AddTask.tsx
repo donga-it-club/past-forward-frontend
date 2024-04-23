@@ -28,6 +28,7 @@ export const AddTask: FC<Props> = ({ retrospectiveId, template, setRendering }) 
           sectionContent: content,
         });
       }
+      toast.success('회고 카드가 추가되었습니다.');
       setRendering(prev => !prev);
       setContent('');
     } catch (e) {

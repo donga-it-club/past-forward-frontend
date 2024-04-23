@@ -1,4 +1,5 @@
 import { FC, useState } from 'react';
+import { IoPerson } from 'react-icons/io5';
 import { MdPeopleAlt } from 'react-icons/md';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Flex } from '@chakra-ui/react';
@@ -7,10 +8,11 @@ import * as S from '@/styles/writeRetroStyles/Layout.style';
 import * as L from '@/styles/writeRetroStyles/ReviseLayout.style';
 
 interface Props {
-  name: string | undefined;
+  name: string;
+  description: string;
 }
 
-const Title: FC<Props> = ({ name }) => {
+const Title: FC<Props> = ({ name, description }) => {
   const { search } = useLocation();
   const query = search.split(/[=,&]/);
   const retrospectiveId = Number(query[1]);
@@ -23,7 +25,11 @@ const Title: FC<Props> = ({ name }) => {
       <S.TitleBox>
         <Flex flexDirection="column" margin="20px 10px">
           <Flex>
-            <MdPeopleAlt size="40px" color="#434343" style={{ margin: 'auto 0' }} />
+            {teamId ? (
+              <MdPeopleAlt size="40px" color="#434343" style={{ margin: 'auto 0' }} />
+            ) : (
+              <IoPerson size="40px" color="#434343" style={{ margin: 'auto 0' }} />
+            )}
 
             <S.TitleText>{name}</S.TitleText>
             <L.InvitationLinkButton
@@ -40,7 +46,7 @@ const Title: FC<Props> = ({ name }) => {
           </Flex>
 
           <S.SubTitleText>
-            첫 회고 진행 - 앞으로 남은 회고는 2번! <br />
+            {description} <br />
           </S.SubTitleText>
         </Flex>
 
