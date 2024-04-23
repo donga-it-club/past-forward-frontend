@@ -42,13 +42,18 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
   const query = search.split(/[=,&]/);
   const retrospectiveId = Number(query[1]);
   const teamId = Number(query[3]);
+
+  //image
   const [image, setImage] = useState<Blob | null>(null);
   const [imageURL, setImageURL] = useState<string>('');
   const [title, setTitle] = useState<string>('');
+
+  //revise
   const [templateName, setTemplateName] = useState<TemplateNameData[]>();
   const [description, setDescription] = useState<string>('');
-  const [imageUUID, setImageUUID] = useState<string | null>(null); // 상태를 활용할 수 있도록 수정
+  const [imageUUID, setImageUUID] = useState<string | null>(null);
   const [preview, setPreview] = useState<string | null>('DefaultImage.png');
+
   const toast = useCustomToast();
   const navigate = useNavigate();
 
