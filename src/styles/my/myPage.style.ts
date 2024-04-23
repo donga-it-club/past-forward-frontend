@@ -68,6 +68,14 @@ export const ImageButtonBox = styled.div`
   margin: 0 auto;
 `;
 
+export const ImageDescription = styled.div`
+  display: flex;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  flex-direction: column;
+  align-items: flex-end;
+`;
+
 export const NicknameContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -154,4 +162,12 @@ export const deleteContainer = styled.div`
   margin-top: 1rem;
   display: flex;
   justify-content: flex-end;
+`;
+
+export const UploadImage = styled.img<{ width: string; height: string }>`
+  /* width: 100px; */
+  /* height: 100px; */
+  border-radius: 50%;
+  object-fit: cover;
+  aspect-ratio: 1/1;
 `;

@@ -3,9 +3,9 @@ export interface GetUsersResponse {
   code: number;
   data: {
     userId: number;
-    userName: string;
+    username: string;
     email: string;
-    thumbnail: string | null;
+    thumbnail?: string;
     phone: string | null;
     createDate: Date;
     updateDate: Date;
@@ -16,7 +16,7 @@ export interface GetUsersResponse {
 // put
 export interface PutUsersRequest {
   thumbnail: string | null;
-  username: string;
+  username: string | null;
 }
 
 export interface PutUsersResponse {

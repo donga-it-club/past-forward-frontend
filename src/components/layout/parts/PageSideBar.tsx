@@ -1,33 +1,39 @@
 import { useState } from 'react';
-import { PeopleFill, Person, PersonCircle, PersonFill, PlusCircleFill } from 'react-bootstrap-icons';
+import { PeopleFill, Person, PersonFill, PlusCircleFill } from 'react-bootstrap-icons';
 import { IoArrowUndoSharp } from 'react-icons/io5';
+import { useNavigate } from 'react-router-dom';
 import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Flex } from '@chakra-ui/react';
 import { useRecoilState } from 'recoil';
 import Search_SideBar from './Search_SideBar';
 import UserEmail from '@/components/user/UserEmail';
 import UserNickname from '@/components/user/UserNickname';
+import UserProfileImage from '@/components/user/UserProfileImage';
 import { userNicknameState } from '@/recoil/user/userAtom';
 import * as S from '@/styles/layout/layout.style';
 
 const PageSideBar = () => {
   const [userNickname, setUserNickname] = useRecoilState(userNicknameState);
   const [userEmail, setUserEmail] = useState<string | null>(null);
+  const navigate = useNavigate();
+
+  const navigateToMy = () => {
+    navigate('/my');
+  };
 
   return (
     <S.SideBarBGContainer>
       <S.LogoBox />
-      <S.ProfileLink>
-        <PersonCircle style={{ width: '100', height: '100', color: '#C3CAD9' }} />
-        <a href="/my">
-          <S.MainName>
-            <UserNickname setUserNickname={setUserNickname} />
-            {userNickname}
-          </S.MainName>
-          <S.MailName>
-            <UserEmail setUserEmail={setUserEmail} />
-            {userEmail}
-          </S.MailName>
-        </a>
+      <S.ProfileLink onClick={navigateToMy}>
+        <UserProfileImage width="100px" />
+        {/* <PersonCircle style={{ width: '100', height: '100', color: '#C3CAD9' }} /> */}
+        <S.MainName onClick={navigateToMy}>
+          <UserNickname setUserNickname={setUserNickname} />
+          {userNickname}
+        </S.MainName>
+        <S.MailName onClick={navigateToMy}>
+          <UserEmail setUserEmail={setUserEmail} />
+          {userEmail}
+        </S.MailName>
       </S.ProfileLink>
 
       <Accordion allowMultiple color="black">
