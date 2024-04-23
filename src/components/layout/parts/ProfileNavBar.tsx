@@ -1,4 +1,4 @@
-import { Gear, PersonCircle } from 'react-bootstrap-icons';
+import { Gear } from 'react-bootstrap-icons';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { useNavigate } from 'react-router-dom';
 import { Button, Drawer, DrawerContent, DrawerOverlay, useDisclosure } from '@chakra-ui/react';
@@ -8,6 +8,7 @@ import MenuBar from './MenuBar';
 import PageSideBar from './PageSideBar';
 import Alarm from '@/components/alarm/Alarm';
 import UserNickname from '@/components/user/UserNickname';
+import UserProfileImage from '@/components/user/UserProfileImage';
 import { useAuth } from '@/hooks/useAuth';
 import { userNicknameState } from '@/recoil/user/userAtom';
 import * as S from '@/styles/layout/layout.style';
@@ -56,9 +57,11 @@ const PageNavBar = () => {
                 }}
                 onClick={navigateToMyPage}
               >
-                <PersonCircle style={{ width: '30px', margin: 'auto 3px' }} />
-                <UserNickname setUserNickname={setUserNickname} />
-                {userNickname}
+                <UserProfileImage width="30px" />
+                <p style={{ margin: 'auto 10px' }}>
+                  <UserNickname setUserNickname={setUserNickname} />
+                  {userNickname}
+                </p>
               </div>
             </S.IconStyle>
 
