@@ -1,10 +1,10 @@
 import { FC, useEffect, useState } from 'react';
 import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Flex, Button } from '@chakra-ui/react';
-import { formattedDate } from '../task/PersonalTask';
 import { TeamMembersData } from '@/api/@types/TeamController';
 import { UserData } from '@/api/@types/Users';
 import { TeamControllerServices } from '@/api/services/TeamController';
 import { UserServices } from '@/api/services/User';
+import { convertToLocalTime } from '@/components/RetroList/ContentsList';
 import InviteTeamModal from '@/components/inviteTeam/InviteTeamModal';
 import UserProfileImage from '@/components/user/UserProfileImage';
 import { useCustomToast } from '@/hooks/useCustomToast';
@@ -113,7 +113,7 @@ const ManageTeamMembers: FC<Props> = ({ members, teamId }) => {
                     </Flex>
                   </Td>
                   <Td>{item.email ?? <S.NotMemberInfo>(이메일 없음)</S.NotMemberInfo>}</Td>
-                  <Td>{formattedDate(item.joinedAt)}</Td>
+                  <Td>{convertToLocalTime(item.joinedAt)}</Td>
                   <Td>
                     {user?.userId !== item.userId ? (
                       <Button colorScheme="red" fontSize={15} onClick={DeleteTeamMember}>

@@ -4,12 +4,10 @@ import { CgProfile } from 'react-icons/cg';
 import { CiCirclePlus } from 'react-icons/ci';
 import { MdAccessAlarm } from 'react-icons/md';
 import { Flex, Modal, ModalCloseButton, ModalContent, ModalOverlay, useDisclosure } from '@chakra-ui/react';
-import dayjs from 'dayjs';
 import { PersonalTaskMessage } from './taskMessage/PersonalTaskMessage';
 import { sectionData } from '@/api/@types/Section';
+import { convertToLocalTime } from '@/components/RetroList/ContentsList';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
-
-export const formattedDate = (name: any) => dayjs(name).format('YYYY/MM/DD HH:MM');
 
 interface Props {
   name: sectionData;
@@ -84,7 +82,7 @@ const PersonalTask: FC<Props> = ({ name }) => {
               <S.SubTaskIcon>
                 <MdAccessAlarm size="20px" color="#DADEE5" />
               </S.SubTaskIcon>
-              <S.SubTaskCount>{formattedDate(name.createdDate)}</S.SubTaskCount>
+              <S.SubTaskCount>{convertToLocalTime(name.createdDate)}</S.SubTaskCount>
             </S.SubTaskStyle>
           </S.SubTaskBox>
         </S.TaskMainStyle>
