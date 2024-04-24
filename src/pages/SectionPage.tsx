@@ -100,7 +100,7 @@ const RetroTeamPage = () => {
                             section={section}
                             setRendering={setRendering}
                             teamId={teamId}
-                            imageURL={section.sectionName}
+                            imageURL={section.thumbnail}
                           />
                         ))}
                     </S.FrameStyle>

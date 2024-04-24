@@ -3,7 +3,7 @@ import { BiLike, BiSolidLike } from 'react-icons/bi';
 import { CgProfile } from 'react-icons/cg';
 import { MdAccessAlarm, MdMessage } from 'react-icons/md';
 import { useLocation } from 'react-router-dom';
-import { Flex, Popover, PopoverContent, PopoverTrigger, Image } from '@chakra-ui/react';
+import { Flex, Popover, PopoverContent, PopoverTrigger } from '@chakra-ui/react';
 import DeleteData from './DeleteData';
 import TeamTaskMessage from './taskMessage/TeamTaskMessage';
 import { sectionData } from '@/api/@types/Section';
@@ -13,6 +13,7 @@ import { convertToLocalTime } from '@/components/RetroList/ContentsList';
 import ActionItemTask from '@/components/writeRetro/ActionItems/ActionItemTask';
 import ReviseModal from '@/components/writeRetro/task/ReviseModal';
 import { useCustomToast } from '@/hooks/useCustomToast';
+import * as M from '@/styles/my/myPage.style';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 
 interface Props {
@@ -84,7 +85,11 @@ const TeamTask: FC<Props> = ({ section, setRendering, teamId, imageURL }) => {
           {/* TaskTop */}
           <Flex margin="10px auto">
             <S.TaskUserProfile>
-              {image ? <Image src={image} sizes="40px" /> : <CgProfile size="40px" color="#DADEE5" />}
+              {image ? (
+                <M.UploadImage src={image} sizes="40px" width="40px" height="auto" />
+              ) : (
+                <CgProfile size="40px" color="#DADEE5" />
+              )}
               <S.TaskUserName>{section.username ?? '닉네임 없음'}</S.TaskUserName>
             </S.TaskUserProfile>
 
@@ -138,7 +143,7 @@ const TeamTask: FC<Props> = ({ section, setRendering, teamId, imageURL }) => {
 
         {section.comments.map(
           id =>
-            isVisible && <TeamTaskMessage section={section} setRendering={setRendering} commentImage={id.username} />,
+            isVisible && <TeamTaskMessage section={section} setRendering={setRendering} commentImage={id.thumbnail} />,
         )}
       </S.TaskBox>
     </>

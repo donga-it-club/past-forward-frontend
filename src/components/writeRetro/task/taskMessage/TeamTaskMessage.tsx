@@ -1,12 +1,13 @@
 import { ChangeEvent, FC, useEffect, useState } from 'react';
 import { CgProfile } from 'react-icons/cg';
-import { Flex, Popover, PopoverContent, PopoverTrigger, Image } from '@chakra-ui/react';
+import { Flex, Popover, PopoverContent, PopoverTrigger } from '@chakra-ui/react';
 import DeleteData from '../DeleteData';
 import ReviseCommentModal from '../ReviseCommentModal';
 import { sectionData } from '@/api/@types/Section';
 import postImageToS3 from '@/api/imageApi/postImageToS3';
 import { CommentService } from '@/api/services/Comment';
 import { useCustomToast } from '@/hooks/useCustomToast';
+import * as M from '@/styles/my/myPage.style';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 
 interface Props {
@@ -78,7 +79,11 @@ const TeamTaskMessage: FC<Props> = ({ section, setRendering, commentImage }) => 
                 {/* TaskMessageTop */}
                 <Flex>
                   <S.TaskUserProfile>
-                    {image ? <Image src={image} sizes="40px" /> : <CgProfile size="40px" color="#DADEE5" />}
+                    {image ? (
+                      <M.UploadImage sizes="40px" width="40px" height="auto" src={image} />
+                    ) : (
+                      <CgProfile size="40px" color="#DADEE5" />
+                    )}
                     <S.TaskUserName>{section.username ?? '닉네임 없음'}</S.TaskUserName>
                   </S.TaskUserProfile>
                   {/* <S.MessageTime>1일 전</S.MessageTime> */}

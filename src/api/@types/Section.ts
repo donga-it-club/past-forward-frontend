@@ -15,6 +15,7 @@ export interface sectionData {
   likeCnt: number;
   sectionName: string;
   createdDate: string;
+  thumbnail: string;
   comments: CommentData[];
 }
 
@@ -22,6 +23,7 @@ export interface CommentData {
   commentId: number;
   content: string;
   username: string;
+  thumbnail: string;
 }
 
 export interface GetSectionResponse {
