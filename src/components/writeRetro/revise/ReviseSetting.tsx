@@ -52,7 +52,7 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
   const [templateName, setTemplateName] = useState<TemplateNameData[]>();
   const [description, setDescription] = useState<string>('');
   const [imageUUID, setImageUUID] = useState<string | null>(null);
-  const [preview, setPreview] = useState<string | null>('DefaultImage.png');
+  const [preview, setPreview] = useState<string | null>(null);
 
   const toast = useCustomToast();
   const navigate = useNavigate();
@@ -62,7 +62,6 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
       try {
         const data = await postImageToS3({ filename: retro.thumbnail, method: 'GET' });
         setImageURL(data.data.preSignedUrl);
-        setPreview(data.data.preSignedUrl);
       } catch (e) {
         console.error(e);
       }
@@ -111,13 +110,11 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
           method: 'PUT',
         });
 
-        const uploadResponse = await axios.put(response.data.preSignedUrl, image, {
+        await axios.put(response.data.preSignedUrl, image, {
           headers: {
             'Content-Type': image?.type,
           },
         });
-
-        console.log(uploadResponse.status);
       }
     } catch {
       toast.error('회고 수정이 정상 처리되지 않았습니다.');

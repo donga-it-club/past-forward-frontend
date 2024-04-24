@@ -1,8 +1,7 @@
 import { FC, useEffect, useState } from 'react';
-import { IoPerson } from 'react-icons/io5';
-import { MdPeopleAlt } from 'react-icons/md';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Flex, Image } from '@chakra-ui/react';
+import RetroTitle from './RetroTitle';
 import { RetrospectiveData } from '@/api/@types/Retrospectives';
 import postImageToS3 from '@/api/imageApi/postImageToS3';
 import InviteTeamModal from '@/components/inviteTeam/InviteTeamModal';
@@ -45,13 +44,7 @@ const Title: FC<Props> = ({ name, description, thumbnail, retro }) => {
         <Image src={imageURL} maxWidth={150} borderRadius="10px" margin="auto 5px" />
         <Flex flexDirection="column" margin="20px 10px">
           <Flex>
-            {teamId ? (
-              <MdPeopleAlt size="40px" color="#434343" style={{ margin: 'auto 0' }} />
-            ) : (
-              <IoPerson size="40px" color="#434343" style={{ margin: 'auto 0' }} />
-            )}
-
-            <S.TitleText>{name}</S.TitleText>
+            <RetroTitle teamId={teamId} name={name} />
             <L.InvitationLinkButton
               id="wr_edit"
               style={{ backgroundColor: '#E9E9E9', color: 'black' }}

@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import { MdPeopleAlt } from 'react-icons/md';
 import { useLocation } from 'react-router-dom';
 import { Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 import { RetrospectiveData } from '@/api/@types/Retrospectives';
 import { TeamMembersData } from '@/api/@types/TeamController';
 import { RetrospectiveService } from '@/api/services/Retrospectives';
 import { TeamControllerServices } from '@/api/services/TeamController';
+import RetroTitle from '@/components/writeRetro/layout/RetroTitle';
 import ManageTeamMembers from '@/components/writeRetro/revise/ManageTeamMembers';
 import ReviseSetting from '@/components/writeRetro/revise/ReviseSetting';
 import { useCustomToast } from '@/hooks/useCustomToast';
@@ -55,9 +55,8 @@ const RetroRevisePage = () => {
   return (
     <>
       <S.TitleBox>
-        <Flex>
-          <MdPeopleAlt size="40px" color="#434343" style={{ margin: 'auto 0', marginLeft: '30px' }} />
-          <S.TitleText>FistRetro</S.TitleText>
+        <Flex marginLeft="20px">
+          <RetroTitle teamId={teamId} name={retro.title} />
         </Flex>
       </S.TitleBox>
       <S.SettingMenuStyle>

@@ -1,5 +1,4 @@
 import { FC, useEffect, useState } from 'react';
-import { BsPersonCircle } from 'react-icons/bs';
 import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Flex, Button } from '@chakra-ui/react';
 import { formattedDate } from '../task/PersonalTask';
 import { TeamMembersData } from '@/api/@types/TeamController';
@@ -7,6 +6,7 @@ import { UserData } from '@/api/@types/Users';
 import { TeamControllerServices } from '@/api/services/TeamController';
 import { UserServices } from '@/api/services/User';
 import InviteTeamModal from '@/components/inviteTeam/InviteTeamModal';
+import UserProfileImage from '@/components/user/UserProfileImage';
 import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/writeRetroStyles/ReviseLayout.style';
 
@@ -20,7 +20,6 @@ const ManageTeamMembers: FC<Props> = ({ members, teamId }) => {
   const [searchList, setSearchList] = useState<TeamMembersData[]>();
   const [isInviteModalOpen, setInviteModalOpen] = useState<boolean>(false);
   const [user, setUser] = useState<UserData>();
-  // const [deleteData, setDeleteData] = useState<DeleteTeamMembersResponse>;
   const toast = useCustomToast();
 
   const fetchUser = async () => {
@@ -39,7 +38,9 @@ const ManageTeamMembers: FC<Props> = ({ members, teamId }) => {
       if (data.username.includes(searchTerm)) {
         filterData.push(data);
         setSearchList(filterData);
-      } else {
+      }
+      if (!searchList) {
+        toast.info('검색 결과가 없습니다.');
       }
     });
   };
@@ -98,13 +99,17 @@ const ManageTeamMembers: FC<Props> = ({ members, teamId }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {(searchList ?? members).map(item => {
+            {(searchList === null ? searchList : members).map(item => {
               return (
                 <Tr>
                   <Td>
                     <Flex>
-                      {item.profileImage ?? <BsPersonCircle style={{ margin: 'auto 10px' }} size={30} />}
-                      {item.username ?? <S.NotMemberInfo> (닉네임 없음)</S.NotMemberInfo>}
+                      <UserProfileImage width="30px" />
+                      {item.username ? (
+                        <p style={{ margin: 'auto 5px' }}>{item.username}</p>
+                      ) : (
+                        <S.NotMemberInfo> (닉네임 없음)</S.NotMemberInfo>
+                      )}
                     </Flex>
                   </Td>
                   <Td>{item.email ?? <S.NotMemberInfo>(이메일 없음)</S.NotMemberInfo>}</Td>
