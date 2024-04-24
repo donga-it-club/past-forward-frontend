@@ -11,3 +11,10 @@ export const Container = styled.div`
 export const TextContainer = styled.div`
   margin-bottom: 2rem;
 `;
+
+export const TextBox = styled.div`
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
