@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PeopleFill, Person, PersonFill, PlusCircleFill } from 'react-bootstrap-icons';
 import { IoArrowUndoSharp } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Flex } from '@chakra-ui/react';
 import { useRecoilState } from 'recoil';
-import Search_SideBar from './Search_SideBar';
+import { GetRetrospectiveData } from '@/api/@types/Retrospectives';
+import { queryGetRetrospective } from '@/api/retrospectivesApi/getRetrospective';
 import UserEmail from '@/components/user/UserEmail';
 import UserNickname from '@/components/user/UserNickname';
 import UserProfileImage from '@/components/user/UserProfileImage';
@@ -14,11 +15,33 @@ import * as S from '@/styles/layout/layout.style';
 const PageSideBar = () => {
   const [userNickname, setUserNickname] = useRecoilState(userNicknameState);
   const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [retro, setRetro] = useState<GetRetrospectiveData['data']>();
   const navigate = useNavigate();
 
   const navigateToMy = () => {
     navigate('/my');
   };
+
+  const fetchRetrospective = async () => {
+    try {
+      const data = await queryGetRetrospective({
+        page: 0,
+        size: 10,
+        order: 'NEWEST',
+        status: 'ALL',
+        keyword: '',
+        isBookmarked: false,
+      });
+      setRetro(data.data);
+      console.log('retro', retro);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  useEffect(() => {
+    fetchRetrospective();
+  }, [retro?.totalCount]);
 
   return (
     <S.SideBarBGContainer>
@@ -50,18 +73,22 @@ const PageSideBar = () => {
             </S.MiniBox>
           </AccordionButton>
 
-          <AccordionPanel pb={4}>
-            <Flex alignItems="center" padding="2px 10px">
-              <PersonFill style={{ marginRight: '5px', color: '#939393' }} />
-              <a
-                id="leftside_persnalproject"
-                href="/WriteRetroTeamPage"
-                style={{ color: '#939393', textDecoration: 'none' }}
-              >
-                Personal Project
-              </a>
-            </Flex>
-          </AccordionPanel>
+          {retro?.nodes
+            .filter(item => item.teamId === null)
+            .map(id => (
+              <AccordionPanel pb={4}>
+                <Flex alignItems="center" padding="0 20px">
+                  <PersonFill style={{ marginRight: '5px', color: '#939393' }} />
+                  <a
+                    id="leftside_persnalproject"
+                    href={`sections?retrospectiveId=${id.id}&teamId=${id.teamId}`}
+                    style={{ color: '#939393', textDecoration: 'none' }}
+                  >
+                    {id.title}
+                  </a>
+                </Flex>
+              </AccordionPanel>
+            ))}
         </AccordionItem>
 
         {/* Team Retro */}
@@ -80,20 +107,25 @@ const PageSideBar = () => {
           <AccordionPanel pb={4}>
             <Accordion allowMultiple>
               <AccordionItem>
-                <AccordionButton>
-                  <Flex alignItems="center" padding="2px 10px">
-                    <PersonFill style={{ marginRight: '5px', color: 'gray' }} />
-                    <a
-                      id="leftside_personaltoggle"
-                      href="/WriteRetroTeamPage"
-                      style={{ color: 'gray', textDecoration: 'none' }}
-                    >
-                      Team Project
-                    </a>
-                  </Flex>
-                </AccordionButton>
+                {retro?.nodes
+                  .filter(item => item.teamId)
+                  .map(id => (
+                    <AccordionButton>
+                      <Flex alignItems="center" padding="2px 10px">
+                        <PersonFill style={{ marginRight: '5px', color: 'gray' }} />
+
+                        <a
+                          id="leftside_personaltoggle"
+                          href={`sections?retrospectiveId=${id.id}&teamId=${id.teamId}`}
+                          style={{ color: 'gray', textDecoration: 'none' }}
+                        >
+                          {id.title}
+                        </a>
+                      </Flex>
+                    </AccordionButton>
+                  ))}
               </AccordionItem>
-              <Search_SideBar />
+              {/* <Search_SideBar /> */}
             </Accordion>
           </AccordionPanel>
 
@@ -113,11 +145,7 @@ const PageSideBar = () => {
           <AccordionButton>
             <Flex alignItems="center" padding="2px 10px">
               <PlusCircleFill style={{ marginRight: '5px' }} />
-              <a
-                id="leftside_personaltoggle"
-                href="/WriteRetroTeamPage"
-                style={{ color: '#111b47', textDecoration: 'none' }}
-              >
+              <a id="leftside_personaltoggle" href="/create" style={{ color: '#111b47', textDecoration: 'none' }}>
                 Create New Retro
               </a>
             </Flex>

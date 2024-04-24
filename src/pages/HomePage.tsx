@@ -7,9 +7,7 @@ import Template3 from '@/components/Main/Template3';
 import Template4 from '@/components/Main/Template4';
 import MainDesign from '@/components/home/MainDesign';
 
-interface AppProps {}
-
-const App: React.FC<AppProps> = () => {
+const App = () => {
   const options = {
     anchors: ['Home', 'Template', 'Template2', 'Template3', 'Template4', 'AboutUs', 'Contact'],
   };
