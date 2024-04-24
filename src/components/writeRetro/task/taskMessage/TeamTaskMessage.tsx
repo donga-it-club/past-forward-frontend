@@ -1,9 +1,10 @@
-import { ChangeEvent, FC, useState } from 'react';
+import { ChangeEvent, FC, useEffect, useState } from 'react';
 import { CgProfile } from 'react-icons/cg';
-import { Flex, Popover, PopoverContent, PopoverTrigger } from '@chakra-ui/react';
+import { Flex, Popover, PopoverContent, PopoverTrigger, Image } from '@chakra-ui/react';
 import DeleteData from '../DeleteData';
 import ReviseCommentModal from '../ReviseCommentModal';
 import { sectionData } from '@/api/@types/Section';
+import postImageToS3 from '@/api/imageApi/postImageToS3';
 import { CommentService } from '@/api/services/Comment';
 import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
@@ -11,11 +12,24 @@ import * as S from '@/styles/writeRetroStyles/Layout.style';
 interface Props {
   section: sectionData;
   setRendering: React.Dispatch<React.SetStateAction<boolean>>;
+  commentImage: string;
 }
 
-const TeamTaskMessage: FC<Props> = ({ section, setRendering }) => {
-  const [value, setValue] = useState('');
+const TeamTaskMessage: FC<Props> = ({ section, setRendering, commentImage }) => {
+  const [value, setValue] = useState<string>('');
   const toast = useCustomToast();
+  const [image, setImage] = useState<string>('');
+
+  const fetchRetrospectiveImage = async () => {
+    if (section) {
+      try {
+        const data = await postImageToS3({ filename: commentImage, method: 'GET' });
+        setImage(data.data.preSignedUrl);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  };
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
@@ -42,6 +56,10 @@ const TeamTaskMessage: FC<Props> = ({ section, setRendering }) => {
     }
   };
 
+  useEffect(() => {
+    fetchRetrospectiveImage();
+  }, []);
+
   return (
     <>
       {/* TaskMessage */}
@@ -60,7 +78,7 @@ const TeamTaskMessage: FC<Props> = ({ section, setRendering }) => {
                 {/* TaskMessageTop */}
                 <Flex>
                   <S.TaskUserProfile>
-                    <CgProfile size="40px" color="#DADEE5" />
+                    {image ? <Image src={image} sizes="40px" /> : <CgProfile size="40px" color="#DADEE5" />}
                     <S.TaskUserName>{section.username ?? '닉네임 없음'}</S.TaskUserName>
                   </S.TaskUserProfile>
                   {/* <S.MessageTime>1일 전</S.MessageTime> */}

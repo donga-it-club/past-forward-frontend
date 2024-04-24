@@ -39,9 +39,6 @@ const ManageTeamMembers: FC<Props> = ({ members, teamId }) => {
         filterData.push(data);
         setSearchList(filterData);
       }
-      if (!searchList) {
-        toast.info('검색 결과가 없습니다.');
-      }
     });
   };
 
@@ -99,7 +96,7 @@ const ManageTeamMembers: FC<Props> = ({ members, teamId }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {(searchList === null ? searchList : members).map(item => {
+            {(searchList ?? members).map(item => {
               return (
                 <Tr>
                   <Td>
