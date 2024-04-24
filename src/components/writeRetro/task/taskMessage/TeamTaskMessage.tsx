@@ -1,36 +1,42 @@
-import { ChangeEvent, FC, useEffect, useState } from 'react';
-import { CgProfile } from 'react-icons/cg';
+import { ChangeEvent, FC, useState } from 'react';
 import { Flex, Popover, PopoverContent, PopoverTrigger } from '@chakra-ui/react';
 import DeleteData from '../DeleteData';
 import ReviseCommentModal from '../ReviseCommentModal';
 import { sectionData } from '@/api/@types/Section';
-import postImageToS3 from '@/api/imageApi/postImageToS3';
 import { CommentService } from '@/api/services/Comment';
 import { useCustomToast } from '@/hooks/useCustomToast';
-import * as M from '@/styles/my/myPage.style';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 
 interface Props {
   section: sectionData;
   setRendering: React.Dispatch<React.SetStateAction<boolean>>;
-  commentImage: string;
 }
 
-const TeamTaskMessage: FC<Props> = ({ section, setRendering, commentImage }) => {
+const TeamTaskMessage: FC<Props> = ({ section, setRendering }) => {
   const [value, setValue] = useState<string>('');
   const toast = useCustomToast();
-  const [image, setImage] = useState<string>('');
+  // const [image, setImage] = useState<string>('');
+  // const [comment, setComment] = useState<CommentData[]>();
 
-  const fetchRetrospectiveImage = async () => {
-    if (section) {
-      try {
-        const data = await postImageToS3({ filename: commentImage, method: 'GET' });
-        setImage(data.data.preSignedUrl);
-      } catch (e) {
-        console.error(e);
-      }
-    }
-  };
+  // const fetchComment = async () => {
+  //   try {
+  //     const data = await SectionServices.getComment({ sectionId: section });
+  //     setComment(data.data);
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // };
+
+  // const fetchRetrospectiveImage = async () => {
+  //   if (section) {
+  //     try {
+  //       const data = await postImageToS3({ filename: , method: 'GET' });
+  //       setImage(data.data.preSignedUrl);
+  //     } catch (e) {
+  //       console.error(e);
+  //     }
+  //   }
+  // };
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
@@ -57,9 +63,10 @@ const TeamTaskMessage: FC<Props> = ({ section, setRendering, commentImage }) => 
     }
   };
 
-  useEffect(() => {
-    fetchRetrospectiveImage();
-  }, []);
+  // useEffect(() => {
+  //   fetchRetrospectiveImage();
+  //   fetchComment();
+  // }, []);
 
   return (
     <>
@@ -79,11 +86,11 @@ const TeamTaskMessage: FC<Props> = ({ section, setRendering, commentImage }) => 
                 {/* TaskMessageTop */}
                 <Flex>
                   <S.TaskUserProfile>
-                    {image ? (
-                      <M.UploadImage sizes="40px" width="40px" height="auto" src={image} />
-                    ) : (
-                      <CgProfile size="40px" color="#DADEE5" />
-                    )}
+                    {/* {image ? (
+                        <M.UploadImage sizes="40px" width="40px" height="auto" src={image} />
+                      ) : (
+                        <CgProfile size="40px" color="#DADEE5" />
+                      )} */}
                     <S.TaskUserName>{section.username ?? '닉네임 없음'}</S.TaskUserName>
                   </S.TaskUserProfile>
                   {/* <S.MessageTime>1일 전</S.MessageTime> */}

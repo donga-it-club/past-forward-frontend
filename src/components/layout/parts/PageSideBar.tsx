@@ -112,7 +112,7 @@ const PageSideBar = () => {
                   .map(id => (
                     <AccordionButton>
                       <Flex alignItems="center" padding="2px 10px">
-                        <PersonFill style={{ marginRight: '5px', color: 'gray' }} />
+                        <PeopleFill style={{ marginRight: '5px', color: 'gray' }} />
 
                         <a
                           id="leftside_personaltoggle"

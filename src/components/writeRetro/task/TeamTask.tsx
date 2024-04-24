@@ -76,6 +76,8 @@ const TeamTask: FC<Props> = ({ section, setRendering, teamId, imageURL }) => {
     fetchRetrospectiveImage();
   });
 
+  console.log(isVisible);
+
   const actionCondition = teamId && section.sectionName === 'Action Items';
 
   return (
@@ -141,10 +143,7 @@ const TeamTask: FC<Props> = ({ section, setRendering, teamId, imageURL }) => {
           </S.SubTaskBox>
         </S.TaskMainStyle>
 
-        {section.comments.map(
-          id =>
-            isVisible && <TeamTaskMessage section={section} setRendering={setRendering} commentImage={id.thumbnail} />,
-        )}
+        {isVisible && <TeamTaskMessage section={section} setRendering={setRendering} />}
       </S.TaskBox>
     </>
   );
