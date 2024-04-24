@@ -4,7 +4,7 @@ import { getCurrentUser } from '@aws-amplify/auth';
 import { Button, Text } from '@chakra-ui/react';
 import postInviteTeam from '@/api/inviteTeamApi/postInviteTeam';
 import { useCustomToast } from '@/hooks/useCustomToast';
-import * as S from '@/styles/inviteTeam/AcceptInvite';
+import * as S from '@/styles/inviteTeam/AcceptInvite.style';
 
 const AcceptInvite: React.FC = () => {
   const location = useLocation();
@@ -33,11 +33,19 @@ const AcceptInvite: React.FC = () => {
   const acceptInvitation = async () => {
     try {
       if (invitationCode) {
+        if (inviteSuccess) {
+          navigate('/retrolist');
+          return;
+        }
+
         if (isLoggedIn) {
           // 로그인된 사용자인 경우에만 초대 수락 요청 보냄
           const response = await postInviteTeam(invitationCode);
-          // 백엔드에서 204 반환해줌
-          if (response.ok) {
+          if (response.data.role === 'LEADER') {
+            toast.error('리더는 초대 수락을 할 수 없습니다.');
+          }
+
+          if (response.data.role === 'MEMBER') {
             setInviteSuccess(true); // 초대 요청이 성공했을 때 상태를 true로 변경
           } else {
             console.error('초대 수락 실패');
@@ -70,6 +78,10 @@ const AcceptInvite: React.FC = () => {
         <Button colorScheme="brand" size="lg" onClick={acceptInvitation}>
           초대 수락하기
         </Button>
+        <S.TextBox>
+          <Text fontSize="sm">로그인 된 유저가 아닐 시 버튼 클릭시 로그인 화면으로 이동합니다.</Text>
+          <Text fontSize="sm">로그인 후 다시 초대 링크에 접속해주세요!</Text>
+        </S.TextBox>
       </S.Container>
     </>
   );
