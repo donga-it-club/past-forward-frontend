@@ -15,6 +15,7 @@ export interface sectionData {
   likeCnt: number;
   sectionName: string;
   createdDate: string;
+  thumbnail: string;
   comments: CommentData[];
 }
 
@@ -22,6 +23,7 @@ export interface CommentData {
   commentId: number;
   content: string;
   username: string;
+  thumbnail: string;
 }
 
 export interface GetSectionResponse {
@@ -88,6 +90,17 @@ export interface PostLikeSectionResponse {
     likeCnt: number;
   };
 }
+
+export interface GetSectionCommentsRequest {
+  sectionId: number;
+}
+
+export interface GetSectionCommentsResponse {
+  code: number;
+  message: string;
+  data: CommentData[];
+}
+
 export interface SectionClient {
   TeamGet(request: TeamGetSectionRequest): Promise<GetSectionResponse>;
   PersonalGet(request: PersonalGetSectionRequest): Promise<GetSectionResponse>;
@@ -95,4 +108,5 @@ export interface SectionClient {
   patch(request: PatchSectionRequest): Promise<PatchSectionResponse>;
   delete(request: DeleteSectionRequest): Promise<DeleteSectionResponse>;
   likePost(request: PostLikesSectionRequest): Promise<PostLikeSectionResponse>;
+  getComment(request: GetSectionCommentsRequest): Promise<GetSectionCommentsResponse>;
 }

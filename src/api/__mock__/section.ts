@@ -11,6 +11,8 @@ export const mockSection: GetSectionResponse = {
       likeCnt: 3,
       sectionName: 'Keep',
       createdDate: '2024-03-31T16:05:20.983Z',
+      thumbnail: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+
       comments: [],
     },
     {
@@ -20,6 +22,8 @@ export const mockSection: GetSectionResponse = {
       likeCnt: 3,
       sectionName: 'Problem',
       createdDate: '2024-03-31T16:05:20.983Z',
+      thumbnail: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+
       comments: [],
     },
     {
@@ -29,6 +33,8 @@ export const mockSection: GetSectionResponse = {
       likeCnt: 3,
       sectionName: 'Keep',
       createdDate: '2024-03-31T16:05:20.983Z',
+      thumbnail: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+
       comments: [],
     },
     {
@@ -38,6 +44,8 @@ export const mockSection: GetSectionResponse = {
       likeCnt: 3,
       sectionName: 'Keep',
       createdDate: '2024-03-31T16:05:20.983Z',
+      thumbnail: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+
       comments: [],
     },
     {
@@ -47,6 +55,8 @@ export const mockSection: GetSectionResponse = {
       likeCnt: 3,
       sectionName: 'Keep',
       createdDate: '2024-03-31T16:05:20.983Z',
+      thumbnail: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+
       comments: [],
     },
     {
@@ -56,6 +66,7 @@ export const mockSection: GetSectionResponse = {
       likeCnt: 3,
       sectionName: 'Try',
       createdDate: '2024-03-31T16:05:20.983Z',
+      thumbnail: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
       comments: [],
     },
     {
@@ -65,6 +76,7 @@ export const mockSection: GetSectionResponse = {
       likeCnt: 3,
       sectionName: 'Try',
       createdDate: '2024-03-31T16:05:20.983Z',
+      thumbnail: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
       comments: [],
     },
     {
@@ -74,6 +86,8 @@ export const mockSection: GetSectionResponse = {
       likeCnt: 3,
       sectionName: 'Try',
       createdDate: '2024-03-31T16:05:20.983Z',
+      thumbnail: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+
       comments: [],
     },
     {
@@ -83,6 +97,8 @@ export const mockSection: GetSectionResponse = {
       likeCnt: 3,
       sectionName: 'Action Items',
       createdDate: '2024-03-31T16:05:20.983Z',
+      thumbnail: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+
       comments: [],
     },
     {
@@ -92,6 +108,8 @@ export const mockSection: GetSectionResponse = {
       likeCnt: 3,
       sectionName: 'Action Items',
       createdDate: '2024-03-31T16:05:20.983Z',
+      thumbnail: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+
       comments: [],
     },
     {
@@ -101,6 +119,8 @@ export const mockSection: GetSectionResponse = {
       likeCnt: 3,
       sectionName: 'Keep',
       createdDate: '2024-03-31T16:05:20.983Z',
+      thumbnail: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+
       comments: [],
     },
   ],

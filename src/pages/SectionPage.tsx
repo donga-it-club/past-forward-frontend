@@ -96,7 +96,12 @@ const RetroTeamPage = () => {
                       {section
                         .filter(key => key.sectionName === title.name)
                         .map(section => (
-                          <TeamTask section={section} setRendering={setRendering} teamId={teamId} />
+                          <TeamTask
+                            section={section}
+                            setRendering={setRendering}
+                            teamId={teamId}
+                            imageURL={section.thumbnail}
+                          />
                         ))}
                     </S.FrameStyle>
                   </>

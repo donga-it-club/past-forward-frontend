@@ -146,6 +146,9 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
 
   return (
     <S.SettingContainer>
+      <Flex flexDirection="row-reverse" margin="10px 5px">
+        변경 전 사진이 없으면 사진이 보이지 않습니다.
+      </Flex>
       <RetroImageUploader
         image={imageURL}
         onChange={(files, imageUUID) => {
@@ -156,6 +159,7 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
         preview={preview}
         setPreview={setPreview}
       />
+
       {/* 회고명 */}
       <Flex flexDirection="column">
         <L.reviseTitleText>회고명 </L.reviseTitleText>

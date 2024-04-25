@@ -1,5 +1,4 @@
 import { ChangeEvent, FC, useState } from 'react';
-import { CgProfile } from 'react-icons/cg';
 import { Flex, Popover, PopoverContent, PopoverTrigger } from '@chakra-ui/react';
 import DeleteData from '../DeleteData';
 import ReviseCommentModal from '../ReviseCommentModal';
@@ -14,8 +13,30 @@ interface Props {
 }
 
 const TeamTaskMessage: FC<Props> = ({ section, setRendering }) => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState<string>('');
   const toast = useCustomToast();
+  // const [image, setImage] = useState<string>('');
+  // const [comment, setComment] = useState<CommentData[]>();
+
+  // const fetchComment = async () => {
+  //   try {
+  //     const data = await SectionServices.getComment({ sectionId: section });
+  //     setComment(data.data);
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // };
+
+  // const fetchRetrospectiveImage = async () => {
+  //   if (section) {
+  //     try {
+  //       const data = await postImageToS3({ filename: , method: 'GET' });
+  //       setImage(data.data.preSignedUrl);
+  //     } catch (e) {
+  //       console.error(e);
+  //     }
+  //   }
+  // };
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
@@ -42,6 +63,11 @@ const TeamTaskMessage: FC<Props> = ({ section, setRendering }) => {
     }
   };
 
+  // useEffect(() => {
+  //   fetchRetrospectiveImage();
+  //   fetchComment();
+  // }, []);
+
   return (
     <>
       {/* TaskMessage */}
@@ -60,7 +86,11 @@ const TeamTaskMessage: FC<Props> = ({ section, setRendering }) => {
                 {/* TaskMessageTop */}
                 <Flex>
                   <S.TaskUserProfile>
-                    <CgProfile size="40px" color="#DADEE5" />
+                    {/* {image ? (
+                        <M.UploadImage sizes="40px" width="40px" height="auto" src={image} />
+                      ) : (
+                        <CgProfile size="40px" color="#DADEE5" />
+                      )} */}
                     <S.TaskUserName>{section.username ?? '닉네임 없음'}</S.TaskUserName>
                   </S.TaskUserProfile>
                   {/* <S.MessageTime>1일 전</S.MessageTime> */}
