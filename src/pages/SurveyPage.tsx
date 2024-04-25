@@ -47,8 +47,8 @@ const SurveyPage: React.FC = () => {
       });
       console.log('설문조사 전송 성공', SurveyRequest);
       alert('설문조사가 전송되었습니다.');
-    } catch (error) {
       navigate('/');
+    } catch (error) {
       console.error('실패입니다.', error);
     }
   };
