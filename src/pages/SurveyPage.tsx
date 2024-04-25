@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-// import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Text, Button, Divider } from '@chakra-ui/react';
 import { PostSurvey } from '@/api/survey/postSurvey';
 import AgeInput from '@/components/survey/AgeInput';
@@ -12,19 +11,11 @@ import PurposeCheckbox from '@/components/survey/PurposeCheckbox';
 import * as S from '@/styles/survey/SurveyPage.style';
 
 const SurveyPage: React.FC = () => {
-  const [surveySuccess, setSurveySuccess] = useState<boolean>(false);
-  // const navigate = useNavigate();
-  // if (surveySuccess === true) {
-  //   navigate('https://www.pastforward.link');
-  // } else {
-  //   navigate('/survey');
-  // }
-
   useEffect(() => {
     localStorage.setItem('surveyVisited', 'true');
   }, []);
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleSurveyButtonClick = () => {
     handleSurvey();
@@ -32,22 +23,32 @@ const SurveyPage: React.FC = () => {
 
   const handleSurvey = async () => {
     try {
-      if (surveySuccess === false) {
-        const SurveyRequest = await PostSurvey({
-          age: numAge,
-          gender: gender,
-          occupation: job,
-          region: city,
-          source: path,
-          purposes: purpose,
-        });
-        console.log('설문조사 전송 성공', SurveyRequest);
-        setSurveySuccess(prev => !prev);
-        console.log(surveySuccess);
-        alert('설문조사가 전송되었습니다.');
-      }
+      console.log(
+        '나이는:',
+        age,
+        '/성별은:',
+        gender,
+        '/직업은:',
+        job,
+        '/지역은:',
+        city,
+        '/경로는:',
+        path,
+        '/목적은(복수선택):',
+        purpose,
+      );
+      const SurveyRequest = await PostSurvey({
+        age: numAge,
+        gender: gender,
+        occupation: job,
+        region: city,
+        source: path,
+        purposes: purpose,
+      });
+      console.log('설문조사 전송 성공', SurveyRequest);
+      alert('설문조사가 전송되었습니다.');
+      navigate('/');
     } catch (error) {
-      // navigate('/');
       console.error('실패입니다.', error);
     }
   };
@@ -97,7 +98,6 @@ const SurveyPage: React.FC = () => {
           <PathRadio onPathChange={handlePathChange} />
           <Divider />
           <PurposeCheckbox onPurposeChange={handlePurposeChange} />
-
           <Button
             onClick={handleSurveyButtonClick}
             colorScheme="brand"
@@ -105,9 +105,7 @@ const SurveyPage: React.FC = () => {
             style={{ marginBottom: '4rem' }}
             id="survey_submit"
           >
-            {/* <Link to="https://www.pastforward.link/">제출</Link> */}
-            {/* <Link to={navigate}>제출</Link> */}
-            <Link to={surveySuccess ? 'https://www.pastforward.link' : '/survey'}>제출</Link>
+            제출
           </Button>
         </S.WhiteContainer>
       </S.Background>
