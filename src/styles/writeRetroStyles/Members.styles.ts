@@ -37,11 +37,9 @@ export const ListItem = styled.li`
   }
 `;
 
-export const ProfileImage = styled.img`
+export const ProfileImage = styled.div`
   margin-left: 5px;
   margin-right: 5px;
-  width: 30px;
-  height: 30px;
 `;
 
 export const UserName = styled.span`

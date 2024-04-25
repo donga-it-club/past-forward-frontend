@@ -1,6 +1,6 @@
 import { PutActionItemsRequest } from '@/api/@types/TeamController';
 import { putActionItemsMember } from '@/api/teamControllerApi/putActionItemsMember';
-import UserProfile from '@/assets/UserProfile1.png';
+import UserProfileImage from '@/components/user/UserProfileImage';
 import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/writeRetroStyles/Members.styles';
 
@@ -47,8 +47,13 @@ export const Members: React.FC<UserListProps> = ({ users, onSelectUserImg, onSel
         </S.TitleContainer>
         <ul>
           {users.map((user, index) => (
-            <S.ListItem key={index} onClick={() => handleUserClick(user.name, user.image || UserProfile)}>
-              <S.ProfileImage src={user.image || UserProfile} /> <S.UserName>{user.name}</S.UserName>
+            <S.ListItem key={index} onClick={() => handleUserClick(user.name, user.image)}>
+              <S.ProfileImage>
+                <UserProfileImage width="25px" />
+              </S.ProfileImage>
+              <div style={{ alignItems: 'center' }}>
+                <S.UserName>{user.name}</S.UserName>
+              </div>
             </S.ListItem>
           ))}
         </ul>
