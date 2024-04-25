@@ -66,7 +66,7 @@ const ActionItemTask: FC<ActionItemTaskProps> = ({ tId, rId, sId }) => {
   };
   return (
     <>
-      <Popover>
+      <Popover isOpen={showPopup} onClose={() => setShowPopup(false)}>
         <PopoverTrigger>
           <S.ManagerButton
             onClick={togglePopup}
