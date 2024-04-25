@@ -1,6 +1,7 @@
 import { FC, useState, useEffect } from 'react';
 import { Popover, PopoverTrigger, PopoverContent } from '@chakra-ui/react';
 import { TeamControllerServices } from '@/api/services/TeamController';
+import UserProfileImage from '@/components/user/UserProfileImage';
 import Members from '@/components/writeRetro/ActionItems/Members';
 import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
@@ -65,14 +66,14 @@ const ActionItemTask: FC<ActionItemTaskProps> = ({ tId, rId, sId }) => {
   };
   return (
     <>
-      <Popover>
+      <Popover isOpen={showPopup} onClose={() => setShowPopup(false)}>
         <PopoverTrigger>
           <S.ManagerButton
             onClick={togglePopup}
             onMouseEnter={() => handleMouseEnter(selectedUserName || '')}
             onMouseLeave={handleMouseLeave}
           >
-            {selectedUserImg ? <img src={selectedUserImg} /> : 'M'}
+            {selectedUserImg ? <UserProfileImage width="30px" /> : 'M'}
             {hoveredUser && <S.HoverUser>{hoveredUser}</S.HoverUser>}
           </S.ManagerButton>
         </PopoverTrigger>
