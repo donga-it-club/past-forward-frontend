@@ -47,8 +47,8 @@ const InviteTeamModal: React.FC<InviteTeamModalProps> = ({ isOpen, onClose, team
   }, []);
 
   const generateInvitationUrl = (invitationCode: string) => {
-    // const domain = 'http://localhost:3000'; // 로컬 테스트용
-    const domain = 'https://www.pastforward.link'; // 배포용
+    const domain = 'http://localhost:3000'; // 로컬 테스트용
+    // const domain = 'https://www.pastforward.link'; // 배포용
     return `${domain}/invitations?invitationId=${invitationCode}`;
   };
 
@@ -83,7 +83,13 @@ const InviteTeamModal: React.FC<InviteTeamModalProps> = ({ isOpen, onClose, team
                 <Text fontSize="sm">QR과 Link를 통해 팀원을 초대하여 회고를 함께하세요!</Text>
                 <S.LinkBox>
                   <Input value={generateInvitationUrl(inviteData.invitationCode)} isReadOnly />
-                  <Button onClick={copyToClipboard} colorScheme="brand" leftIcon={<FaCopy />} marginLeft="0.2rem">
+                  <Button
+                    onClick={copyToClipboard}
+                    colorScheme="brand"
+                    leftIcon={<FaCopy />}
+                    marginLeft="0.2rem"
+                    id="inv_url"
+                  >
                     Copy
                   </Button>
                 </S.LinkBox>

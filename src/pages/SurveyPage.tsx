@@ -47,6 +47,7 @@ const SurveyPage: React.FC = () => {
       });
       console.log('설문조사 전송 성공', SurveyRequest);
       alert('설문조사가 전송되었습니다.');
+      // 홈페이지로 이동
       navigate('/');
     } catch (error) {
       console.error('실패입니다.', error);
@@ -57,7 +58,7 @@ const SurveyPage: React.FC = () => {
   const [gender, setGender] = useState<string>('FEMALE');
   const [job, setJob] = useState<string>('');
   const [city, setCity] = useState<string>('서울');
-  const [path, setPath] = useState<string>('');
+  const [path, setPath] = useState<string>('블라인드');
   const [purpose, setPurpose] = useState<string[]>();
 
   const handleAgeChange = (age: string) => {
@@ -98,7 +99,13 @@ const SurveyPage: React.FC = () => {
           <PathRadio onPathChange={handlePathChange} />
           <Divider />
           <PurposeCheckbox onPurposeChange={handlePurposeChange} />
-          <Button onClick={handleSurveyButtonClick} colorScheme="brand" width="80%" style={{ marginBottom: '4rem' }}>
+          <Button
+            onClick={handleSurveyButtonClick}
+            colorScheme="brand"
+            width="80%"
+            style={{ marginBottom: '4rem' }}
+            id="survey_submit"
+          >
             제출
           </Button>
         </S.WhiteContainer>

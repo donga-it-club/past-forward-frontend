@@ -22,7 +22,9 @@ const MenuBar = () => {
       <S.Link href="/#Contact" id="header_contact">
         Contact
       </S.Link>
-      <S.OrdinaryButton onClick={navigateToCreate}>Create</S.OrdinaryButton>
+      <S.OrdinaryButton onClick={navigateToCreate} id="header_create">
+        Create
+      </S.OrdinaryButton>
     </S.LeftBox>
   );
 };

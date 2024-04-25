@@ -35,6 +35,7 @@ const ViewButton: React.FC<ViewModeButtonProps> = ({ viewMode, onViewModeChange 
             onClick={() => {
               handleBoardClick();
             }}
+            id="rl_boardview"
           >
             {viewMode === 'board'}
             <S.Icon src={BoardIcon} alt="board icon" size={18} />
@@ -45,6 +46,7 @@ const ViewButton: React.FC<ViewModeButtonProps> = ({ viewMode, onViewModeChange 
             onClick={() => {
               handleListClick();
             }}
+            id="rl_listview"
           >
             <S.Icon src={ListIcon} alt="list icon" size={22} />
             <S.Text>List View</S.Text>

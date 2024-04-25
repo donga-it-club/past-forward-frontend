@@ -1,20 +1,7 @@
 import { ChangeEvent, FC, useState } from 'react';
-import { CgProfile } from 'react-icons/cg';
-import { FaRegTrashAlt } from 'react-icons/fa';
-import {
-  Button,
-  Flex,
-  Popover,
-  PopoverArrow,
-  PopoverBody,
-  PopoverCloseButton,
-  PopoverContent,
-  PopoverHeader,
-  PopoverTrigger,
-  Portal,
-} from '@chakra-ui/react';
+import { Flex, Popover, PopoverContent, PopoverTrigger } from '@chakra-ui/react';
+import DeleteData from '../DeleteData';
 import ReviseCommentModal from '../ReviseCommentModal';
-import { PostCommentData } from '@/api/@types/Comment';
 import { sectionData } from '@/api/@types/Section';
 import { CommentService } from '@/api/services/Comment';
 import { useCustomToast } from '@/hooks/useCustomToast';
@@ -22,35 +9,64 @@ import * as S from '@/styles/writeRetroStyles/Layout.style';
 
 interface Props {
   section: sectionData;
+  setRendering: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const TeamTaskMessage: FC<Props> = ({ section }) => {
-  const [value, setValue] = useState('');
-  const [comment, setComment] = useState<PostCommentData>();
+const TeamTaskMessage: FC<Props> = ({ section, setRendering }) => {
+  const [value, setValue] = useState<string>('');
   const toast = useCustomToast();
+  // const [image, setImage] = useState<string>('');
+  // const [comment, setComment] = useState<CommentData[]>();
+
+  // const fetchComment = async () => {
+  //   try {
+  //     const data = await SectionServices.getComment({ sectionId: section });
+  //     setComment(data.data);
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // };
+
+  // const fetchRetrospectiveImage = async () => {
+  //   if (section) {
+  //     try {
+  //       const data = await postImageToS3({ filename: , method: 'GET' });
+  //       setImage(data.data.preSignedUrl);
+  //     } catch (e) {
+  //       console.error(e);
+  //     }
+  //   }
+  // };
+
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
-    e.target.style.height = 'auto';
-    e.target.style.height = `${e.target.scrollHeight}px`;
   };
 
   const handlePostComment = async () => {
     try {
-      const response = await CommentService.post({ sectionId: section.sectionId, commentContent: value });
-      setComment(response.data);
-      console.log(comment);
-    } catch (e) {
-      toast.error(e);
+      await CommentService.post({ sectionId: section.sectionId, commentContent: value });
+      setRendering(prev => !prev);
+      setValue('');
+      toast.success('댓글이 추가되었습니다.');
+    } catch {
+      toast.error('댓글 추가에 실패했습니다.');
     }
   };
 
   const handleDeleteComment = async (id: number) => {
     try {
       await CommentService.delete({ commentId: id });
-    } catch (e) {
-      toast.error(e);
+      setRendering(prev => !prev);
+      toast.info('해당 댓글이 삭제되었습니다.');
+    } catch {
+      toast.error('댓글 삭제에 실패하였습니다.');
     }
   };
+
+  // useEffect(() => {
+  //   fetchRetrospectiveImage();
+  //   fetchComment();
+  // }, []);
 
   return (
     <>
@@ -70,40 +86,20 @@ const TeamTaskMessage: FC<Props> = ({ section }) => {
                 {/* TaskMessageTop */}
                 <Flex>
                   <S.TaskUserProfile>
-                    <CgProfile size="40px" color="#DADEE5" />
-                    <S.TaskUserName>{section.username}</S.TaskUserName>
+                    {/* {image ? (
+                        <M.UploadImage sizes="40px" width="40px" height="auto" src={image} />
+                      ) : (
+                        <CgProfile size="40px" color="#DADEE5" />
+                      )} */}
+                    <S.TaskUserName>{section.username ?? '닉네임 없음'}</S.TaskUserName>
                   </S.TaskUserProfile>
                   {/* <S.MessageTime>1일 전</S.MessageTime> */}
-                  <Popover>
-                    <PopoverTrigger>
-                      <S.TaskRevise>삭제</S.TaskRevise>
-                    </PopoverTrigger>
-                    <Portal>
-                      <PopoverContent>
-                        <PopoverArrow />
-                        <PopoverHeader display="flex">
-                          <FaRegTrashAlt style={{ margin: 'auto 0', marginRight: '10px' }} />
-                          삭제요청
-                        </PopoverHeader>
-
-                        <PopoverBody>
-                          <S.DeleteSectionText>선택한 회고 카드를 삭제하시겠습니까?</S.DeleteSectionText>
-                          <Flex flexDirection="row-reverse">
-                            <Button
-                              colorScheme="brand"
-                              margin="0 10px"
-                              onClick={() => {
-                                handleDeleteComment(section.commentId);
-                              }}
-                            >
-                              <PopoverCloseButton hidden />
-                              삭제
-                            </Button>
-                          </Flex>
-                        </PopoverBody>
-                      </PopoverContent>
-                    </Portal>
-                  </Popover>
+                  <DeleteData
+                    value="댓글"
+                    handleDeleteValue={() => {
+                      handleDeleteComment(section.commentId);
+                    }}
+                  />
                 </Flex>
                 <Popover>
                   <PopoverTrigger>
@@ -113,7 +109,7 @@ const TeamTaskMessage: FC<Props> = ({ section }) => {
                     </S.TaskText>
                   </PopoverTrigger>
                   <PopoverContent>
-                    <ReviseCommentModal comment={section} />
+                    <ReviseCommentModal comment={section} setRendering={setRendering} />
                     {/* TaskTextModal */}
                   </PopoverContent>
                 </Popover>

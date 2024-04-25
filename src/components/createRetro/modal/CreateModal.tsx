@@ -144,7 +144,7 @@ const CreateModal: React.FC<CreateModalProps> = ({ isOpen, onClose, templateId, 
         </S.BottomModalBody>
 
         <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={handleCreateClick}>
+          <Button colorScheme="blue" mr={3} onClick={handleCreateClick} id="cr_create">
             Create
           </Button>
         </ModalFooter>

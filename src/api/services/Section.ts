@@ -9,6 +9,8 @@ import {
   PostSectionResponse,
   SectionClient,
   PersonalGetSectionRequest,
+  GetSectionCommentsResponse,
+  GetSectionCommentsRequest,
 } from '../@types/Section';
 import axiosInstance from '../axiosConfig';
 
@@ -58,6 +60,14 @@ export const SectionServices: SectionClient = {
   likePost: async ({ sectionId }: PostLikesSectionRequest): Promise<PostLikeSectionResponse> => {
     try {
       const response = await axiosInstance.post<PostLikeSectionResponse>(`${ROUTE}/${sectionId}/likes`);
+      return response.data;
+    } catch (error) {
+      throw new Error(error as string);
+    }
+  },
+  getComment: async ({ sectionId }: GetSectionCommentsRequest): Promise<GetSectionCommentsResponse> => {
+    try {
+      const response = await axiosInstance.get<GetSectionCommentsResponse>(`${ROUTE}/${sectionId}/comments`);
       return response.data;
     } catch (error) {
       throw new Error(error as string);

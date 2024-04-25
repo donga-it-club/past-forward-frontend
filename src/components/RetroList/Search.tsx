@@ -18,7 +18,13 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
   return (
     <>
       <S.SearchLayout>
-        <S.SearchInput type="search" placeholder="Search Tasks" value={searchInput} onChange={handleInputChange} />
+        <S.SearchInput
+          type="search"
+          placeholder="Search Tasks"
+          value={searchInput}
+          onChange={handleInputChange}
+          id="rl_seo"
+        />
         <S.SearchIconImg src={SearchIcon} />
       </S.SearchLayout>
     </>

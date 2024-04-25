@@ -1,6 +1,5 @@
 import { FC, useState } from 'react';
 import { AiFillPlusCircle } from 'react-icons/ai';
-import { PostSectionData } from '@/api/@types/Section';
 import { SectionServices } from '@/api/services/Section';
 import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
@@ -8,11 +7,11 @@ import * as S from '@/styles/writeRetroStyles/Layout.style';
 interface Props {
   retrospectiveId: number | undefined;
   template: number;
+  setRendering: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const AddTask: FC<Props> = ({ retrospectiveId, template }) => {
+export const AddTask: FC<Props> = ({ retrospectiveId, template, setRendering }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const [result, setResult] = useState<PostSectionData>();
   const toast = useCustomToast();
   const [content, setContent] = useState<string>('');
 
@@ -23,30 +22,25 @@ export const AddTask: FC<Props> = ({ retrospectiveId, template }) => {
   const handleAddSection = async () => {
     try {
       if (retrospectiveId) {
-        const data = await SectionServices.create({
+        await SectionServices.create({
           retrospectiveId: retrospectiveId,
           templateSectionId: template.valueOf(),
           sectionContent: content,
         });
-        setResult(data.data);
-        console.log(result);
       }
+      toast.success('회고 카드가 추가되었습니다.');
+      setRendering(prev => !prev);
+      setContent('');
     } catch (e) {
       toast.error(e);
     }
   };
 
-  // const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-  //   setValue(e.target.value);
-  //   e.target.style.height = 'auto';
-  //   e.target.style.height = `${e.target.scrollHeight}px`;
-  // };
-
   return (
     <>
       {/* AddTaskButton */}
       <S.AddTaskButtonStyle>
-        <S.AddTaskButtonBox onClick={handleClick}>
+        <S.AddTaskButtonBox onClick={handleClick} id="wr_add">
           <S.AddTaskButtonImage>
             <AiFillPlusCircle size={'21px'} />
           </S.AddTaskButtonImage>
@@ -57,11 +51,13 @@ export const AddTask: FC<Props> = ({ retrospectiveId, template }) => {
           <S.InputTaskBox>
             <S.InputTask
               value={content}
-              onChange={e => setContent(e.target.value)}
+              onChange={e => {
+                setContent(e.target.value);
+              }}
               placeholder="내용을 입력해주세요"
               rows={1}
             ></S.InputTask>
-            <S.InputButton style={{ marginTop: '10px', marginLeft: '55%' }} onClick={handleAddSection}>
+            <S.InputButton style={{ marginTop: '10px', marginLeft: '60%' }} onClick={handleAddSection}>
               확인
             </S.InputButton>
           </S.InputTaskBox>

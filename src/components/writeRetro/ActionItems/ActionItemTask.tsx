@@ -1,4 +1,5 @@
-import React, { FC, useState, useEffect } from 'react';
+import { FC, useState, useEffect } from 'react';
+import { Popover, PopoverTrigger, PopoverContent } from '@chakra-ui/react';
 import { TeamControllerServices } from '@/api/services/TeamController';
 import Members from '@/components/writeRetro/ActionItems/Members';
 import { useCustomToast } from '@/hooks/useCustomToast';
@@ -63,17 +64,19 @@ const ActionItemTask: FC<ActionItemTaskProps> = ({ tId, rId, sId }) => {
     setHoveredUser(null);
   };
   return (
-    <S.ManagerStyle>
-      <div>
-        <S.ManagerButton
-          onClick={togglePopup}
-          onMouseEnter={() => handleMouseEnter(selectedUserName || '')}
-          onMouseLeave={handleMouseLeave}
-        >
-          {selectedUserImg ? <img src={selectedUserImg} /> : 'M'}
-          {hoveredUser && <S.HoverUser>{hoveredUser}</S.HoverUser>}
-        </S.ManagerButton>
-        {showPopup && (
+    <>
+      <Popover>
+        <PopoverTrigger>
+          <S.ManagerButton
+            onClick={togglePopup}
+            onMouseEnter={() => handleMouseEnter(selectedUserName || '')}
+            onMouseLeave={handleMouseLeave}
+          >
+            {selectedUserImg ? <img src={selectedUserImg} /> : 'M'}
+            {hoveredUser && <S.HoverUser>{hoveredUser}</S.HoverUser>}
+          </S.ManagerButton>
+        </PopoverTrigger>
+        <PopoverContent>
           <Members
             users={users}
             onSelectUserImg={handleSelectUserImg}
@@ -82,9 +85,9 @@ const ActionItemTask: FC<ActionItemTaskProps> = ({ tId, rId, sId }) => {
             rId={retrospectiveId}
             sId={sectionId}
           />
-        )}
-      </div>
-    </S.ManagerStyle>
+        </PopoverContent>
+      </Popover>
+    </>
   );
 };
 

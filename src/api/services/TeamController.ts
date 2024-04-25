@@ -5,6 +5,7 @@ import {
   TeamControllerClient,
   PutActionItemsRequest,
   PutActionItemsResponse,
+  DeleteTeamMembersResponse,
 } from '@/api/@types/TeamController';
 import axiosInstance from '@/api/axiosConfig';
 
@@ -31,6 +32,14 @@ export const TeamControllerServices: TeamControllerClient = {
   ActionItemsMemberPut: async (request: PutActionItemsRequest): Promise<PutActionItemsResponse> => {
     try {
       const response = await axiosInstance.put(`/sections/action-itmes`, request);
+      return response.data;
+    } catch (error) {
+      throw new Error(error as string);
+    }
+  },
+  DeleteTeamMembers: async ({ teamId, userId }): Promise<DeleteTeamMembersResponse> => {
+    try {
+      const response = await axiosInstance.delete(`${TEAMS_ROUTE}/${teamId}/users/${userId}`);
       return response.data;
     } catch (error) {
       throw new Error(error as string);

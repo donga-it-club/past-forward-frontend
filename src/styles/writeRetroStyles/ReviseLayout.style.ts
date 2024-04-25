@@ -371,7 +371,7 @@ export const SettingDetailText = styled.p`
   margin: auto 5px;
 `;
 export const NotMemberInfo = styled.p`
-  font-size: 20px;
+  font-size: 15px;
   color: #636363;
   margin: auto 0;
 `;

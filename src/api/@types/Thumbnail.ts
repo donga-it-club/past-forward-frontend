@@ -1,6 +1,6 @@
 //post
 export interface PostImageToS3Request {
-  filename: string;
+  filename?: string;
   method: string;
 }
 

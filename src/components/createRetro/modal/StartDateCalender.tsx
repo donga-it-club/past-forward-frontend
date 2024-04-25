@@ -14,7 +14,7 @@ const StartDateCalendar: React.FC<StartDateCalendarProps> = ({ onDateChange }) =
     onDateChange(selectedDate); // 부모 컴포넌트로 전달
   };
 
-  return <Input placeholder="회고 시작일 선택" size="md" type="date" onChange={handleChange} />;
+  return <Input placeholder="회고 시작일 선택" size="md" type="date" onChange={handleChange} id="cr_date" />;
 };
 
 export default StartDateCalendar;

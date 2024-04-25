@@ -24,14 +24,13 @@ const RetroTeamPage = () => {
   const [section, setSection] = useState<sectionData[]>([]);
   const [retro, setRetro] = useState<RetrospectiveData>();
   const [template, setTemplate] = useState<TemplateNameData[]>();
+  const [rendering, setRendering] = useState<boolean>(false);
   const toast = useCustomToast();
 
   const fetchRetrospective = async () => {
     try {
       const data = await RetrospectiveService.onlyGet({ retrospectiveId: retrospectiveId });
-      console.log('retro.data', data.data);
       setRetro(data.data);
-      console.log('retro', retro);
     } catch (e) {
       toast.error(e);
     }
@@ -42,12 +41,11 @@ const RetroTeamPage = () => {
       if (!teamId) {
         const data = await SectionServices.PersonalGet({ retrospectiveId: retrospectiveId });
         setSection(data.data);
-      } else {
-        const data = await SectionServices.TeamGet({ retrospectiveId: retrospectiveId, teamId: teamId });
-        setSection(data.data);
       }
+      const data = await SectionServices.TeamGet({ retrospectiveId: retrospectiveId, teamId: teamId });
+      setSection(data.data);
     } catch (e) {
-      toast.error(e);
+      console.error(e);
     }
   };
 
@@ -56,7 +54,6 @@ const RetroTeamPage = () => {
       if (retro) {
         const data = await TeamControllerServices.TemplateNameGet({ templateId: retro.templateId });
         setTemplate(data.data);
-        console.log('template', template);
       }
     } catch (e) {
       toast.error(e);
@@ -67,11 +64,14 @@ const RetroTeamPage = () => {
     fetchSection();
     fetchRetrospective();
     fetchTemplate();
-  }, [retro?.status, template?.values]);
+  }, [retro?.description, template?.values, section.values, rendering]);
+
+  if (!retro) return;
 
   return (
     <S.Container>
-      <Title />
+      {retro && <Title name={retro.title} description={retro.description} thumbnail={retro.thumbnail} retro={retro} />}
+
       <S.SectionBox>
         <Flex flexDirection="column" margin="0 auto">
           <Flex>
@@ -88,14 +88,20 @@ const RetroTeamPage = () => {
                         labelType="dark"
                         taskCount={section.filter(data => data.sectionName === title.name).length}
                       />
-
-                      <AddTask template={title.id} retrospectiveId={retro?.retrospectiveId} />
+                      <AddTask
+                        template={title.id}
+                        retrospectiveId={retro?.retrospectiveId}
+                        setRendering={setRendering}
+                      />
                       {section
                         .filter(key => key.sectionName === title.name)
                         .map(section => (
-                          <>
-                            <TeamTask section={section} />
-                          </>
+                          <TeamTask
+                            section={section}
+                            setRendering={setRendering}
+                            teamId={teamId}
+                            imageURL={section.thumbnail}
+                          />
                         ))}
                     </S.FrameStyle>
                   </>

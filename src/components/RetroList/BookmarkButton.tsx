@@ -15,7 +15,7 @@ const BookmarkButton: React.FC<BookmarkButtonProps> = ({ handleBookmarkButton })
 
   return (
     <>
-      <S.Button onClick={handleBookmark} isBookmarked={isBookmarked}>
+      <S.Button onClick={handleBookmark} isBookmarked={isBookmarked} id="rl_bookmark">
         <S.StarIcon />
         <S.Text>Bookmark</S.Text>
       </S.Button>
