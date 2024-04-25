@@ -47,7 +47,7 @@ const UserProfileImage = ({ width }: Props) => {
       {userData?.data.thumbnail ? (
         <S.UploadImage src={imageURL} width={width} height="auto" />
       ) : (
-        <PersonCircle style={{ width: '30px', height: 'auto 3px' }} />
+        <PersonCircle style={{ width: '30px', height: 'auto' }} />
       )}
     </>
   );
