@@ -142,7 +142,7 @@ export const TaskUserName = styled.p`
   font-weight: 700;
   color: #adb8cc;
   line-height: 20px;
-  margin: 5px 0;
+  margin: auto 8px;
 `;
 
 export const TaskRevise = styled.div`
