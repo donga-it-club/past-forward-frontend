@@ -54,8 +54,12 @@ const Title: FC<Props> = ({ name, description, thumbnail, retro }) => {
             >
               회고 수정하기
             </L.InvitationLinkButton>
-            <L.InvitationLinkButton onClick={() => setInviteModalOpen(true)}>팀원 초대 링크</L.InvitationLinkButton>
-            <L.LinkExpirationText>링크는 2시간 후에 만료됩니다.</L.LinkExpirationText>
+            {teamId ? (
+              <>
+                <L.InvitationLinkButton onClick={() => setInviteModalOpen(true)}>팀원 초대 링크</L.InvitationLinkButton>
+                <L.LinkExpirationText>링크는 2시간 후에 만료됩니다.</L.LinkExpirationText>
+              </>
+            ) : null}
           </Flex>
 
           <S.SubTitleText>
