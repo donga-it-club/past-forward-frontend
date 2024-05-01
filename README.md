@@ -1,4 +1,4 @@
-# 📖 팀 회고 작성 서비스 웹 Past-Forward
+![mainPage](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/b19cc815-677f-42e8-ab35-f7acfa4bf988)# 📖 팀 회고 작성 서비스 웹 Past-Forward
 
 - 배포 URL : https://www.pastforward.link/
 
@@ -144,7 +144,8 @@
 
 | 메인페이지                                                                                                        |
 | ----------------------------------------------------------------------------------------------------------------- |
-| ![splash](https://user-images.githubusercontent.com/112460466/210172920-aef402ed-5aef-4d4a-94b9-2b7147fd8389.gif) |
+| ![mainPage](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/e54876e6-34e6-4d79-a6f5-fc0ed4e86cb5)
+ |
 
 <br>
 
@@ -157,7 +158,8 @@
 
 | 로그인                                                                                                            |
 | ----------------------------------------------------------------------------------------------------------------- |
-| ![splash](https://user-images.githubusercontent.com/112460466/210172920-aef402ed-5aef-4d4a-94b9-2b7147fd8389.gif) |
+| ![login](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/e7563be4-a688-4ff6-a88d-4cd22bc88791)
+|
 
 <br>
 
@@ -168,7 +170,8 @@
 
 | 프로필 설정                                                                                                           |
 | --------------------------------------------------------------------------------------------------------------------- |
-| ![setProfile](https://user-images.githubusercontent.com/112460466/210173749-2da6c9af-eb93-4eea-9663-1a03e19299ec.gif) |
+| ![profile](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/368317a7-d163-4ebd-8797-402447d2bed7)  |
+
 
 <br>
 
@@ -187,7 +190,8 @@
 
 | 레이아웃                                                                                                       |
 | -------------------------------------------------------------------------------------------------------------- |
-| ![tab](https://user-images.githubusercontent.com/112460466/210178028-3185f944-6ac1-468a-94ba-b32cdc5e380e.gif) |
+| ![layout](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/bce14804-789e-40c4-977b-36bcf288aa0e)
+ |
 
 <br>
 
@@ -201,7 +205,8 @@
 
 | 회고 작성                                                                                                             |
 | --------------------------------------------------------------------------------------------------------------------- |
-| ![uploadPost](https://user-images.githubusercontent.com/112460466/210381758-1de5a889-f587-41d2-b200-22c20a970519.gif) |
+| ![create](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/1c999531-0881-40c7-920c-4d6a4e1caef9)
+ |
 
 <br>
 
@@ -220,7 +225,7 @@
 
 | 회고 수정                                                                                                                 |
 | ------------------------------------------------------------------------------------------------------------------------- |
-| ![editDeletePost](https://user-images.githubusercontent.com/112460466/210382021-da057943-dc21-411e-a1f8-552be0e973bf.gif) |
+| ![revise-setting](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/5a482dd4-bd9b-423a-a805-92b55d21cbc6) |
 
 <br>
 
@@ -237,6 +242,22 @@
 
 | 회고 보드                                                                                                              |
 | ---------------------------------------------------------------------------------------------------------------------- |
-| ![likeComment](https://user-images.githubusercontent.com/112460466/210382217-01d70181-91c3-43db-a1b8-409a612afb1c.gif) |
+| ![invitess](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/aac19bab-e59e-46b8-989a-19f54fe1b65c)
+ |
 
+
+#### 4. 초대 링크
+
+- 팀원을 초대하는 링크입니다.
+- 팀원 QR코드도 존재합니다.
+- 초대링크를 복사해 팀원을 초대할 수 있습니다.
+- 단, 팀장(회고 작성자)은 초대를 받을 수 없습니다.
+- 개인 회고 보드에는 초대링크가 존재하지 않습니다.
+
+
+| 초대 링크                                                                                                           |
+| ---------------------------------------------------------------------------------------------------------------------- |
+| ![invited](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/fa2f03f1-07ef-4cf3-bb07-07e64de20dc3)
+
+ |
 <br>
