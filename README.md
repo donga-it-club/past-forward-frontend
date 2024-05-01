@@ -104,6 +104,7 @@
   - 페이지: RetroList 페이지, Main 화면 서브 페이지 디자인, Action Items 담당자 지정 창
 
 - **기능**
+  - 메인 페이지 react-fullpage 라이브러리 적용
   - RetroList API 연결
   - Action Items 담당자 지정 창 API 연결
 
