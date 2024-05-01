@@ -7,7 +7,7 @@ export const TopText = styled.p`
 `;
 
 export const BottomText = styled.p`
-  margin-top: 30%;
+  margin-top: 25%;
   margin-left: 5%;
   color: #111b47;
 `;
