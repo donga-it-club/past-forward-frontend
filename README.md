@@ -244,7 +244,8 @@
 
 | 회고 보드                                                                                                              |
 | ---------------------------------------------------------------------------------------------------------------------- |
-| ![invitess](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/aac19bab-e59e-46b8-989a-19f54fe1b65c)
+| ![invite](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/cc57cc79-c8ef-4d2d-925f-7479d3da2332)
+
 
 
 
