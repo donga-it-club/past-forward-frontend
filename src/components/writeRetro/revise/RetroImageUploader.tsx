@@ -35,14 +35,22 @@ const RetroImageUploader: FC<Props> = ({ image, onChange, setImageUUID, setPrevi
   };
 
   const DeleteImage: MouseEventHandler<HTMLButtonElement> = () => {
-    setPreview('DefaultImage.png');
+    setPreview('https://www.hillsidebeefnwa.com/images/default.jpg');
     setImageUUID(null);
     onChange(null, '');
   };
 
   return (
     <>
-      <Image src={preview ?? image} maxWidth={200} margin="20px auto" h="auto" aspectRatio="1/1" objectFit="contain" />
+      <Image
+        src={preview ?? image}
+        maxWidth={200}
+        margin="20px auto"
+        h="auto"
+        aspectRatio="1/1"
+        objectFit="contain"
+        borderRadius="10%"
+      />
 
       <div style={{ margin: '0 auto' }}>
         <Button colorScheme="brand" variant="outline" margin="0 30px" onClick={handleUploadButtonClick}>

@@ -19,7 +19,8 @@ const MainDesign = () => {
           과거의 경험을 효과적으로 되새기고 배우는 것을 지원합니다.
         </S.TopText>
         <S.BottomText>
-          과거를 회고하며 미래로 나아가는 과정을 촉진하는 의미를 가진 이름으로 <br />
+          과거를 회고하며 미래로 나아가는 과정을
+          <br /> 촉진하는 의미를 가진 이름으로 <br />
           &apos; Past&apos; (과거)와 &apos;Forward &apos;(앞으로 나아가다)를 결합하여 비전을 표현합니다.
         </S.BottomText>
       </S.TopTriangleContainer>
