@@ -1,4 +1,6 @@
-![mainPage](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/b19cc815-677f-42e8-ab35-f7acfa4bf988)# 📖 팀 회고 작성 서비스 웹 Past-Forward
+![mainPage](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/b19cc815-677f-42e8-ab35-f7acfa4bf988)
+
+# 📖 팀 회고 작성 서비스 웹 Past-Forward
 
 - 배포 URL : https://www.pastforward.link/
 
@@ -191,7 +193,7 @@
 | 레이아웃                                                                                                       |
 | -------------------------------------------------------------------------------------------------------------- |
 | ![layout](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/bce14804-789e-40c4-977b-36bcf288aa0e)
- |
+
 
 <br>
 
@@ -206,7 +208,7 @@
 | 회고 작성                                                                                                             |
 | --------------------------------------------------------------------------------------------------------------------- |
 | ![create](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/1c999531-0881-40c7-920c-4d6a4e1caef9)
- |
+
 
 <br>
 
@@ -243,7 +245,7 @@
 | 회고 보드                                                                                                              |
 | ---------------------------------------------------------------------------------------------------------------------- |
 | ![invitess](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/aac19bab-e59e-46b8-989a-19f54fe1b65c)
- |
+
 
 
 #### 4. 초대 링크
@@ -259,5 +261,5 @@
 | ---------------------------------------------------------------------------------------------------------------------- |
 | ![invited](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/fa2f03f1-07ef-4cf3-bb07-07e64de20dc3)
 
- |
+
 <br>
