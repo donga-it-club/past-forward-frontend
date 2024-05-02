@@ -1,6 +1,8 @@
+import { useEffect, useState } from 'react';
+import { CgProfile } from 'react-icons/cg';
 import { PutActionItemsRequest } from '@/api/@types/TeamController';
+import postImageToS3 from '@/api/imageApi/postImageToS3';
 import { putActionItemsMember } from '@/api/teamControllerApi/putActionItemsMember';
-import UserProfileImage from '@/components/user/UserProfileImage';
 import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/writeRetroStyles/Members.styles';
 
@@ -11,9 +13,18 @@ interface UserListProps {
   tId: number;
   rId: number;
   sId: number;
+  imageURL: { url: string }[];
 }
 
-export const Members: React.FC<UserListProps> = ({ users, onSelectUserImg, onSelectUserName, tId, rId, sId }) => {
+export const Members: React.FC<UserListProps> = ({
+  users,
+  onSelectUserImg,
+  onSelectUserName,
+  tId,
+  rId,
+  sId,
+  imageURL,
+}) => {
   const teamId: number = tId;
   const retrospectiveId: number = rId;
   const sectionId: number = sId;
@@ -33,11 +44,42 @@ export const Members: React.FC<UserListProps> = ({ users, onSelectUserImg, onSel
     }
   };
 
-  const handleUserClick = async (name: string, image: string, userId: number) => {
+  const [images, setImages] = useState<string[]>([]);
+
+  const fetchRetrospectiveImage = async () => {
+    try {
+      const newImages = [];
+      for (const urlData of imageURL) {
+        const url = urlData.url;
+        if (!url || url.trim() === '') {
+          newImages.push('');
+          continue;
+        }
+        const data = await postImageToS3({ filename: url.trim(), method: 'GET' });
+        newImages.push(data.data.preSignedUrl);
+      }
+      setImages(newImages);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const handleUserClick = async (name: string, userId: number, userIndex: number) => {
     onSelectUserName(name);
-    onSelectUserImg(image);
+    const selectedUserImage = usersWithImages[userIndex].imageURL;
+    const userImage = selectedUserImage !== '' ? selectedUserImage : '';
+    onSelectUserImg(userImage);
     await putActionItemMember(userId);
   };
+
+  useEffect(() => {
+    fetchRetrospectiveImage();
+  }, [imageURL]);
+
+  const usersWithImages = users.map((user, index) => ({
+    ...user,
+    imageURL: user.image ? images[index] : '',
+  }));
 
   return (
     <>
@@ -46,10 +88,14 @@ export const Members: React.FC<UserListProps> = ({ users, onSelectUserImg, onSel
           <S.Title>해당 업무의 담당자를 지정해주세요</S.Title>
         </S.TitleContainer>
         <ul>
-          {users.map((user, index) => (
-            <S.ListItem key={index} onClick={() => handleUserClick(user.name, user.image, user.userId)}>
+          {usersWithImages.map((user, index) => (
+            <S.ListItem key={index} onClick={() => handleUserClick(user.name, user.userId, index)}>
               <S.ProfileImage>
-                <UserProfileImage width="25px" />
+                {user.imageURL !== '' ? (
+                  <img src={user.imageURL} style={{ width: '25px', height: '25px' }} />
+                ) : (
+                  <CgProfile size="25px" color="#969696" />
+                )}
               </S.ProfileImage>
               <div style={{ alignItems: 'center' }}>
                 <S.UserName>{user.name}</S.UserName>
