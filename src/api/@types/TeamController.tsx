@@ -41,6 +41,7 @@ export interface PutActionItemsRequest {
   teamId: number;
   retrospectiveId: number;
   sectionId: number;
+  userId: number;
 }
 
 export interface PutActionItemsResponse {
