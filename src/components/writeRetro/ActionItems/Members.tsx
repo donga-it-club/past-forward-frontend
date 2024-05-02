@@ -5,7 +5,7 @@ import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/writeRetroStyles/Members.styles';
 
 interface UserListProps {
-  users: { name: string; image: string }[];
+  users: { name: string; image: string; userId: number }[];
   onSelectUserImg: (image: string) => void;
   onSelectUserName: (name: string) => void;
   tId: number;
@@ -17,15 +17,15 @@ export const Members: React.FC<UserListProps> = ({ users, onSelectUserImg, onSel
   const teamId: number = tId;
   const retrospectiveId: number = rId;
   const sectionId: number = sId;
-
   const toast = useCustomToast();
 
-  const putActionItemMember = async () => {
+  const putActionItemMember = async (selectedUserId: number) => {
     try {
       const requestData: PutActionItemsRequest = {
         teamId: teamId,
         retrospectiveId: retrospectiveId,
         sectionId: sectionId,
+        userId: selectedUserId,
       };
       await putActionItemsMember(requestData);
     } catch (e) {
@@ -33,10 +33,10 @@ export const Members: React.FC<UserListProps> = ({ users, onSelectUserImg, onSel
     }
   };
 
-  const handleUserClick = async (name: string, image: string) => {
+  const handleUserClick = async (name: string, image: string, userId: number) => {
     onSelectUserName(name);
     onSelectUserImg(image);
-    await putActionItemMember();
+    await putActionItemMember(userId);
   };
 
   return (
@@ -47,7 +47,7 @@ export const Members: React.FC<UserListProps> = ({ users, onSelectUserImg, onSel
         </S.TitleContainer>
         <ul>
           {users.map((user, index) => (
-            <S.ListItem key={index} onClick={() => handleUserClick(user.name, user.image)}>
+            <S.ListItem key={index} onClick={() => handleUserClick(user.name, user.image, user.userId)}>
               <S.ProfileImage>
                 <UserProfileImage width="25px" />
               </S.ProfileImage>

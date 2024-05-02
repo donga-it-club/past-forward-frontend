@@ -22,16 +22,20 @@ const ActionItemTask: FC<ActionItemTaskProps> = ({ tId, rId, sId }) => {
   const retrospectiveId: number = rId;
   const sectionId: number = sId;
 
-  const [users, setUsers] = useState<{ name: string; image: string }[]>([]);
+  const [users, setUsers] = useState<{ name: string; image: string; userId: number }[]>([]);
   const toast = useCustomToast();
 
   const fetchTeamMember = async () => {
     try {
       if (teamId) {
-        const data = await TeamControllerServices.TeamMemberGet({ teamId: teamId, retrospectiveId: retrospectiveId });
+        const data = await TeamControllerServices.TeamMemberGet({
+          teamId: teamId,
+          retrospectiveId: retrospectiveId,
+        });
         const userData = data.data.map(member => ({
           name: member.username,
           image: member.profileImage,
+          userId: member.userId,
         }));
         setUsers(userData);
       }
@@ -43,7 +47,6 @@ const ActionItemTask: FC<ActionItemTaskProps> = ({ tId, rId, sId }) => {
   useEffect(() => {
     fetchTeamMember();
   }, []);
-
   const togglePopup = () => {
     setShowPopup(!showPopup);
   };
