@@ -77,10 +77,11 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
   };
 
   const filteredData = data.filter(item => item.title.toLowerCase().includes(searchData.toLowerCase()));
-  console.log('filter', filteredData);
   const navigate = useNavigate();
 
   useEffect(() => {
+    const filtered = data.filter(item => item.thumbnail !== null); // thumbnail이 null인 항목 필터링
+
     const fetchThumbnailsData = async (item: Content) => {
       try {
         if (item.thumbnail) {
@@ -88,7 +89,7 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
             filename: item.thumbnail,
             method: 'GET',
           });
-          console.log('s3 사진 받아오기 성공', imageResponse.data.preSignedUrl);
+          // console.log('s3 사진 받아오기 성공', imageResponse.data.preSignedUrl);
           setImage(prevImage => ({
             ...prevImage,
             [item.id]: imageResponse.data.preSignedUrl,
@@ -99,7 +100,7 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
       }
     };
 
-    data.forEach(item => fetchThumbnailsData(item));
+    filtered.forEach(item => fetchThumbnailsData(item));
   }, [data]);
 
   return (
