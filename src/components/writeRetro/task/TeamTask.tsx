@@ -109,7 +109,7 @@ const TeamTask: FC<Props> = ({ section, setRendering, teamId, imageURL }) => {
             {actionCondition ? (
               <S.ManagerStyle>
                 <ActionItemTask tId={tId} rId={rId} sId={sId} />
-                <S.ManagerText>담당자</S.ManagerText>
+                {/* <S.ManagerText>담당자</S.ManagerText> */}
               </S.ManagerStyle>
             ) : null}
             <PopoverContent>
