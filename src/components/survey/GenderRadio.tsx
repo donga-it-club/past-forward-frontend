@@ -22,10 +22,10 @@ const GenderRadio: React.FC<Gender> = ({ onGenderChange }) => {
         <S.RadioContainer>
           <RadioGroup onChange={setGender} value={gender}>
             <Stack direction="row">
-              <Radio colorScheme="brand" value="FEMALE" onChange={handleGenderChange}>
+              <Radio id="survey_sex_1" colorScheme="brand" value="FEMALE" onChange={handleGenderChange}>
                 여성
               </Radio>
-              <Radio colorScheme="brand" value="MALE" onChange={handleGenderChange}>
+              <Radio id="survey_sex_2" colorScheme="brand" value="MALE" onChange={handleGenderChange}>
                 남성
               </Radio>
             </Stack>
