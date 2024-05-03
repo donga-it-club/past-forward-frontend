@@ -4,7 +4,8 @@
 ![mainPage](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/b19cc815-677f-42e8-ab35-f7acfa4bf988) <br>
 
 <div align='center'>
-[💻 사이트 바로가기](https://www.pastforward.link/) <br>
+[💻 사이트 바로가기](https://www.pastforward.link/)
+  <br>
 </div>
 <br>
 
