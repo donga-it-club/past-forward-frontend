@@ -1,10 +1,13 @@
-import { ChangeEvent, FC, useState } from 'react';
+import { ChangeEvent, FC, useEffect, useState } from 'react';
+import { CgProfile } from 'react-icons/cg';
 import { Flex, Popover, PopoverContent, PopoverTrigger } from '@chakra-ui/react';
 import DeleteData from '../DeleteData';
 import ReviseCommentModal from '../ReviseCommentModal';
-import { sectionData } from '@/api/@types/Section';
+import { AddedImageCommentData, sectionData } from '@/api/@types/Section';
+import postImageToS3 from '@/api/imageApi/postImageToS3';
 import { CommentService } from '@/api/services/Comment';
 import { useCustomToast } from '@/hooks/useCustomToast';
+import * as M from '@/styles/my/myPage.style';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 
 interface Props {
@@ -15,8 +18,8 @@ interface Props {
 const TeamTaskMessage: FC<Props> = ({ section, setRendering }) => {
   const [value, setValue] = useState<string>('');
   const toast = useCustomToast();
-  // const [image, setImage] = useState<string>('');
-  // const [comment, setComment] = useState<CommentData[]>();
+  const [image, setImage] = useState<string>('');
+  const [comment, setComment] = useState<AddedImageCommentData[]>();
 
   // const fetchComment = async () => {
   //   try {
@@ -63,10 +66,21 @@ const TeamTaskMessage: FC<Props> = ({ section, setRendering }) => {
     }
   };
 
-  // useEffect(() => {
-  //   fetchRetrospectiveImage();
-  //   fetchComment();
-  // }, []);
+  useEffect(() => {
+    const fetchImage = async () => {
+      const newData = await Promise.all(
+        section.comments.map(async item => {
+          const imageURL = await postImageToS3({ filename: item.thumbnail, method: 'GET' });
+          setImage(imageURL.data.preSignedUrl);
+          return { ...item, image };
+        }),
+      );
+      setComment(newData);
+    };
+    if (section) {
+      fetchImage();
+    }
+  }, [comment?.values]);
 
   return (
     <>
@@ -81,42 +95,43 @@ const TeamTaskMessage: FC<Props> = ({ section, setRendering }) => {
         {/* TaskMessages */}
         <div>
           <S.TaskMessageStyle>
-            {section.comments.map(section => (
-              <Flex flexDirection="column">
-                {/* TaskMessageTop */}
-                <Flex>
-                  <S.TaskUserProfile>
-                    {/* {image ? (
-                        <M.UploadImage sizes="40px" width="40px" height="auto" src={image} />
+            {comment &&
+              comment.map((section: AddedImageCommentData) => (
+                <Flex flexDirection="column">
+                  {/* TaskMessageTop */}
+                  <Flex>
+                    <S.TaskUserProfile>
+                      {section.image ? (
+                        <M.UploadImage sizes="40px" width="40px" height="auto" src={section.image} />
                       ) : (
                         <CgProfile size="40px" color="#DADEE5" />
-                      )} */}
-                    <S.TaskUserName>{section.username ?? '닉네임 없음'}</S.TaskUserName>
-                  </S.TaskUserProfile>
-                  {/* <S.MessageTime>1일 전</S.MessageTime> */}
-                  <DeleteData
-                    value="댓글"
-                    handleDeleteValue={() => {
-                      handleDeleteComment(section.commentId);
-                    }}
-                  />
-                </Flex>
-                <Popover>
-                  <PopoverTrigger>
-                    <S.TaskText>
-                      {section.content}
-                      {/* <S.ReviseText>(수정됨)</S.ReviseText> */}
-                    </S.TaskText>
-                  </PopoverTrigger>
-                  <PopoverContent>
-                    <ReviseCommentModal comment={section} setRendering={setRendering} />
-                    {/* TaskTextModal */}
-                  </PopoverContent>
-                </Popover>
+                      )}
+                      <S.TaskUserName>{section.username ?? '닉네임 없음'}</S.TaskUserName>
+                    </S.TaskUserProfile>
+                    {/* <S.MessageTime>1일 전</S.MessageTime> */}
+                    <DeleteData
+                      value="댓글"
+                      handleDeleteValue={() => {
+                        handleDeleteComment(section.commentId);
+                      }}
+                    />
+                  </Flex>
+                  <Popover>
+                    <PopoverTrigger>
+                      <S.TaskText>
+                        {section.content}
+                        {/* <S.ReviseText>(수정됨)</S.ReviseText> */}
+                      </S.TaskText>
+                    </PopoverTrigger>
+                    <PopoverContent>
+                      <ReviseCommentModal comment={section} setRendering={setRendering} />
+                      {/* TaskTextModal */}
+                    </PopoverContent>
+                  </Popover>
 
-                {/* TaskMessageMain */}
-              </Flex>
-            ))}
+                  {/* TaskMessageMain */}
+                </Flex>
+              ))}
           </S.TaskMessageStyle>
         </div>
 

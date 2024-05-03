@@ -26,6 +26,10 @@ export interface CommentData {
   thumbnail: string;
 }
 
+export interface AddedImageCommentData extends CommentData {
+  image: string;
+}
+
 export interface GetSectionResponse {
   code: number;
   error: string;
