@@ -43,5 +43,36 @@
   ></noscript>
   <body>
     <div id="root"></div>
+    <script>
+      document.querySelector('#amplify-id-:r9:').addEventListener('click', function () {
+        gtag('event', 'try_signup', {
+          step: 'name',
+        });
+      });
+    </script>
+
+    <script>
+      document.querySelector('#amplify-id-:rc:').addEventListener('click', function () {
+        gtag('event', 'try_signup', {
+          step: 'mail',
+        });
+      });
+    </script>
+
+    <script>
+      document.querySelector('#amplify-id-:rf:').addEventListener('click', function () {
+        gtag('event', 'try_signup', {
+          step: 'pw',
+        });
+      });
+    </script>
+
+    <script>
+      document.querySelector('#amplify-id-:ri:').addEventListener('click', function () {
+        gtag('event', 'try_signup', {
+          step: 'ck_pw',
+        });
+      });
+    </script>
   </body>
 </html>
