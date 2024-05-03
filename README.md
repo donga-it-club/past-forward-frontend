@@ -1,7 +1,8 @@
 # 📖 팀 회고 작성 서비스 웹 Past-Forward
 
 <div align='center'>
-![mainPage](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/b19cc815-677f-42e8-ab35-f7acfa4bf988)
+![mainPage](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/b19cc815-677f-42e8-ab35-f7acfa4bf988) <br>
+
 [💻 사이트 바로가기](https://www.pastforward.link/) <br>
 </div>
 <br>
@@ -149,7 +150,7 @@
 | 메인페이지 |
 | ---------- |
 
- ![mainPage](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/e54876e6-34e6-4d79-a6f5-fc0ed4e86cb5)
+| ![mainPage](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/e54876e6-34e6-4d79-a6f5-fc0ed4e86cb5)
 
 <br>
 
@@ -163,7 +164,7 @@
 | 로그인 |
 | ------ |
 
-![login](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/e7563be4-a688-4ff6-a88d-4cd22bc88791)
+| ![login](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/e7563be4-a688-4ff6-a88d-4cd22bc88791)
 
 <br>
 
@@ -174,7 +175,7 @@
 
 | 프로필 설정                                                                                                              |
 | ------------------------------------------------------------------------------------------------------------------------ |
-![profile](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/368317a7-d163-4ebd-8797-402447d2bed7) |
+| ![profile](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/368317a7-d163-4ebd-8797-402447d2bed7) |
 
 <br>
 
@@ -194,7 +195,7 @@
 | 레이아웃 |
 | -------- |
 
- ![layout](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/bce14804-789e-40c4-977b-36bcf288aa0e)
+| ![layout](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/bce14804-789e-40c4-977b-36bcf288aa0e)
 
 <br>
 
@@ -209,7 +210,7 @@
 | 회고 작성 |
 | --------- |
 
-![create](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/1c999531-0881-40c7-920c-4d6a4e1caef9)
+| ![create](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/1c999531-0881-40c7-920c-4d6a4e1caef9)
 
 <br>
 
@@ -248,7 +249,7 @@
 | 회고 보드 |
 | --------- |
 
-| ![invite](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/cc57cc79-c8ef-4d2d-925f-7479d3da2332)
+| ![invite](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/cc57cc79-c8ef-4d2d-925f-7479d3da2332) |
 
 #### 4. 초대 링크
 
