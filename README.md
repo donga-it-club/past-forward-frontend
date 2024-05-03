@@ -1,7 +1,7 @@
-![mainPage](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/b19cc815-677f-42e8-ab35-f7acfa4bf988)
 
 # 📖 팀 회고 작성 서비스 웹 Past-Forward
 
+![mainPage](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/b19cc815-677f-42e8-ab35-f7acfa4bf988)
 - 배포 URL : https://www.pastforward.link/
 
 <br>
@@ -75,10 +75,11 @@
 ### 🤩공정민
 
 - **UI**
-  - 페이지 : 회고 생성 페이지, 프로필 페이지
+  - 페이지 : 회고 생성 페이지, 프로필 페이지, 설문조사 페이지
   - 공통 컴포넌트 : 팀원 초대 모달
 - **기능**
   - Cognito 인증 처리
+  - Amplify ui를 활용한 로그인 및 회원가입 페이지 구현
   - 개발환경 구축 (webpack 사용)
 
 <br>
