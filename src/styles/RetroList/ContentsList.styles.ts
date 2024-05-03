@@ -30,17 +30,23 @@ export const InfoBox = styled.div`
   padding-left: 10px;
   padding-right: 10px;
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  /* grid-template-columns: 3fr 1fr; */
+  grid-template-columns: 135px 45px;
   grid-template-rows: repeat(3, 1fr);
   align-content: stretch;
 `;
 
 export const RetroTitle = styled.span`
+  width: 100%;
   font-size: 15px;
   margin-left: 3px;
   &:hover {
     cursor: pointer;
   }
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const RetroUser = styled.span`
@@ -113,21 +119,37 @@ export const ListTitleBox = styled.div`
   &:hover {
     cursor: pointer;
   }
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 5px;
+  padding-right: 5px;
 `;
 export const ListUserBox = styled.div`
   flex: 1;
+  padding-left: 5px;
+  padding-right: 5px;
 `;
 export const ListTimeBox = styled.div`
   flex: 1;
+  padding-left: 5px;
+  padding-right: 5px;
 `;
 export const ListBookmarkBox = styled.div`
   flex: 1;
+  padding-left: 5px;
+  padding-right: 5px;
 `;
 export const ListLinkBox = styled.div`
   flex: 1;
+  padding-left: 5px;
+  padding-right: 5px;
 `;
 export const ListProgressBox = styled.div`
   flex: 1;
+  padding-left: 5px;
+  padding-right: 5px;
 `;
 
 export const Icon = styled.img`

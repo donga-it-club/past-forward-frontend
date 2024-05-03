@@ -1,10 +1,12 @@
 # 📖 팀 회고 작성 서비스 웹 Past-Forward
 
-![mainPage](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/b19cc815-677f-42e8-ab35-f7acfa4bf988)
 
+![mainPage](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/b19cc815-677f-42e8-ab35-f7acfa4bf988) <br>
 
-- 배포 URL : https://www.pastforward.link/
-
+<div align='center'>
+[💻 사이트 바로가기](https://www.pastforward.link/)
+  <br>
+</div>
 <br>
 
 ## 프로젝트 소개
@@ -149,8 +151,8 @@
 
 | 메인페이지 |
 | ---------- |
-
 | ![mainPage](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/e54876e6-34e6-4d79-a6f5-fc0ed4e86cb5)
+
 
 <br>
 
@@ -162,6 +164,7 @@
 - 사용자가 비밀번호를 잊었다면 이메일 주소로 코드를 전송해 일치하는 코드를 입력한다면, 비밀번호 재설정이 가능합니다.
 
 | 로그인 |
+
 | ------ |
 
 | ![login](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/e7563be4-a688-4ff6-a88d-4cd22bc88791)
@@ -192,10 +195,11 @@
   - 회고보드를 만들 수 있는 create 페이지 이동의 아코디언 형식의 UI가 구성되어있습니다.
   - 회고 리스트 페이지 이동의
 
-| 레이아웃 |
-| -------- |
 
+| 레이아웃                                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------------------------- |
 | ![layout](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/bce14804-789e-40c4-977b-36bcf288aa0e)
+
 
 <br>
 
@@ -208,9 +212,9 @@
 - 회고 이름, 회고 설명, 회고 작성일을 입력합니다.
 
 | 회고 작성 |
-| --------- |
-
+| ------------------------------------------------------------------------------------------------------------------------------- |
 | ![create](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/1c999531-0881-40c7-920c-4d6a4e1caef9)
+
 
 <br>
 
@@ -247,9 +251,10 @@
 - 팀 회고일 경우, 'Action Items' 내에서 담당자 지정이 가능합니다.
 
 | 회고 보드 |
-| --------- |
 
-| ![invite](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/cc57cc79-c8ef-4d2d-925f-7479d3da2332)
+| ------------------------------------------------------------------------------------------------------------------------------- |
+| ![invite](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/cc57cc79-c8ef-4d2d-925f-7479d3da2332) |
+
 
 #### 4. 초대 링크
 

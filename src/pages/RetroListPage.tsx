@@ -50,7 +50,7 @@ const RetroListPage = () => {
   }, [currentPage]);
 
   useEffect(() => {
-    const newStatus = 'IN_PROGRESS';
+    const newStatus = 'ALL';
     setQuery(prev => {
       return { ...prev, status: newStatus };
     });
@@ -61,8 +61,6 @@ const RetroListPage = () => {
       // console.log(query);
       try {
         const responseData = await queryGetRetrospective(query);
-        // console.log(query);
-        // console.log('회고 조회 성공');
         setData(responseData.data);
       } catch (error) {
         // console.error('회고 데이터를 가져오는 도중 오류가 발생했습니다:', error);
@@ -77,7 +75,6 @@ const RetroListPage = () => {
   const [searchData, setSearchData] = useState('');
 
   useEffect(() => {
-    // data 부분만 저장
     const rawData = data.nodes.map(item => ({
       id: item.id,
       title: item.title,
@@ -95,7 +92,6 @@ const RetroListPage = () => {
     setRetroData(rawData);
   }, [data.nodes]);
 
-  // console.log(retroData);
   const handleContentsFilter = (filterType: string) => {
     if (filterType === 'Personal') {
       const filtered = data.nodes
