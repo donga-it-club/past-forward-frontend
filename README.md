@@ -167,7 +167,7 @@
 
 | ------ |
 
-| ![login](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/e7563be4-a688-4ff6-a88d-4cd22bc88791)
+| ![login](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/e7563be4-a688-4ff6-a88d-4cd22bc88791) |
 
 <br>
 
@@ -251,7 +251,6 @@
 - 팀 회고일 경우, 'Action Items' 내에서 담당자 지정이 가능합니다.
 
 | 회고 보드 |
-
 | ------------------------------------------------------------------------------------------------------------------------------- |
 | ![invite](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/cc57cc79-c8ef-4d2d-925f-7479d3da2332) |
 
@@ -266,7 +265,6 @@
 
 | 초대 링크 |
 | --------- |
-
-| ![invited](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/fa2f03f1-07ef-4cf3-bb07-07e64de20dc3)
+| ![invited](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/fa2f03f1-07ef-4cf3-bb07-07e64de20dc3)  |
 
 <br>
