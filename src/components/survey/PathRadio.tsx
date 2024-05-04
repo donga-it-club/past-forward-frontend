@@ -30,24 +30,24 @@ const PathRadio: React.FC<Path> = ({ onPathChange }) => {
           <RadioGroup onChange={setPath} value={path}>
             <Stack direction="column" spacing={6}>
               <Stack direction="row" spacing={3}>
-                <Radio colorScheme="brand" value="블라인드" onChange={handlePathChange}>
+                <Radio id="survey_path_1" colorScheme="brand" value="블라인드" onChange={handlePathChange}>
                   블라인드
                 </Radio>
-                <Radio colorScheme="brand" value="에브리타임" onChange={handlePathChange}>
+                <Radio id="survey_path_2" colorScheme="brand" value="에브리타임" onChange={handlePathChange}>
                   에브리타임
                 </Radio>
-                <Radio colorScheme="brand" value="카카오톡" onChange={handlePathChange}>
+                <Radio id="survey_path_3" colorScheme="brand" value="카카오톡" onChange={handlePathChange}>
                   카카오톡
                 </Radio>
-                <Radio colorScheme="brand" value="인스타그램" onChange={handlePathChange}>
+                <Radio id="survey_path_4" colorScheme="brand" value="인스타그램" onChange={handlePathChange}>
                   인스타그램
                 </Radio>
-                <Radio colorScheme="brand" value="슬랙" onChange={handlePathChange}>
+                <Radio id="survey_path_5" colorScheme="brand" value="슬랙" onChange={handlePathChange}>
                   슬랙
                 </Radio>
               </Stack>
               <Stack direction="row">
-                <Radio colorScheme="brand" value="기타" onChange={handlePathChange}>
+                <Radio id="survey_path_6" colorScheme="brand" value="기타" onChange={handlePathChange}>
                   기타
                 </Radio>
                 <Input
