@@ -164,9 +164,7 @@
 - 사용자가 비밀번호를 잊었다면 이메일 주소로 코드를 전송해 일치하는 코드를 입력한다면, 비밀번호 재설정이 가능합니다.
 
 | 로그인 |
-
 | ------ |
-
 | ![login](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/e7563be4-a688-4ff6-a88d-4cd22bc88791) |
 
 <br>
