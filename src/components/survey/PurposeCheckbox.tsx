@@ -46,7 +46,7 @@ const PurposeCheckbox: React.FC<Purpose> = ({ onPurposeChange }) => {
   return (
     <>
       <S.CustomContainer>
-        <Text fontSize="lg">Past-Forward 서비스를 알게 된 경로는 무엇입니까?</Text>
+        <Text fontSize="lg">Past-Forward 서비스를 어떤 목적으로 사용하려 하십니까?</Text>
         <Text>(복수 선택 가능)</Text>
         <S.CheckboxContainer>
           <Stack direction="column" spacing={6}>
