@@ -136,6 +136,7 @@ export interface RetrospectivesClient {
   create(request: PostRetrospectivesRequest): Promise<PostRetrospectivesResponse>;
   get(request: GetRetrospectiveRequest): Promise<GetRetrospectiveData>;
   delete(request: DeleteRetrospectiveRequest): Promise<void>;
-  put(request: PutTeamRetrospectiveRequest): Promise<RetrospectiveResponse>;
+  putTeam(request: PutTeamRetrospectiveRequest): Promise<RetrospectiveResponse>;
+  putPersonal(request: PutPersonalRetrospectiveRequest): Promise<RetrospectiveResponse>;
   patch(request: PatchRetrospectiveRequest): Promise<PatchRetrospectiveResponse>;
 }

@@ -81,16 +81,28 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
 
   const handlePutRetrospective = async () => {
     try {
-      await RetrospectiveService.put({
-        retrospectiveId: retro.retrospectiveId,
-        title: title ? title : retro.title,
-        teamId: teamId ?? null,
-        description: description ? description : retro.description,
-        thumbnail: imageUUID,
-        status: status,
-      });
-      navigate('/retrolist');
-      toast.info('회고 수정이 정상 처리되었습니다.');
+      if (teamId) {
+        await RetrospectiveService.putTeam({
+          retrospectiveId: retro.retrospectiveId,
+          title: title ? title : retro.title,
+          teamId: teamId,
+          description: description ? description : retro.description,
+          thumbnail: imageUUID,
+          status: status,
+        });
+        navigate('/retrolist');
+        toast.info('회고 수정이 정상 처리되었습니다.');
+      } else {
+        await RetrospectiveService.putPersonal({
+          retrospectiveId: retro.retrospectiveId,
+          title: title ? title : retro.title,
+          description: description ? description : retro.description,
+          thumbnail: imageUUID,
+          status: status,
+        });
+        navigate('/retrolist');
+        toast.info('회고 수정이 정상 처리되었습니다.');
+      }
 
       if (imageURL && retro.thumbnail !== imageURL) {
         const response = await postImageToS3({
