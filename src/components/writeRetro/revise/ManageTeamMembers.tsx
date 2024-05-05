@@ -1,26 +1,29 @@
 import { FC, useEffect, useState } from 'react';
+import { CgProfile } from 'react-icons/cg';
 import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Flex, Button } from '@chakra-ui/react';
 import { TeamMembersData } from '@/api/@types/TeamController';
 import { UserData } from '@/api/@types/Users';
+import postImageToS3 from '@/api/imageApi/postImageToS3';
 import { TeamControllerServices } from '@/api/services/TeamController';
 import { UserServices } from '@/api/services/User';
 import { convertToLocalTime } from '@/components/RetroList/ContentsList';
 import InviteTeamModal from '@/components/inviteTeam/InviteTeamModal';
-import UserProfileImage from '@/components/user/UserProfileImage';
 import { useCustomToast } from '@/hooks/useCustomToast';
+import * as M from '@/styles/my/myPage.style';
 import * as S from '@/styles/writeRetroStyles/ReviseLayout.style';
 
 interface Props {
-  members: TeamMembersData[];
   teamId: number;
+  members: TeamMembersData[];
 }
 
-const ManageTeamMembers: FC<Props> = ({ members, teamId }) => {
+const ManageTeamMembers: FC<Props> = ({ teamId, members }) => {
   const [searchTerm, setSearchTerm] = useState<string>('');
-  const [searchList, setSearchList] = useState<TeamMembersData[]>();
   const [isInviteModalOpen, setInviteModalOpen] = useState<boolean>(false);
   const [user, setUser] = useState<UserData>();
+  const [image, setImage] = useState<{ [key: number]: string }>({});
   const toast = useCustomToast();
+  const filterData = members.filter(members => members.username.includes(searchTerm));
 
   const fetchUser = async () => {
     try {
@@ -31,21 +34,25 @@ const ManageTeamMembers: FC<Props> = ({ members, teamId }) => {
     }
   };
 
-  const searchTeamMembers = (searchTerm: string) => {
-    const filterData: TeamMembersData[] = [];
-
-    members.forEach(data => {
-      if (data.username.includes(searchTerm)) {
-        filterData.push(data);
-        setSearchList(filterData);
-      }
-    });
-  };
-
-  const DeleteTeamMember = async () => {
+  const DeleteTeamMember = async (id: number) => {
     try {
       if (user && user.userId) {
-        await TeamControllerServices.DeleteTeamMembers({ teamId: teamId, userId: user.userId });
+        await TeamControllerServices.DeleteTeamMembers({ teamId: teamId, userId: id });
+      }
+      toast.error('팀원을 삭제했습니다.');
+    } catch (e) {
+      toast.error(e);
+    }
+  };
+
+  const fetchImage = async (item: TeamMembersData) => {
+    try {
+      if (item.profileImage) {
+        const response = await postImageToS3({ filename: item.profileImage, method: 'GET' });
+        setImage(prev => ({
+          ...prev,
+          [item.userId]: response.data.preSignedUrl,
+        }));
       }
     } catch (e) {
       toast.error(e);
@@ -54,7 +61,8 @@ const ManageTeamMembers: FC<Props> = ({ members, teamId }) => {
 
   useEffect(() => {
     fetchUser();
-  }, []);
+    members.forEach(item => fetchImage(item));
+  }, [members.map(id => id.userId)]);
 
   return (
     <S.ManageStyle>
@@ -69,13 +77,13 @@ const ManageTeamMembers: FC<Props> = ({ members, teamId }) => {
           value={searchTerm}
           onChange={e => setSearchTerm(e.target.value.toLowerCase())}
         />
-        <S.ManageSearchButton
+        {/* <S.ManageSearchButton
           onClick={() => {
             searchTeamMembers(searchTerm);
           }}
         >
           검색
-        </S.ManageSearchButton>
+        </S.ManageSearchButton> */}
       </Flex>
       <TableContainer marginTop="40px">
         <Table variant="simple">
@@ -96,33 +104,38 @@ const ManageTeamMembers: FC<Props> = ({ members, teamId }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {(searchList ?? members).map(item => {
-              return (
-                <Tr>
-                  <Td>
-                    <Flex>
-                      <UserProfileImage width="30px" />
-                      {item.username ? (
-                        <p style={{ margin: 'auto 5px' }}>{item.username}</p>
+            {filterData &&
+              filterData.map(item => {
+                return (
+                  <Tr>
+                    <Td>
+                      <Flex>
+                        {item.profileImage ? (
+                          <M.UploadImage sizes="40px" width="40px" height="auto" src={image[item.userId]} />
+                        ) : (
+                          <CgProfile size="40px" color="#DADEE5" />
+                        )}
+                        {item.username ? (
+                          <p style={{ margin: 'auto 5px' }}>{item.username}</p>
+                        ) : (
+                          <S.NotMemberInfo> (닉네임 없음)</S.NotMemberInfo>
+                        )}
+                      </Flex>
+                    </Td>
+                    <Td>{item.email ?? <S.NotMemberInfo>(이메일 없음)</S.NotMemberInfo>}</Td>
+                    <Td>{convertToLocalTime(item.joinedAt)}</Td>
+                    <Td>
+                      {user?.userId !== item.userId ? (
+                        <Button colorScheme="red" fontSize={15} onClick={() => DeleteTeamMember(item.userId)}>
+                          제거
+                        </Button>
                       ) : (
-                        <S.NotMemberInfo> (닉네임 없음)</S.NotMemberInfo>
+                        <S.NotMemberInfo style={{ fontSize: '15px' }}>팀장은 나갈 수 없음</S.NotMemberInfo>
                       )}
-                    </Flex>
-                  </Td>
-                  <Td>{item.email ?? <S.NotMemberInfo>(이메일 없음)</S.NotMemberInfo>}</Td>
-                  <Td>{convertToLocalTime(item.joinedAt)}</Td>
-                  <Td>
-                    {user?.userId !== item.userId ? (
-                      <Button colorScheme="red" fontSize={15} onClick={DeleteTeamMember}>
-                        제거
-                      </Button>
-                    ) : (
-                      <S.NotMemberInfo style={{ fontSize: '15px' }}>팀장은 나갈 수 없음</S.NotMemberInfo>
-                    )}
-                  </Td>
-                </Tr>
-              );
-            })}
+                    </Td>
+                  </Tr>
+                );
+              })}
           </Tbody>
         </Table>
       </TableContainer>

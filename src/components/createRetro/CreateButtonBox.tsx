@@ -29,10 +29,10 @@ const CreateButtonBox: React.FC = () => {
   return (
     <>
       <S.ButtonListContainer>
-        <S.SpacedButton onClick={handleTeamButtonClick}>
+        <S.SpacedButton onClick={handleTeamButtonClick} className="create_team">
           <TeamRetroCreateButton />
         </S.SpacedButton>
-        <S.SpacedButton onClick={handlePersonalButtonClick}>
+        <S.SpacedButton onClick={handlePersonalButtonClick} className="create_personal">
           <PersonalRetroCreateButton />
         </S.SpacedButton>
       </S.ButtonListContainer>

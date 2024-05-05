@@ -76,8 +76,6 @@ const TeamTask: FC<Props> = ({ section, setRendering, teamId, imageURL }) => {
     fetchRetrospectiveImage();
   });
 
-  console.log(isVisible);
-
   const actionCondition = teamId && section.sectionName === 'Action Items';
 
   return (

@@ -18,6 +18,10 @@ export interface TeamMembersData {
   joinedAt: string;
 }
 
+export interface AddedImageTeamMember extends TeamMembersData {
+  image: string;
+}
+
 //getTemplateName
 export interface GetTemplateNameRequest {
   templateId: number;
