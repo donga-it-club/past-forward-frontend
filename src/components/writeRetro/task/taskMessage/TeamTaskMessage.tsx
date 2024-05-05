@@ -3,7 +3,7 @@ import { CgProfile } from 'react-icons/cg';
 import { Flex, Popover, PopoverContent, PopoverTrigger } from '@chakra-ui/react';
 import DeleteData from '../DeleteData';
 import ReviseCommentModal from '../ReviseCommentModal';
-import { AddedImageCommentData, sectionData } from '@/api/@types/Section';
+import { CommentData, sectionData } from '@/api/@types/Section';
 import postImageToS3 from '@/api/imageApi/postImageToS3';
 import { CommentService } from '@/api/services/Comment';
 import { useCustomToast } from '@/hooks/useCustomToast';
@@ -18,28 +18,7 @@ interface Props {
 const TeamTaskMessage: FC<Props> = ({ section, setRendering }) => {
   const [value, setValue] = useState<string>('');
   const toast = useCustomToast();
-  const [image, setImage] = useState<string>('');
-  const [comment, setComment] = useState<AddedImageCommentData[]>();
-
-  // const fetchComment = async () => {
-  //   try {
-  //     const data = await SectionServices.getComment({ sectionId: section });
-  //     setComment(data.data);
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-  // };
-
-  // const fetchRetrospectiveImage = async () => {
-  //   if (section) {
-  //     try {
-  //       const data = await postImageToS3({ filename: , method: 'GET' });
-  //       setImage(data.data.preSignedUrl);
-  //     } catch (e) {
-  //       console.error(e);
-  //     }
-  //   }
-  // };
+  const [image, setImage] = useState<{ [key: number]: string }>('');
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
@@ -66,21 +45,25 @@ const TeamTaskMessage: FC<Props> = ({ section, setRendering }) => {
     }
   };
 
-  useEffect(() => {
-    const fetchImage = async () => {
-      const newData = await Promise.all(
-        section.comments.map(async item => {
-          const imageURL = await postImageToS3({ filename: item.thumbnail, method: 'GET' });
-          setImage(imageURL.data.preSignedUrl);
-          return { ...item, image };
-        }),
-      );
-      setComment(newData);
-    };
-    if (section) {
-      fetchImage();
+  const fetchImage = async (item: CommentData) => {
+    try {
+      if (item.thumbnail) {
+        const imageURL = await postImageToS3({ filename: item.thumbnail, method: 'GET' });
+        setImage(prev => ({
+          ...prev,
+          [item.commentId]: imageURL.data.preSignedUrl,
+        }));
+      }
+    } catch (e) {
+      console.error(e);
     }
-  }, [comment?.values]);
+  };
+
+  useEffect(() => {
+    if (section.comments) {
+      section.comments.forEach(item => fetchImage(item));
+    }
+  }, [section.comments, section.comments, image]);
 
   return (
     <>
@@ -95,14 +78,14 @@ const TeamTaskMessage: FC<Props> = ({ section, setRendering }) => {
         {/* TaskMessages */}
         <div>
           <S.TaskMessageStyle>
-            {comment &&
-              comment.map((section: AddedImageCommentData) => (
+            {section.comments &&
+              section.comments.map((section: CommentData) => (
                 <Flex flexDirection="column">
                   {/* TaskMessageTop */}
                   <Flex>
                     <S.TaskUserProfile>
-                      {section.image ? (
-                        <M.UploadImage sizes="40px" width="40px" height="auto" src={section.image} />
+                      {section.thumbnail ? (
+                        <M.UploadImage sizes="40px" width="40px" height="auto" src={image[section.commentId]} />
                       ) : (
                         <CgProfile size="40px" color="#DADEE5" />
                       )}

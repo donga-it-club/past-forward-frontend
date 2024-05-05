@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { CgProfile } from 'react-icons/cg';
 import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Flex, Button } from '@chakra-ui/react';
-import { AddedImageTeamMember, TeamMembersData } from '@/api/@types/TeamController';
+import { TeamMembersData } from '@/api/@types/TeamController';
 import { UserData } from '@/api/@types/Users';
 import postImageToS3 from '@/api/imageApi/postImageToS3';
 import { TeamControllerServices } from '@/api/services/TeamController';
@@ -13,18 +13,17 @@ import * as M from '@/styles/my/myPage.style';
 import * as S from '@/styles/writeRetroStyles/ReviseLayout.style';
 
 interface Props {
-  members: TeamMembersData[];
   teamId: number;
+  members: TeamMembersData[];
 }
 
-const ManageTeamMembers: FC<Props> = ({ members, teamId }) => {
+const ManageTeamMembers: FC<Props> = ({ teamId, members }) => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [isInviteModalOpen, setInviteModalOpen] = useState<boolean>(false);
-  const [image, setImage] = useState<string>('');
   const [user, setUser] = useState<UserData>();
-  const [data, setData] = useState<AddedImageTeamMember[]>();
+  const [image, setImage] = useState<{ [key: number]: string }>({});
   const toast = useCustomToast();
-  const [rendering, setRendering] = useState<boolean>(false);
+  const filterData = members.filter(members => members.username.includes(searchTerm));
 
   const fetchUser = async () => {
     try {
@@ -35,36 +34,25 @@ const ManageTeamMembers: FC<Props> = ({ members, teamId }) => {
     }
   };
 
-  const searchTeamMembers = (searchTerm: string) => {
-    if (data) {
-      const filterData = data.filter(members => members.username.includes(searchTerm));
-      setData(filterData);
-      setRendering(prev => !prev);
-    }
-  };
-
-  const fetchImage = async () => {
-    const newData = await Promise.all(
-      members.map(async item => {
-        const imageURL = await postImageToS3({ filename: item.profileImage, method: 'GET' });
-        setImage(imageURL.data.preSignedUrl);
-        return { ...item, image };
-      }),
-    );
-    setData(newData);
-    setRendering(prev => !prev);
-  };
-
-  useEffect(() => {
-    if (members) {
-      fetchImage();
-    }
-  }, [data?.values, rendering]);
-
-  const DeleteTeamMember = async () => {
+  const DeleteTeamMember = async (id: number) => {
     try {
       if (user && user.userId) {
-        await TeamControllerServices.DeleteTeamMembers({ teamId: teamId, userId: user.userId });
+        await TeamControllerServices.DeleteTeamMembers({ teamId: teamId, userId: id });
+      }
+      toast.error('팀원을 삭제했습니다.');
+    } catch (e) {
+      toast.error(e);
+    }
+  };
+
+  const fetchImage = async (item: TeamMembersData) => {
+    try {
+      if (item.profileImage) {
+        const response = await postImageToS3({ filename: item.profileImage, method: 'GET' });
+        setImage(prev => ({
+          ...prev,
+          [item.userId]: response.data.preSignedUrl,
+        }));
       }
     } catch (e) {
       toast.error(e);
@@ -73,7 +61,8 @@ const ManageTeamMembers: FC<Props> = ({ members, teamId }) => {
 
   useEffect(() => {
     fetchUser();
-  }, []);
+    members.forEach(item => fetchImage(item));
+  }, [members.map(id => id.userId)]);
 
   return (
     <S.ManageStyle>
@@ -88,13 +77,13 @@ const ManageTeamMembers: FC<Props> = ({ members, teamId }) => {
           value={searchTerm}
           onChange={e => setSearchTerm(e.target.value.toLowerCase())}
         />
-        <S.ManageSearchButton
+        {/* <S.ManageSearchButton
           onClick={() => {
             searchTeamMembers(searchTerm);
           }}
         >
           검색
-        </S.ManageSearchButton>
+        </S.ManageSearchButton> */}
       </Flex>
       <TableContainer marginTop="40px">
         <Table variant="simple">
@@ -115,14 +104,14 @@ const ManageTeamMembers: FC<Props> = ({ members, teamId }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {data &&
-              data.map(item => {
+            {filterData &&
+              filterData.map(item => {
                 return (
                   <Tr>
                     <Td>
                       <Flex>
-                        {item.image ? (
-                          <M.UploadImage sizes="40px" width="40px" height="auto" src={item.image} />
+                        {item.profileImage ? (
+                          <M.UploadImage sizes="40px" width="40px" height="auto" src={image[item.userId]} />
                         ) : (
                           <CgProfile size="40px" color="#DADEE5" />
                         )}
@@ -137,7 +126,7 @@ const ManageTeamMembers: FC<Props> = ({ members, teamId }) => {
                     <Td>{convertToLocalTime(item.joinedAt)}</Td>
                     <Td>
                       {user?.userId !== item.userId ? (
-                        <Button colorScheme="red" fontSize={15} onClick={DeleteTeamMember}>
+                        <Button colorScheme="red" fontSize={15} onClick={() => DeleteTeamMember(item.userId)}>
                           제거
                         </Button>
                       ) : (
