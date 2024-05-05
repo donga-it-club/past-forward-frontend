@@ -106,8 +106,7 @@ export interface GetSectionCommentsResponse {
 }
 
 export interface SectionClient {
-  TeamGet(request: TeamGetSectionRequest): Promise<GetSectionResponse>;
-  PersonalGet(request: PersonalGetSectionRequest): Promise<GetSectionResponse>;
+  get(request: TeamGetSectionRequest): Promise<GetSectionResponse>;
   create(request: CreateSectionRequest): Promise<PostSectionResponse>;
   patch(request: PatchSectionRequest): Promise<PatchSectionResponse>;
   delete(request: DeleteSectionRequest): Promise<DeleteSectionResponse>;

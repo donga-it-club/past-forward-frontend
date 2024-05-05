@@ -47,8 +47,8 @@ const InviteTeamModal: React.FC<InviteTeamModalProps> = ({ isOpen, onClose, team
   }, []);
 
   const generateInvitationUrl = (invitationCode: string) => {
-    const domain = 'http://localhost:3000'; // 로컬 테스트용
-    // const domain = 'https://www.pastforward.link'; // 배포용
+    // const domain = 'http://localhost:3000'; // 로컬 테스트용
+    const domain = 'https://www.pastforward.link'; // 배포용
     return `${domain}/invitations?invitationId=${invitationCode}`;
   };
 

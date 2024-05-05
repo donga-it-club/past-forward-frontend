@@ -1,9 +1,7 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Flex, Image } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import RetroTitle from './RetroTitle';
-import { RetrospectiveData } from '@/api/@types/Retrospectives';
-import postImageToS3 from '@/api/imageApi/postImageToS3';
 import InviteTeamModal from '@/components/inviteTeam/InviteTeamModal';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 import * as L from '@/styles/writeRetroStyles/ReviseLayout.style';
@@ -11,37 +9,38 @@ import * as L from '@/styles/writeRetroStyles/ReviseLayout.style';
 interface Props {
   name: string;
   description: string;
-  thumbnail: string;
-  retro: RetrospectiveData;
 }
 
-const Title: FC<Props> = ({ name, description, thumbnail, retro }) => {
+const Title: FC<Props> = ({ name, description }) => {
   const { search } = useLocation();
   const query = search.split(/[=,&]/);
   const retrospectiveId = Number(query[1]);
   const teamId = Number(query[3]);
   const [isInviteModalOpen, setInviteModalOpen] = useState<boolean>(false);
-  const [imageURL, setImageURL] = useState<string>('');
+  // const [imageURL, setImageURL] = useState<{ [key: number]: string }>({});
   const navigate = useNavigate();
 
-  const fetchRetrospectiveImage = async () => {
-    if (retro) {
-      try {
-        const data = await postImageToS3({ filename: thumbnail, method: 'GET' });
-        setImageURL(data.data.preSignedUrl);
-      } catch (e) {
-        console.error(e);
-      }
-    }
-  };
+  // const fetchRetrospectiveImage = async (item: string) => {
+  //   if (item) {
+  //     try {
+  //       const data = await postImageToS3({ filename: item, method: 'GET' });
+  //       setImageURL(prev => ({
+  //         ...prev,
+  //         [retro.retrospectiveId]: data.data.preSignedUrl,
+  //       }));
+  //     } catch (e) {
+  //       console.error(e);
+  //     }
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchRetrospectiveImage();
-  });
+  // useEffect(() => {
+  //   fetchRetrospectiveImage(String(thumbnail));
+  // }, []);
   return (
     <>
       <S.TitleBox>
-        <Image src={imageURL} maxWidth={150} borderRadius="10px" margin="auto 5px" />
+        {/* <Image src="MainPageLogo.svg" maxWidth={150} borderRadius="10px" margin="auto 5px" /> */}
         <Flex flexDirection="column" margin="20px 10px">
           <Flex>
             <RetroTitle teamId={teamId} name={name} />
