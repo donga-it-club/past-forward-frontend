@@ -22,6 +22,7 @@ const ManageTeamMembers: FC<Props> = ({ teamId, members }) => {
   const [isInviteModalOpen, setInviteModalOpen] = useState<boolean>(false);
   const [user, setUser] = useState<UserData>();
   const [image, setImage] = useState<{ [key: number]: string }>({});
+  const [render, setRender] = useState<boolean>(false);
   const toast = useCustomToast();
   const filterData = members.filter(members => members.username.includes(searchTerm));
 
@@ -39,7 +40,8 @@ const ManageTeamMembers: FC<Props> = ({ teamId, members }) => {
       if (user && user.userId) {
         await TeamControllerServices.DeleteTeamMembers({ teamId: teamId, userId: id });
       }
-      toast.error('팀원을 삭제했습니다.');
+      toast.info('팀원을 삭제했습니다.');
+      setRender(prev => !prev);
     } catch (e) {
       toast.error(e);
     }
@@ -62,7 +64,7 @@ const ManageTeamMembers: FC<Props> = ({ teamId, members }) => {
   useEffect(() => {
     fetchUser();
     members.forEach(item => fetchImage(item));
-  }, [members.map(id => id.userId)]);
+  }, [render]);
 
   return (
     <S.ManageStyle>

@@ -13,7 +13,6 @@ interface ActionItemTaskProps {
 }
 
 const ActionItemTask: FC<ActionItemTaskProps> = ({ tId, rId, sId }) => {
-  const [hoveredUser, setHoveredUser] = useState<string | null>(null);
   const [showPopup, setShowPopup] = useState<boolean>(false);
   const [selectedUserName, setSelectedUserName] = useState<string | null>(null);
   const [selectedUserImg, setSelectedUserImg] = useState<string | null>(null);
@@ -65,22 +64,11 @@ const ActionItemTask: FC<ActionItemTaskProps> = ({ tId, rId, sId }) => {
     setSelectedUserName(name);
   };
 
-  const handleMouseEnter = (name: string) => {
-    setHoveredUser(name);
-  };
-
-  const handleMouseLeave = () => {
-    setHoveredUser(null);
-  };
   return (
     <>
       <Popover isOpen={showPopup} onClose={() => setShowPopup(false)}>
         <PopoverTrigger>
-          <S.ManagerButton
-            onClick={togglePopup}
-            onMouseEnter={() => handleMouseEnter(selectedUserName || '')}
-            onMouseLeave={handleMouseLeave}
-          >
+          <S.ManagerButton onClick={togglePopup}>
             {selectedUserImg ? (
               <img src={selectedUserImg} style={{ width: '30px' }} />
             ) : selectedUserImg === '' ? (
@@ -88,10 +76,9 @@ const ActionItemTask: FC<ActionItemTaskProps> = ({ tId, rId, sId }) => {
             ) : (
               'M'
             )}
-
-            {hoveredUser && <S.HoverUser>{hoveredUser}</S.HoverUser>}
           </S.ManagerButton>
         </PopoverTrigger>
+        {selectedUserName ? <S.ManagerText> {selectedUserName}</S.ManagerText> : <S.ManagerText>담당자</S.ManagerText>}
         <PopoverContent>
           <Members
             users={users}

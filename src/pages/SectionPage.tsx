@@ -38,11 +38,7 @@ const RetroTeamPage = () => {
 
   const fetchSection = async () => {
     try {
-      if (!teamId) {
-        const data = await SectionServices.PersonalGet({ retrospectiveId: retrospectiveId });
-        setSection(data.data);
-      }
-      const data = await SectionServices.TeamGet({ retrospectiveId: retrospectiveId, teamId: teamId });
+      const data = await SectionServices.get({ retrospectiveId: retrospectiveId, teamId: teamId ?? null });
       setSection(data.data);
     } catch (e) {
       console.error(e);
@@ -70,7 +66,7 @@ const RetroTeamPage = () => {
 
   return (
     <S.Container>
-      {retro && <Title name={retro.title} description={retro.description} thumbnail={retro.thumbnail} retro={retro} />}
+      {retro && <Title name={retro.title} description={retro.description} />}
 
       <S.SectionBox>
         <Flex flexDirection="column" margin="0 auto">
