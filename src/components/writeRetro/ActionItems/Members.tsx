@@ -29,6 +29,7 @@ export const Members: React.FC<UserListProps> = ({
   const retrospectiveId: number = rId;
   const sectionId: number = sId;
   const toast = useCustomToast();
+  const [rendering, setRendering] = useState<boolean>(false);
 
   const putActionItemMember = async (selectedUserId: number) => {
     try {
@@ -39,6 +40,7 @@ export const Members: React.FC<UserListProps> = ({
         userId: selectedUserId,
       };
       await putActionItemsMember(requestData);
+      setRendering(prev => !prev);
     } catch (e) {
       toast.error('담당자 지정 실패');
     }
@@ -74,7 +76,7 @@ export const Members: React.FC<UserListProps> = ({
 
   useEffect(() => {
     fetchRetrospectiveImage();
-  }, [imageURL]);
+  }, [imageURL, rendering]);
 
   const usersWithImages = users.map((user, index) => ({
     ...user,

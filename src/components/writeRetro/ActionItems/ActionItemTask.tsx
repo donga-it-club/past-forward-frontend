@@ -1,21 +1,25 @@
 import { FC, useState, useEffect } from 'react';
 import { CgProfile } from 'react-icons/cg';
 import { Popover, PopoverTrigger, PopoverContent } from '@chakra-ui/react';
+import { sectionData } from '@/api/@types/Section';
 import { TeamControllerServices } from '@/api/services/TeamController';
 import Members from '@/components/writeRetro/ActionItems/Members';
 import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 
 interface ActionItemTaskProps {
+  section: sectionData;
   tId: number;
   rId: number;
   sId: number;
 }
 
-const ActionItemTask: FC<ActionItemTaskProps> = ({ tId, rId, sId }) => {
+const ActionItemTask: FC<ActionItemTaskProps> = ({ tId, rId, sId, section }) => {
   const [showPopup, setShowPopup] = useState<boolean>(false);
   const [selectedUserName, setSelectedUserName] = useState<string | null>(null);
   const [selectedUserImg, setSelectedUserImg] = useState<string | null>(null);
+
+  console.log(section);
 
   const teamId: number = tId;
   const retrospectiveId: number = rId;
@@ -50,7 +54,8 @@ const ActionItemTask: FC<ActionItemTaskProps> = ({ tId, rId, sId }) => {
   };
   useEffect(() => {
     fetchTeamMember();
-  }, []);
+  }, [section.actionItems]);
+
   const togglePopup = () => {
     setShowPopup(!showPopup);
   };
