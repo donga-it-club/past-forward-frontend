@@ -73,7 +73,10 @@ const MainNavBar = () => {
               <Button style={{ marginRight: '0.3rem' }} variant="ghost" onClick={handleLoginOrLogout} id="header_login">
                 {isLoggedIn ? 'Logout' : 'Login'}
               </Button>
-              <S.GetStaredButton onClick={navigateToCreate} id="header_startpf">
+              <S.GetStaredButton
+                onClick={navigateToCreate}
+                id={isLoggedIn ? 'header_startpf_login' : 'header_startpf_logout'}
+              >
                 Get Started for Free
               </S.GetStaredButton>
             </div>
