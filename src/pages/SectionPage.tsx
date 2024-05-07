@@ -20,7 +20,7 @@ const RetroTeamPage = () => {
   const { search } = useLocation();
   const query = search.split(/[=,&]/);
   const retrospectiveId = Number(query[1]);
-  const teamId = Number(query[3]);
+  const teamId = query[3] === 'null' ? null : Number(query[3]);
   const [section, setSection] = useState<sectionData[]>([]);
   const [retro, setRetro] = useState<RetrospectiveData>();
   const [template, setTemplate] = useState<TemplateNameData[]>();
@@ -95,7 +95,7 @@ const RetroTeamPage = () => {
                           <TeamTask
                             section={section}
                             setRendering={setRendering}
-                            teamId={teamId}
+                            teamId={teamId ?? null}
                             imageURL={section.thumbnail}
                           />
                         ))}

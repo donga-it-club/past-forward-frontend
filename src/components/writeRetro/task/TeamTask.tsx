@@ -19,7 +19,7 @@ import * as S from '@/styles/writeRetroStyles/Layout.style';
 interface Props {
   section: sectionData;
   setRendering: React.Dispatch<React.SetStateAction<boolean>>;
-  teamId: number;
+  teamId: number | null;
   imageURL: string;
 }
 

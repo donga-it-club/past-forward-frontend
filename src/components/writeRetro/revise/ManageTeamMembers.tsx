@@ -41,9 +41,10 @@ const ManageTeamMembers: FC<Props> = ({ teamId, members }) => {
         await TeamControllerServices.DeleteTeamMembers({ teamId: teamId, userId: id });
       }
       toast.info('팀원을 삭제했습니다.');
+      filterData.filter(item => item.userId !== id);
       setRender(prev => !prev);
-    } catch (e) {
-      toast.error(e);
+    } catch {
+      toast.error('팀원 삭제에 실패했습니다.');
     }
   };
 
