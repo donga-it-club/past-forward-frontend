@@ -35,7 +35,7 @@ const RetroImageUploader: FC<Props> = ({ image, onChange, setImageUUID, setPrevi
   };
 
   const DeleteImage: MouseEventHandler<HTMLButtonElement> = () => {
-    setPreview('https://www.hillsidebeefnwa.com/images/default.jpg');
+    setPreview('defaultImage.jpeg');
     setImageUUID(null);
     onChange(null, '');
   };

@@ -27,9 +27,10 @@ interface CreateModalProps {
   templateId: number | null;
   type: keyof TRetrospective;
   status: keyof TStatus;
+  name: string;
 }
 
-const CreateModal: React.FC<CreateModalProps> = ({ isOpen, onClose, templateId, type, status }) => {
+const CreateModal: React.FC<CreateModalProps> = ({ isOpen, onClose, templateId, type, status, name }) => {
   const size = 'xl';
   const navigate = useNavigate();
   const [requestData, setRequestData] = useState<PostRetrospectivesRequest>({
@@ -115,6 +116,7 @@ const CreateModal: React.FC<CreateModalProps> = ({ isOpen, onClose, templateId, 
     console.log('startDate:', startDate); // startDate를 콘솔에 출력
     setRequestData({ ...requestData, startDate }); // startDate 상태 업데이트
   };
+  console.log(name);
 
   return (
     <Modal isOpen={isOpen} size={size} onClose={onClose}>
@@ -144,7 +146,7 @@ const CreateModal: React.FC<CreateModalProps> = ({ isOpen, onClose, templateId, 
         </S.BottomModalBody>
 
         <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={handleCreateClick} id="cr_create">
+          <Button colorScheme="blue" mr={3} onClick={handleCreateClick} id={name}>
             Create
           </Button>
         </ModalFooter>
