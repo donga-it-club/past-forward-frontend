@@ -17,6 +17,13 @@ export interface sectionData {
   createdDate: string;
   thumbnail: string;
   comments: CommentData[];
+  actionItems?: ActionItemData;
+}
+
+export interface ActionItemData {
+  userId: number;
+  username: string;
+  thumbnail: string;
 }
 
 export interface CommentData {

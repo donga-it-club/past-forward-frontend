@@ -1,7 +1,6 @@
 import { http, RequestHandler, HttpResponse } from 'msw';
 import { setupWorker } from 'msw/browser';
 import { MockOnlyGetRetrospective, MockRetrospective } from '@/api/__mock__/retrospective';
-import { mockSection } from '@/api/__mock__/section';
 
 //Retro
 const RETRO_ROUTE = 'retrospectives';
@@ -28,7 +27,7 @@ export const RetrospectiveHandlers: RequestHandler[] = [
     return HttpResponse.json(mock);
   }),
   http.get(`${RETRO_ROUTE}?retrospectiveId=1&teamId=1`, () => {
-    return HttpResponse.json(mockSection);
+    return HttpResponse.json();
   }),
   http.delete(`${RETRO_ROUTE}/0`, () => {
     return;
@@ -46,16 +45,16 @@ export const RetrospectiveHandlers: RequestHandler[] = [
 const SECTION_ROUTE = 'sections';
 export const SectionHandlers: RequestHandler[] = [
   http.get(`${SECTION_ROUTE}/`, () => {
-    return HttpResponse.json(mockSection);
+    return HttpResponse.json();
   }),
   http.post(`${SECTION_ROUTE}/`, () => {
-    return HttpResponse.json(mockSection);
+    return HttpResponse.json();
   }),
   http.patch(`${SECTION_ROUTE}/1`, () => {
-    return HttpResponse.json(mockSection);
+    return HttpResponse.json();
   }),
   http.delete(`${SECTION_ROUTE}/1`, () => {
-    return HttpResponse.json(mockSection);
+    return HttpResponse.json();
   }),
   http.post(`${SECTION_ROUTE}/0/likes`, () => {
     const mockLikes = {

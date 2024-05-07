@@ -49,24 +49,26 @@ const MainNavBar = () => {
                 justifyContent: 'flex-end',
               }}
             >
-              <S.IconStyle border-radius="10px">
-                <div
-                  style={{
-                    display: 'flex',
-                    textAlign: 'center',
-                    alignContent: 'center',
-                    margin: '2px',
-                    cursor: 'pointer',
-                  }}
-                  onClick={navigateToMyPage}
-                >
-                  <UserProfileImage width="30px" />
-                  <p style={{ margin: 'auto 10px' }}>
-                    <UserNickname setUserNickname={setUserNickname} />
-                    {userNickname}
-                  </p>
-                </div>
-              </S.IconStyle>
+              {isLoggedIn ? (
+                <S.IconStyle border-radius="10px">
+                  <div
+                    style={{
+                      display: 'flex',
+                      textAlign: 'center',
+                      alignContent: 'center',
+                      margin: '2px',
+                      cursor: 'pointer',
+                    }}
+                    onClick={navigateToMyPage}
+                  >
+                    <UserProfileImage width="30px" />
+                    <p style={{ margin: 'auto 10px' }}>
+                      <UserNickname setUserNickname={setUserNickname} />
+                      {userNickname}
+                    </p>
+                  </div>
+                </S.IconStyle>
+              ) : null}
 
               <Button style={{ marginRight: '0.3rem' }} variant="ghost" onClick={handleLoginOrLogout} id="header_login">
                 {isLoggedIn ? 'Logout' : 'Login'}

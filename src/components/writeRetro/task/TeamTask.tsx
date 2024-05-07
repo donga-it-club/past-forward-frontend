@@ -47,6 +47,8 @@ const TeamTask: FC<Props> = ({ section, setRendering, teamId, imageURL }) => {
     }
   };
 
+  console.log('section', section);
+
   const handleLike = async () => {
     try {
       const data = await SectionServices.likePost({ sectionId: section.sectionId });
@@ -106,8 +108,8 @@ const TeamTask: FC<Props> = ({ section, setRendering, teamId, imageURL }) => {
             </PopoverTrigger>
             {actionCondition ? (
               <S.ManagerStyle>
-                <ActionItemTask tId={tId} rId={rId} sId={sId} />
-                {/* <S.ManagerText>담당자</S.ManagerText> */}
+                <ActionItemTask tId={tId} rId={rId} sId={sId} section={section} />
+                <S.ManagerText>{(section.actionItems && section.actionItems.username) ?? '담당자'}</S.ManagerText>
               </S.ManagerStyle>
             ) : null}
             <PopoverContent>
