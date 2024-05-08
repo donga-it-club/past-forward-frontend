@@ -13,6 +13,7 @@ interface Props {
 
 const RetroImageUploader: FC<Props> = ({ image, onChange, setImageUUID, setPreview, preview }) => {
   const inputRef = useRef<HTMLInputElement>(null);
+
   const handleUploadButtonClick: MouseEventHandler<HTMLButtonElement> = () => {
     inputRef.current?.click();
   };

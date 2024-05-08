@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PersonCircle } from 'react-bootstrap-icons';
-import { Center, Spinner } from '@chakra-ui/react';
+import { Spinner } from '@chakra-ui/react';
 import { GetUsersResponse } from '@/api/@types/User';
 import getUser from '@/api/imageApi/getUser';
 import postImageToS3 from '@/api/imageApi/postImageToS3';
@@ -45,20 +45,21 @@ const UserProfileImage = ({ width }: Props) => {
   useEffect(() => {
     fetchProfileImage();
     fetchUserData();
-  }, [userData?.data.thumbnail, isLoading]);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
 
-  if (isLoading) {
-    return (
-      <Center w="100%" h="100%" margin="20px 0">
-        <Spinner />
-      </Center>
-    );
-  }
+    return () => clearTimeout(timer);
+  }, [userData?.data.thumbnail, isLoading]);
 
   return (
     <>
       {userData?.data.thumbnail ? (
-        <S.UploadImage src={imageURL} width={width} height="auto" />
+        isLoading ? (
+          <Spinner />
+        ) : (
+          <S.UploadImage src={imageURL} width={width} height="auto" />
+        )
       ) : (
         <PersonCircle style={{ width: '30px', height: 'auto' }} />
       )}

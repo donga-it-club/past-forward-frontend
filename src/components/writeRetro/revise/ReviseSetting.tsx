@@ -7,6 +7,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import {
   Button,
   ButtonGroup,
+  Center,
   Editable,
   EditableInput,
   EditablePreview,
@@ -16,6 +17,7 @@ import {
   Input,
   Radio,
   RadioGroup,
+  Spinner,
   Stack,
   useEditableControls,
 } from '@chakra-ui/react';
@@ -53,6 +55,7 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
   const [description, setDescription] = useState<string>('');
   const [imageUUID, setImageUUID] = useState<string | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const toast = useCustomToast();
   const navigate = useNavigate();
@@ -128,6 +131,11 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
   useEffect(() => {
     fetchRetrospectiveTemplate();
     fetchRetrospectiveImage();
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
   }, [imageURL]);
 
   if (!fetch) return;
@@ -137,16 +145,22 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
       <Flex flexDirection="row-reverse" margin="10px 5px">
         변경 전 사진이 없으면 사진이 보이지 않습니다.
       </Flex>
-      <RetroImageUploader
-        image={imageURL}
-        onChange={(files, imageUUID) => {
-          imageUUID && setImageURL(imageUUID);
-          setImage(files);
-        }}
-        setImageUUID={setImageUUID}
-        preview={preview}
-        setPreview={setPreview}
-      />
+      {isLoading ? (
+        <Center w="100%" h="100%" margin="20px 0">
+          <Spinner />
+        </Center>
+      ) : (
+        <RetroImageUploader
+          image={imageURL}
+          onChange={(files, imageUUID) => {
+            imageUUID && setImageURL(imageUUID);
+            setImage(files);
+          }}
+          setImageUUID={setImageUUID}
+          preview={preview}
+          setPreview={setPreview}
+        />
+      )}
 
       {/* 회고명 */}
       <Flex flexDirection="column">
