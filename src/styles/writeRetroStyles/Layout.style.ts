@@ -435,7 +435,7 @@ export const ReviseModalTitle = styled.div`
 `;
 
 export const ReviseModalInput = styled.textarea.attrs(props => ({
-  placeholder: props.placeholder,
+  defaultValue: props.defaultValue,
 }))`
   width: 85%;
   min-height: 87px;
