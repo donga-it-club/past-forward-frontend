@@ -33,6 +33,7 @@ const TeamTask: FC<Props> = ({ section, setRendering, teamId, imageURL, user }) 
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [liked, setLiked] = useState<number>(0);
   const [image, setImage] = useState<string>('');
+  const actionCondition = teamId && section.sectionName === 'Action Items';
 
   const rId = Number(query[1]); // action-items로 넘겨줄 Id값들
   const tId = Number(query[3]);
@@ -48,9 +49,6 @@ const TeamTask: FC<Props> = ({ section, setRendering, teamId, imageURL, user }) 
       }
     }
   };
-
-  console.log('section', section);
-  console.log(user);
 
   const handleLike = async () => {
     try {
@@ -79,9 +77,7 @@ const TeamTask: FC<Props> = ({ section, setRendering, teamId, imageURL, user }) 
 
   useEffect(() => {
     fetchRetrospectiveImage();
-  });
-
-  const actionCondition = teamId && section.sectionName === 'Action Items';
+  }, []);
 
   return (
     <>
