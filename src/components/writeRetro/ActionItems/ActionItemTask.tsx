@@ -84,7 +84,7 @@ const ActionItemTask: FC<ActionItemTaskProps> = ({ tId, rId, sId, section }) => 
           </S.ManagerButton>
         </PopoverTrigger>
         {selectedUserName ? <S.ManagerText> {selectedUserName}</S.ManagerText> : <S.ManagerText>담당자</S.ManagerText>}
-        <PopoverContent>
+        <PopoverContent border={'none'}>
           <Members
             users={users}
             onSelectUserImg={handleSelectUserImg}
