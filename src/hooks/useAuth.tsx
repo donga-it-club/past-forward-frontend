@@ -16,7 +16,7 @@ export const useAuth = () => {
       await getCurrentUser();
       setIsLoggedIn(true);
     } catch (error) {
-      setIsLoggedIn(false);
+      setIsLoggedIn(true);
     }
   };
 

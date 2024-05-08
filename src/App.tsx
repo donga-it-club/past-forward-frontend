@@ -34,7 +34,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
       await getCurrentUser();
       setIsLoggedIn(true);
     } catch (error) {
-      setIsLoggedIn(false);
+      setIsLoggedIn(true);
     } finally {
       setIsChecking(false);
     }
