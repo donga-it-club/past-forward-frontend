@@ -67,7 +67,6 @@ export interface PostSectionData {
 //patch
 export interface PatchSectionRequest {
   sectionId: number;
-  userId: number;
   sectionContent: string;
 }
 

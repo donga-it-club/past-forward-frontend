@@ -96,7 +96,7 @@ const TeamTask: FC<Props> = ({ section, setRendering, teamId, imageURL, user }) 
 
             {user.userId === section.userId && (
               <>
-                <ReviseModal section={section} setRendering={setRendering} userId={user.userId} />
+                <ReviseModal section={section} setRendering={setRendering} />
                 <DeleteData value="회고 카드" handleDeleteValue={DeleteSection} />
               </>
             )}

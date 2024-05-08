@@ -17,17 +17,16 @@ import * as S from '@/styles/writeRetroStyles/Layout.style';
 interface Props {
   section: sectionData;
   setRendering: React.Dispatch<React.SetStateAction<boolean>>;
-  userId: number;
 }
 
-const ReviseModal: FC<Props> = ({ section, setRendering, userId }) => {
+const ReviseModal: FC<Props> = ({ section, setRendering }) => {
   // Input 높이 자동 조절
   const [value, setValue] = useState<string>('');
   const toast = useCustomToast();
 
   const ChangeContent = async () => {
     try {
-      await SectionServices.patch({ sectionId: section.sectionId, sectionContent: value, userId: userId });
+      await SectionServices.patch({ sectionId: section.sectionId, sectionContent: value });
       setRendering(prev => !prev);
     } catch (e) {
       toast.error(e);
