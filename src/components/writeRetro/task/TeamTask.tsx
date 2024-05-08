@@ -7,6 +7,7 @@ import { Flex, Popover, PopoverContent, PopoverTrigger } from '@chakra-ui/react'
 import DeleteData from './DeleteData';
 import TeamTaskMessage from './taskMessage/TeamTaskMessage';
 import { sectionData } from '@/api/@types/Section';
+import { UserData } from '@/api/@types/Users';
 import postImageToS3 from '@/api/imageApi/postImageToS3';
 import { SectionServices } from '@/api/services/Section';
 import { convertToLocalTime } from '@/components/RetroList/ContentsList';
@@ -21,9 +22,10 @@ interface Props {
   setRendering: React.Dispatch<React.SetStateAction<boolean>>;
   teamId: number | null;
   imageURL: string;
+  user: UserData;
 }
 
-const TeamTask: FC<Props> = ({ section, setRendering, teamId, imageURL }) => {
+const TeamTask: FC<Props> = ({ section, setRendering, teamId, imageURL, user }) => {
   const { search } = useLocation();
   const query = search.split(/[=,&]/);
   const toast = useCustomToast();
@@ -48,6 +50,7 @@ const TeamTask: FC<Props> = ({ section, setRendering, teamId, imageURL }) => {
   };
 
   console.log('section', section);
+  console.log(user);
 
   const handleLike = async () => {
     try {
@@ -109,7 +112,7 @@ const TeamTask: FC<Props> = ({ section, setRendering, teamId, imageURL }) => {
             {actionCondition ? (
               <S.ManagerStyle>
                 <ActionItemTask tId={tId} rId={rId} sId={sId} section={section} />
-                <S.ManagerText>{(section.actionItems && section.actionItems.username) ?? '담당자'}</S.ManagerText>
+                {/* <S.ManagerText>{(section.actionItems && section.actionItems.username) ?? '담당자'}</S.ManagerText> */}
               </S.ManagerStyle>
             ) : null}
             <PopoverContent>
