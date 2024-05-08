@@ -13,14 +13,15 @@ const CreateButtonBox: React.FC = () => {
   const [status, setStatus] = useState<keyof TStatus>('NOT_STARTED');
 
   const handleTeamButtonClick = () => {
-    setTemplateId(1);
+    setTemplateId(1); // KPT를 초기값으로 함
     setType('TEAM'); // TEAM으로 type 설정
     setStatus('NOT_STARTED'); // 초기 상태
     onOpen();
   };
 
   const handlePersonalButtonClick = () => {
-    setTemplateId(2);
+    // setTemplateId(2); // Kudos를 초기 값으로 함
+    setTemplateId(1); // KPT를 초기값으로 함
     setType('PERSONAL'); // PERSONAL로 type 설정
     setStatus('NOT_STARTED'); // 초기 상태
     onOpen();
