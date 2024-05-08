@@ -25,7 +25,7 @@ import * as S from '@/styles/inviteTeam/InviteTeamModal.style';
 interface InviteTeamModalProps {
   isOpen: boolean;
   onClose: () => void;
-  teamId: number;
+  teamId: number | null;
 }
 
 const InviteTeamModal: React.FC<InviteTeamModalProps> = ({ isOpen, onClose, teamId }) => {
@@ -36,8 +36,10 @@ const InviteTeamModal: React.FC<InviteTeamModalProps> = ({ isOpen, onClose, team
   useEffect(() => {
     const fetchInviteData = async () => {
       try {
-        const response: GetInviteTeamResponse = await getInviteTeam(teamId);
-        setInviteData(response.data);
+        if (teamId) {
+          const response: GetInviteTeamResponse = await getInviteTeam(teamId);
+          setInviteData(response.data);
+        }
       } catch (error) {
         console.error('팀원 초대 get 실패', error);
       }

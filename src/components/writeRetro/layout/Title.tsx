@@ -15,7 +15,7 @@ const Title: FC<Props> = ({ name, description }) => {
   const { search } = useLocation();
   const query = search.split(/[=,&]/);
   const retrospectiveId = Number(query[1]);
-  const teamId = Number(query[3]);
+  const teamId = query[3] === 'null' ? null : Number(query[3]);
   const [isInviteModalOpen, setInviteModalOpen] = useState<boolean>(false);
   // const [imageURL, setImageURL] = useState<{ [key: number]: string }>({});
   const navigate = useNavigate();

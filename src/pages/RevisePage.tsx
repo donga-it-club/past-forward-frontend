@@ -49,7 +49,7 @@ const RetroRevisePage = () => {
   useEffect(() => {
     fetchTeamMembers();
     fetchRetrospective();
-  }, [retro?.status, members.map(id => id.userId)]);
+  }, [retro?.status, members.values]);
 
   if (!retro) return;
 

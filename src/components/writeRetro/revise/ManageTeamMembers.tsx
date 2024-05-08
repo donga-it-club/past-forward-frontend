@@ -1,6 +1,21 @@
 import { FC, useEffect, useState } from 'react';
 import { CgProfile } from 'react-icons/cg';
-import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Flex, Button } from '@chakra-ui/react';
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  TableContainer,
+  Flex,
+  Button,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverArrow,
+  PopoverCloseButton,
+} from '@chakra-ui/react';
 import { TeamMembersData } from '@/api/@types/TeamController';
 import { UserData } from '@/api/@types/Users';
 import postImageToS3 from '@/api/imageApi/postImageToS3';
@@ -22,7 +37,6 @@ const ManageTeamMembers: FC<Props> = ({ teamId, members }) => {
   const [isInviteModalOpen, setInviteModalOpen] = useState<boolean>(false);
   const [user, setUser] = useState<UserData>();
   const [image, setImage] = useState<{ [key: number]: string }>({});
-  const [render, setRender] = useState<boolean>(false);
   const toast = useCustomToast();
   const filterData = members.filter(members => members.username.includes(searchTerm));
 
@@ -41,9 +55,9 @@ const ManageTeamMembers: FC<Props> = ({ teamId, members }) => {
         await TeamControllerServices.DeleteTeamMembers({ teamId: teamId, userId: id });
       }
       toast.info('팀원을 삭제했습니다.');
-      setRender(prev => !prev);
-    } catch (e) {
-      toast.error(e);
+      filterData.filter(item => item.userId !== id);
+    } catch {
+      toast.error('팀원 삭제에 실패했습니다.');
     }
   };
 
@@ -64,7 +78,7 @@ const ManageTeamMembers: FC<Props> = ({ teamId, members }) => {
   useEffect(() => {
     fetchUser();
     members.forEach(item => fetchImage(item));
-  }, [render]);
+  }, []);
 
   return (
     <S.ManageStyle>
@@ -86,6 +100,9 @@ const ManageTeamMembers: FC<Props> = ({ teamId, members }) => {
         >
           검색
         </S.ManageSearchButton> */}
+      </Flex>
+      <Flex flexDirection="row-reverse" margin="auto 50px">
+        팀원 삭제 후 새로고침하면 해당 팀원을 제외한 팀원리스트를 볼 수 있습니다.
       </Flex>
       <TableContainer marginTop="40px">
         <Table variant="simple">
@@ -128,10 +145,27 @@ const ManageTeamMembers: FC<Props> = ({ teamId, members }) => {
                     <Td>{convertToLocalTime(item.joinedAt)}</Td>
                     <Td>
                       {user?.userId !== item.userId ? (
-                        <Button colorScheme="red" fontSize={15} onClick={() => DeleteTeamMember(item.userId)}>
-                          제거
-                        </Button>
+                        <Popover>
+                          <PopoverTrigger>
+                            <Button colorScheme="red" fontSize={15} variant="outline">
+                              제거
+                            </Button>
+                          </PopoverTrigger>
+                          <PopoverContent>
+                            <PopoverArrow />
+                            <PopoverCloseButton />
+                            <p style={{ margin: '20px 10px' }}>해당 팀원을 정말 삭제하시겠습니까?</p>
+                            <Flex flexDirection="row-reverse" margin="5px 20px">
+                              <Button colorScheme="red" fontSize={12} onClick={() => DeleteTeamMember(item.userId)}>
+                                제거
+                              </Button>
+                            </Flex>
+                          </PopoverContent>
+                        </Popover>
                       ) : (
+                        // <Button colorScheme="red" fontSize={15} onClick={() => DeleteTeamMember(item.userId)}>
+                        //   제거
+                        // </Button>
                         <S.NotMemberInfo style={{ fontSize: '15px' }}>팀장은 나갈 수 없음</S.NotMemberInfo>
                       )}
                     </Td>

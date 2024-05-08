@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PostMail } from '@/api/mailApi/postMail';
 import RadioCheck from '@/assets/RadioCheck.png';
+import { useAuth } from '@/hooks/useAuth';
 import * as S from '@/styles/Main/Contact.styles';
 
 const Contact: React.FC = () => {
+  const { isLoggedIn } = useAuth();
   const navigate = useNavigate();
   const navigateToCreate = () => {
     navigate('/create');
@@ -125,7 +127,12 @@ const Contact: React.FC = () => {
         </S.TextContainer>
       </S.Container>
       <S.ContactButtonContainer>
-        <S.ContactButton onClick={navigateToCreate}>회고 무료로 시작하기</S.ContactButton>
+        <S.ContactButton
+          onClick={navigateToCreate}
+          id={isLoggedIn ? 'contact_startpf_login' : 'contact_startpf_logout'}
+        >
+          회고 무료로 시작하기
+        </S.ContactButton>
       </S.ContactButtonContainer>
     </div>
   );

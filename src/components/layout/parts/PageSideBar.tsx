@@ -73,22 +73,23 @@ const PageSideBar = () => {
             </S.MiniBox>
           </AccordionButton>
 
-          {retro?.nodes
-            .filter(item => item.teamId === null)
-            .map(id => (
-              <AccordionPanel pb={4}>
-                <Flex alignItems="center" padding="0 20px">
-                  <PersonFill style={{ marginRight: '5px', color: '#939393' }} />
-                  <a
-                    id="leftside_persnalproject"
-                    href={`sections?retrospectiveId=${id.id}&teamId=${id.teamId}`}
-                    style={{ color: '#939393', textDecoration: 'none' }}
-                  >
-                    {id.title}
-                  </a>
-                </Flex>
-              </AccordionPanel>
-            ))}
+          {retro &&
+            retro.nodes
+              .filter(item => item.teamId === null)
+              .map(id => (
+                <AccordionPanel pb={4}>
+                  <Flex alignItems="center" padding="0 20px">
+                    <PersonFill style={{ marginRight: '5px', color: '#939393' }} />
+                    <a
+                      id="leftside_persnalproject"
+                      href={`sections?retrospectiveId=${id.id}&teamId=${id.teamId}`}
+                      style={{ color: '#939393', textDecoration: 'none' }}
+                    >
+                      {id.title}
+                    </a>
+                  </Flex>
+                </AccordionPanel>
+              ))}
         </AccordionItem>
 
         {/* Team Retro */}
@@ -107,23 +108,24 @@ const PageSideBar = () => {
           <AccordionPanel pb={4}>
             <Accordion allowMultiple>
               <AccordionItem>
-                {retro?.nodes
-                  .filter(item => item.teamId)
-                  .map(id => (
-                    <AccordionButton>
-                      <Flex alignItems="center" padding="2px 10px">
-                        <PeopleFill style={{ marginRight: '5px', color: 'gray' }} />
+                {retro &&
+                  retro.nodes
+                    .filter(item => item.teamId)
+                    .map(id => (
+                      <AccordionButton>
+                        <Flex alignItems="center" padding="2px 10px">
+                          <PeopleFill style={{ marginRight: '5px', color: 'gray' }} />
 
-                        <a
-                          id="leftside_personaltoggle"
-                          href={`sections?retrospectiveId=${id.id}&teamId=${id.teamId}`}
-                          style={{ color: 'gray', textDecoration: 'none' }}
-                        >
-                          {id.title}
-                        </a>
-                      </Flex>
-                    </AccordionButton>
-                  ))}
+                          <a
+                            id="leftside_personaltoggle"
+                            href={`sections?retrospectiveId=${id.id}&teamId=${id.teamId}`}
+                            style={{ color: 'gray', textDecoration: 'none' }}
+                          >
+                            {id.title}
+                          </a>
+                        </Flex>
+                      </AccordionButton>
+                    ))}
               </AccordionItem>
               {/* <Search_SideBar /> */}
             </Accordion>

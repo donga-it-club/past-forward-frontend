@@ -4,7 +4,7 @@ import { MdPeopleAlt } from 'react-icons/md';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 
 interface Props {
-  teamId: number;
+  teamId: number | null;
   name: string;
 }
 

@@ -5,9 +5,11 @@ import { Flex } from '@chakra-ui/react';
 import { RetrospectiveData } from '@/api/@types/Retrospectives';
 import { sectionData } from '@/api/@types/Section';
 import { TemplateNameData } from '@/api/@types/TeamController';
+import { UserData } from '@/api/@types/Users';
 import { RetrospectiveService } from '@/api/services/Retrospectives';
 import { SectionServices } from '@/api/services/Section';
 import { TeamControllerServices } from '@/api/services/TeamController';
+import { UserServices } from '@/api/services/User';
 import { AddTask } from '@/components/writeRetro/layout/AddTask';
 import Label from '@/components/writeRetro/layout/Label';
 import Title from '@/components/writeRetro/layout/Title';
@@ -20,11 +22,12 @@ const RetroTeamPage = () => {
   const { search } = useLocation();
   const query = search.split(/[=,&]/);
   const retrospectiveId = Number(query[1]);
-  const teamId = Number(query[3]);
+  const teamId = query[3] === 'null' ? null : Number(query[3]);
   const [section, setSection] = useState<sectionData[]>([]);
   const [retro, setRetro] = useState<RetrospectiveData>();
   const [template, setTemplate] = useState<TemplateNameData[]>();
   const [rendering, setRendering] = useState<boolean>(false);
+  const [user, setUser] = useState<UserData>();
   const toast = useCustomToast();
 
   const fetchRetrospective = async () => {
@@ -33,6 +36,15 @@ const RetroTeamPage = () => {
       setRetro(data.data);
     } catch (e) {
       toast.error(e);
+    }
+  };
+
+  const fetchUser = async () => {
+    try {
+      const data = await UserServices.get();
+      setUser(data.data);
+    } catch (error) {
+      toast.error(error);
     }
   };
 
@@ -60,9 +72,11 @@ const RetroTeamPage = () => {
     fetchSection();
     fetchRetrospective();
     fetchTemplate();
+    fetchUser();
   }, [retro?.description, template?.values, section.values, rendering]);
 
   if (!retro) return;
+  if (!user) return;
 
   return (
     <S.Container>
@@ -95,8 +109,9 @@ const RetroTeamPage = () => {
                           <TeamTask
                             section={section}
                             setRendering={setRendering}
-                            teamId={teamId}
+                            teamId={teamId ?? null}
                             imageURL={section.thumbnail}
+                            user={user}
                           />
                         ))}
                     </S.FrameStyle>
