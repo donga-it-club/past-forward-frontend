@@ -5,7 +5,7 @@ const TitleInput: React.FC<{ onChange: (title: string) => void }> = ({ onChange 
   return (
     <>
       <Input
-        placeholder="Retrospect Name"
+        placeholder="Retrospect Name *"
         variant="flushed"
         onChange={e => onChange(e.target.value)}
         id="cr_writename"
