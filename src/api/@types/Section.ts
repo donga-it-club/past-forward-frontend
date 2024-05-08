@@ -10,6 +10,7 @@ export interface PersonalGetSectionRequest {
 
 export interface sectionData {
   sectionId: number;
+  userId: number;
   username: string;
   content: string;
   likeCnt: number;
@@ -28,6 +29,7 @@ export interface ActionItemData {
 
 export interface CommentData {
   commentId: number;
+  userId: number;
   content: string;
   username: string;
   thumbnail: string;
