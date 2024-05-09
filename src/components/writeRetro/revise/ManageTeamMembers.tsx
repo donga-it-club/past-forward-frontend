@@ -80,6 +80,8 @@ const ManageTeamMembers: FC<Props> = ({ teamId, members }) => {
     members.forEach(item => fetchImage(item));
   }, []);
 
+  if (!user) return;
+
   return (
     <S.ManageStyle>
       <Flex height="46px">
@@ -144,7 +146,7 @@ const ManageTeamMembers: FC<Props> = ({ teamId, members }) => {
                     <Td>{item.email ?? <S.NotMemberInfo>(이메일 없음)</S.NotMemberInfo>}</Td>
                     <Td>{convertToLocalTime(item.joinedAt)}</Td>
                     <Td>
-                      {user?.userId !== item.userId ? (
+                      {user.userId !== item.userId ? (
                         <Popover>
                           <PopoverTrigger>
                             <Button colorScheme="red" fontSize={15} variant="outline">

@@ -3,8 +3,9 @@ import { BiLike, BiSolidLike } from 'react-icons/bi';
 import { CgProfile } from 'react-icons/cg';
 import { MdAccessAlarm, MdMessage } from 'react-icons/md';
 import { useLocation } from 'react-router-dom';
-import { Flex, Popover, PopoverContent, PopoverTrigger } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import DeleteData from './DeleteData';
+import ReviseModal from './ReviseModal';
 import TeamTaskMessage from './taskMessage/TeamTaskMessage';
 import { sectionData } from '@/api/@types/Section';
 import { UserData } from '@/api/@types/Users';
@@ -12,7 +13,6 @@ import postImageToS3 from '@/api/imageApi/postImageToS3';
 import { SectionServices } from '@/api/services/Section';
 import { convertToLocalTime } from '@/components/RetroList/ContentsList';
 import ActionItemTask from '@/components/writeRetro/ActionItems/ActionItemTask';
-import ReviseModal from '@/components/writeRetro/task/ReviseModal';
 import { useCustomToast } from '@/hooks/useCustomToast';
 import * as M from '@/styles/my/myPage.style';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
@@ -34,6 +34,7 @@ const TeamTask: FC<Props> = ({ section, setRendering, teamId, imageURL, user, fe
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [liked, setLiked] = useState<number>(0);
   const [image, setImage] = useState<string>('');
+  const actionCondition = teamId && section.sectionName === 'Action Items';
 
   const rId = Number(query[1]); // action-items로 넘겨줄 Id값들
   const tId = Number(query[3]);
@@ -49,9 +50,6 @@ const TeamTask: FC<Props> = ({ section, setRendering, teamId, imageURL, user, fe
       }
     }
   };
-
-  console.log('section', section);
-  console.log(user);
 
   const handleLike = async () => {
     try {
@@ -82,8 +80,6 @@ const TeamTask: FC<Props> = ({ section, setRendering, teamId, imageURL, user, fe
     fetchRetrospectiveImage();
   });
 
-  const actionCondition = teamId && section.sectionName === 'Action Items';
-
   return (
     <>
       <S.TaskBox>
@@ -99,26 +95,24 @@ const TeamTask: FC<Props> = ({ section, setRendering, teamId, imageURL, user, fe
               <S.TaskUserName>{section.username ?? '닉네임 없음'}</S.TaskUserName>
             </S.TaskUserProfile>
 
-            <DeleteData value="회고 카드" handleDeleteValue={DeleteSection} />
+            {user.userId === section.userId && (
+              <>
+                <ReviseModal section={section} setRendering={setRendering} />
+                <DeleteData value="회고 카드" handleDeleteValue={DeleteSection} />
+              </>
+            )}
           </Flex>
+          <div>
+            <S.TaskText>{section.content}</S.TaskText>
+          </div>
 
           {/* TaskCenter */}
 
-          <Popover>
-            <PopoverTrigger>
-              <div>
-                <S.TaskText>{section.content}</S.TaskText>
-              </div>
-            </PopoverTrigger>
-            {actionCondition ? (
-              <S.ManagerStyle>
-                <ActionItemTask tId={tId} rId={rId} sId={sId} section={section} fetchSection={fetchSection} />
-              </S.ManagerStyle>
-            ) : null}
-            <PopoverContent>
-              <ReviseModal section={section} setRendering={setRendering} />
-            </PopoverContent>
-          </Popover>
+          {actionCondition ? (
+            <S.ManagerStyle>
+              <ActionItemTask tId={tId} rId={rId} sId={sId} section={section} fetchSection={fetchSection} />
+            </S.ManagerStyle>
+          ) : null}
 
           {/* TaskBottom */}
           <S.SubTaskBox>
@@ -146,7 +140,7 @@ const TeamTask: FC<Props> = ({ section, setRendering, teamId, imageURL, user, fe
           </S.SubTaskBox>
         </S.TaskMainStyle>
 
-        {isVisible && <TeamTaskMessage section={section} setRendering={setRendering} />}
+        {isVisible && <TeamTaskMessage section={section} setRendering={setRendering} user={user} />}
       </S.TaskBox>
     </>
   );

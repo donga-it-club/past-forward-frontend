@@ -73,14 +73,14 @@ const RetroTeamPage = () => {
     fetchRetrospective();
     fetchTemplate();
     fetchUser();
-  }, [retro?.description, template?.values, section.values, rendering]);
+  }, [retro?.description, rendering]);
 
   if (!retro) return;
   if (!user) return;
 
   return (
     <S.Container>
-      {retro && <Title name={retro.title} description={retro.description} />}
+      {retro && <Title name={retro.title} description={retro.description} user={user} retro={retro} />}
 
       <S.SectionBox>
         <Flex flexDirection="column" margin="0 auto">

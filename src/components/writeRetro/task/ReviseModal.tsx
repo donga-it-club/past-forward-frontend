@@ -1,5 +1,14 @@
-import { ChangeEvent, FC, useState } from 'react';
-import { Button } from '@chakra-ui/react';
+import { FC, useState } from 'react';
+import {
+  Button,
+  Editable,
+  EditableInput,
+  EditablePreview,
+  Input,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@chakra-ui/react';
 import { sectionData } from '@/api/@types/Section';
 import { SectionServices } from '@/api/services/Section';
 import { useCustomToast } from '@/hooks/useCustomToast';
@@ -15,12 +24,6 @@ const ReviseModal: FC<Props> = ({ section, setRendering }) => {
   const [value, setValue] = useState<string>('');
   const toast = useCustomToast();
 
-  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setValue(e.target.value);
-    e.target.style.height = 'auto';
-    e.target.style.height = `${e.target.scrollHeight}px`;
-  };
-
   const ChangeContent = async () => {
     try {
       await SectionServices.patch({ sectionId: section.sectionId, sectionContent: value });
@@ -31,25 +34,28 @@ const ReviseModal: FC<Props> = ({ section, setRendering }) => {
   };
   return (
     <>
-      <S.ReviseModalStyle>
-        <S.ReviseModalLine>
-          <S.ReviseModalTitle>수정</S.ReviseModalTitle>
-        </S.ReviseModalLine>
-        <S.ReviseModalInput
-          value={value}
-          onChange={handleChange}
-          placeholder={section.content}
-          rows={1}
-        ></S.ReviseModalInput>
+      <Popover>
+        <PopoverTrigger>
+          <S.TaskRevise style={{ color: 'blue' }}>수정</S.TaskRevise>
+        </PopoverTrigger>
+        <PopoverContent>
+          <S.ReviseModalStyle>
+            <S.ReviseModalLine>
+              <S.ReviseModalTitle>수정</S.ReviseModalTitle>
+            </S.ReviseModalLine>
+            <Editable defaultValue={section.content} margin="10px 0 ">
+              <EditablePreview />
+              <Input as={EditableInput} value={value} onChange={e => setValue(e.target.value)} />
+            </Editable>
 
-        <S.ReviseModalButtonBox>
-          {/* <S.ReviseModalButton>삭제</S.ReviseModalButton> */}
-
-          <Button colorScheme="brand" marginRight={10} onClick={ChangeContent}>
-            확인
-          </Button>
-        </S.ReviseModalButtonBox>
-      </S.ReviseModalStyle>
+            <S.ReviseModalButtonBox>
+              <Button colorScheme="brand" marginRight={10} onClick={ChangeContent}>
+                확인
+              </Button>
+            </S.ReviseModalButtonBox>
+          </S.ReviseModalStyle>
+        </PopoverContent>
+      </Popover>
     </>
   );
 };

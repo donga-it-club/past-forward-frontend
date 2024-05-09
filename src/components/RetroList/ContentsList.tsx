@@ -6,8 +6,10 @@ import { MdPeople } from 'react-icons/md';
 import { RxCounterClockwiseClock } from 'react-icons/rx'; //before
 import { useNavigate } from 'react-router-dom';
 import { PatchRetrospectiveRequest } from '@/api/@types/Retrospectives';
+import { UserData } from '@/api/@types/Users';
 import postImageToS3 from '@/api/imageApi/postImageToS3';
 import { patchRetrospective } from '@/api/retrospectivesApi/patchRetrospective';
+import { UserServices } from '@/api/services/User';
 import Thumbnail from '@/assets/Thumbnail.png';
 import Modal from '@/components/RetroList/Modal';
 import { useCustomToast } from '@/hooks/useCustomToast';
@@ -53,6 +55,16 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
   const [openModalId, setOpenModalId] = useState<number | null>(null);
   const toast = useCustomToast();
   const [image, setImage] = useState<{ [key: number]: string }>({});
+  const [user, setUser] = useState<UserData>();
+
+  const fetchUser = async () => {
+    try {
+      const data = await UserServices.get();
+      setUser(data.data);
+    } catch (error) {
+      toast.error(error);
+    }
+  };
 
   const handleBookmark = async (itemId: number) => {
     try {
@@ -81,6 +93,7 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
 
   useEffect(() => {
     const filtered = data.filter(item => item.thumbnail !== null); // thumbnail이 null인 항목 필터링
+    fetchUser();
 
     const fetchThumbnailsData = async (item: Content) => {
       try {
@@ -102,6 +115,8 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
 
     filtered.forEach(item => fetchThumbnailsData(item));
   }, [data]);
+
+  if (!user) return;
 
   return (
     <div>
@@ -132,19 +147,21 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
                     <S.StyledFaStar onClick={() => handleBookmark(item.id)} style={{ color: '#fcea12' }} size="19" />
                   )}
                   {!item.isBookmarked && <S.StyledCiStar onClick={() => handleBookmark(item.id)} size={20} />}
-                  <S.StyledHiOutlineDotsHorizontal
-                    style={{ color: '#33363F' }}
-                    size={20}
-                    // onClick={() => openModalForItem(item.id)}
-                    onClick={() => {
-                      if (item.userId === item.id) {
-                        // 수정 권한 없을 때(생성자가 아닐 때 확인하고 고치기)
-                        openModalForItem(item.id);
-                      } else {
-                        navigate(`/revise?retrospectiveId=${item.id}&teamId=${item.teamId}`);
-                      }
-                    }}
-                  />
+                  {user.userId === item.userId && (
+                    <S.StyledHiOutlineDotsHorizontal
+                      style={{ color: '#33363F' }}
+                      size={20}
+                      // onClick={() => openModalForItem(item.id)}
+                      onClick={() => {
+                        if (item.userId === item.id) {
+                          // 수정 권한 없을 때(생성자가 아닐 때 확인하고 고치기)
+                          openModalForItem(item.id);
+                        } else {
+                          navigate(`/revise?retrospectiveId=${item.id}&teamId=${item.teamId}`);
+                        }
+                      }}
+                    />
+                  )}
                 </div>
                 <S.RetroUser>{item.username}</S.RetroUser>
                 <div></div>

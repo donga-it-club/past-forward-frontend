@@ -1,9 +1,10 @@
 import { ChangeEvent, FC, useEffect, useState } from 'react';
 import { CgProfile } from 'react-icons/cg';
-import { Flex, Popover, PopoverContent, PopoverTrigger } from '@chakra-ui/react';
+import { Center, Flex, Spinner } from '@chakra-ui/react';
 import DeleteData from '../DeleteData';
 import ReviseCommentModal from '../ReviseCommentModal';
 import { CommentData, sectionData } from '@/api/@types/Section';
+import { UserData } from '@/api/@types/Users';
 import postImageToS3 from '@/api/imageApi/postImageToS3';
 import { CommentService } from '@/api/services/Comment';
 import { useCustomToast } from '@/hooks/useCustomToast';
@@ -13,12 +14,15 @@ import * as S from '@/styles/writeRetroStyles/Layout.style';
 interface Props {
   section: sectionData;
   setRendering: React.Dispatch<React.SetStateAction<boolean>>;
+  user: UserData;
 }
 
-const TeamTaskMessage: FC<Props> = ({ section, setRendering }) => {
+const TeamTaskMessage: FC<Props> = ({ section, setRendering, user }) => {
   const [value, setValue] = useState<string>('');
   const toast = useCustomToast();
   const [image, setImage] = useState<{ [key: number]: string }>('');
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
@@ -28,6 +32,7 @@ const TeamTaskMessage: FC<Props> = ({ section, setRendering }) => {
     try {
       await CommentService.post({ sectionId: section.sectionId, commentContent: value });
       setRendering(prev => !prev);
+      setIsLoading(false);
       setValue('');
       toast.success('댓글이 추가되었습니다.');
     } catch {
@@ -39,9 +44,11 @@ const TeamTaskMessage: FC<Props> = ({ section, setRendering }) => {
     try {
       await CommentService.delete({ commentId: id });
       setRendering(prev => !prev);
+
       toast.info('해당 댓글이 삭제되었습니다.');
     } catch {
       toast.error('댓글 삭제에 실패하였습니다.');
+    } finally {
     }
   };
 
@@ -56,6 +63,8 @@ const TeamTaskMessage: FC<Props> = ({ section, setRendering }) => {
       }
     } catch (e) {
       console.error(e);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -63,7 +72,15 @@ const TeamTaskMessage: FC<Props> = ({ section, setRendering }) => {
     if (section.comments) {
       section.comments.forEach(item => fetchImage(item));
     }
-  }, [section.comments, section.comments, image]);
+  }, [section.comments, section.comments, isLoading]);
+
+  if (isLoading && section.comments.length !== 0) {
+    return (
+      <Center w="100%" h="100%" margin="20px 0">
+        <Spinner />
+      </Center>
+    );
+  }
 
   return (
     <>
@@ -85,34 +102,41 @@ const TeamTaskMessage: FC<Props> = ({ section, setRendering }) => {
                   <Flex>
                     <S.TaskUserProfile>
                       {section.thumbnail ? (
-                        <M.UploadImage sizes="40px" width="40px" height="auto" src={image[section.commentId]} />
+                        isImageLoaded ? (
+                          <M.UploadImage sizes="40px" width="40px" height="auto" src={image[section.commentId]} />
+                        ) : (
+                          <>
+                            <Spinner size="md" />
+                            <M.UploadImage
+                              sizes="40px"
+                              width="40px"
+                              height="auto"
+                              src={image[section.commentId]}
+                              onLoad={() => setIsImageLoaded(true)}
+                              style={{ display: 'none' }} // 숨겨진 이미지, 로드 완료 후 스피너를 제거하려면 필요
+                            />
+                          </>
+                        )
                       ) : (
                         <CgProfile size="40px" color="#DADEE5" />
                       )}
                       <S.TaskUserName>{section.username ?? '닉네임 없음'}</S.TaskUserName>
                     </S.TaskUserProfile>
-                    {/* <S.MessageTime>1일 전</S.MessageTime> */}
-                    <DeleteData
-                      value="댓글"
-                      handleDeleteValue={() => {
-                        handleDeleteComment(section.commentId);
-                      }}
-                    />
+                    {user.userName === section.username && (
+                      <>
+                        <ReviseCommentModal comment={section} setRendering={setRendering} section={section} />
+                        <DeleteData
+                          value="댓글"
+                          handleDeleteValue={() => {
+                            handleDeleteComment(section.commentId);
+                          }}
+                        />
+                      </>
+                    )}
                   </Flex>
-                  <Popover>
-                    <PopoverTrigger>
-                      <S.TaskText>
-                        {section.content}
-                        {/* <S.ReviseText>(수정됨)</S.ReviseText> */}
-                      </S.TaskText>
-                    </PopoverTrigger>
-                    <PopoverContent>
-                      <ReviseCommentModal comment={section} setRendering={setRendering} />
-                      {/* TaskTextModal */}
-                    </PopoverContent>
-                  </Popover>
-
-                  {/* TaskMessageMain */}
+                  <div>
+                    <S.TaskText>{section.content}</S.TaskText>
+                  </div>
                 </Flex>
               ))}
           </S.TaskMessageStyle>
