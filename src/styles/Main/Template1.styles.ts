@@ -6,6 +6,7 @@ export const Container = styled.div`
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: 90px 30px 60px auto;
   overflow-x: hidden;
+  padding-top: 140px;
   padding-left: 115px;
   padding-right: 115px;
 `;
@@ -79,7 +80,7 @@ export const CheckIcon = styled.img`
 `;
 
 export const HexagonWrapper = styled.div`
-  margin-top: 30px;
+  margin-top: 50px;
   display: grid;
   place-items: stretch;
   position: relative;

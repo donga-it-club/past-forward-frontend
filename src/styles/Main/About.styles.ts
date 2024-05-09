@@ -6,9 +6,12 @@ export const Container = styled.div`
   justify-content: center;
   padding-left: 115px;
   padding-right: 115px;
+  padding-top: 30px;
+  align-items: center;
 `;
 export const Img = styled.img`
   margin-top: 40px;
   width: 75%;
   height: 70%;
+  align-content: center;
 `;
