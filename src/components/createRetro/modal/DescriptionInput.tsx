@@ -9,7 +9,7 @@ const DescriptionInput: React.FC<DescriptionInputProps> = ({ onChange }) => {
   return (
     <>
       <Input
-        placeholder="회고에 대한 설명을 입력해주세요."
+        placeholder="회고에 대한 설명을 입력해 주세요."
         variant="flushed"
         onChange={e => onChange(e.target.value)}
       ></Input>

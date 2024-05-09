@@ -56,6 +56,20 @@ const CreateModal: React.FC<CreateModalProps> = ({ isOpen, onClose, templateId, 
 
   const handleCreateClick = async () => {
     try {
+      if (!requestData.title) {
+        // 회고 제목이 비어 있다면 사용자에게 알림을 표시함
+        alert('회고 제목을 입력해 주세요.');
+        return;
+      }
+
+      if (!requestData.description) {
+        // 회고 내용이 비어있다면 requestData.description에 빈칸 한 개 삽입하고 회고 생성함
+        requestData.description = ' ';
+        // 회고 내용이 비어 있다면 사용자에게 알림을 표시함
+        // alert('회고 내용을 입력하세요.');
+        return;
+      }
+
       let calculatedStatus: keyof TStatus = 'NOT_STARTED'; // 기본값은 'NOT_STARTED'로 설정
 
       // startDate 값이 오늘 이전이면 'IN_PROGRESS'로 설정
