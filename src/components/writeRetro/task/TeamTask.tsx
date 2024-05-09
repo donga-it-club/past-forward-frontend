@@ -23,9 +23,10 @@ interface Props {
   teamId: number | null;
   imageURL: string;
   user: UserData;
+  fetchSection: () => void;
 }
 
-const TeamTask: FC<Props> = ({ section, setRendering, teamId, imageURL, user }) => {
+const TeamTask: FC<Props> = ({ section, setRendering, teamId, imageURL, user, fetchSection }) => {
   const { search } = useLocation();
   const query = search.split(/[=,&]/);
   const toast = useCustomToast();
@@ -109,8 +110,7 @@ const TeamTask: FC<Props> = ({ section, setRendering, teamId, imageURL, user }) 
 
           {actionCondition ? (
             <S.ManagerStyle>
-              <ActionItemTask tId={tId} rId={rId} sId={sId} section={section} />
-              {/* <S.ManagerText>{(section.actionItems && section.actionItems.username) ?? '담당자'}</S.ManagerText> */}
+              <ActionItemTask tId={tId} rId={rId} sId={sId} section={section} fetchSection={fetchSection} />
             </S.ManagerStyle>
           ) : null}
 

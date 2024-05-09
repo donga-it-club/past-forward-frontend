@@ -14,6 +14,7 @@ interface UserListProps {
   rId: number;
   sId: number;
   imageURL: { url: string }[];
+  fetchSection: () => void;
 }
 
 export const Members: React.FC<UserListProps> = ({
@@ -24,6 +25,7 @@ export const Members: React.FC<UserListProps> = ({
   rId,
   sId,
   imageURL,
+  fetchSection,
 }) => {
   const teamId: number = tId;
   const retrospectiveId: number = rId;
@@ -72,6 +74,7 @@ export const Members: React.FC<UserListProps> = ({
     const userImage = selectedUserImage !== '' ? selectedUserImage : '';
     onSelectUserImg(userImage);
     await putActionItemMember(userId);
+    fetchSection();
   };
 
   useEffect(() => {
