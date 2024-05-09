@@ -112,6 +112,8 @@ const RetroTeamPage = () => {
                             teamId={teamId ?? null}
                             imageURL={section.thumbnail}
                             user={user}
+                            fetchSection={fetchSection}
+                            key={section.sectionId}
                           />
                         ))}
                     </S.FrameStyle>

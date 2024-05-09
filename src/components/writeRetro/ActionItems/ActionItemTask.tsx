@@ -13,9 +13,10 @@ interface ActionItemTaskProps {
   tId: number;
   rId: number;
   sId: number;
+  fetchSection: () => void;
 }
 
-const ActionItemTask: FC<ActionItemTaskProps> = ({ tId, rId, sId, section }) => {
+const ActionItemTask: FC<ActionItemTaskProps> = ({ tId, rId, sId, section, fetchSection }) => {
   const ActionItems: ActionItemData | undefined = section.actionItems;
   const [showPopup, setShowPopup] = useState<boolean>(false);
   const [selectedUserName, setSelectedUserName] = useState<string>(ActionItems?.username || '');
@@ -56,19 +57,6 @@ const ActionItemTask: FC<ActionItemTaskProps> = ({ tId, rId, sId, section }) => 
     fetchTeamMember();
   }, [section.actionItems]);
 
-  const togglePopup = () => {
-    setShowPopup(!showPopup);
-  };
-
-  const handleSelectUserImg = (image: string) => {
-    setSelectedUserImg(image);
-    setShowPopup(false);
-  };
-
-  const handleSelectUserName = (name: string) => {
-    setSelectedUserName(name);
-  };
-
   const fetchRetrospectiveImage = async () => {
     if (section.actionItems && section.actionItems.thumbnail) {
       try {
@@ -82,9 +70,18 @@ const ActionItemTask: FC<ActionItemTaskProps> = ({ tId, rId, sId, section }) => 
     }
   };
 
-  useEffect(() => {
-    fetchRetrospectiveImage();
-  }, [ActionItems?.thumbnail]);
+  const togglePopup = () => {
+    setShowPopup(!showPopup);
+  };
+
+  const handleSelectUserImg = (image: string) => {
+    setSelectedUserImg(image);
+    setShowPopup(false);
+  };
+
+  const handleSelectUserName = (name: string) => {
+    setSelectedUserName(name);
+  };
 
   const renderImage = () => {
     if (!ActionItems) {
@@ -99,6 +96,10 @@ const ActionItemTask: FC<ActionItemTaskProps> = ({ tId, rId, sId, section }) => 
       return <CgProfile size="24px" color="#969696" />;
     }
   };
+
+  useEffect(() => {
+    fetchRetrospectiveImage();
+  }, []);
 
   return (
     <>
@@ -120,6 +121,7 @@ const ActionItemTask: FC<ActionItemTaskProps> = ({ tId, rId, sId, section }) => 
             rId={retrospectiveId}
             sId={sectionId}
             imageURL={imageURL}
+            fetchSection={fetchSection}
           />
         </PopoverContent>
       </Popover>
