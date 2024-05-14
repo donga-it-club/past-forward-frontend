@@ -50,10 +50,9 @@ export const OrdinaryButton = styled.button`
   color: white;
   margin: 10px 20px;
   border: 2px solid;
-  border-radius: 3px;
+  border-radius: 10px;
   font-size: 20px;
   padding: 10px;
-  border-radius: 15%;
 `;
 
 export const Link = styled.a`

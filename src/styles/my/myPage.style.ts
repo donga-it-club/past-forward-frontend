@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 export const MyPageBGContainer = styled.div`
   display: flex;
-  padding: 5px 25%;
+  padding: 5px 0;
+  margin: 0 auto;
 `;
 export const ProfileContainer = styled.div`
   display: flex;
