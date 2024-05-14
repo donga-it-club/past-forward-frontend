@@ -8,6 +8,7 @@ export const Container = styled.div`
   display: relative;
   padding-left: 115px;
   padding-right: 115px;
+  margin-bottom: 100px;
 `;
 
 export const Title = styled.span`

@@ -6,6 +6,7 @@ export const Container = styled.div`
   grid-template-rows: 80px 10px 30px auto;
   padding-left: 115px;
   padding-right: 115px;
+  margin-bottom: 100px;
 `;
 
 export const Title = styled.span`
