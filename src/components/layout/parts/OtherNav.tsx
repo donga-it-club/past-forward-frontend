@@ -11,9 +11,9 @@ const OtherNav = () => {
       <S.OrdinaryButton onClick={navigateToCreate} id="header_create">
         Create
       </S.OrdinaryButton>
-      <S.Link href="/#Home" id="header_home">
-        How to use Retrospective Templates?
-      </S.Link>
+      <S.OrdinaryButton onClick={() => navigate('retrolist')} style={{ backgroundColor: '#37447E' }}>
+        Retrospect List
+      </S.OrdinaryButton>
     </S.LeftBox>
   );
 };

@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { IoMdInformationCircle } from 'react-icons/io';
 import { useLocation } from 'react-router-dom';
 import { Flex } from '@chakra-ui/react';
 import { RetrospectiveData } from '@/api/@types/Retrospectives';
@@ -84,10 +83,6 @@ const RetroTeamPage = () => {
 
       <S.SectionBox>
         <Flex flexDirection="column" margin="0 auto">
-          <Flex>
-            <IoMdInformationCircle size={25} style={{ margin: 'auto 5px' }} />
-            <p style={{ fontSize: '20px', margin: '5px' }}>수정을 원한다면, 해당 텍스트를 선택하세요!</p>
-          </Flex>
           <Flex>
             {template
               ? template.map(title => (
