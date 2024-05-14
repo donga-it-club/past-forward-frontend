@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PeopleFill, Person, PersonFill, PlusCircleFill } from 'react-bootstrap-icons';
-import { IoArrowUndoSharp } from 'react-icons/io5';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Flex } from '@chakra-ui/react';
 import { useRecoilState } from 'recoil';
 import { GetRetrospectiveData } from '@/api/@types/Retrospectives';
@@ -48,7 +47,6 @@ const PageSideBar = () => {
       <S.LogoBox />
       <S.ProfileLink onClick={navigateToMy}>
         <UserProfileImage width="100px" />
-        {/* <PersonCircle style={{ width: '100', height: '100', color: '#C3CAD9' }} /> */}
         <S.MainName onClick={navigateToMy}>
           <UserNickname setUserNickname={setUserNickname} />
           {userNickname}
@@ -78,16 +76,16 @@ const PageSideBar = () => {
               .filter(item => item.teamId === null)
               .map(id => (
                 <AccordionPanel pb={4}>
-                  <Flex alignItems="center" padding="0 20px">
-                    <PersonFill style={{ marginRight: '5px', color: '#939393' }} />
-                    <a
-                      id="leftside_persnalproject"
-                      href={`sections?retrospectiveId=${id.id}&teamId=${id.teamId}`}
-                      style={{ color: '#939393', textDecoration: 'none' }}
-                    >
+                  <a
+                    id="leftside_persnalproject"
+                    href={`sections?retrospectiveId=${id.id}&teamId=${id.teamId}`}
+                    style={{ color: '#939393', textDecoration: 'none' }}
+                  >
+                    <Flex alignItems="center" padding="0 20px">
+                      <PersonFill style={{ marginRight: '5px', color: '#939393' }} />
                       {id.title}
-                    </a>
-                  </Flex>
+                    </Flex>
+                  </a>
                 </AccordionPanel>
               ))}
         </AccordionItem>
@@ -112,19 +110,19 @@ const PageSideBar = () => {
                   retro.nodes
                     .filter(item => item.teamId)
                     .map(id => (
-                      <AccordionButton>
-                        <Flex alignItems="center" padding="2px 10px">
-                          <PeopleFill style={{ marginRight: '5px', color: 'gray' }} />
+                      <a
+                        id="leftside_personaltoggle"
+                        href={`sections?retrospectiveId=${id.id}&teamId=${id.teamId}`}
+                        style={{ color: 'gray', textDecoration: 'none' }}
+                      >
+                        <AccordionButton>
+                          <Flex alignItems="center" padding="2px 10px">
+                            <PeopleFill style={{ marginRight: '5px', color: 'gray' }} />
 
-                          <a
-                            id="leftside_personaltoggle"
-                            href={`sections?retrospectiveId=${id.id}&teamId=${id.teamId}`}
-                            style={{ color: 'gray', textDecoration: 'none' }}
-                          >
                             {id.title}
-                          </a>
-                        </Flex>
-                      </AccordionButton>
+                          </Flex>
+                        </AccordionButton>
+                      </a>
                     ))}
               </AccordionItem>
               {/* <Search_SideBar /> */}
@@ -133,25 +131,16 @@ const PageSideBar = () => {
 
           {/* Create New Retro */}
         </AccordionItem>
+
         <AccordionItem border="1px solid gray">
-          <AccordionButton>
-            <Flex alignItems="center" padding="2px 10px">
-              <IoArrowUndoSharp style={{ marginRight: '10px' }} size={15} />
-              <a href="/retrolist" style={{ color: '#111b47', textDecoration: 'none' }}>
-                Move to the List
-              </a>
-            </Flex>
-          </AccordionButton>
-        </AccordionItem>
-        <AccordionItem border="1px solid gray">
-          <AccordionButton>
-            <Flex alignItems="center" padding="2px 10px">
-              <PlusCircleFill style={{ marginRight: '5px' }} />
-              <a id="leftside_personaltoggle" href="/create" style={{ color: '#111b47', textDecoration: 'none' }}>
-                Create New Retro
-              </a>
-            </Flex>
-          </AccordionButton>
+          <Link to="/create">
+            <AccordionButton>
+              <Flex alignItems="center" padding="2px 10px">
+                <PlusCircleFill style={{ marginRight: '5px' }} />
+                <a style={{ color: '#111b47', textDecoration: 'none' }}>Create New Retro</a>
+              </Flex>
+            </AccordionButton>
+          </Link>
         </AccordionItem>
       </Accordion>
     </S.SideBarBGContainer>

@@ -2,6 +2,7 @@ import { ChangeEventHandler, FC, MouseEventHandler, useRef } from 'react';
 import { MdOutlineFileUpload } from 'react-icons/md';
 import { Button, Image } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
+import defaultImage from '@/../public/defaultImage.png';
 
 interface Props {
   image: string;
@@ -36,7 +37,7 @@ const RetroImageUploader: FC<Props> = ({ image, onChange, setImageUUID, setPrevi
   };
 
   const DeleteImage: MouseEventHandler<HTMLButtonElement> = () => {
-    setPreview('defaultImage.jpeg');
+    setPreview(defaultImage);
     setImageUUID(null);
     onChange(null, '');
   };

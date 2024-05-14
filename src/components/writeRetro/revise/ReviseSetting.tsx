@@ -26,9 +26,11 @@ import DeleteRetrospective from './DeleteRetrospective';
 import RetroImageUploader from './RetroImageUploader';
 import { RetrospectiveData } from '@/api/@types/Retrospectives';
 import { TemplateNameData } from '@/api/@types/TeamController';
+import { UserData } from '@/api/@types/Users';
 import postImageToS3 from '@/api/imageApi/postImageToS3';
 import { RetrospectiveService } from '@/api/services/Retrospectives';
 import { TeamControllerServices } from '@/api/services/TeamController';
+import { UserServices } from '@/api/services/User';
 import { useCustomToast } from '@/hooks/useCustomToast';
 import * as L from '@/styles/writeRetroStyles/Layout.style';
 import * as S from '@/styles/writeRetroStyles/ReviseLayout.style';
@@ -56,6 +58,7 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
   const [imageUUID, setImageUUID] = useState<string | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [user, setUser] = useState<UserData>();
 
   const toast = useCustomToast();
   const navigate = useNavigate();
@@ -107,10 +110,30 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
           },
         });
       }
-    } catch {
-      toast.error('회고 수정이 정상 처리되지 않았습니다.');
+    } catch (e) {
+      console.error(e);
     }
   };
+
+  const fetchUser = async () => {
+    try {
+      const data = await UserServices.get();
+      setUser(data.data);
+    } catch (error) {
+      toast.error(error);
+    }
+  };
+
+  // const fetchReaderImage = async () => {
+  //   if (retro) {
+  //     try {
+  //       const data = await postImageToS3({ filename: retro., method: 'GET' });
+  //       setImage(data.data.preSignedUrl);
+  //     } catch (e) {
+  //       console.error(e);
+  //     }
+  //   }
+  // };
 
   //description edit icon
   function EditableControls() {
@@ -131,6 +154,7 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
   useEffect(() => {
     fetchRetrospectiveTemplate();
     fetchRetrospectiveImage();
+    fetchUser();
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 2000);
@@ -197,7 +221,15 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
         <S.ReaderBox>
           <BsPersonCircle size={30} style={{ margin: '5px' }} />
           <p style={{ margin: 'auto 0' }}>
-            {retro.leaderName ?? <S.NotMemberInfo> (회고 리더 이름없음)</S.NotMemberInfo>}
+            {retro.leaderName ? (
+              user && user.userId === retro.userId ? (
+                <p style={{ margin: 'auto 5px' }}>본인</p>
+              ) : (
+                retro.leaderName
+              )
+            ) : (
+              <S.NotMemberInfo> (회고 리더 이름없음)</S.NotMemberInfo>
+            )}
           </p>
         </S.ReaderBox>
 
