@@ -2,6 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Center, Flex, Image, Spinner } from '@chakra-ui/react';
 import RetroTitle from './RetroTitle';
+import defaultImage from '@/../public/defaultImage.png';
 import { RetrospectiveData } from '@/api/@types/Retrospectives';
 import { UserData } from '@/api/@types/Users';
 import postImageToS3 from '@/api/imageApi/postImageToS3';
@@ -40,6 +41,11 @@ const Title: FC<Props> = ({ name, description, retro, user }) => {
     }
   };
 
+  const handleError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    const target = e.target as HTMLImageElement;
+    target.src = defaultImage;
+  };
+
   useEffect(() => {
     fetchRetrospectiveImage(String(retro.thumbnail));
     const timer = setTimeout(() => {
@@ -55,7 +61,13 @@ const Title: FC<Props> = ({ name, description, retro, user }) => {
             <Spinner />
           </Center>
         ) : (
-          <Image src={imageURL[retro.retrospectiveId]} maxWidth={150} borderRadius="10px" margin="auto 5px" />
+          <Image
+            src={imageURL[retro.retrospectiveId]}
+            onError={handleError}
+            maxWidth={150}
+            borderRadius="10px"
+            margin="auto 5px"
+          />
         )}
         <Flex flexDirection="column" margin="20px 10px">
           <Flex>
