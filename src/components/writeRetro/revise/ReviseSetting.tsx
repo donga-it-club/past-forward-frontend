@@ -20,10 +20,12 @@ import {
   Spinner,
   Stack,
   useEditableControls,
+  Image,
 } from '@chakra-ui/react';
 import axios from 'axios';
 import DeleteRetrospective from './DeleteRetrospective';
 import RetroImageUploader from './RetroImageUploader';
+import defaultImage from '@/../public/defaultImage.png';
 import { RetrospectiveData } from '@/api/@types/Retrospectives';
 import { TemplateNameData } from '@/api/@types/TeamController';
 import { UserData } from '@/api/@types/Users';
@@ -58,10 +60,14 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
   const [imageUUID, setImageUUID] = useState<string | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [readerImage, setReaderImage] = useState<string | null>(null);
   const [user, setUser] = useState<UserData>();
-
   const toast = useCustomToast();
   const navigate = useNavigate();
+  const handleError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    const target = e.target as HTMLImageElement;
+    target.src = defaultImage;
+  };
 
   const fetchRetrospectiveImage = async () => {
     if (retro) {
@@ -124,16 +130,16 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
     }
   };
 
-  // const fetchReaderImage = async () => {
-  //   if (retro) {
-  //     try {
-  //       const data = await postImageToS3({ filename: retro., method: 'GET' });
-  //       setImage(data.data.preSignedUrl);
-  //     } catch (e) {
-  //       console.error(e);
-  //     }
-  //   }
-  // };
+  const fetchReaderImage = async () => {
+    if (retro.leaderProfileImage) {
+      try {
+        const data = await postImageToS3({ filename: retro.leaderProfileImage, method: 'GET' });
+        setReaderImage(data.data.preSignedUrl);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  };
 
   //description edit icon
   function EditableControls() {
@@ -155,6 +161,7 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
     fetchRetrospectiveTemplate();
     fetchRetrospectiveImage();
     fetchUser();
+    fetchReaderImage();
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 2000);
@@ -183,6 +190,7 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
           setImageUUID={setImageUUID}
           preview={preview}
           setPreview={setPreview}
+          imageUUID={imageUUID}
         />
       )}
 
@@ -219,7 +227,11 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
           <S.NoteChangeText>변경 불가</S.NoteChangeText>
         </Flex>
         <S.ReaderBox>
-          <BsPersonCircle size={30} style={{ margin: '5px' }} />
+          {readerImage ? (
+            <Image src={readerImage} onError={handleError} maxWidth={30} borderRadius="15px" margin="5px" />
+          ) : (
+            <BsPersonCircle size={30} style={{ margin: '5px' }} />
+          )}
           <p style={{ margin: 'auto 0' }}>
             {retro.leaderName ? (
               user && user.userId === retro.userId ? (

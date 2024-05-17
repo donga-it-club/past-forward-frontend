@@ -6,7 +6,6 @@ export interface PostSurveyRequest {
   region: string;
   source: string;
   purposes: string[] | undefined;
-
 }
 
 export interface PostSurveyResponse {
