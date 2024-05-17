@@ -1,7 +1,8 @@
 import { FC, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Flex, Image } from '@chakra-ui/react';
+import { Center, Flex, Image, Spinner } from '@chakra-ui/react';
 import RetroTitle from './RetroTitle';
+import defaultImage from '@/../public/defaultImage.png';
 import { RetrospectiveData } from '@/api/@types/Retrospectives';
 import { UserData } from '@/api/@types/Users';
 import postImageToS3 from '@/api/imageApi/postImageToS3';
@@ -23,6 +24,7 @@ const Title: FC<Props> = ({ name, description, retro, user }) => {
   const teamId = query[3] === 'null' ? null : Number(query[3]);
   const [isInviteModalOpen, setInviteModalOpen] = useState<boolean>(false);
   const [imageURL, setImageURL] = useState<{ [key: number]: string }>({});
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const navigate = useNavigate();
 
   const fetchRetrospectiveImage = async (item: string) => {
@@ -39,13 +41,34 @@ const Title: FC<Props> = ({ name, description, retro, user }) => {
     }
   };
 
+  const handleError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    const target = e.target as HTMLImageElement;
+    target.src = defaultImage;
+  };
+
   useEffect(() => {
     fetchRetrospectiveImage(String(retro.thumbnail));
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+      return () => clearTimeout(timer);
+    }, 1500);
   }, []);
   return (
     <>
       <S.TitleBox>
-        <Image src={imageURL[retro.retrospectiveId]} maxWidth={150} borderRadius="10px" margin="auto 5px" />
+        {isLoading ? (
+          <Center w="40px" margin="20px 0">
+            <Spinner />
+          </Center>
+        ) : (
+          <Image
+            src={imageURL[retro.retrospectiveId]}
+            onError={handleError}
+            maxWidth={150}
+            borderRadius="10px"
+            margin="auto 5px"
+          />
+        )}
         <Flex flexDirection="column" margin="20px 10px">
           <Flex>
             <RetroTitle teamId={teamId} name={name} />

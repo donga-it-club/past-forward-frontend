@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PersonCircle } from 'react-bootstrap-icons';
+import { Spinner } from '@chakra-ui/react';
 import { GetUsersResponse } from '@/api/@types/User';
 import getUser from '@/api/imageApi/getUser';
 import postImageToS3 from '@/api/imageApi/postImageToS3';
@@ -12,6 +13,8 @@ interface Props {
 const UserProfileImage = ({ width }: Props) => {
   const [userData, setUserData] = useState<GetUsersResponse | null>(null);
   const [imageURL, setImageURL] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  // const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   const fetchUserData = async () => {
     try {
@@ -33,6 +36,8 @@ const UserProfileImage = ({ width }: Props) => {
         setImageURL(data.data.preSignedUrl);
       } catch (e) {
         console.error(e);
+      } finally {
+        setIsLoading(false);
       }
     }
   };
@@ -40,12 +45,21 @@ const UserProfileImage = ({ width }: Props) => {
   useEffect(() => {
     fetchProfileImage();
     fetchUserData();
-  }, [userData?.data.thumbnail]);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [userData?.data.thumbnail, isLoading]);
 
   return (
     <>
       {userData?.data.thumbnail ? (
-        <S.UploadImage src={imageURL} width={width} height="auto" />
+        isLoading ? (
+          <Spinner />
+        ) : (
+          <S.UploadImage src={imageURL} width={width} height="auto" />
+        )
       ) : (
         <PersonCircle style={{ width: '30px', height: 'auto' }} />
       )}

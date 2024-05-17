@@ -10,10 +10,12 @@ interface Props {
   setImageUUID: (uuid: string | null) => void;
   setPreview: (preview: string | null) => void;
   preview: string | null;
+  imageUUID: string | null;
 }
 
-const RetroImageUploader: FC<Props> = ({ image, onChange, setImageUUID, setPreview, preview }) => {
+const RetroImageUploader: FC<Props> = ({ image, onChange, setImageUUID, setPreview, preview, imageUUID }) => {
   const inputRef = useRef<HTMLInputElement>(null);
+
   const handleUploadButtonClick: MouseEventHandler<HTMLButtonElement> = () => {
     inputRef.current?.click();
   };
@@ -56,12 +58,14 @@ const RetroImageUploader: FC<Props> = ({ image, onChange, setImageUUID, setPrevi
       <div style={{ margin: '0 auto' }}>
         <Button colorScheme="brand" variant="outline" margin="0 30px" onClick={handleUploadButtonClick}>
           <MdOutlineFileUpload style={{ margin: '0 5px' }} />
-          변경하기
+          {imageUUID ? '이미지 변경하기' : '이미지 첨부하기'}
           <input type="file" ref={inputRef} onChange={handleImageChange} accept="image/*" hidden></input>
         </Button>
-        <Button colorScheme="brand" variant="outline" margin="0 30px" onClick={DeleteImage}>
-          삭제하기
-        </Button>
+        {imageUUID && (
+          <Button colorScheme="brand" variant="outline" margin="0 30px" onClick={DeleteImage}>
+            삭제하기
+          </Button>
+        )}
       </div>
     </>
   );

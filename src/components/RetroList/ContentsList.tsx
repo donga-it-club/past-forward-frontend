@@ -5,6 +5,7 @@ import { IoMdPerson } from 'react-icons/io';
 import { MdPeople } from 'react-icons/md';
 import { RxCounterClockwiseClock } from 'react-icons/rx'; //before
 import { useNavigate } from 'react-router-dom';
+import { Center, Spinner } from '@chakra-ui/react';
 import { PatchRetrospectiveRequest } from '@/api/@types/Retrospectives';
 import { UserData } from '@/api/@types/Users';
 import postImageToS3 from '@/api/imageApi/postImageToS3';
@@ -56,6 +57,7 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
   const toast = useCustomToast();
   const [image, setImage] = useState<{ [key: number]: string }>({});
   const [user, setUser] = useState<UserData>();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const fetchUser = async () => {
     try {
@@ -91,6 +93,10 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
   const filteredData = data.filter(item => item.title.toLowerCase().includes(searchData.toLowerCase()));
   const navigate = useNavigate();
 
+  const handleImageLoad = () => {
+    setIsLoading(false);
+  };
+
   useEffect(() => {
     const filtered = data.filter(item => item.thumbnail !== null); // thumbnail이 null인 항목 필터링
     fetchUser();
@@ -110,6 +116,8 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
         }
       } catch (error) {
         console.error(error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -118,6 +126,14 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
 
   if (!user) return;
 
+  if (isLoading) {
+    return (
+      <Center w="100%" h="100%" margin="20px 0">
+        <Spinner />
+      </Center>
+    );
+  }
+
   return (
     <div>
       {viewMode === 'board' && (
@@ -125,7 +141,11 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
           {filteredData.map(item => (
             <S.Box key={item.id}>
               <S.ImgBox>
-                <S.Thumbnail src={item.thumbnail ? image[item.id] : Thumbnail} />
+                {isLoading ? (
+                  <Spinner size="md" />
+                ) : (
+                  <S.Thumbnail src={item.thumbnail ? image[item.id] : Thumbnail} onLoad={handleImageLoad} />
+                )}
               </S.ImgBox>
               <hr />
               <S.InfoBox>

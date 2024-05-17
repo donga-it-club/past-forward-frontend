@@ -21,6 +21,7 @@ export interface RetrospectiveData {
   description: string;
   status: string;
   thumbnail: string;
+  leaderProfileImage: string | null;
 }
 
 // get
