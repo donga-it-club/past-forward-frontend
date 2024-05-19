@@ -211,18 +211,23 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
       )}
 
       {viewMode === 'list' && (
-        <>
+        <div>
           <S.ListContainer>
             <S.ListTopBox>
+              <S.ListTypeBox>회고유형</S.ListTypeBox>
               <S.ListTitleBox>회고이름</S.ListTitleBox> <S.ListUserBox>생성자</S.ListUserBox>
               <S.ListTimeBox>마지막 수정시간</S.ListTimeBox> <S.ListBookmarkBox>즐겨찾기</S.ListBookmarkBox>
               <S.ListLinkBox>회고 진행 여부</S.ListLinkBox>
               <S.ListProgressBox>회고 수정</S.ListProgressBox>
             </S.ListTopBox>
-
             <div>
               {filteredData.map(item => (
                 <S.ItemBox key={item.id}>
+                  <S.ListTypeBox>
+                    <div style={{ padding: '5px' }}>
+                      {item.teamId && <MdPeople size={20} />} {!item.teamId && <IoMdPerson size={20} />}
+                    </div>
+                  </S.ListTypeBox>
                   <S.ListTitleBox
                     onClick={() => navigate(`/sections?retrospectiveId=${item.id}&teamId=${item.teamId}`)}
                   >
@@ -275,7 +280,7 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
               ))}
             </div>
           </S.ListContainer>
-        </>
+        </div>
       )}
     </div>
   );

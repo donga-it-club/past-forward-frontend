@@ -104,8 +104,11 @@ export const ListContainer = styled.div`
 export const ListTopBox = styled.div`
   display: flex;
   justify-content: space-around;
-  color: #9b9b9b;
+  color: white;
   margin-bottom: 15px;
+  background-color: #111b47;
+  border-radius: 5px;
+  padding: 15px;
 `;
 
 export const ItemBox = styled.li`
@@ -114,6 +117,11 @@ export const ItemBox = styled.li`
   justify-content: space-around;
 `;
 
+export const ListTypeBox = styled.div`
+  flex: 1;
+  padding-left: 10px;
+  padding-right: 10px;
+`;
 export const ListTitleBox = styled.div`
   flex: 1;
   &:hover {
@@ -123,33 +131,33 @@ export const ListTitleBox = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
 `;
 export const ListUserBox = styled.div`
   flex: 1;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
 `;
 export const ListTimeBox = styled.div`
   flex: 1;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
 `;
 export const ListBookmarkBox = styled.div`
   flex: 1;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
 `;
 export const ListLinkBox = styled.div`
   flex: 1;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
 `;
 export const ListProgressBox = styled.div`
   flex: 1;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
 `;
 
 export const Icon = styled.img`
