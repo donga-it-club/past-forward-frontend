@@ -133,7 +133,6 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
       </Center>
     );
   }
-
   return (
     <div>
       {viewMode === 'board' && (
@@ -167,23 +166,22 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
                     <S.StyledFaStar onClick={() => handleBookmark(item.id)} style={{ color: '#fcea12' }} size="19" />
                   )}
                   {!item.isBookmarked && <S.StyledCiStar onClick={() => handleBookmark(item.id)} size={20} />}
-                  {user.userId === item.userId && (
-                    <S.StyledHiOutlineDotsHorizontal
-                      style={{ color: '#33363F' }}
-                      size={20}
-                      // onClick={() => openModalForItem(item.id)}
-                      onClick={() => {
-                        if (item.userId === item.id) {
-                          // 수정 권한 없을 때(생성자가 아닐 때 확인하고 고치기)
-                          openModalForItem(item.id);
-                        } else {
-                          navigate(`/revise?retrospectiveId=${item.id}&teamId=${item.teamId}`);
-                        }
-                      }}
-                    />
-                  )}
+                  <S.StyledHiOutlineDotsHorizontal
+                    style={{ color: '#33363F' }}
+                    size={20}
+                    onClick={() => {
+                      if (user.userId === item.userId) {
+                        navigate(`/revise?retrospectiveId=${item.id}&teamId=${item.teamId}`);
+                      } else {
+                        openModalForItem(item.id);
+                      }
+                    }}
+                  />
+                  <Modal onClose={closeModalForItem} isOpen={openModalId === item.id} />
                 </div>
-                <S.RetroUser>{item.username}</S.RetroUser>
+                <S.RetroUser>
+                  {item.username} {user.userId === item.userId && <S.RetroLeader>본인</S.RetroLeader>}
+                </S.RetroUser>
                 <div></div>
                 <S.RetroDate>
                   {item.updatedDate !== item.createdDate
@@ -203,7 +201,6 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
                 {item.status === 'COMPLETED' && (
                   <FaRegCircleCheck size={15} style={{ alignItems: 'start', justifySelf: 'end', color: '#FF1818' }} />
                 )}
-                <Modal onClose={closeModalForItem} isOpen={openModalId === item.id} />
               </S.InfoBox>
             </S.Box>
           ))}
@@ -233,7 +230,9 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
                   >
                     {item.title}
                   </S.ListTitleBox>
-                  <S.ListUserBox>{item.username}</S.ListUserBox>
+                  <S.ListUserBox>
+                    {item.username} {user.userId === item.userId && <S.ListRetroLeader>본인</S.ListRetroLeader>}
+                  </S.ListUserBox>
                   <S.ListTimeBox>
                     {item.updatedDate && item.updatedDate !== item.startDate ? `${item.updatedDate}` : item.startDate}
                   </S.ListTimeBox>
@@ -264,13 +263,11 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
                     <S.StyledHiOutlineDotsHorizontal
                       style={{ color: '#33363F' }}
                       size={20}
-                      // onClick={() => openModalForItem(item.id)}
                       onClick={() => {
-                        if (item.userId === item.id) {
-                          // 수정 권한 없을 때(생성자가 아닐 때 확인하고 고치기)
-                          openModalForItem(item.id);
-                        } else {
+                        if (user.userId === item.userId) {
                           navigate(`/revise?retrospectiveId=${item.id}&teamId=${item.teamId}`);
+                        } else {
+                          openModalForItem(item.id);
                         }
                       }}
                     />
