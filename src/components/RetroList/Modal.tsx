@@ -12,7 +12,7 @@ const Modal: React.FC<ModalProps> = ({ onClose, isOpen }) => {
       <S.ModalContent>
         <div>
           <S.CloseBox>
-            <IoIosClose onClick={onClose} />
+            <IoIosClose onClick={onClose} style={{ cursor: 'pointer' }} />
           </S.CloseBox>
           <S.Text>생성자가 아닌 참여자는 수정 권한이 없습니다.</S.Text>
         </div>
