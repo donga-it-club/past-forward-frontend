@@ -52,13 +52,16 @@ export const RetroTitle = styled.span`
 export const RetroUser = styled.span`
   align-self: center;
   font-size: x-small;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const RetroLeader = styled.div`
   display: inline;
   color: white;
   background-color: #3360eb;
-  font-size: 10px;
+  font-size: 8px;
   padding: 2px;
   border-radius: 2px;
 `;
@@ -147,6 +150,17 @@ export const ListUserBox = styled.div`
   flex: 1;
   padding-left: 10px;
   padding-right: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline;
+`;
+export const ListRetroLeader = styled.span`
+  color: white;
+  background-color: #3360eb;
+  font-size: 8px;
+  padding: 2px;
+  border-radius: 2px;
 `;
 export const ListTimeBox = styled.div`
   flex: 1;
