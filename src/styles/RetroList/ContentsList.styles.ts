@@ -53,6 +53,15 @@ export const RetroUser = styled.span`
   align-self: center;
   font-size: x-small;
 `;
+
+export const RetroLeader = styled.div`
+  display: inline;
+  color: white;
+  background-color: #3360eb;
+  font-size: 10px;
+  padding: 2px;
+  border-radius: 2px;
+`;
 export const RetroDate = styled.span`
   align-self: center;
   font-size: x-small;

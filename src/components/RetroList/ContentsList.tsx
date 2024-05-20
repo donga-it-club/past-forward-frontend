@@ -183,7 +183,9 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
                     />
                   )}
                 </div>
-                <S.RetroUser>{item.username}</S.RetroUser>
+                <S.RetroUser>
+                  {item.username} {user.userId === item.userId && <S.RetroLeader>본인</S.RetroLeader>}
+                </S.RetroUser>
                 <div></div>
                 <S.RetroDate>
                   {item.updatedDate !== item.createdDate
@@ -233,7 +235,9 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
                   >
                     {item.title}
                   </S.ListTitleBox>
-                  <S.ListUserBox>{item.username}</S.ListUserBox>
+                  <S.ListUserBox>
+                    {item.username} {user.userId === item.userId && <S.RetroLeader>본인</S.RetroLeader>}
+                  </S.ListUserBox>
                   <S.ListTimeBox>
                     {item.updatedDate && item.updatedDate !== item.startDate ? `${item.updatedDate}` : item.startDate}
                   </S.ListTimeBox>
