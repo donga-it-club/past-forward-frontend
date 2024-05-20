@@ -6,6 +6,7 @@ import { TeamMembersData } from '@/api/@types/TeamController';
 import { RetrospectiveService } from '@/api/services/Retrospectives';
 import { TeamControllerServices } from '@/api/services/TeamController';
 import RetroTitle from '@/components/writeRetro/layout/RetroTitle';
+import BackButton from '@/components/writeRetro/revise/BackButton';
 import ManageTeamMembers from '@/components/writeRetro/revise/ManageTeamMembers';
 import ReviseSetting from '@/components/writeRetro/revise/ReviseSetting';
 import { useCustomToast } from '@/hooks/useCustomToast';
@@ -55,11 +56,16 @@ const RetroRevisePage = () => {
 
   return (
     <>
-      <S.TitleBox>
-        <Flex marginLeft="20px">
-          <RetroTitle teamId={teamId} name={retro.title} />
+      <Flex flexDirection="column" margin="20px 10px">
+        <Flex alignItems={'center'}>
+          <S.TitleBox>
+            <Flex marginLeft="20px">
+              <RetroTitle teamId={teamId} name={retro.title} />
+            </Flex>
+          </S.TitleBox>
+          <BackButton />
         </Flex>
-      </S.TitleBox>
+      </Flex>
       <S.SettingMenuStyle>
         <Tabs colorScheme="brand" isLazy isFitted>
           <TabList margin="0 40px" fontSize={60}>
