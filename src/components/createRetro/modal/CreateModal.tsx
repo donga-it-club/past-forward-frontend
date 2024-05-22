@@ -136,7 +136,11 @@ const CreateModal: React.FC<CreateModalProps> = ({ isOpen, onClose, templateId, 
     <Modal isOpen={isOpen} size={size} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Create Retrospect</ModalHeader>
+        <ModalHeader>
+          <p style={{ color: '#6C6C6C' }}>
+            Create <span style={{ color: 'black' }}>{type}</span> Retrospect
+          </p>
+        </ModalHeader>
         <ModalCloseButton />
 
         <S.CustomModalBody>

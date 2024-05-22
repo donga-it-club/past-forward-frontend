@@ -147,7 +147,7 @@ const TeamTask: FC<Props> = ({ section, setRendering, teamId, imageURL, user, fe
           </S.SubTaskBox>
         </S.TaskMainStyle>
 
-        {isVisible && <TeamTaskMessage section={section} setRendering={setRendering} user={user} />}
+        {isVisible && <TeamTaskMessage section={section} setRendering={setRendering} user={user} teamId={teamId} />}
       </S.TaskBox>
     </>
   );
