@@ -15,9 +15,10 @@ interface Props {
   section: sectionData;
   setRendering: React.Dispatch<React.SetStateAction<boolean>>;
   user: UserData;
+  teamId: number | null;
 }
 
-const TeamTaskMessage: FC<Props> = ({ section, setRendering, user }) => {
+const TeamTaskMessage: FC<Props> = ({ section, setRendering, user, teamId }) => {
   const [value, setValue] = useState<string>('');
   const toast = useCustomToast();
   const [image, setImage] = useState<{ [key: number]: string }>('');
@@ -88,7 +89,9 @@ const TeamTaskMessage: FC<Props> = ({ section, setRendering, user }) => {
       <S.TaskMessageBoxStyle>
         {/* TaskMessageTop */}
         <Flex>
-          <S.TaskMessageCount>{section.comments.length}개의 댓글</S.TaskMessageCount>
+          <S.TaskMessageCount>
+            {section.comments.length}개의 {teamId !== null ? '댓글' : '메모'}
+          </S.TaskMessageCount>
           <S.TaskMessageLine></S.TaskMessageLine>
         </Flex>
 
