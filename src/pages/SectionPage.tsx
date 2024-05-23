@@ -9,6 +9,7 @@ import { RetrospectiveService } from '@/api/services/Retrospectives';
 import { SectionServices } from '@/api/services/Section';
 import { TeamControllerServices } from '@/api/services/TeamController';
 import { UserServices } from '@/api/services/User';
+import { ExplainButton } from '@/components/writeRetro/explainModal/explainRetro';
 import { AddTask } from '@/components/writeRetro/layout/AddTask';
 import Label from '@/components/writeRetro/layout/Label';
 import Title from '@/components/writeRetro/layout/Title';
@@ -80,6 +81,7 @@ const RetroTeamPage = () => {
   return (
     <S.Container>
       {retro && <Title name={retro.title} description={retro.description} user={user} retro={retro} />}
+      <ExplainButton templateId={retro.templateId}></ExplainButton>
 
       <S.SectionBox>
         <Flex flexDirection="column" margin="0 auto">
