@@ -3,6 +3,7 @@ import { Flex, useDisclosure } from '@chakra-ui/react';
 import PersonalRetroDescription from '../components/createRetro/PersonalRetroDescription';
 import TeamRetroDescription from '../components/createRetro/TeamRetroDescription';
 import { TStatus } from '@/api/@types/@asConst';
+import DescriptionBox from '@/components/createRetro/DescriptionBox';
 import PersonalRetroCreateButton from '@/components/createRetro/PersonalRetroCreateButton';
 import TeamRetroCreateButton from '@/components/createRetro/TeamRetroCreateButton';
 import CreateModal from '@/components/createRetro/modal/CreateModal';
@@ -78,7 +79,7 @@ const CreateRetroPage: React.FC = () => {
         />
       )}
 
-      {/* <DescriptionBox /> */}
+      <DescriptionBox />
     </>
   );
 };

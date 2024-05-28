@@ -8,6 +8,7 @@ import {
   ModalFooter,
   ModalCloseButton,
   Button,
+  Flex,
 } from '@chakra-ui/react';
 import axios from 'axios';
 import { TRetrospective, TStatus } from '@/api/@types/@asConst';
@@ -144,19 +145,21 @@ const CreateModal: React.FC<CreateModalProps> = ({ isOpen, onClose, templateId, 
         <ModalCloseButton />
 
         <S.CustomModalBody>
-          <S.LeftColumn>
-            <ImageUpload
-              onChange={(file, imageUUID) => {
-                setRequestData({ ...requestData, thumbnail: imageUUID });
-                setImage(file);
-              }}
-            />
-          </S.LeftColumn>
-          <S.RightColumn>
-            <TitleInput onChange={title => setRequestData({ ...requestData, title })} />
-            <TemplateSelect onChange={handleTemplateChange} defaultTemplateId={requestData.templateId} />
-            <StartDateCalendar onDateChange={handleStartDateChange} />
-          </S.RightColumn>
+          <Flex flexDirection={{ md: 'row', base: 'column' }}>
+            <S.LeftColumn>
+              <ImageUpload
+                onChange={(file, imageUUID) => {
+                  setRequestData({ ...requestData, thumbnail: imageUUID });
+                  setImage(file);
+                }}
+              />
+            </S.LeftColumn>
+            <S.RightColumn>
+              <TitleInput onChange={title => setRequestData({ ...requestData, title })} />
+              <TemplateSelect onChange={handleTemplateChange} defaultTemplateId={requestData.templateId} />
+              <StartDateCalendar onDateChange={handleStartDateChange} />
+            </S.RightColumn>
+          </Flex>
         </S.CustomModalBody>
         <S.BottomModalBody>
           <div>회고 설명</div>
