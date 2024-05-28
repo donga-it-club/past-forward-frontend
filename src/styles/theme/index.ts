@@ -7,7 +7,8 @@ const config: ThemeConfig = {
 };
 
 const appStyles = {
-  maxWidth: '768px',
+  breakpoints: { md: '800px' },
+  maxWidth: '800px',
   paddingX: '12px',
   headerHeight: { base: '48px', md: '56px' },
   asideHeight: '56px',
@@ -22,6 +23,29 @@ const styles = {
       padding: 0,
       fontFamily:
         '-apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", Pretendard, Roboto, "Noto Sans KR", "Segoe UI", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif',
+    },
+    '#root': {
+      width: '100%',
+      minHeight: '100vh',
+      background: 'gray.50',
+    },
+    main: {
+      width: '100%',
+      minHeight: {
+        base: `calc(100vh - ${appStyles.headerHeight.base})`,
+        md: `calc(100vh - ${appStyles.headerHeight.md})`,
+      },
+      maxWidth: appStyles.maxWidth,
+      margin: '0 auto',
+      background: 'white',
+      padding: `0 ${appStyles.paddingX}`,
+    },
+    'main.with-aside': {
+      paddingBottom: appStyles.asideHeight,
+      minHeight: {
+        base: `calc(100vh - ${appStyles.headerHeight.base} - ${appStyles.asideHeight})`,
+        md: `calc(100vh - ${appStyles.headerHeight.md} - ${appStyles.asideHeight})`,
+      },
     },
   },
 };

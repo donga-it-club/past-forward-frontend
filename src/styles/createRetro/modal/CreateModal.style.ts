@@ -11,6 +11,10 @@ export const CustomModalBody = styled(ModalBody)`
   display: flex;
   justify-content: space-between;
   width: 100%;
+
+  @media (max-width: 800px) {
+    min-width: 95vh;
+  }
 `;
 
 export const BottomModalBody = styled(ModalBody)`
@@ -33,4 +37,8 @@ export const RightColumn = styled.div`
   flex-direction: column;
   gap: 10px;
   margin-left: 2rem;
+
+  @media (max-width: 800px) {
+    margin-top: 20px;
+  }
 `;

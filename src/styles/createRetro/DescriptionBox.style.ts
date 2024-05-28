@@ -12,27 +12,25 @@ export const DescriptionContainer = styled.div`
 `;
 
 export const SpacedLeft = styled.div`
-  margin-top: 1rem;
-  margin-left: 1rem;
+  margin: 10px auto;
 `;
 
 export const SpacedRight = styled.div`
-  margin-top: 1rem;
-  margin-left: 5rem;
+  margin: 10px auto;
 `;
 
 export const DescriptionTitle = styled.div<DescriptionTitleProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 15rem;
-  height: 2rem;
-  margin-left: 5rem;
-  margin-bottom: 2rem;
+  margin: 0 80px;
   border-radius: 0.5rem;
   border: 2px solid rgba(17, 27, 71, 1);
   background-color: ${({ backgroundColor }) => backgroundColor || 'white'};
   color: ${({ color }) => color || 'white'};
+  @media (max-width: 800px) {
+    margin: 0 20px;
+  }
 `;
 
 export const TipBox = styled.div`

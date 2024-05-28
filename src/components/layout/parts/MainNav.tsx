@@ -12,7 +12,7 @@ const MainNav = () => {
         Home
       </S.Link>
       <S.Link href="/#Template" id="header_temp">
-        Template
+        Overview
       </S.Link>
       <S.Link href="/#AboutUs" id="header_about">
         About us
