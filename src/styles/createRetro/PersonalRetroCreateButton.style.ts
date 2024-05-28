@@ -6,22 +6,24 @@ interface TextProps {
 }
 
 export const CreateButtonBorder = styled.div`
-  width: 25rem;
-  height: 13rem;
   border-radius: 1rem;
   border: 2px solid rgba(17, 27, 71, 1);
-  display: flex;
   justify-content: center;
   align-items: center;
+  padding: 10px;
+  margin: 0 30px;
 `;
 
 export const CreateButtonBackground = styled.div`
-  width: 24rem;
-  height: 12rem;
   border-radius: 1rem;
   background-color: white;
   border-radius: 1rem;
+  padding: 20px;
   border: 1px solid rgba(17, 27, 71, 1);
+
+  @media (max-width: 800px) {
+    min-height: 200px;
+  }
 `;
 
 export const CenteredContainer = styled.div`

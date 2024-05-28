@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 
 export const DescriptionBorder = styled.div`
-  width: 30rem;
   line-height: 2;
-  /* height: 13rem; */
+
+  @media (max-width: 800px) {
+    margin: 0 10px;
+  }
 `;
