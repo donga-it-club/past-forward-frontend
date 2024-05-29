@@ -386,14 +386,19 @@ export const ManagerStyle = styled.div`
   display: flex;
   flex-direction: row-reverse;
   margin: 10px;
+  align-items: center;
 `;
 
 export const ManagerText = styled.p`
   font-size: 15px;
   font-weight: 500;
-  color: #1a265c;
+  color: #adb8cc;
   line-height: 28px;
   margin: auto 5px;
+  width: 60%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const ManagerButton = styled.button`
@@ -407,6 +412,9 @@ export const ManagerButton = styled.button`
   background-color: #e4e4e4;
   border-radius: 16px;
   margin-left: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   &:hover {
     cursor: pointer;
   }
@@ -493,4 +501,16 @@ export const DeleteSectionText = styled.p`
   margin: 20px;
   color: #111b47;
   font-size: 15px;
+`;
+
+export const ActionItemsUserContainer = styled.div`
+  border: 1px solid #c3c3c3;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+  padding: 4px;
+  width: 90px;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
 `;

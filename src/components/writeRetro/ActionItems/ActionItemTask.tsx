@@ -93,7 +93,7 @@ const ActionItemTask: FC<ActionItemTaskProps> = ({ tId, rId, sId, section, fetch
     }
 
     if ((ActionItems && selectedUserImg === null) || selectedUserImg === '') {
-      return <CgProfile size="24px" color="#969696" />;
+      return <CgProfile size="24px" color="#ADB8CC" />;
     }
   };
 
@@ -103,28 +103,30 @@ const ActionItemTask: FC<ActionItemTaskProps> = ({ tId, rId, sId, section, fetch
 
   return (
     <>
-      <Popover isOpen={showPopup} onClose={() => setShowPopup(false)}>
-        <PopoverTrigger>
-          <S.ManagerButton onClick={togglePopup}>{renderImage()}</S.ManagerButton>
-        </PopoverTrigger>
-        {section.actionItems ? (
-          <S.ManagerText> {selectedUserName}</S.ManagerText>
-        ) : (
-          <S.ManagerText>담당자</S.ManagerText>
-        )}
-        <PopoverContent border={'none'}>
-          <Members
-            users={users}
-            onSelectUserImg={handleSelectUserImg}
-            onSelectUserName={handleSelectUserName}
-            tId={teamId}
-            rId={retrospectiveId}
-            sId={sectionId}
-            imageURL={imageURL}
-            fetchSection={fetchSection}
-          />
-        </PopoverContent>
-      </Popover>
+      <S.ActionItemsUserContainer>
+        <Popover isOpen={showPopup} onClose={() => setShowPopup(false)}>
+          {section.actionItems ? (
+            <S.ManagerText> {selectedUserName}</S.ManagerText>
+          ) : (
+            <S.ManagerText>닉네임</S.ManagerText>
+          )}
+          <PopoverTrigger>
+            <S.ManagerButton onClick={togglePopup}>{renderImage()}</S.ManagerButton>
+          </PopoverTrigger>
+          <PopoverContent border={'none'}>
+            <Members
+              users={users}
+              onSelectUserImg={handleSelectUserImg}
+              onSelectUserName={handleSelectUserName}
+              tId={teamId}
+              rId={retrospectiveId}
+              sId={sectionId}
+              imageURL={imageURL}
+              fetchSection={fetchSection}
+            />
+          </PopoverContent>
+        </Popover>
+      </S.ActionItemsUserContainer>
     </>
   );
 };

@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { BiLike, BiSolidLike } from 'react-icons/bi';
+import { BsPersonFillCheck } from 'react-icons/bs';
 import { CgProfile } from 'react-icons/cg';
 import { MdAccessAlarm, MdMessage } from 'react-icons/md';
 import { useLocation } from 'react-router-dom';
@@ -112,6 +113,7 @@ const TeamTask: FC<Props> = ({ section, setRendering, teamId, imageURL, user, fe
           {actionCondition ? (
             <S.ManagerStyle>
               <ActionItemTask tId={tId} rId={rId} sId={sId} section={section} fetchSection={fetchSection} />
+              <BsPersonFillCheck size="24px" color="#666666" style={{ marginRight: '5px' }} />
             </S.ManagerStyle>
           ) : null}
 

@@ -99,7 +99,7 @@ export const Members: React.FC<UserListProps> = ({
                 {user.imageURL !== '' ? (
                   <img src={user.imageURL} style={{ width: '25px', height: '25px' }} />
                 ) : (
-                  <CgProfile size="25px" color="#969696" />
+                  <CgProfile size="25px" color="#ADB8CC" />
                 )}
               </S.ProfileImage>
               <div style={{ alignItems: 'center' }}>
