@@ -1,7 +1,7 @@
 import { Gear } from 'react-bootstrap-icons';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { useNavigate } from 'react-router-dom';
-import { Button, Drawer, DrawerContent, DrawerOverlay, useDisclosure } from '@chakra-ui/react';
+import { Button, Drawer, DrawerContent, DrawerOverlay, Flex, useDisclosure } from '@chakra-ui/react';
 import { useRecoilState } from 'recoil';
 import LogoBox from './LogoBox';
 import MenuBar from './MenuBar';
@@ -35,45 +35,49 @@ const PageNavBar = () => {
             <PageSideBar />
           </DrawerContent>
         </Drawer>
+        <Flex flexDirection={{ base: 'column', md: 'row' }} w="100%">
+          <Flex>
+            <LogoBox />
+            <MenuBar />
+          </Flex>
 
-        <LogoBox />
-        <MenuBar />
-
-        <S.RightBox>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-            }}
-          >
-            <S.IconStyle border-radius="10px">
-              <div
-                style={{
-                  display: 'flex',
-                  textAlign: 'center',
-                  alignContent: 'center',
-                  margin: '2px',
-                }}
-                onClick={navigateToMyPage}
-              >
-                <UserProfileImage width="30px" />
-                <p style={{ margin: 'auto 10px' }}>
-                  <UserNickname setUserNickname={setUserNickname} />
-                  {userNickname}
-                </p>
-              </div>
-            </S.IconStyle>
-
-            <S.IconStyle border-radius="45%">
-              <Gear />
-            </S.IconStyle>
-            <Alarm />
-            <Button style={{ marginRight: '0.3rem' }} variant="ghost" onClick={handleLoginOrLogout}>
-              {isLoggedIn ? 'Logout' : 'Login'}
-            </Button>
-          </div>
-        </S.RightBox>
+          <S.RightBox>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'flex-end',
+              }}
+            >
+              <S.IconStyle border-radius="10px">
+                <div
+                  style={{
+                    display: 'flex',
+                    textAlign: 'center',
+                    alignContent: 'center',
+                    margin: '2px',
+                  }}
+                  onClick={navigateToMyPage}
+                >
+                  <UserProfileImage width="30px" />
+                  <p style={{ margin: 'auto 10px' }}>
+                    <UserNickname setUserNickname={setUserNickname} />
+                    {userNickname}
+                  </p>
+                </div>
+              </S.IconStyle>
+              <Flex display={{ base: 'none', md: 'flex' }}>
+                <S.IconStyle border-radius="45%">
+                  <Gear />
+                </S.IconStyle>
+                <Alarm />
+              </Flex>
+              <Button style={{ marginRight: '0.3rem' }} variant="ghost" onClick={handleLoginOrLogout}>
+                {isLoggedIn ? 'Logout' : 'Login'}
+              </Button>
+            </div>
+          </S.RightBox>
+        </Flex>
       </S.Container>
     </>
   );

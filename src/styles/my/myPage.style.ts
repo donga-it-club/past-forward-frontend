@@ -13,7 +13,7 @@ export const ProfileContainer = styled.div`
   color: white;
   justify-items: center;
   align-items: center;
-  font-size: 40px;
+  font-size: 30px;
   margin: 10px 0;
 `;
 
@@ -21,14 +21,16 @@ export const MyPageContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-items: center;
-  width: 800px;
   background-color: rgba(251, 251, 251, 1);
-  /* margin: auto 0; */
   margin-top: 2rem;
   margin-bottom: 8rem;
   border: 1px solid #505f98;
-  border-radius: 5%;
+  border-radius: 20px;
   padding: 20px 50px;
+  @media (max-width: 800px) {
+    margin: 0 5px;
+    padding: 10px;
+  }
 `;
 
 export const MainName = styled.h1`

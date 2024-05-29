@@ -45,4 +45,5 @@ export const HowToUseText = styled.div`
   background-color: #3d7dc9;
   color: white;
   border-radius: 5px;
+  min-width: max-content;
 `;

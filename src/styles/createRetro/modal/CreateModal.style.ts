@@ -1,12 +1,6 @@
 import { ModalBody } from '@chakra-ui/react';
 import styled from 'styled-components';
 
-// export const CustomModalContent = styled(ModalContent)`
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-// `;
-
 export const CustomModalBody = styled(ModalBody)`
   display: flex;
   justify-content: space-between;

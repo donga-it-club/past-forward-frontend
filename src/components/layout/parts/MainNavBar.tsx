@@ -5,6 +5,7 @@ import { useRecoilState } from 'recoil';
 import LogoBox from './LogoBox';
 import MenuBar from './MenuBar';
 import PageSideBar from './PageSideBar';
+import Alarm from '@/components/alarm/Alarm';
 import UserNickname from '@/components/user/UserNickname';
 import UserProfileImage from '@/components/user/UserProfileImage';
 import { useAuth } from '@/hooks/useAuth';
@@ -21,9 +22,9 @@ const MainNavBar = () => {
     navigate('/my');
   };
 
-  const navigateToCreate = () => {
-    navigate('/create');
-  };
+  // const navigateToCreate = () => {
+  //   navigate('/create');
+  // };
 
   return (
     <>
@@ -78,16 +79,23 @@ const MainNavBar = () => {
                   </div>
                 </S.IconStyle>
               ) : null}
+              <Alarm />
 
-              <Button style={{ marginRight: '0.3rem' }} variant="ghost" onClick={handleLoginOrLogout} id="header_login">
+              <Button
+                style={{ marginRight: '0.3rem' }}
+                variant="ghost"
+                onClick={handleLoginOrLogout}
+                id="header_login"
+                fontSize="15px"
+              >
                 {isLoggedIn ? 'Logout' : 'Login'}
               </Button>
-              <S.GetStaredButton
+              {/* <S.GetStaredButton
                 onClick={navigateToCreate}
                 id={isLoggedIn ? 'header_startpf_login' : 'header_startpf_logout'}
               >
                 Get Started for Free
-              </S.GetStaredButton>
+              </S.GetStaredButton> */}
             </div>
           </S.RightBox>
         </S.Container>

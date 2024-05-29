@@ -22,14 +22,16 @@ export const Container = styled.div`
 `;
 
 export const LeftBox = styled.div`
-  flex: auto;
-  margin: '10px';
-  justify-content: 'flex-start';
+  margin: auto 10px;
+  justify-content: flex-start;
+  display: flex;
+  min-width: fit-content;
 `;
 
 export const RightBox = styled.div`
-  flex: auto;
   text-align: center;
+  margin: auto 0;
+  flex-direction: row-reverse;
 `;
 
 interface IconProps {
@@ -43,6 +45,7 @@ export const IconStyle = styled.button<IconProps>`
   border: 2px solid black;
   padding: 5px;
   margin: 5px;
+  min-width: max-content;
 `;
 
 export const OrdinaryButton = styled.button`
@@ -53,12 +56,18 @@ export const OrdinaryButton = styled.button`
   border-radius: 10px;
   font-size: 20px;
   padding: 10px;
+  @media (max-width: 800px) {
+    font-size: 15px;
+  }
 `;
 
 export const Link = styled.a`
   text-decoration-line: none;
   color: #505f98;
-  margin: 10px;
+  margin: auto 10px;
+  @media (max-width: 1000px) {
+    display: none;
+  }
 `;
 
 /* sideBar*/
@@ -82,9 +91,13 @@ interface ColorProps {
 
 export const LogoText = styled.a<ColorProps>`
   display: flex;
-  width: 40vh;
+  flex-grow: 1;
+  margin: auto 0;
   color: ${props => props['color']};
-  font-size: 30px;
+  width: 40vh;
+  min-width: fit-content;
+  font-size: 25px;
+  gap: 10px;
   font-weight: bold;
   border: 20px;
   padding: 10px 20px;
@@ -138,6 +151,10 @@ export const GetStaredButton = styled.button`
   background-color: #111b47;
   color: white;
   border-radius: 5px;
+
+  @media (max-width: 800px) {
+    font-size: 12px;
+  }
 `;
 
 export const MenuText = styled.a`
