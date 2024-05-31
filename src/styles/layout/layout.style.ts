@@ -26,12 +26,14 @@ export const LeftBox = styled.div`
   justify-content: flex-start;
   display: flex;
   min-width: fit-content;
+  flex-grow: 1;
 `;
 
 export const RightBox = styled.div`
   text-align: center;
   margin: auto 0;
   flex-direction: row-reverse;
+  display: flex;
 `;
 
 interface IconProps {
@@ -94,8 +96,6 @@ export const LogoText = styled.a<ColorProps>`
   flex-grow: 1;
   margin: auto 0;
   color: ${props => props['color']};
-  width: 40vh;
-  min-width: fit-content;
   font-size: 25px;
   gap: 10px;
   font-weight: bold;

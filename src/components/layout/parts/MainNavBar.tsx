@@ -1,6 +1,6 @@
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { useNavigate } from 'react-router-dom';
-import { Button, Drawer, DrawerContent, DrawerOverlay, useDisclosure } from '@chakra-ui/react';
+import { Button, Drawer, DrawerContent, DrawerOverlay, Flex, useDisclosure } from '@chakra-ui/react';
 import { useRecoilState } from 'recoil';
 import LogoBox from './LogoBox';
 import MenuBar from './MenuBar';
@@ -48,56 +48,60 @@ const MainNavBar = () => {
               <PageSideBar />
             </DrawerContent>
           </Drawer>
-          <MenuBar />
-          <LogoBox />
+          <Flex flexDirection={{ base: 'column', md: 'row' }} margin="0 auto">
+            <Flex>
+              <MenuBar />
+              <LogoBox />
+            </Flex>
 
-          <S.RightBox>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'flex-end',
-              }}
-            >
-              {isLoggedIn ? (
-                <S.IconStyle border-radius="10px">
-                  <div
-                    style={{
-                      display: 'flex',
-                      textAlign: 'center',
-                      alignContent: 'center',
-                      margin: '2px',
-                      cursor: 'pointer',
-                    }}
-                    onClick={navigateToMyPage}
-                  >
-                    <UserProfileImage width="30px" />
-                    <p style={{ margin: 'auto 10px' }}>
-                      <UserNickname setUserNickname={setUserNickname} />
-                      {userNickname}
-                    </p>
-                  </div>
-                </S.IconStyle>
-              ) : null}
-              <Alarm />
-
-              <Button
-                style={{ marginRight: '0.3rem' }}
-                variant="ghost"
-                onClick={handleLoginOrLogout}
-                id="header_login"
-                fontSize="15px"
+            <S.RightBox>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
+                }}
               >
-                {isLoggedIn ? 'Logout' : 'Login'}
-              </Button>
-              {/* <S.GetStaredButton
+                {isLoggedIn ? (
+                  <S.IconStyle border-radius="10px">
+                    <div
+                      style={{
+                        display: 'flex',
+                        textAlign: 'center',
+                        alignContent: 'center',
+                        margin: '2px',
+                        cursor: 'pointer',
+                      }}
+                      onClick={navigateToMyPage}
+                    >
+                      <UserProfileImage width="30px" />
+                      <p style={{ margin: 'auto 10px' }}>
+                        <UserNickname setUserNickname={setUserNickname} />
+                        {userNickname}
+                      </p>
+                    </div>
+                  </S.IconStyle>
+                ) : null}
+                <Alarm />
+
+                <Button
+                  style={{ marginRight: '0.3rem' }}
+                  variant="ghost"
+                  onClick={handleLoginOrLogout}
+                  id="header_login"
+                  fontSize="15px"
+                >
+                  {isLoggedIn ? 'Logout' : 'Login'}
+                </Button>
+                {/* <S.GetStaredButton
                 onClick={navigateToCreate}
                 id={isLoggedIn ? 'header_startpf_login' : 'header_startpf_logout'}
               >
                 Get Started for Free
               </S.GetStaredButton> */}
-            </div>
-          </S.RightBox>
+              </div>
+            </S.RightBox>
+          </Flex>
         </S.Container>
       </div>
     </>

@@ -6,7 +6,7 @@ const LogoBox = () => {
     <>
       <S.LogoText color="brand" href="/#">
         <img src={Logo} style={{ minWidth: 'fit-content', margin: 'auto 0' }} />
-        <Text margin="auto 0" minWidth="fit-content" display={{ base: 'none', md: 'block' }}>
+        <Text margin="auto 0" minWidth="max-content" display={{ base: 'none', md: 'block' }}>
           Past Forward
         </Text>
       </S.LogoText>
