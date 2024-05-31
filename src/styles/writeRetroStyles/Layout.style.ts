@@ -395,7 +395,7 @@ export const ManagerText = styled.p`
   color: #adb8cc;
   line-height: 28px;
   margin: auto 5px;
-  width: 60%;
+  width: 50%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
