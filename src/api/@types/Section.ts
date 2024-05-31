@@ -19,9 +19,16 @@ export interface sectionData {
   thumbnail: string;
   comments: CommentData[];
   actionItems?: ActionItemData;
+  kudosTarget?: KudosTargetData;
 }
 
 export interface ActionItemData {
+  userId: number;
+  username: string;
+  thumbnail: string;
+}
+
+export interface KudosTargetData {
   userId: number;
   username: string;
   thumbnail: string;

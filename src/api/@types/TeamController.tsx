@@ -40,6 +40,24 @@ export interface TemplateNameData {
   sequence: number;
 }
 
+// put kudos 칭찬 대상
+export interface PutKudosTargetRequest {
+  sectionId: number;
+  userId: number;
+}
+
+export interface PutKudosTargetResponse {
+  code: number;
+  message: number;
+  data: KudosTargetData[];
+}
+
+export interface KudosTargetData {
+  kudosId: number;
+  sectionId: number;
+  userId: number;
+}
+
 // put 담당자
 export interface PutActionItemsRequest {
   teamId: number;
