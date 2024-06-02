@@ -120,8 +120,11 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
         setIsLoading(false);
       }
     };
-
-    filtered.forEach(item => fetchThumbnailsData(item));
+    if (filtered.length) {
+      filtered.forEach(item => fetchThumbnailsData(item));
+    } else {
+      setIsLoading(false);
+    }
   }, [data]);
 
   if (!user) return;

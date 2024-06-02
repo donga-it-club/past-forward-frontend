@@ -32,7 +32,7 @@ const RetroListPage = () => {
 
   const [query, setQuery] = useState<GetRetrospectiveRequest>({
     page: 0,
-    size: 10,
+    size: 9,
     order: 'NEWEST',
     status: 'ALL',
     keyword: '',
@@ -160,8 +160,9 @@ const RetroListPage = () => {
   };
 
   const handleBookmarkButton = (option: boolean) => {
+    setCurrentPage(1);
     setQuery(prev => {
-      return { ...prev, isBookmarked: option };
+      return { ...prev, page: 0, isBookmarked: option };
     });
   };
 
