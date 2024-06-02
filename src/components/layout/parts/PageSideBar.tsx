@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PeopleFill, Person, PersonFill, PlusCircleFill } from 'react-bootstrap-icons';
+import { RiFolder6Fill } from 'react-icons/ri';
 import { Link, useNavigate } from 'react-router-dom';
 import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Flex } from '@chakra-ui/react';
 import { useRecoilState } from 'recoil';
@@ -58,6 +59,18 @@ const PageSideBar = () => {
       </S.ProfileLink>
 
       <Accordion allowMultiple color="black">
+        {/* Project */}
+        <AccordionItem border="1px solid gray">
+          <AccordionButton>
+            <S.MiniBox>
+              <Flex alignItems="center" padding="2px 10px">
+                <AccordionIcon /> <RiFolder6Fill style={{ marginRight: '5px', color: '#111b47' }} />
+                <S.ProjectMenuText id="leftside_teamproject">Project </S.ProjectMenuText>
+              </Flex>
+            </S.MiniBox>
+          </AccordionButton>
+        </AccordionItem>
+
         {/* Personal Retro */}
         <AccordionItem border="1px solid gray">
           <AccordionButton>

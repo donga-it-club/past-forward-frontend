@@ -171,3 +171,13 @@ export const AlarmContents = styled.div`
   padding: 2px 5px;
   margin-bottom: 20px;
 `;
+
+export const ProjectMenuText = styled.a`
+  color: white;
+  background-color: #111b47;
+  border-radius: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-weight: 400;
+  text-decoration: none;
+`;
