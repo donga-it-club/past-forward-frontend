@@ -19,19 +19,31 @@ export const Container = styled.div`
   margin: 30px;
   position: sticky;
   align-items: center;
+  @media (max-width: 580px) {
+    display: flex;
+    justify-content: space-between;
+  }
 `;
 
 export const LeftBox = styled.div`
   margin: auto 10px;
   justify-content: flex-start;
   display: flex;
-  min-width: fit-content;
+  min-width: max-content;
+
+  @media (max-width: 885px) {
+    display: none;
+  }
 `;
 
 export const RightBox = styled.div`
+  display: flex;
   text-align: center;
+  align-items: center;
   margin: auto 0;
-  flex-direction: row-reverse;
+  @media (max-width: 580px) {
+    justify-content: flex-end;
+  }
 `;
 
 interface IconProps {
@@ -85,24 +97,19 @@ export const SideBarBGContainer = styled.div`
 
 export const LogoBox = styled.div``;
 
-interface ColorProps {
-  color: string;
-}
-
-export const LogoText = styled.a<ColorProps>`
+export const LogoText = styled.a`
   display: flex;
   flex-grow: 1;
   margin: auto 0;
-  color: ${props => props['color']};
-  width: 40vh;
   min-width: fit-content;
   font-size: 25px;
   gap: 10px;
   font-weight: bold;
   border: 20px;
-  padding: 10px 20px;
+  padding: 0 20px;
   text-decoration: none;
   padding-top: 10px;
+  align-items: center;
 `;
 
 export const ProfileBox = styled.div`
@@ -150,7 +157,8 @@ export const GetStaredButton = styled.button`
   padding: 5px;
   background-color: #111b47;
   color: white;
-  border-radius: 5px;
+  border-radius: 10px;
+  margin: 10px 40%;
 
   @media (max-width: 800px) {
     font-size: 12px;

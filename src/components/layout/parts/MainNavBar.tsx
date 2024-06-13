@@ -1,6 +1,6 @@
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { useNavigate } from 'react-router-dom';
-import { Button, Drawer, DrawerContent, DrawerOverlay, useDisclosure } from '@chakra-ui/react';
+import { Button, Drawer, DrawerCloseButton, DrawerContent, DrawerOverlay, useDisclosure } from '@chakra-ui/react';
 import { useRecoilState } from 'recoil';
 import LogoBox from './LogoBox';
 import MenuBar from './MenuBar';
@@ -22,10 +22,6 @@ const MainNavBar = () => {
     navigate('/my');
   };
 
-  // const navigateToCreate = () => {
-  //   navigate('/create');
-  // };
-
   return (
     <>
       <div
@@ -45,21 +41,16 @@ const MainNavBar = () => {
           <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
             <DrawerOverlay />
             <DrawerContent>
-              <PageSideBar />
+              <DrawerCloseButton />
+              <PageSideBar onClose={onClose} />
             </DrawerContent>
           </Drawer>
           <MenuBar />
           <LogoBox />
 
           <S.RightBox>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'flex-end',
-              }}
-            >
-              {isLoggedIn ? (
+            {isLoggedIn ? (
+              <>
                 <S.IconStyle border-radius="10px">
                   <div
                     style={{
@@ -78,25 +69,19 @@ const MainNavBar = () => {
                     </p>
                   </div>
                 </S.IconStyle>
-              ) : null}
-              <Alarm />
+                <Alarm />
+              </>
+            ) : null}
 
-              <Button
-                style={{ marginRight: '0.3rem' }}
-                variant="ghost"
-                onClick={handleLoginOrLogout}
-                id="header_login"
-                fontSize="15px"
-              >
-                {isLoggedIn ? 'Logout' : 'Login'}
-              </Button>
-              {/* <S.GetStaredButton
-                onClick={navigateToCreate}
-                id={isLoggedIn ? 'header_startpf_login' : 'header_startpf_logout'}
-              >
-                Get Started for Free
-              </S.GetStaredButton> */}
-            </div>
+            <Button
+              style={{ marginRight: '0.3rem' }}
+              variant="ghost"
+              onClick={handleLoginOrLogout}
+              id="header_login"
+              fontSize="15px"
+            >
+              {isLoggedIn ? 'Logout' : 'Login'}
+            </Button>
           </S.RightBox>
         </S.Container>
       </div>

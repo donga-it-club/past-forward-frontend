@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text } from '@chakra-ui/react';
-import logo from '@/../public/logo.svg';
+import logo from '@/../public/PastForwardLogo.svg';
 import * as S from '@/styles/user/DefaultHeader.style';
 
 function DefaultHeader() {
