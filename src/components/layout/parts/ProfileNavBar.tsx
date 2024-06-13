@@ -32,11 +32,11 @@ const PageNavBar = () => {
         <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
           <DrawerOverlay />
           <DrawerContent>
-            <PageSideBar />
+            <PageSideBar onClose={onClose} />
           </DrawerContent>
         </Drawer>
-        <Flex flexDirection={{ base: 'column', md: 'row' }} w="100%">
-          <Flex>
+        <Flex justifyContent="space-between" flexGrow={1}>
+          <Flex minW="fit-content">
             <LogoBox />
             <MenuBar />
           </Flex>

@@ -1,13 +1,11 @@
 import React from 'react';
 import { FaLightbulb } from 'react-icons/fa6';
-import { Flex } from '@chakra-ui/react';
 import * as S from '@/styles/createRetro/DescriptionBox.style';
 
 const DescriptionBox: React.FC = () => {
   return (
     <>
       <S.DescriptionContainer>
-        <Flex></Flex>
         <S.TipBox>
           <div style={{ margin: 'auto 5px' }}>
             <FaLightbulb />
