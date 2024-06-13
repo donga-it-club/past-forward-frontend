@@ -1,18 +1,31 @@
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { PeopleFill, Person, PersonFill, PlusCircleFill } from 'react-bootstrap-icons';
 import { RiFolder6Fill } from 'react-icons/ri';
 import { Link, useNavigate } from 'react-router-dom';
-import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Flex } from '@chakra-ui/react';
+import {
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  Button,
+  Flex,
+} from '@chakra-ui/react';
 import { useRecoilState } from 'recoil';
 import { GetRetrospectiveData } from '@/api/@types/Retrospectives';
 import { queryGetRetrospective } from '@/api/retrospectivesApi/getRetrospective';
+import DefaultHeader from '@/components/user/DefaultHeader';
 import UserEmail from '@/components/user/UserEmail';
 import UserNickname from '@/components/user/UserNickname';
 import UserProfileImage from '@/components/user/UserProfileImage';
 import { userNicknameState } from '@/recoil/user/userAtom';
 import * as S from '@/styles/layout/layout.style';
 
-const PageSideBar = () => {
+interface Props {
+  onClose: () => void;
+}
+
+const PageSideBar: FC<Props> = ({ onClose }) => {
   const [userNickname, setUserNickname] = useRecoilState(userNicknameState);
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const [retro, setRetro] = useState<GetRetrospectiveData['data']>();
@@ -45,6 +58,13 @@ const PageSideBar = () => {
 
   return (
     <S.SideBarBGContainer>
+      <Flex justifyContent="flex-end" margin="5px">
+        <Button onClick={onClose}>X</Button>
+      </Flex>
+      <div onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
+        <DefaultHeader />
+      </div>
+
       <S.LogoBox />
       <S.ProfileLink onClick={navigateToMy}>
         <UserProfileImage width="100px" />

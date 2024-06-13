@@ -1,10 +1,11 @@
 import { useNavigate } from 'react-router-dom';
-import logo from '@/../public/MainPageLogo.svg';
-import * as S from '@/styles/Home/home.style';
-import * as L from '@/styles/layout/layout.style';
+import { Button, Flex, Image } from '@chakra-ui/react';
+import { useAuth } from '@/hooks/useAuth';
+import * as S from '@/styles/layout/layout.style';
 
 const MainDesign = () => {
   const navigate = useNavigate();
+  const { isLoggedIn, handleLoginOrLogout } = useAuth();
 
   const navigateToCreate = () => {
     navigate('/create');
@@ -12,38 +13,39 @@ const MainDesign = () => {
 
   return (
     <div style={{ paddingTop: '130px' }}>
-      <div style={{ height: '100vh' }}>
-        <S.TopTriangleContainer>
-          <S.TopText>
-            개인회고와 팀 회고 템플릿을 동시에 제공하는 회고 웹페이지입니다. <br />
-            우리는 개인과 팀이 모두 발전할 수 있도록, <br />
-            과거의 경험을 효과적으로 되새기고 배우는 것을 지원합니다.
-          </S.TopText>
-          <S.BottomText>
-            과거를 회고하며 미래로 나아가는 과정을
-            <br /> 촉진하는 의미를 가진 이름으로 <br />
-            &apos; Past&apos; (과거)와 &apos;Forward &apos;(앞으로 나아가다)를 결합하여 비전을 표현합니다.
-          </S.BottomText>
-        </S.TopTriangleContainer>
-        <S.BrandContainer>
-          <img src={logo} style={{ paddingLeft: '80px', width: '300px' }} />
-          <S.BrandTextBox>
-            <S.BrandSmallText style={{ paddingLeft: '20%' }}>Moving</S.BrandSmallText>
-            <L.LogoText color="white" style={{ fontSize: '70px' }}>
-              Forward
-            </L.LogoText>
-          </S.BrandTextBox>
-          <S.BrandTextBox>
-            <S.BrandSmallText style={{ paddingLeft: '45%' }}>From the</S.BrandSmallText>
-            <L.LogoText color="white" style={{ fontSize: '70px' }}>
-              Past
-            </L.LogoText>
-          </S.BrandTextBox>
-          <S.StartedFreeButton onClick={navigateToCreate} id="home_startpf">
-            Get Started for Free
-          </S.StartedFreeButton>
-        </S.BrandContainer>
-      </div>
+      {/* <Text
+          position="absolute"
+          left="40%"
+          fontSize="1.2rem"
+          top="500px"
+          fontFamily="serif"
+          color="blue.800"
+          fontWeight={500}
+        >
+          Moving Forward from the Past
+        </Text> */}
+      <Image src="mainDesign.svg" width="70%" margin="0 auto" marginTop={100} />
+      <Flex
+        padding="0 auto"
+        margin={{ md: '20px auto', base: '10px' }}
+        justifyContent="center"
+        fontSize={{ md: '20px', base: '15px' }}
+        flexDirection="column"
+      >
+        <Flex justifyContent="center" margin="0 20px">
+          과거를 회고하며 미래로 나아가는 과정을 촉진하는 의미를 가진 이름으로 &apos; Past&apos; (과거)와 &apos;Forward
+          &apos;(앞으로 나아가다)를 결합하여 비전을 표현합니다.
+        </Flex>
+        <S.GetStaredButton
+          onClick={navigateToCreate}
+          id={isLoggedIn ? 'header_startpf_login' : 'header_startpf_logout'}
+        >
+          Get Started for Free
+        </S.GetStaredButton>
+        <Button variant="ghost" onClick={handleLoginOrLogout} id="header_login" fontSize="15px" margin="10px 40%">
+          {isLoggedIn ? 'Logout' : 'Login'}
+        </Button>
+      </Flex>
     </div>
   );
 };
