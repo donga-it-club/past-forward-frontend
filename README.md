@@ -3,6 +3,7 @@
 ![mainPage](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/b19cc815-677f-42e8-ab35-f7acfa4bf988) <br>
 
 <div align='center'>
+
 [💻 사이트 바로가기](https://www.pastforward.link/)
   <br>
 </div>
@@ -191,7 +192,7 @@
   - 회고보드를 만들 수 있는 create 페이지 이동의 아코디언 형식의 UI가 구성되어있습니다.
   - 회고 리스트 페이지 이동의
 
-| 레이아웃 |                                                                                                              |
+| 레이아웃                                                                                                               |
 | ---------------------------------------------------------------------------------------------------------------------- |
 | ![layout](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/bce14804-789e-40c4-977b-36bcf288aa0e)
 
