@@ -8,6 +8,9 @@ export const BoardContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+  @media screen and (max-width: 800px) {
+    display: inline-block;
+  }
 `;
 
 export const Box = styled.div`
@@ -17,6 +20,10 @@ export const Box = styled.div`
   margin-top: 30px;
   margin-left: 40px;
   margin-right: 40px;
+  @media screen and (max-width: 800px) {
+    width: 260px;
+    height: auto;
+  }
 `;
 
 export const ImgBox = styled.div`
@@ -24,16 +31,21 @@ export const ImgBox = styled.div`
   margin: 5px;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 800px) {
+    height: 140px;
+  }
 `;
 
 export const InfoBox = styled.div`
   padding-left: 10px;
   padding-right: 10px;
   display: grid;
-  /* grid-template-columns: 3fr 1fr; */
   grid-template-columns: 135px 45px;
   grid-template-rows: repeat(3, 1fr);
   align-content: stretch;
+  @media screen and (max-width: 800px) {
+    grid-template-columns: 180px 60px;
+  }
 `;
 
 export const RetroTitle = styled.span`

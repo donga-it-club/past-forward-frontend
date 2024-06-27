@@ -137,7 +137,7 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
     );
   }
   return (
-    <div>
+    <>
       {viewMode === 'board' && (
         <S.BoardContainer>
           {filteredData.map(item => (
@@ -215,7 +215,7 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
           <S.ListContainer>
             <S.ListTopBox>
               <S.ListTypeBox>회고유형</S.ListTypeBox>
-              <S.ListTitleBox>회고이름</S.ListTitleBox> <S.ListUserBox>생성자</S.ListUserBox>
+              <S.ListTitleBox>회고이름</S.ListTitleBox> <S.ListUserBox>회고리더</S.ListUserBox>
               <S.ListTimeBox>마지막 수정시간</S.ListTimeBox> <S.ListBookmarkBox>즐겨찾기</S.ListBookmarkBox>
               <S.ListLinkBox>회고 진행 여부</S.ListLinkBox>
               <S.ListProgressBox>회고 수정</S.ListProgressBox>
@@ -282,7 +282,7 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
           </S.ListContainer>
         </div>
       )}
-    </div>
+    </>
   );
 };
 
