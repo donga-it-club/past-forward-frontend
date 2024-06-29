@@ -217,68 +217,61 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
               <S.ListTypeBox>회고유형</S.ListTypeBox>
               <S.ListTitleBox>회고이름</S.ListTitleBox> <S.ListUserBox>회고리더</S.ListUserBox>
               <S.ListTimeBox>마지막 수정시간</S.ListTimeBox> <S.ListBookmarkBox>즐겨찾기</S.ListBookmarkBox>
-              <S.ListLinkBox>회고 진행 여부</S.ListLinkBox>
-              <S.ListProgressBox>회고 수정</S.ListProgressBox>
+              <S.ListProgressBox>회고 진행 여부</S.ListProgressBox>
+              <S.ListReviseBox>회고 수정</S.ListReviseBox>
             </S.ListTopBox>
-            <div>
-              {filteredData.map(item => (
-                <S.ItemBox key={item.id}>
-                  <S.ListTypeBox>
-                    <div style={{ padding: '5px' }}>
-                      {item.teamId && <MdPeople size={20} />} {!item.teamId && <IoMdPerson size={20} />}
-                    </div>
-                  </S.ListTypeBox>
-                  <S.ListTitleBox
-                    onClick={() => navigate(`/sections?retrospectiveId=${item.id}&teamId=${item.teamId}`)}
-                  >
-                    {item.title}
-                  </S.ListTitleBox>
-                  <S.ListUserBox>
-                    {item.username} {user.userId === item.userId && <S.ListRetroLeader>본인</S.ListRetroLeader>}
-                  </S.ListUserBox>
-                  <S.ListTimeBox>
-                    {item.updatedDate && item.updatedDate !== item.startDate ? `${item.updatedDate}` : item.startDate}
-                  </S.ListTimeBox>
-                  <S.ListBookmarkBox>
-                    {item.isBookmarked && (
-                      <S.StyledFaStar onClick={() => handleBookmark(item.id)} style={{ color: '#fcea12' }} size="19" />
-                    )}
-                    {!item.isBookmarked && <S.StyledCiStar onClick={() => handleBookmark(item.id)} size={20} />}
-                  </S.ListBookmarkBox>
-                  <S.ListProgressBox>
-                    {item.status === 'NOT_STARTED' && (
-                      <RxCounterClockwiseClock
-                        size={20}
-                        style={{ alignItems: 'start', justifySelf: 'end', color: '#5B5B5B' }}
-                      />
-                    )}
-                    {item.status === 'IN_PROGRESS' && (
-                      <CgTimelapse size={20} style={{ alignItems: 'start', justifySelf: 'end', color: '#57AD5A' }} />
-                    )}
-                    {item.status === 'COMPLETED' && (
-                      <FaRegCircleCheck
-                        size={20}
-                        style={{ alignItems: 'start', justifySelf: 'end', color: '#FF1818' }}
-                      />
-                    )}
-                  </S.ListProgressBox>
-                  <S.ListLinkBox>
-                    <S.StyledHiOutlineDotsHorizontal
-                      style={{ color: '#33363F' }}
+            {filteredData.map(item => (
+              <S.ItemBox key={item.id}>
+                <S.ListTypeBox>
+                  <div style={{ padding: '5px' }}>
+                    {item.teamId && <MdPeople size={20} />} {!item.teamId && <IoMdPerson size={20} />}
+                  </div>
+                </S.ListTypeBox>
+                <S.ListTitleBox onClick={() => navigate(`/sections?retrospectiveId=${item.id}&teamId=${item.teamId}`)}>
+                  {item.title}
+                </S.ListTitleBox>
+                <S.ListUserBox>
+                  {item.username} {user.userId === item.userId && <S.ListRetroLeader>본인</S.ListRetroLeader>}
+                </S.ListUserBox>
+                <S.ListTimeBox>
+                  {item.updatedDate && item.updatedDate !== item.startDate ? `${item.updatedDate}` : item.startDate}
+                </S.ListTimeBox>
+                <S.ListBookmarkBox>
+                  {item.isBookmarked && (
+                    <S.StyledFaStar onClick={() => handleBookmark(item.id)} style={{ color: '#fcea12' }} size="19" />
+                  )}
+                  {!item.isBookmarked && <S.StyledCiStar onClick={() => handleBookmark(item.id)} size={20} />}
+                </S.ListBookmarkBox>
+                <S.ListProgressBox>
+                  {item.status === 'NOT_STARTED' && (
+                    <RxCounterClockwiseClock
                       size={20}
-                      onClick={() => {
-                        if (user.userId === item.userId) {
-                          navigate(`/revise?retrospectiveId=${item.id}&teamId=${item.teamId}`);
-                        } else {
-                          openModalForItem(item.id);
-                        }
-                      }}
+                      style={{ alignItems: 'start', justifySelf: 'end', color: '#5B5B5B' }}
                     />
-                    <Modal onClose={closeModalForItem} isOpen={openModalId === item.id} />
-                  </S.ListLinkBox>
-                </S.ItemBox>
-              ))}
-            </div>
+                  )}
+                  {item.status === 'IN_PROGRESS' && (
+                    <CgTimelapse size={20} style={{ alignItems: 'start', justifySelf: 'end', color: '#57AD5A' }} />
+                  )}
+                  {item.status === 'COMPLETED' && (
+                    <FaRegCircleCheck size={20} style={{ alignItems: 'start', justifySelf: 'end', color: '#FF1818' }} />
+                  )}
+                </S.ListProgressBox>
+                <S.ListReviseBox>
+                  <S.StyledHiOutlineDotsHorizontal
+                    style={{ color: '#33363F' }}
+                    size={20}
+                    onClick={() => {
+                      if (user.userId === item.userId) {
+                        navigate(`/revise?retrospectiveId=${item.id}&teamId=${item.teamId}`);
+                      } else {
+                        openModalForItem(item.id);
+                      }
+                    }}
+                  />
+                  <Modal onClose={closeModalForItem} isOpen={openModalId === item.id} />
+                </S.ListReviseBox>
+              </S.ItemBox>
+            ))}
           </S.ListContainer>
         </div>
       )}

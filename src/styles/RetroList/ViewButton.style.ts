@@ -41,7 +41,7 @@ export const ViewButton = styled.button<ViewButtonProps>`
     color: ${props => (props.activePart === 'list' ? 'white' : '#505f98')};
   }
 
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 768px) {
     width: 100px;
   }
 `;
@@ -50,7 +50,7 @@ export const Text = styled.span`
   font-size: 13px;
   font-weight: bold;
   padding-left: 10px;
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 768px) {
     display: none !important;
   }
 `;
