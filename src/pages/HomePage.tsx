@@ -8,7 +8,7 @@ import MainDesign from '@/components/home/MainDesign';
 
 const App = () => {
   return (
-    <>
+    <div style={{ backgroundColor: 'rgb(247, 250, 252)' }}>
       <a id="Home">
         <MainDesign />
       </a>
@@ -24,7 +24,7 @@ const App = () => {
       <a id="Contact">
         <Contact />
       </a>
-    </>
+    </div>
   );
 };
 
