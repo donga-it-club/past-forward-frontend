@@ -6,6 +6,14 @@ export const Container = styled.div`
   grid-template-rows: 80px 10px 30px auto;
   padding-left: 115px;
   padding-right: 115px;
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: auto;
+  }
 `;
 
 export const Title = styled.span`
@@ -14,6 +22,9 @@ export const Title = styled.span`
   padding-bottom: 10px;
   align-self: center;
   margin-top: 10px;
+  @media screen and (max-width: 768px) {
+    font-size: large;
+  }
 `;
 
 export const SubTitle = styled.span`
@@ -22,6 +33,11 @@ export const SubTitle = styled.span`
   display: block;
   align-self: center;
   margin-top: 5px;
+  @media screen and (max-width: 768px) {
+    font-size: small;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
 `;
 
 export const TitleBox = styled.span`
@@ -52,13 +68,26 @@ export const BackgroundImg = styled.img`
   width: 1100px;
   height: 595px;
   margin-top: 10px;
-  z-index: -1;
+  @media screen and (max-width: 768px) {
+    width: 100vw;
+    height: auto;
+    margin: 0;
+  }
+`;
+
+export const ResponsiveContainer = styled.div`
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 `;
 
 export const SliderContainer = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
+  align-items: center;
 `;
 
 export const Img = styled.img<{ active: boolean }>`
@@ -70,6 +99,11 @@ export const Img = styled.img<{ active: boolean }>`
   display: block;
   transition: opacity 0.5s ease-in-out;
   opacity: ${({ active }) => (active ? 1 : 0)};
+  @media screen and (max-width: 768px) {
+    width: 80vw;
+    height: auto;
+    padding: 0px;
+  }
 `;
 
 export const DotContainer = styled.div`
@@ -91,6 +125,11 @@ export const Dot = styled.div<{ active: boolean }>`
   background-color: ${({ active }) => (active ? '#F3F3F3' : 'white')};
   margin: 0 5px;
   cursor: pointer;
+  @media screen and (max-width: 768px) {
+    width: 5px;
+    height: 5px;
+    margin: 0 2px;
+  }
 `;
 
 export const Line = styled.div`
@@ -100,4 +139,8 @@ export const Line = styled.div`
   background-color: '#111b47';
   justify-self: center;
   align-self: center;
+  @media screen and (max-width: 768px) {
+    width: 70vw;
+    height: auto;
+  }
 `;

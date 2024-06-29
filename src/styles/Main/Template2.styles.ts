@@ -7,6 +7,14 @@ export const Container = styled.div`
   padding-left: 115px;
   padding-right: 115px;
   margin-bottom: 100px;
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: auto;
+  }
 `;
 
 export const Title = styled.span`
@@ -15,6 +23,9 @@ export const Title = styled.span`
   padding-bottom: 10px;
   align-self: center;
   margin-top: 10px;
+  @media screen and (max-width: 768px) {
+    font-size: large;
+  }
 `;
 
 export const SubTitle = styled.span`
@@ -23,6 +34,11 @@ export const SubTitle = styled.span`
   display: block;
   align-self: center;
   margin-top: 5px;
+  @media screen and (max-width: 768px) {
+    font-size: small;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
 `;
 
 export const TitleBox = styled.span`
@@ -54,6 +70,10 @@ export const Img = styled.img`
   height: auto;
   justify-self: center;
   align-self: center;
+  @media screen and (max-width: 768px) {
+    width: 100vw;
+    height: auto;
+  }
 `;
 
 export const Line = styled.div`
@@ -63,4 +83,8 @@ export const Line = styled.div`
   background-color: '#111b47';
   justify-self: center;
   align-self: center;
+  @media screen and (max-width: 768px) {
+    width: 70vw;
+    height: auto;
+  }
 `;

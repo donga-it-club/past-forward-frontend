@@ -35,7 +35,6 @@ export const Poster = styled.div`
     grid-row: 2/4;
   }
   position: relative;
-  z-index: -1;
 `;
 
 export const PosterTitle = styled.span`
@@ -202,6 +201,8 @@ export const ButtonText = styled.span`
 `;
 
 export const ContactButtonContainer = styled.div`
+  z-index: 1;
+  position: relative;
   height: 80px;
   background-color: #ececec;
   display: flex;
