@@ -12,7 +12,7 @@ const App = () => {
       <a id="Home">
         <MainDesign />
       </a>
-      <a id="Template">
+      <a id="Overview">
         <Template1 />
       </a>
       <Template2 />

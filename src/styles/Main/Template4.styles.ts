@@ -52,7 +52,6 @@ export const BackgroundImg = styled.img`
   width: 1100px;
   height: 595px;
   margin-top: 10px;
-  z-index: -1;
 `;
 
 export const SliderContainer = styled.div`

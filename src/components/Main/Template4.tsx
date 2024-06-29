@@ -5,7 +5,7 @@ import Image2 from '@/assets/Template4-2.png';
 import * as S from '@/styles/Main/Template4.styles';
 
 const Template4: React.FC = () => {
-  const images = [Image1, Image2]; // 이미지 파일명에 따라 수정하세요
+  const images = [Image1, Image2];
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleDotClick = (index: number) => {
