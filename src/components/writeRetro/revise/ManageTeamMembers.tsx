@@ -103,9 +103,11 @@ const ManageTeamMembers: FC<Props> = ({ teamId, members }) => {
           검색
         </S.ManageSearchButton> */}
       </Flex>
-      <Flex flexDirection="row-reverse" margin="auto 50px">
+      {/* <Flex flexDirection="row-reverse" margin="auto 50px">
         팀원 삭제 후 새로고침하면 해당 팀원을 제외한 팀원리스트를 볼 수 있습니다.
-      </Flex>
+      </Flex> */}
+
+      <S.ManageAlarm>팀원 삭제 후 새로고침하면 해당 팀원을 제외한 팀원리스트를 볼 수 있습니다.</S.ManageAlarm>
       <TableContainer marginTop="40px">
         <Table variant="simple">
           <Thead>

@@ -6,10 +6,12 @@ const BackButton: React.FC = () => {
   const navigate = useNavigate();
   return (
     <>
-      <S.Button onClick={() => navigate(-1)}>
-        <MdKeyboardDoubleArrowLeft size={14} />
-        &nbsp; 회고 페이지로 돌아가기
-      </S.Button>
+      <S.ButtonBox>
+        <S.Button onClick={() => navigate(-1)}>
+          <MdKeyboardDoubleArrowLeft size={14} />
+          &nbsp; 회고 페이지로 돌아가기
+        </S.Button>
+      </S.ButtonBox>
     </>
   );
 };

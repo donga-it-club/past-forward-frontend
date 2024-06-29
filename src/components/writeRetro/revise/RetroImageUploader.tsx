@@ -56,13 +56,13 @@ const RetroImageUploader: FC<Props> = ({ image, onChange, setImageUUID, setPrevi
       />
 
       <div style={{ margin: '0 auto' }}>
-        <Button colorScheme="brand" variant="outline" margin="0 30px" onClick={handleUploadButtonClick}>
+        <Button colorScheme="brand" variant="outline" margin="0 30px 20px" onClick={handleUploadButtonClick}>
           <MdOutlineFileUpload style={{ margin: '0 5px' }} />
           {imageUUID ? '이미지 변경하기' : '이미지 첨부하기'}
           <input type="file" ref={inputRef} onChange={handleImageChange} accept="image/*" hidden></input>
         </Button>
         {imageUUID && (
-          <Button colorScheme="brand" variant="outline" margin="0 30px" onClick={DeleteImage}>
+          <Button colorScheme="brand" variant="outline" margin="0 30px 20px" onClick={DeleteImage}>
             삭제하기
           </Button>
         )}

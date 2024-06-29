@@ -2,25 +2,73 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   margin: 0 30px;
+  @media (max-width: 800px) {
+    position: relative;
+    margin: 0 auto;
+  }
 `;
 export const TitleBox = styled.div`
   display: flex;
+  @media (max-width: 800px) {
+    display: block;
+  }
+`;
+
+export const RetroTitleBox = styled.div`
+  display: flex;
+  /* @media (max-width: 800px) {
+    display: block;
+  } */
+  @media (max-width: 1000px) {
+    display: block;
+  }
+`;
+
+export const TitleStyleBox = styled.div`
+  display: flex;
+  /* @media (max-width: 800px) {
+    display: block;
+  } */
+  @media (max-width: 1000px) {
+    display: block;
+  }
 `;
 
 export const TitleText = styled.p`
   width: auto;
+  max-width: 1200px;
+  height: auto;
   font-size: 30px;
   font-weight: 700;
   color: #434343;
+  line-height: 38px;
   margin-top: 3px;
   margin-left: 13px;
+  margin-bottom: 5px;
+  @media (max-width: 800px) {
+    /* width: 55vw; */
+    width: 85vw;
+    margin-left: 0px;
+  }
+  @media (max-width: 1000px) {
+    margin-left: 0px;
+  }
 `;
 
 export const SubTitleText = styled.p`
-  height: 20px;
+  max-width: 1170px;
+  height: auto;
   font-size: 20px;
   font-weight: 600;
+  line-height: 23px;
   color: #8d8d8d;
+  margin-left: 55px;
+  @media (max-width: 1000px) {
+    width: 85vw;
+    margin-top: 10px;
+    margin-left: 0px;
+    margin-bottom: 20px;
+  }
 `;
 
 export const SaveSettingBox = styled.div`
@@ -55,6 +103,10 @@ export const SettingButton = styled.div`
 export const SectionBox = styled.div`
   display: flex;
   margin-top: 10px;
+  @media (max-width: 800px) {
+    display: block;
+    margin: 10px auto;
+  }
 `;
 
 export const FrameStyle = styled.div`
@@ -70,6 +122,14 @@ export const FrameStyle = styled.div`
   padding: 15px;
   margin-left: 10px;
   padding-bottom: 80px;
+  @media (max-width: 800px) {
+    box-shadow:
+      0.3px 0 0 0.3px #4d5e80,
+      0 0.3px 0 0.3px #4d5e80,
+      0 -0.3px 0 0.3px #4d5e80;
+    border-radius: 10px;
+    margin: 0 auto 35px;
+  }
 `;
 
 export const LabelStyle = styled.div<{ color: string }>`

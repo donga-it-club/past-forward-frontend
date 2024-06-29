@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Flex } from '@chakra-ui/react';
+// import { Flex } from '@chakra-ui/react';
 import { RetrospectiveData } from '@/api/@types/Retrospectives';
 import { sectionData } from '@/api/@types/Section';
 import { TemplateNameData } from '@/api/@types/TeamController';
@@ -9,7 +9,7 @@ import { RetrospectiveService } from '@/api/services/Retrospectives';
 import { SectionServices } from '@/api/services/Section';
 import { TeamControllerServices } from '@/api/services/TeamController';
 import { UserServices } from '@/api/services/User';
-import { ExplainButton } from '@/components/writeRetro/explainModal/explainRetro';
+// import { ExplainButton } from '@/components/writeRetro/explainModal/explainRetro';
 import { AddTask } from '@/components/writeRetro/layout/AddTask';
 import Label from '@/components/writeRetro/layout/Label';
 import Title from '@/components/writeRetro/layout/Title';
@@ -81,52 +81,48 @@ const RetroTeamPage = () => {
   return (
     <S.Container>
       {retro && <Title name={retro.title} description={retro.description} user={user} retro={retro} />}
-      <ExplainButton templateId={retro.templateId}></ExplainButton>
+      {/* <ExplainButton templateId={retro.templateId}></ExplainButton> */}
 
       <S.SectionBox>
-        <Flex flexDirection="column" margin="0 auto">
-          <Flex>
-            {template
-              ? template.map(title => (
-                  <>
-                    <S.FrameStyle>
-                      <Label
-                        labelName={title.name}
-                        labelType="dark"
-                        taskCount={section.filter(data => data.sectionName === title.name).length}
-                      />
-                      <AddTask
-                        template={title.id}
-                        retrospectiveId={retro?.retrospectiveId}
+        {/* <Flex flexDirection="column" margin="0 auto">
+          <Flex> */}
+        {template
+          ? template.map(title => (
+              <>
+                <S.FrameStyle>
+                  <Label
+                    labelName={title.name}
+                    labelType="dark"
+                    taskCount={section.filter(data => data.sectionName === title.name).length}
+                  />
+                  <AddTask template={title.id} retrospectiveId={retro?.retrospectiveId} setRendering={setRendering} />
+                  {section
+                    .filter(key => key.sectionName === title.name)
+                    .map(section => (
+                      <TeamTask
+                        section={section}
                         setRendering={setRendering}
+                        teamId={teamId ?? null}
+                        imageURL={section.thumbnail}
+                        user={user}
+                        fetchSection={fetchSection}
+                        key={section.sectionId}
                       />
-                      {section
-                        .filter(key => key.sectionName === title.name)
-                        .map(section => (
-                          <TeamTask
-                            section={section}
-                            setRendering={setRendering}
-                            teamId={teamId ?? null}
-                            imageURL={section.thumbnail}
-                            user={user}
-                            fetchSection={fetchSection}
-                            key={section.sectionId}
-                          />
-                        ))}
-                    </S.FrameStyle>
-                  </>
-                ))
-              : PersonalSectionTitleName.map(title => (
-                  <S.FrameStyle>
-                    <Label
-                      labelName={title.title}
-                      labelType="dark"
-                      taskCount={section.filter(data => data.sectionName === title.title).length}
-                    />
-                  </S.FrameStyle>
-                ))}
-          </Flex>
-        </Flex>
+                    ))}
+                </S.FrameStyle>
+              </>
+            ))
+          : PersonalSectionTitleName.map(title => (
+              <S.FrameStyle>
+                <Label
+                  labelName={title.title}
+                  labelType="dark"
+                  taskCount={section.filter(data => data.sectionName === title.title).length}
+                />
+              </S.FrameStyle>
+            ))}
+        {/* </Flex>
+        </Flex> */}
       </S.SectionBox>
     </S.Container>
   );
