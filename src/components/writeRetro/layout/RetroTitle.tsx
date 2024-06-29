@@ -11,13 +11,17 @@ interface Props {
 const RetroTitle: FC<Props> = ({ teamId, name }) => {
   return (
     <>
-      {teamId ? (
-        <MdPeopleAlt size="40px" color="#434343" style={{ margin: 'auto 0' }} />
-      ) : (
-        <IoPerson size="40px" color="#434343" style={{ margin: 'auto 0' }} />
-      )}
-
-      <S.TitleText>{name}</S.TitleText>
+      <S.RetroTitleBox>
+        <div style={{ width: '40px', height: '40px', position: 'relative', top: '2px' }}>
+          {teamId ? (
+            //  <MdPeopleAlt size="40px" color="#434343" style={{  margin: 'auto 0' }} />
+            <MdPeopleAlt color="#434343" style={{ width: '40px', height: '40px', margin: 'auto 0' }} />
+          ) : (
+            <IoPerson color="#434343" style={{ width: '40px', height: '40px', margin: 'auto 0' }} />
+          )}
+        </div>
+        <S.TitleText>{name}</S.TitleText>
+      </S.RetroTitleBox>
     </>
   );
 };

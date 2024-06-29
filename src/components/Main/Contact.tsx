@@ -56,12 +56,14 @@ const Contact: React.FC = () => {
         <S.TitleContainer>
           <S.Title>Contact</S.Title>
         </S.TitleContainer>
+
         <S.Poster>
           <S.PosterTitle>Past Forward</S.PosterTitle>
           <S.PosterText>Say something to start a chat!</S.PosterText>
           <S.CircleBig></S.CircleBig>
           <S.CircleSmall></S.CircleSmall>
         </S.Poster>
+
         <S.TextContainer>
           <S.EmailContainer>
             <S.EmailTitle>Email</S.EmailTitle>

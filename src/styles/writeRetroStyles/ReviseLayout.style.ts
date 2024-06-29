@@ -4,6 +4,14 @@ export const TitleBox = styled.div`
   margin: 0 10px;
 `;
 
+export const TitleStyle = styled.div`
+  align-items: center;
+  display: flex;
+  @media (max-width: 1000px) {
+    display: block;
+  }
+`;
+
 export const TitleText = styled.p`
   width: auto;
   font-size: 30px;
@@ -212,14 +220,21 @@ export const SettingContainer = styled.div`
   flex-direction: column;
   margin: 20px auto;
   width: 600px;
+  @media (max-width: 1000px) {
+    width: 90vw;
+  }
 `;
 
 export const ManageTitleStyle = styled.p`
-  width: auto;
+  width: 150px;
   height: 46px;
   font-size: 30px;
   font-weight: 500;
   color: #434343;
+  word-break: keep-all;
+  @media (max-width: 1000px) {
+    margin-right: 10px;
+  }
 `;
 
 export const InvitationLinkButton = styled.button`
@@ -234,8 +249,17 @@ export const InvitationLinkButton = styled.button`
   border-radius: 5px;
   margin: auto 0;
   margin-left: 35px;
+  display: inline-block;
   &:hover {
     cursor: pointer;
+  }
+  /* @media (max-width: 800px) {
+    margin-left: 0px;
+    margin-right: 15px;
+  } */
+  @media (max-width: 1000px) {
+    margin-left: 0px;
+    margin-right: 15px;
   }
 `;
 
@@ -244,6 +268,7 @@ export const LinkExpirationText = styled.p`
   font-weight: 500;
   color: #f93333;
   margin: auto 10px;
+  word-break: keep-all;
 `;
 
 export const ManageSearchInput = styled.input`
@@ -270,6 +295,18 @@ export const ManageSearchButton = styled.button`
   border-radius: 4px;
   &:hover {
     cursor: pointer;
+  }
+`;
+
+export const ManageAlarm = styled.div`
+  position: absolute;
+  top: 150px;
+  right: 40px;
+  @media (max-width: 1000px) {
+    position: relative;
+    margin-top: 7px;
+    top: 0;
+    right: 0;
   }
 `;
 
@@ -362,6 +399,7 @@ export const ReaderBox = styled.div`
 export const SettingLine = styled.div`
   border: 1px solid black;
   width: 100%;
+
   margin: 10px 0;
 `;
 

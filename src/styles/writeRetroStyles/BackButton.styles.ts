@@ -1,5 +1,14 @@
 import styled from 'styled-components';
 
+export const ButtonBox = styled.div`
+  display: inline-block;
+  @media (max-width: 1000px) {
+    width: 90vw;
+    display: flex;
+    justify-content: flex-end;
+  }
+`;
+
 export const Button = styled.button`
   display: flex;
   align-items: center;
@@ -15,5 +24,9 @@ export const Button = styled.button`
   color: 'black';
   &:hover {
     cursor: pointer;
+  }
+  @media (max-width: 1000px) {
+    position: relative;
+    top: 10px;
   }
 `;
