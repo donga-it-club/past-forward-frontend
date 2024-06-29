@@ -40,12 +40,19 @@ export const ViewButton = styled.button<ViewButtonProps>`
     background-color: ${props => (props.activePart === 'list' ? '#111B47E6' : 'white')};
     color: ${props => (props.activePart === 'list' ? 'white' : '#505f98')};
   }
+
+  @media screen and (max-width: 768px) {
+    width: 100px;
+  }
 `;
 
 export const Text = styled.span`
   font-size: 13px;
   font-weight: bold;
   padding-left: 10px;
+  @media screen and (max-width: 768px) {
+    display: none !important;
+  }
 `;
 
 export const Icon = styled.img<{ size: number }>`

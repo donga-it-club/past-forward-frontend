@@ -181,26 +181,30 @@ const RetroListPage = () => {
           <S.FilterContainer>
             <ContentsFilter onFilter={handleContentsFilter} />
           </S.FilterContainer>
-          <S.SearchContainer>
-            <Search onSearch={handleSearch} />
-          </S.SearchContainer>
-          <S.SortButtonContainer>
-            <ViewButton viewMode={viewMode} onViewModeChange={handleViewModeChange} />
-          </S.SortButtonContainer>
+          <S.SubContainer>
+            <S.SearchContainer>
+              <Search onSearch={handleSearch} />
+            </S.SearchContainer>
+            <S.SortButtonContainer>
+              <ViewButton viewMode={viewMode} onViewModeChange={handleViewModeChange} />
+            </S.SortButtonContainer>
+          </S.SubContainer>
         </S.Container>
         <S.ControlBarContainer>
           <ProgressButton handleStatus={handleStatus} />
           <OrderButton handleOrder={handleOrder} />
           <BookmarkButton handleBookmarkButton={handleBookmarkButton} />
         </S.ControlBarContainer>
-        <S.Box>
-          <ContentList
-            data={retroData}
-            viewMode={viewMode}
-            searchData={searchData}
-            setBookmarkUpdate={setBookmarkUpdate}
-          />
-        </S.Box>
+        <S.Wrapper>
+          <S.Box>
+            <ContentList
+              data={retroData}
+              viewMode={viewMode}
+              searchData={searchData}
+              setBookmarkUpdate={setBookmarkUpdate}
+            />
+          </S.Box>
+        </S.Wrapper>
         <S.PageContainer>
           <Pagination totalPage={page} limit={5} page={currentPage} setPage={setCurrentPage} />
         </S.PageContainer>

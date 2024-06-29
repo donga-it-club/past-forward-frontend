@@ -37,6 +37,9 @@ export const SearchInput = styled.input`
       cursor: pointer;
     }
   }
+  @media screen and (max-width: 800px) {
+    width: 100%;
+  }
 `;
 export const SearchIconImg = styled.img`
   position: absolute;
