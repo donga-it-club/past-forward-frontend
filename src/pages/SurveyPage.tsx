@@ -11,6 +11,7 @@ import PurposeCheckbox from '@/components/survey/PurposeCheckbox';
 import * as S from '@/styles/survey/SurveyPage.style';
 
 const SurveyPage: React.FC = () => {
+  // Survey 페이지 작업 시 주석 처리하기
   useEffect(() => {
     localStorage.setItem('surveyVisited', 'true');
   }, []);
@@ -85,7 +86,13 @@ const SurveyPage: React.FC = () => {
     <>
       <S.Background>
         <S.WhiteContainer>
-          <Text fontSize="2xl" as="b" style={{ marginTop: '3rem', marginBottom: '4rem' }}>
+          <S.TitleCircle></S.TitleCircle>
+          <Text
+            fontSize="2xl"
+            color={{ base: 'white', md: 'black' }}
+            as="b"
+            style={{ marginTop: '3rem', marginBottom: '4rem', zIndex: '3' }}
+          >
             설문조사
           </Text>
           <AgeInput onAgeChange={handleAgeChange} />

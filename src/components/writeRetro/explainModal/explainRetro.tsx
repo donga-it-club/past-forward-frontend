@@ -65,7 +65,7 @@ export const ExplainKPT = () => {
     <>
       <S.ExplainStyle>
         <div style={{ display: 'flex' }}>
-          <div style={{ display: 'flex', marginTop: '15px', position: 'absolute', left: '154px' }}>
+          <div style={{ display: 'flex', marginTop: '15px', position: 'absolute', left: '120px' }}>
             <IoPersonSharp color="#878787" size="26px" />
             <S.ExplainSideTitle>개인 단위 회고에 추천!</S.ExplainSideTitle>
           </div>
@@ -167,7 +167,7 @@ export const ExplainKudos = () => {
     <>
       <S.ExplainStyle>
         <div style={{ display: 'flex' }}>
-          <div style={{ display: 'flex', marginTop: '15px', position: 'absolute', left: '154px' }}>
+          <div style={{ display: 'flex', marginTop: '15px', position: 'absolute', left: '120px' }}>
             <IoPeopleSharp color="#878787" size="26px" />
             <S.ExplainSideTitle>팀 단위 회고에 추천!</S.ExplainSideTitle>
           </div>
