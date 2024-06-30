@@ -36,6 +36,7 @@ export const TitleStyleBox = styled.div`
 
 export const TitleText = styled.p`
   width: auto;
+  max-width: calc(100vw - 300px);
   max-width: 1200px;
   height: auto;
   font-size: 30px;
@@ -44,11 +45,12 @@ export const TitleText = styled.p`
   line-height: 38px;
   margin-top: 3px;
   margin-left: 13px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+  word-break: keep-all;
   @media (max-width: 800px) {
     /* width: 55vw; */
+    /* margin-left: 0px; */
     width: 85vw;
-    margin-left: 0px;
   }
   @media (max-width: 1000px) {
     margin-left: 0px;
@@ -56,18 +58,31 @@ export const TitleText = styled.p`
 `;
 
 export const SubTitleText = styled.p`
-  max-width: 1170px;
+  width: calc(100vw - 400px);
   height: auto;
   font-size: 20px;
   font-weight: 600;
   line-height: 23px;
   color: #8d8d8d;
   margin-left: 55px;
-  @media (max-width: 1000px) {
+  margin-bottom: 15px;
+  word-break: keep-all;
+  @media (max-width: 800px) {
     width: 85vw;
+  }
+  @media (max-width: 1000px) {
     margin-top: 10px;
     margin-left: 0px;
-    margin-bottom: 20px;
+  }
+`;
+
+export const ExplainBox = styled.div`
+  width: calc(100vw - 350px);
+  display: flex;
+  justify-content: flex-end;
+  @media (max-width: 800px) {
+    width: 85vw;
+    margin-bottom: 10px;
   }
 `;
 
@@ -123,6 +138,7 @@ export const FrameStyle = styled.div`
   margin-left: 10px;
   padding-bottom: 80px;
   @media (max-width: 800px) {
+    width: 90vw;
     box-shadow:
       0.3px 0 0 0.3px #4d5e80,
       0 0.3px 0 0.3px #4d5e80,
@@ -298,6 +314,9 @@ export const TaskMessageLine = styled.div`
   width: 60%;
   margin: auto 10px;
   border-bottom: 1px solid #dadee5;
+  @media (max-width: 800px) {
+    width: 83%;
+  }
 `;
 
 export const TaskMessageStyle = styled.div`

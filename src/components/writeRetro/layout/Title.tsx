@@ -7,6 +7,7 @@ import { RetrospectiveData } from '@/api/@types/Retrospectives';
 import { UserData } from '@/api/@types/Users';
 import postImageToS3 from '@/api/imageApi/postImageToS3';
 import InviteTeamModal from '@/components/inviteTeam/InviteTeamModal';
+import { ExplainButton } from '@/components/writeRetro/explainModal/explainRetro';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 import * as L from '@/styles/writeRetroStyles/ReviseLayout.style';
 
@@ -99,6 +100,9 @@ const Title: FC<Props> = ({ name, description, retro, user }) => {
           <S.SubTitleText>
             {description} <br />
           </S.SubTitleText>
+          <S.ExplainBox>
+            <ExplainButton templateId={retro.templateId}></ExplainButton>
+          </S.ExplainBox>
         </Flex>
 
         <InviteTeamModal isOpen={isInviteModalOpen} onClose={() => setInviteModalOpen(false)} teamId={teamId} />

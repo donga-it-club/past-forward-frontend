@@ -13,4 +13,7 @@ export const CheckboxContainer = styled.div`
   display: flex;
   justify-content: center;
   width: 150%;
+  @media (max-width: 1000px) {
+    width: 90%;
+  }
 `;

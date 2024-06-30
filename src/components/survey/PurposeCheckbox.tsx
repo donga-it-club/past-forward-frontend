@@ -51,19 +51,44 @@ const PurposeCheckbox: React.FC<Purpose> = ({ onPurposeChange }) => {
         <S.CheckboxContainer>
           <Stack direction="column" spacing={6}>
             <Stack direction="row" spacing={3}>
-              <Checkbox value="업무 목적" colorScheme="brand" onChange={handlePurposeChange}>
+              <Checkbox
+                style={{ wordBreak: 'keep-all' }}
+                value="업무 목적"
+                colorScheme="brand"
+                onChange={handlePurposeChange}
+              >
                 업무 목적
               </Checkbox>
-              <Checkbox value="개인 발전" colorScheme="brand" onChange={handlePurposeChange}>
+              <Checkbox
+                style={{ wordBreak: 'keep-all' }}
+                value="개인 발전"
+                colorScheme="brand"
+                onChange={handlePurposeChange}
+              >
                 개인 발전
               </Checkbox>
-              <Checkbox value="팀 협업" colorScheme="brand" onChange={handlePurposeChange}>
+              <Checkbox
+                style={{ wordBreak: 'keep-all' }}
+                value="팀 협업"
+                colorScheme="brand"
+                onChange={handlePurposeChange}
+              >
                 팀 협업
               </Checkbox>
-              <Checkbox value="프로젝트 관리" colorScheme="brand" onChange={handlePurposeChange}>
+              <Checkbox
+                style={{ wordBreak: 'keep-all' }}
+                value="프로젝트 관리"
+                colorScheme="brand"
+                onChange={handlePurposeChange}
+              >
                 프로젝트 관리
               </Checkbox>
-              <Checkbox value="학습 및 개선" colorScheme="brand" onChange={handlePurposeChange}>
+              <Checkbox
+                style={{ wordBreak: 'keep-all' }}
+                value="학습 및 개선"
+                colorScheme="brand"
+                onChange={handlePurposeChange}
+              >
                 학습 및 개선
               </Checkbox>
             </Stack>
