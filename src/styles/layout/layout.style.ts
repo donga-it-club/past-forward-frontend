@@ -162,6 +162,7 @@ export const GetStaredButton = styled.button`
 
   @media (max-width: 800px) {
     font-size: 12px;
+    margin: 10px 20%;
   }
 `;
 

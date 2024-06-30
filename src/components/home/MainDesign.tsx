@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import { Button, Flex, Image } from '@chakra-ui/react';
+import { Button, Flex } from '@chakra-ui/react';
+import mainDesignSVG from '@/../public/mainDesign.svg';
 import { useAuth } from '@/hooks/useAuth';
 import * as S from '@/styles/layout/layout.style';
 
@@ -24,7 +25,7 @@ const MainDesign = () => {
         >
           Moving Forward from the Past
         </Text> */}
-      <Image src="mainDesign.svg" width={{ base: '70%', md: '50%' }} margin="0 auto" marginTop={100} />
+      <img src={mainDesignSVG} style={{ width: '50%', margin: '0 auto', marginTop: '50px' }} />
       <Flex
         padding="0 auto"
         margin={{ md: '20px auto', base: '10px' }}
