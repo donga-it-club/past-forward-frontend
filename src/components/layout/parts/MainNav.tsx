@@ -13,7 +13,7 @@ const MainNav = () => {
         <S.Link href="/#Home" id="header_home">
           Home
         </S.Link>
-        <S.Link href="/#Template" id="header_temp">
+        <S.Link href="/#Overview" id="header_temp">
           Overview
         </S.Link>
         <S.Link href="/#AboutUs" id="header_about">

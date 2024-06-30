@@ -1,4 +1,4 @@
-import Background from '@/assets/Template2.png';
+import Background from '@/assets/overview1.png';
 import * as S from '@/styles/Main/Template2.styles';
 
 const Template2: React.FC = () => {

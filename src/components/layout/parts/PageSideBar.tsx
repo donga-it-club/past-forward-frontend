@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import { PeopleFill, Person, PersonFill, PlusCircleFill } from 'react-bootstrap-icons';
+import { IoIosListBox } from 'react-icons/io';
 import { RiFolder6Fill } from 'react-icons/ri';
 import { Link, useNavigate } from 'react-router-dom';
 import {
@@ -171,6 +172,16 @@ const PageSideBar: FC<Props> = ({ onClose }) => {
               <Flex alignItems="center" padding="2px 10px">
                 <PlusCircleFill style={{ marginRight: '5px' }} />
                 <a style={{ color: '#111b47', textDecoration: 'none' }}>Create New Retro</a>
+              </Flex>
+            </AccordionButton>
+          </Link>
+        </AccordionItem>
+        <AccordionItem borderBottom="1px solid gray">
+          <Link to="/retrolist">
+            <AccordionButton>
+              <Flex alignItems="center" padding="2px 10px">
+                <IoIosListBox style={{ marginRight: '5px' }} />
+                <a style={{ color: '#111b47', textDecoration: 'none' }}>Go to Retrospect List</a>
               </Flex>
             </AccordionButton>
           </Link>

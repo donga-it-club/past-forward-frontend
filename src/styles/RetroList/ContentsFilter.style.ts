@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const ContentsFilterButton = styled.button`
   border: none;
-  background: white;
+  background-color: rgb(247, 250, 252);
   color: #949494;
   padding: 5px 15px;
   text-align: center;

@@ -10,21 +10,41 @@ export const ExplainButtonStyle = styled.button`
   text-align: center;
   background-color: #4972a8;
   border-radius: 5px;
-  position: absolute;
-  top: 195px;
-  left: 1300px;
 `;
 
+// 흰색 바탕
 export const ExplainStyle = styled.div`
   width: 934px;
   height: 523px;
   border-radius: 10px;
-  /* background-color: #ededed; */
   position: relative;
   padding: 29px 11px;
 `;
 
-export const ExplainSideTitle = styled.span`
+export const modalStyle = {
+  maxWidth: '934px',
+  height: '523px',
+  borderRadius: '10px',
+  '@media (max-width: 800px)': {
+    width: '90vw',
+    height: 'auto',
+  },
+};
+
+export const ExplainTitleBox = styled.div`
+  display: flex;
+`;
+
+export const ExplainSideTitle = styled.div`
+  width: 200px;
+  display: inline-block;
+  margin-left: 5px;
+  /* position: absolute;
+  margin-top: 15px; */
+  /* left: 154px; */
+`;
+
+export const RecommendMessage = styled.span`
   font-size: 12px;
   font-weight: 500;
   color: #878787;

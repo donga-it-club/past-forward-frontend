@@ -43,67 +43,85 @@ const Contact: React.FC = () => {
   const handlesubjectChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSubject(event.target.value);
   };
-  const handlecontentChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handlecontentChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.target.value);
+    event.target.style.height = 'auto';
+    event.target.style.height = `${event.target.scrollHeight}px`;
   };
   const handleMailStatusChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setMailStatus(event.target.value);
   };
 
   return (
-    <div style={{ height: '100vh', paddingLeft: '115px', paddingRight: '115px' }}>
+    <div style={{ height: '100vh' }}>
       <S.Container>
         <S.TitleContainer>
           <S.Title>Contact</S.Title>
         </S.TitleContainer>
+
         <S.Poster>
           <S.PosterTitle>Past Forward</S.PosterTitle>
           <S.PosterText>Say something to start a chat!</S.PosterText>
           <S.CircleBig></S.CircleBig>
           <S.CircleSmall></S.CircleSmall>
         </S.Poster>
+
         <S.TextContainer>
           <S.EmailContainer>
             <S.EmailTitle>Email</S.EmailTitle>
             <S.EmailInput placeholder="이메일을 입력해주세요" value={email} onChange={handleEmailChange}></S.EmailInput>
           </S.EmailContainer>
+
           <S.SubjectContainer>
             <S.SubjectTitle>Select Subject?</S.SubjectTitle>
             <S.RadioContainer>
-              <S.RadioInput
-                type="radio"
-                name="inquiryType"
-                value="SITE"
-                onChange={handleMailStatusChange}
-                imageURL={RadioCheck}
-              />
-              <S.RadioLabel htmlFor="radio1">사이트 문의</S.RadioLabel>
-              <S.RadioInput
-                type="radio"
-                name="inquiryType"
-                value="CREATOR"
-                onChange={handleMailStatusChange}
-                imageURL={RadioCheck}
-              />
-              <S.RadioLabel htmlFor="radio2">제작자 문의</S.RadioLabel>
-              <S.RadioInput
-                type="radio"
-                name="inquiryType"
-                value="ERROR"
-                onChange={handleMailStatusChange}
-                imageURL={RadioCheck}
-              />
-              <S.RadioLabel htmlFor="radio3">오류 문의</S.RadioLabel>
-              <S.RadioInput
-                type="radio"
-                name="inquiryType"
-                value="OTHER"
-                onChange={handleMailStatusChange}
-                imageURL={RadioCheck}
-              />
-              <S.RadioLabel htmlFor="radio4">기타</S.RadioLabel>
+              <S.RadioStyle>
+                <S.RadioInput
+                  type="radio"
+                  name="inquiryType"
+                  value="SITE"
+                  onChange={handleMailStatusChange}
+                  imageURL={RadioCheck}
+                />
+
+                <S.RadioLabel htmlFor="radio1">사이트 문의</S.RadioLabel>
+              </S.RadioStyle>
+              <S.RadioStyle>
+                <S.RadioInput
+                  type="radio"
+                  name="inquiryType"
+                  value="CREATOR"
+                  onChange={handleMailStatusChange}
+                  imageURL={RadioCheck}
+                />
+
+                <S.RadioLabel htmlFor="radio2">제작자 문의</S.RadioLabel>
+              </S.RadioStyle>
+              <S.RadioStyle>
+                <S.RadioInput
+                  type="radio"
+                  name="inquiryType"
+                  value="ERROR"
+                  onChange={handleMailStatusChange}
+                  imageURL={RadioCheck}
+                />
+
+                <S.RadioLabel htmlFor="radio3">오류 문의</S.RadioLabel>
+              </S.RadioStyle>
+              <S.RadioStyle>
+                <S.RadioInput
+                  type="radio"
+                  name="inquiryType"
+                  value="OTHER"
+                  onChange={handleMailStatusChange}
+                  imageURL={RadioCheck}
+                />
+
+                <S.RadioLabel htmlFor="radio4">기타</S.RadioLabel>
+              </S.RadioStyle>
             </S.RadioContainer>
           </S.SubjectContainer>
+
           <S.ContentTitleContainer>
             <S.ContentTitle>제목</S.ContentTitle>
             <S.ContentInput
@@ -112,20 +130,24 @@ const Contact: React.FC = () => {
               onChange={handlesubjectChange}
             ></S.ContentInput>
           </S.ContentTitleContainer>
+
           <S.ContentTextBoxContainer>
             <S.ContentTextTitle>내용</S.ContentTextTitle>
             <S.ContentTextBox
               placeholder="내용을 입력해주세요"
               value={content}
               onChange={handlecontentChange}
+              rows={4}
             ></S.ContentTextBox>
           </S.ContentTextBoxContainer>
+
           <S.ButtonContainer>
             <S.Button onClick={handleSendButtonClick}>Send Message</S.Button>
             <S.ButtonText>· 답변은 작성하신 이메일로 전송됩니다.</S.ButtonText>
           </S.ButtonContainer>
         </S.TextContainer>
       </S.Container>
+
       <S.ContactButtonContainer>
         <S.ContactButton
           onClick={navigateToCreate}

@@ -2,25 +2,88 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   margin: 0 30px;
+  @media (max-width: 800px) {
+    position: relative;
+    margin: 0 auto;
+  }
 `;
 export const TitleBox = styled.div`
   display: flex;
+  @media (max-width: 800px) {
+    display: block;
+  }
+`;
+
+export const RetroTitleBox = styled.div`
+  display: flex;
+  /* @media (max-width: 800px) {
+    display: block;
+  } */
+  @media (max-width: 1000px) {
+    display: block;
+  }
+`;
+
+export const TitleStyleBox = styled.div`
+  display: flex;
+  /* @media (max-width: 800px) {
+    display: block;
+  } */
+  @media (max-width: 1000px) {
+    display: block;
+  }
 `;
 
 export const TitleText = styled.p`
   width: auto;
+  max-width: calc(100vw - 300px);
+  max-width: 1200px;
+  height: auto;
   font-size: 30px;
   font-weight: 700;
   color: #434343;
+  line-height: 38px;
   margin-top: 3px;
   margin-left: 13px;
+  margin-bottom: 10px;
+  word-break: keep-all;
+  @media (max-width: 800px) {
+    /* width: 55vw; */
+    /* margin-left: 0px; */
+    width: 85vw;
+  }
+  @media (max-width: 1000px) {
+    margin-left: 0px;
+  }
 `;
 
 export const SubTitleText = styled.p`
-  height: 20px;
+  width: calc(100vw - 400px);
+  height: auto;
   font-size: 20px;
   font-weight: 600;
+  line-height: 23px;
   color: #8d8d8d;
+  margin-left: 55px;
+  margin-bottom: 15px;
+  word-break: keep-all;
+  @media (max-width: 800px) {
+    width: 85vw;
+  }
+  @media (max-width: 1000px) {
+    margin-top: 10px;
+    margin-left: 0px;
+  }
+`;
+
+export const ExplainBox = styled.div`
+  width: calc(100vw - 350px);
+  display: flex;
+  justify-content: flex-end;
+  @media (max-width: 800px) {
+    width: 85vw;
+    margin-bottom: 10px;
+  }
 `;
 
 export const SaveSettingBox = styled.div`
@@ -55,6 +118,10 @@ export const SettingButton = styled.div`
 export const SectionBox = styled.div`
   display: flex;
   margin-top: 10px;
+  @media (max-width: 800px) {
+    display: block;
+    margin: 10px auto;
+  }
 `;
 
 export const FrameStyle = styled.div`
@@ -70,6 +137,15 @@ export const FrameStyle = styled.div`
   padding: 15px;
   margin-left: 10px;
   padding-bottom: 80px;
+  @media (max-width: 800px) {
+    width: 90vw;
+    box-shadow:
+      0.3px 0 0 0.3px #4d5e80,
+      0 0.3px 0 0.3px #4d5e80,
+      0 -0.3px 0 0.3px #4d5e80;
+    border-radius: 10px;
+    margin: 0 auto 35px;
+  }
 `;
 
 export const LabelStyle = styled.div<{ color: string }>`
@@ -238,6 +314,9 @@ export const TaskMessageLine = styled.div`
   width: 60%;
   margin: auto 10px;
   border-bottom: 1px solid #dadee5;
+  @media (max-width: 800px) {
+    width: 83%;
+  }
 `;
 
 export const TaskMessageStyle = styled.div`

@@ -57,14 +57,14 @@ const RetroRevisePage = () => {
   return (
     <>
       <Flex flexDirection="column" margin="20px 10px">
-        <Flex alignItems={'center'}>
+        <S.TitleStyle>
           <S.TitleBox>
             <Flex marginLeft="20px">
               <RetroTitle teamId={teamId} name={retro.title} />
             </Flex>
           </S.TitleBox>
           <BackButton />
-        </Flex>
+        </S.TitleStyle>
       </Flex>
       <S.SettingMenuStyle>
         <Tabs colorScheme="brand" isLazy isFitted>

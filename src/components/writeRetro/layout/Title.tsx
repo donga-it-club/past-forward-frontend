@@ -7,6 +7,7 @@ import { RetrospectiveData } from '@/api/@types/Retrospectives';
 import { UserData } from '@/api/@types/Users';
 import postImageToS3 from '@/api/imageApi/postImageToS3';
 import InviteTeamModal from '@/components/inviteTeam/InviteTeamModal';
+import { ExplainButton } from '@/components/writeRetro/explainModal/explainRetro';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
 import * as L from '@/styles/writeRetroStyles/ReviseLayout.style';
 
@@ -64,37 +65,44 @@ const Title: FC<Props> = ({ name, description, retro, user }) => {
           <Image
             src={imageURL[retro.retrospectiveId]}
             onError={handleError}
-            maxWidth={150}
+            maxWidth={{ base: '85vw', md: '150px' }}
             borderRadius="10px"
-            margin="auto 5px"
+            margin={{ base: 'auto 30px', md: 'auto 5px' }}
           />
         )}
-        <Flex flexDirection="column" margin="20px 10px">
-          <Flex>
+        <Flex flexDirection="column" margin="20px 0px 20px 30px">
+          <S.TitleStyleBox>
             <RetroTitle teamId={teamId} name={name} />
-            {user.userId === retro.userId && (
-              <L.InvitationLinkButton
-                id="wr_edit"
-                style={{ backgroundColor: '#E9E9E9', color: 'black' }}
-                onClick={() => {
-                  navigate(`/revise?retrospectiveId=${retrospectiveId}&teamId=${teamId}`);
-                }}
-              >
-                회고 수정하기
-              </L.InvitationLinkButton>
-            )}
+            <div style={{ display: 'flex' }}>
+              {user.userId === retro.userId && (
+                <L.InvitationLinkButton
+                  id="wr_edit"
+                  style={{ backgroundColor: '#E9E9E9', color: 'black' }}
+                  onClick={() => {
+                    navigate(`/revise?retrospectiveId=${retrospectiveId}&teamId=${teamId}`);
+                  }}
+                >
+                  회고 수정하기
+                </L.InvitationLinkButton>
+              )}
 
-            {teamId ? (
-              <>
-                <L.InvitationLinkButton onClick={() => setInviteModalOpen(true)}>팀원 초대 링크</L.InvitationLinkButton>
-                <L.LinkExpirationText>링크는 2시간 후에 만료됩니다.</L.LinkExpirationText>
-              </>
-            ) : null}
-          </Flex>
+              {teamId ? (
+                <>
+                  <L.InvitationLinkButton onClick={() => setInviteModalOpen(true)}>
+                    팀원 초대 링크
+                  </L.InvitationLinkButton>
+                  <L.LinkExpirationText>링크는 2시간 후에 만료됩니다.</L.LinkExpirationText>
+                </>
+              ) : null}
+            </div>
+          </S.TitleStyleBox>
 
           <S.SubTitleText>
             {description} <br />
           </S.SubTitleText>
+          <S.ExplainBox>
+            <ExplainButton templateId={retro.templateId}></ExplainButton>
+          </S.ExplainBox>
         </Flex>
 
         <InviteTeamModal isOpen={isInviteModalOpen} onClose={() => setInviteModalOpen(false)} teamId={teamId} />

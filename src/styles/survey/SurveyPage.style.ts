@@ -18,4 +18,21 @@ export const WhiteContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 800px) {
+    width: 100%;
+  }
+`;
+
+export const TitleCircle = styled.div`
+  @media (max-width: 768px) {
+    width: 250px;
+    height: 250px;
+    justify-content: center;
+    background-color: #111b47;
+    border-radius: 50%;
+    position: absolute;
+    top: -150px;
+    z-index: 0;
+  }
 `;

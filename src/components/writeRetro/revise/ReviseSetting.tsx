@@ -173,9 +173,8 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
 
   return (
     <S.SettingContainer>
-      <Flex flexDirection="row-reverse" margin="10px 5px">
-        변경 전 사진이 없으면 사진이 보이지 않습니다.
-      </Flex>
+      <div style={{ margin: '0px 20px' }}>변경 전 사진이 없으면 사진이 보이지 않습니다.</div>
+
       {isLoading ? (
         <Center w="100%" h="100%" margin="20px 0">
           <Spinner />
@@ -205,6 +204,8 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
           }}
           marginBottom="20px"
           marginTop="5px"
+          maxWidth="600px"
+          width="90vw"
         />
 
         {/* 회고 유형 */}
@@ -254,7 +255,13 @@ const ReviseSetting: FC<Props> = ({ retro, status, setStatus }) => {
           margin="10px 0"
         >
           <EditablePreview />
-          <Input as={EditableInput} value={description} onChange={e => setDescription(e.target.value)} />
+          <Input
+            as={EditableInput}
+            value={description}
+            onChange={e => setDescription(e.target.value)}
+            maxWidth="600px"
+            width="90vw"
+          />
           <EditableControls />
         </Editable>
 
