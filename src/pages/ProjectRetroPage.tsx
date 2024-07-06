@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { AiFillQuestionCircle } from 'react-icons/ai';
+import { FiPlusCircle } from 'react-icons/fi';
 import { RiFolder6Fill } from 'react-icons/ri';
+import CreateModal from '@/components/projectRetro/CreateModal';
+import DescriptionModal from '@/components/projectRetro/DescriptionModal';
 import GroupList from '@/components/projectRetro/GroupList';
 import StatusFilter from '@/components/projectRetro/StatusFilter';
 import * as S from '@/styles/projectRetro/ProjectRetroPage.styles';
@@ -14,6 +17,11 @@ export interface RetroGroup {
 
 const ProjectRetro = () => {
   const [selectedFilter, setSelectedFilter] = useState<'ALL' | 'ING' | 'DONE'>('ALL');
+  const [descriptionOpen, setDescriptionOpen] = useState<boolean>(false);
+  const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false);
+  const handleCreateModal = () => {
+    setIsCreateOpen(true);
+  };
 
   // 데이터 가져오기
   const groups: RetroGroup[] = [
@@ -34,10 +42,18 @@ const ProjectRetro = () => {
         <S.ProjectMenuText>Project</S.ProjectMenuText>
       </S.TopBox>
       <S.DescriptionBox>
-        <AiFillQuestionCircle size={40} style={{ color: '#111b47' }} /> <S.DescriptionText>사용법</S.DescriptionText>
+        <AiFillQuestionCircle size={40} style={{ color: '#111b47' }} onClick={() => setDescriptionOpen(true)} />
+        <S.DescriptionText>사용법</S.DescriptionText>
       </S.DescriptionBox>
       <StatusFilter onSelectedFilter={setSelectedFilter} />
-      <GroupList groups={filteredGroups} />
+      <div>
+        <S.CreateBox>
+          <FiPlusCircle size={40} style={{ color: '#a9a9a9' }} onClick={handleCreateModal} />
+          {isCreateOpen && <CreateModal />}
+        </S.CreateBox>
+        <GroupList groups={filteredGroups} />
+      </div>
+      {descriptionOpen ? <DescriptionModal isClose={() => setDescriptionOpen(false)} /> : null}
     </>
   );
 };

@@ -28,3 +28,13 @@ export const DescriptionText = styled.span`
   color: #a9a9a9;
   font-size: small;
 `;
+
+export const CreateBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 4px dotted #a9a9a9;
+  border-radius: 2px;
+  width: 200px;
+  height: 150px;
+`;
