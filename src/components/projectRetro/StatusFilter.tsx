@@ -2,7 +2,7 @@ import { useState } from 'react';
 import * as S from '@/styles/projectRetro/StatusFilter.styles';
 
 interface StatusFilterProps {
-  onSelectedFilter: (filter: 'ALL' | 'ING' | 'DONE') => void;
+  onSelectedFilter: (filter: 'ALL' | 'IN_PROGRESS' | 'COMPLETED') => void;
 }
 const StatusFilter: React.FC<StatusFilterProps> = ({ onSelectedFilter }) => {
   const [activeFilter, setActiveFilter] = useState<string>('ALL');
@@ -20,19 +20,19 @@ const StatusFilter: React.FC<StatusFilterProps> = ({ onSelectedFilter }) => {
       </S.Button>
       <S.Button
         onClick={() => {
-          onSelectedFilter('ING');
-          setActiveFilter('ING');
+          onSelectedFilter('IN_PROGRESS');
+          setActiveFilter('IN_PROGRESS');
         }}
-        className={activeFilter === 'ING' ? 'active' : ''}
+        className={activeFilter === 'IN_PROGRESS' ? 'active' : ''}
       >
         ING
       </S.Button>
       <S.Button
         onClick={() => {
-          onSelectedFilter('DONE');
-          setActiveFilter('DONE');
+          onSelectedFilter('COMPLETED');
+          setActiveFilter('COMPLETED');
         }}
-        className={activeFilter === 'DONE' ? 'active' : ''}
+        className={activeFilter === 'COMPLETED' ? 'active' : ''}
       >
         DONE
       </S.Button>

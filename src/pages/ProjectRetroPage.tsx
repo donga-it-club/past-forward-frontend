@@ -1,11 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AiFillQuestionCircle } from 'react-icons/ai';
 import { FiPlusCircle } from 'react-icons/fi';
 import { RiFolder6Fill } from 'react-icons/ri';
+import { GetRetrospectiveGroups, GetRetrospectiveGroupsRequest } from '@/api/@types/Groups';
+import { queryGetRetrospectiveAllGroups } from '@/api/retroGroupsApi/getAllGroups';
 import CreateModal from '@/components/projectRetro/CreateModal';
 import DescriptionModal from '@/components/projectRetro/DescriptionModal';
 import GroupList from '@/components/projectRetro/GroupList';
 import StatusFilter from '@/components/projectRetro/StatusFilter';
+import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/projectRetro/ProjectRetroPage.styles';
 
 export interface RetroGroup {
@@ -16,13 +19,36 @@ export interface RetroGroup {
 }
 
 const ProjectRetro = () => {
-  const [selectedFilter, setSelectedFilter] = useState<'ALL' | 'ING' | 'DONE'>('ALL');
+  // const [selectedFilter, setSelectedFilter] = useState<'ALL' | 'ING' | 'DONE'>('ALL');
   const [descriptionOpen, setDescriptionOpen] = useState<boolean>(false);
   const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false);
+  const toast = useCustomToast();
+
+  const [data, setData] = useState<GetRetrospectiveGroups['data']>({ totalCount: 0, nodes: [] });
+  const [query, setQuery] = useState<GetRetrospectiveGroupsRequest>({
+    page: 0,
+    size: 9,
+    status: 'ALL',
+    keyword: '',
+    isBookmarked: false,
+  });
+
+  useEffect(() => {
+    const fetchGroup = async () => {
+      try {
+        const responseData = await queryGetRetrospectiveAllGroups(query);
+        setData(responseData.data);
+        console.log(data);
+      } catch (error) {
+        toast.error(error);
+      }
+    };
+    fetchGroup();
+  }, [query]);
+
   const handleCreateModal = () => {
     setIsCreateOpen(true);
   };
-
   // 데이터 가져오기
   const groups: RetroGroup[] = [
     { id: 1, title: 'Task 1', description: 'Description 1', status: 'ING' },
@@ -32,7 +58,14 @@ const ProjectRetro = () => {
     { id: 5, title: 'Task 5', description: 'Description 5', status: 'ING' },
   ];
 
+  const handleStatusFilter = (option: 'ALL' | 'IN_PROGRESS' | 'COMPLETED') => {
+    setQuery(prev => {
+      return { ...prev, status: option };
+    });
+  };
+
   // 기본 ALL, 아니면 선택한거(ING,DONE)
+  const selectedFilter: 'ALL' | 'ING' | 'DONE' = 'ALL';
   const filteredGroups = selectedFilter === 'ALL' ? groups : groups.filter(group => group.status === selectedFilter);
 
   return (
@@ -42,10 +75,14 @@ const ProjectRetro = () => {
         <S.ProjectMenuText>Project</S.ProjectMenuText>
       </S.TopBox>
       <S.DescriptionBox>
-        <AiFillQuestionCircle size={40} style={{ color: '#111b47' }} onClick={() => setDescriptionOpen(true)} />
+        <AiFillQuestionCircle
+          size={40}
+          style={{ color: '#111b47', cursor: 'pointer' }}
+          onClick={() => setDescriptionOpen(true)}
+        />
         <S.DescriptionText>사용법</S.DescriptionText>
       </S.DescriptionBox>
-      <StatusFilter onSelectedFilter={setSelectedFilter} />
+      <StatusFilter onSelectedFilter={handleStatusFilter} />
       <div>
         <S.CreateBox>
           <FiPlusCircle size={40} style={{ color: '#a9a9a9' }} onClick={handleCreateModal} />
