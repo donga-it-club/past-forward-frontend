@@ -13,6 +13,7 @@ import AuthPage from '@/pages/AuthPage';
 import CreateRetroPage from '@/pages/CreateRetroPage';
 import HomePage from '@/pages/HomePage';
 import MyPage from '@/pages/MyPage';
+import ProjectRetro from '@/pages/ProjectRetroPage';
 import RetroListPage from '@/pages/RetroListPage';
 import SurveyPage from '@/pages/SurveyPage';
 
@@ -107,6 +108,14 @@ const App = () => {
                 element={
                   <PrivateRoute>
                     <RetroListPage />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/retrospectiveGroups"
+                element={
+                  <PrivateRoute>
+                    <ProjectRetro />
                   </PrivateRoute>
                 }
               />
