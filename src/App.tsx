@@ -15,6 +15,8 @@ import HomePage from '@/pages/HomePage';
 import MyPage from '@/pages/MyPage';
 import RetroListPage from '@/pages/RetroListPage';
 import SurveyPage from '@/pages/SurveyPage';
+import { NoticeShowPage } from '@/pages/notice/NoticeShowPage';
+import { NoticeWritePage } from '@/pages/notice/NoticeWritePage';
 
 interface PrivateRouteProps {
   children: ReactElement;
@@ -123,6 +125,22 @@ const App = () => {
               element={
                 <PrivateRoute>
                   <SurveyControl />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/noticeWrite"
+              element={
+                <PrivateRoute>
+                  <NoticeWritePage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/noticeShow"
+              element={
+                <PrivateRoute>
+                  <NoticeShowPage />
                 </PrivateRoute>
               }
             />

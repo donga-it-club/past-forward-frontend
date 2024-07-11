@@ -5,6 +5,7 @@ import Template2 from '@/components/Main/Template2';
 import Template3 from '@/components/Main/Template3';
 import Template4 from '@/components/Main/Template4';
 import MainDesign from '@/components/home/MainDesign';
+import { NoticeBoard } from '@/components/notice/NoticeBoard';
 
 const App = () => {
   return (
@@ -23,6 +24,9 @@ const App = () => {
       </a>
       <a id="Contact">
         <Contact />
+      </a>
+      <a id="Notice">
+        <NoticeBoard />
       </a>
     </div>
   );

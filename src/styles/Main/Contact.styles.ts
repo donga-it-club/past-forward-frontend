@@ -287,7 +287,7 @@ export const ContactButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   @media (max-width: 1000px) {
-    bottom: -350px;
+    bottom: -290px;
     position: absolute;
   }
 `;
