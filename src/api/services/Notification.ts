@@ -29,7 +29,7 @@ export const NotificationServices: NotificationClient = {
   },
   delete: async ({ userId }: DeleteNotificationRequest): Promise<DeleteNotificationResponse> => {
     try {
-      const response = await axiosInstance.post<DeleteNotificationResponse>(`${ROUTE}/${userId}`);
+      const response = await axiosInstance.delete<DeleteNotificationResponse>(`${ROUTE}/${userId}`);
       return response.data;
     } catch (error) {
       throw new Error(error as string);

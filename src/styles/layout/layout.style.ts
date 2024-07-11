@@ -177,12 +177,24 @@ export const AllDeleteText = styled.button`
   font-weight: 600;
 `;
 
-export const notificationBadgeStyle = styled.span`
+export const notificationBadge = styled.span`
+  position: absolute;
+  top: 0px;
+  left: 18px;
+  background: red;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  color: white;
+  padding: 3px;
+  font-size: 8px;
+  align-content: center;
+`;
+
+export const notificationBadgeText = styled.span`
   position: absolute;
   top: 0px;
   right: 0px;
-  background: red;
-  border-radius: 50%;
   color: white;
   padding: 3px;
   font-size: 8px;
@@ -203,6 +215,8 @@ export const AlarmContents = styled.div`
 export const AlarmTitle = styled.p`
   font-size: 15px;
   margin: 10px 0;
+  margin-right: 10px;
+  max-width: 80%;
 `;
 
 export const ProjectMenuText = styled.a`

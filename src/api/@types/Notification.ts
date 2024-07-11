@@ -18,7 +18,7 @@ export interface NotificationData {
 }
 
 export interface PostNotificationRequest {
-  notificationId: string;
+  notificationId: number;
 }
 
 export interface PostNotificationResponse {
