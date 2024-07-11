@@ -52,6 +52,7 @@ interface IconProps {
 
 export const IconStyle = styled.button<IconProps>`
   width: auto;
+  position: relative;
   border-radius: ${props => props['border-radius']};
   display: inline-block;
   border: 2px solid black;
@@ -171,6 +172,22 @@ export const MenuText = styled.a`
   text-decoration: none;
 `;
 
+export const AllDeleteText = styled.button`
+  color: #5a5a5a;
+  font-weight: 600;
+`;
+
+export const notificationBadgeStyle = styled.span`
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background: red;
+  border-radius: 50%;
+  color: white;
+  padding: 3px;
+  font-size: 8px;
+`;
+
 export const AlarmContents = styled.div`
   background-color: #f8f8f8;
   height: auto;
@@ -178,6 +195,9 @@ export const AlarmContents = styled.div`
   padding: 10px;
   margin: 0 10px;
   margin-bottom: 20px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const AlarmTitle = styled.p`
