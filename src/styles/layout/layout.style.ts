@@ -186,8 +186,7 @@ export const notificationBadge = styled.span`
   width: 15px;
   height: 15px;
   color: white;
-  padding: 3px;
-  font-size: 8px;
+  font-size: 10px;
   align-content: center;
 `;
 
