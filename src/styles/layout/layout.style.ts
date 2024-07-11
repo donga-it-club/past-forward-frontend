@@ -173,11 +173,16 @@ export const MenuText = styled.a`
 
 export const AlarmContents = styled.div`
   background-color: #f8f8f8;
-  width: 90%;
   height: auto;
   border-radius: 10px;
-  padding: 2px 5px;
+  padding: 10px;
+  margin: 0 10px;
   margin-bottom: 20px;
+`;
+
+export const AlarmTitle = styled.p`
+  font-size: 15px;
+  margin: 10px 0;
 `;
 
 export const ProjectMenuText = styled.a`

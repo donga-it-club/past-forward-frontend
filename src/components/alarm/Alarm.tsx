@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Bell, BellFill } from 'react-bootstrap-icons';
+import { MdAccessAlarm } from 'react-icons/md';
 import {
   Popover,
   PopoverTrigger,
@@ -10,10 +11,14 @@ import {
   PopoverArrow,
   PopoverCloseButton,
   Portal,
+  Flex,
 } from '@chakra-ui/react';
+import { convertToLocalTime } from '../RetroList/ContentsList';
 import { NotificationData } from '@/api/@types/Notification';
 import { NotificationServices } from '@/api/services/Notification';
+import { NOTIFICATION_TYPE_LABEL } from '@/constant/notification';
 import * as S from '@/styles/layout/layout.style';
+import * as T from '@/styles/writeRetroStyles/Layout.style';
 
 const Alarm = () => {
   const [notification, setNotification] = useState<NotificationData[]>();
@@ -21,6 +26,7 @@ const Alarm = () => {
     try {
       const data = await NotificationServices.get();
       setNotification(data.data);
+      console.log('notification', notification);
     } catch (e) {
       console.error(e);
     }
@@ -28,7 +34,7 @@ const Alarm = () => {
 
   useEffect(() => {
     fetchNotification();
-  });
+  }, []);
   return (
     <Popover>
       <PopoverTrigger>
@@ -37,7 +43,7 @@ const Alarm = () => {
         </S.IconStyle>
       </PopoverTrigger>
       <Portal>
-        <PopoverContent>
+        <PopoverContent minW={{ base: '200', md: '500' }}>
           <PopoverArrow />
           <PopoverHeader>
             <BellFill style={{ fontSize: '30px' }} />
@@ -46,12 +52,20 @@ const Alarm = () => {
           <PopoverBody>
             <S.MenuText>알림</S.MenuText>
           </PopoverBody>
-          <PopoverFooter>
+          <PopoverFooter style={{ overflow: 'auto' }} maxH={300}>
             {/* <S.MenuText>오늘 받은 알림</S.MenuText> */}
             {notification ? (
               notification.map(item => (
                 <S.AlarmContents>
-                  {item.senderName}님이 {item.retrospectiveTitle}에 댓글을 작성했습니다.
+                  <S.AlarmTitle>[{item.retrospectiveTitle}]에서 알림</S.AlarmTitle>
+                  {item.senderName}님이 {NOTIFICATION_TYPE_LABEL[item.notificationType]}을{' '}
+                  {item.notificationType === 'COMMENT' ? '작성했습니다.' : '남겼습니다'}
+                  <Flex justifyContent="flex-end">
+                    <T.SubTaskIcon>
+                      <MdAccessAlarm size="20px" color="#DADEE5" />
+                    </T.SubTaskIcon>
+                    <T.SubTaskCount>{convertToLocalTime(item.dateTime)}</T.SubTaskCount>
+                  </Flex>
                 </S.AlarmContents>
               ))
             ) : (
