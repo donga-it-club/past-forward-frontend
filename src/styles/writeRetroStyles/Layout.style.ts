@@ -116,8 +116,11 @@ export const SettingButton = styled.div`
 `;
 
 export const SectionBox = styled.div`
+  width: 100vw;
   display: flex;
   margin-top: 10px;
+  flex-direction: row;
+  flex-wrap: wrap;
   @media (max-width: 800px) {
     display: block;
     margin: 10px auto;
@@ -139,12 +142,20 @@ export const FrameStyle = styled.div`
   padding-bottom: 80px;
   @media (max-width: 800px) {
     width: 90vw;
+    /* box-shadow:
+      0.3px 0 0 0.3px #4d5e80,
+      0 0.3px 0 0.3px #4d5e80,
+      0 -0.3px 0 0.3px #4d5e80;
+    border-radius: 10px;
+    margin: 0 auto 35px; */
+  }
+  @media (max-width: 1200px) {
     box-shadow:
       0.3px 0 0 0.3px #4d5e80,
       0 0.3px 0 0.3px #4d5e80,
       0 -0.3px 0 0.3px #4d5e80;
     border-radius: 10px;
-    margin: 0 auto 35px;
+    margin: 0px auto 35px;
   }
 `;
 

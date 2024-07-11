@@ -65,7 +65,7 @@ const Title: FC<Props> = ({ name, description, retro, user }) => {
           <Image
             src={imageURL[retro.retrospectiveId]}
             onError={handleError}
-            maxWidth={{ base: '85vw', md: '150px' }}
+            maxWidth={{ base: '60vw', md: '150px' }}
             borderRadius="10px"
             margin={{ base: 'auto 30px', md: 'auto 5px' }}
           />
