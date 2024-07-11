@@ -20,7 +20,7 @@ export interface RetroGroup {
 
 const ProjectRetro = () => {
   // const [selectedFilter, setSelectedFilter] = useState<'ALL' | 'ING' | 'DONE'>('ALL');
-  const [descriptionOpen, setDescriptionOpen] = useState<boolean>(false);
+  const [isDescriptionOpen, setIsDescriptionOpen] = useState<boolean>(false);
   const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false);
   const toast = useCustomToast();
 
@@ -78,7 +78,7 @@ const ProjectRetro = () => {
         <AiFillQuestionCircle
           size={40}
           style={{ color: '#111b47', cursor: 'pointer' }}
-          onClick={() => setDescriptionOpen(true)}
+          onClick={() => setIsDescriptionOpen(true)}
         />
         <S.DescriptionText>사용법</S.DescriptionText>
       </S.DescriptionBox>
@@ -90,7 +90,7 @@ const ProjectRetro = () => {
         </S.CreateBox>
         <GroupList groups={filteredGroups} />
       </div>
-      {descriptionOpen ? <DescriptionModal isClose={() => setDescriptionOpen(false)} /> : null}
+      {isDescriptionOpen ? <DescriptionModal isClose={() => setIsDescriptionOpen(false)} /> : null}
     </>
   );
 };
