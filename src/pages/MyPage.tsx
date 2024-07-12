@@ -20,7 +20,6 @@ const MyPage = () => {
   const [userNickname, _] = useRecoilState(userNicknameState);
   const [image, setImage] = useState<Blob | null>(null);
   const [userProfile, setUserProfile] = useState<{ [key: string]: string }>({});
-
   const [imageURL, setImageURL] = useState<string>('');
   const toast = useCustomToast();
   const navigate = useNavigate();
@@ -71,7 +70,6 @@ const MyPage = () => {
     const fetchUserData = async () => {
       try {
         const response = await getUser();
-        console.log('유저 정보', response);
         setUserData(response);
       } catch (error) {
         console.error('에러', error);

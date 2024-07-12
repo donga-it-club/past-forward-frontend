@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import { CgProfile } from 'react-icons/cg';
+import { useNavigate } from 'react-router-dom';
 import {
   Table,
   Thead,
@@ -41,6 +42,7 @@ const ManageTeamMembers: FC<Props> = ({ teamId, members }) => {
   const [image, setImage] = useState<{ [key: number]: string }>({});
   const toast = useCustomToast();
   const filterData = members.filter(members => members.username.includes(searchTerm));
+  const navigate = useNavigate();
 
   const fetchUser = async () => {
     try {
@@ -77,6 +79,16 @@ const ManageTeamMembers: FC<Props> = ({ teamId, members }) => {
     }
   };
 
+  const PostAdminStatus = async (member: string) => {
+    try {
+      await UserServices.adminPost({ email: member, admin: true });
+      toast.success('리더 권한을 양도하였습니다.');
+      navigate('/');
+    } catch (e) {
+      toast.error(e);
+    }
+  };
+
   useEffect(() => {
     fetchUser();
     members.forEach(item => fetchImage(item));
@@ -99,9 +111,9 @@ const ManageTeamMembers: FC<Props> = ({ teamId, members }) => {
             <PopoverCloseButton />
             <PopoverHeader fontSize={15}>리더 권한을 양도할 팀원을 선택하세요.</PopoverHeader>
             <PopoverBody minH={200} overflow="auto">
-              <Flex flexDirection="column">
+              <Flex flexDirection="column" cursor="pointer">
                 {members.map(item => (
-                  <Flex margin="5px 0">
+                  <Flex margin="5px 0" onClick={() => PostAdminStatus(item.email)}>
                     {item.profileImage ? (
                       <M.UploadImage sizes="40px" width="40px" height="auto" src={image[item.userId]} />
                     ) : (
