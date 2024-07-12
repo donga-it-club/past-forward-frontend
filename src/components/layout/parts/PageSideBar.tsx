@@ -171,7 +171,17 @@ const PageSideBar: FC<Props> = ({ onClose }) => {
             <AccordionButton>
               <Flex alignItems="center" padding="2px 10px">
                 <PlusCircleFill style={{ marginRight: '5px' }} />
-                <a style={{ color: '#111b47', textDecoration: 'none' }}>Create New Retro</a>
+                <a style={{ color: '#111b47', textDecoration: 'none' }}>Create New Retrospective</a>
+              </Flex>
+            </AccordionButton>
+          </Link>
+        </AccordionItem>
+        <AccordionItem borderBottom="1px solid gray">
+          <Link to="/retrolist">
+            <AccordionButton>
+              <Flex alignItems="center" padding="2px 10px">
+                <IoIosListBox style={{ marginRight: '5px' }} />
+                <a style={{ color: '#111b47', textDecoration: 'none' }}>Go to Retrospect List</a>
               </Flex>
             </AccordionButton>
           </Link>

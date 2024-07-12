@@ -13,8 +13,11 @@ import AuthPage from '@/pages/AuthPage';
 import CreateRetroPage from '@/pages/CreateRetroPage';
 import HomePage from '@/pages/HomePage';
 import MyPage from '@/pages/MyPage';
+import ProjectRetro from '@/pages/ProjectRetroPage';
 import RetroListPage from '@/pages/RetroListPage';
 import SurveyPage from '@/pages/SurveyPage';
+import { NoticeShowPage } from '@/pages/notice/NoticeShowPage';
+import { NoticeWritePage } from '@/pages/notice/NoticeWritePage';
 
 interface PrivateRouteProps {
   children: ReactElement;
@@ -110,6 +113,14 @@ const App = () => {
                   </PrivateRoute>
                 }
               />
+              <Route
+                path="/retrospectiveGroups"
+                element={
+                  <PrivateRoute>
+                    <ProjectRetro />
+                  </PrivateRoute>
+                }
+              />
             </Route>
             {/* MainLayout */}
             <Route element={<MainLayout />}>
@@ -123,6 +134,22 @@ const App = () => {
               element={
                 <PrivateRoute>
                   <SurveyControl />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/noticeWrite"
+              element={
+                <PrivateRoute>
+                  <NoticeWritePage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/noticeShow"
+              element={
+                <PrivateRoute>
+                  <NoticeShowPage />
                 </PrivateRoute>
               }
             />
