@@ -77,7 +77,8 @@ const Title: FC<Props> = ({ name, description, retro, user }) => {
               {user.userId === retro.userId && (
                 <L.InvitationLinkButton
                   id="wr_edit"
-                  style={{ backgroundColor: '#E9E9E9', color: 'black' }}
+                  backgroundColor="#E9E9E9"
+                  color="black"
                   onClick={() => {
                     navigate(`/revise?retrospectiveId=${retrospectiveId}&teamId=${teamId}`);
                   }}
@@ -88,7 +89,11 @@ const Title: FC<Props> = ({ name, description, retro, user }) => {
 
               {teamId ? (
                 <>
-                  <L.InvitationLinkButton onClick={() => setInviteModalOpen(true)}>
+                  <L.InvitationLinkButton
+                    backgroundColor="#2f4dce"
+                    color="white"
+                    onClick={() => setInviteModalOpen(true)}
+                  >
                     팀원 초대 링크
                   </L.InvitationLinkButton>
                   <L.LinkExpirationText>링크는 2시간 후에 만료됩니다.</L.LinkExpirationText>

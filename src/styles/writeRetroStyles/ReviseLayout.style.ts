@@ -237,15 +237,15 @@ export const ManageTitleStyle = styled.p`
   }
 `;
 
-export const InvitationLinkButton = styled.button`
+export const InvitationLinkButton = styled.button<{ backgroundColor: string; color: string }>`
   width: 130px;
   height: 33px;
   font-size: 14px;
   font-weight: 600;
-  color: #ffffff;
+  color: ${props => props.color};
   line-height: 33px;
   text-align: center;
-  background-color: #2f4dce;
+  background-color: ${props => props.backgroundColor};
   border-radius: 5px;
   margin: auto 0;
   margin-left: 35px;

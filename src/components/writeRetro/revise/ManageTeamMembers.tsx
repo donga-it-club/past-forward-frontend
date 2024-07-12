@@ -10,6 +10,8 @@ import {
   TableContainer,
   Flex,
   Button,
+  PopoverHeader,
+  PopoverBody,
   Popover,
   PopoverTrigger,
   PopoverContent,
@@ -86,7 +88,36 @@ const ManageTeamMembers: FC<Props> = ({ teamId, members }) => {
     <S.ManageStyle>
       <Flex height="46px">
         <S.ManageTitleStyle>팀원 관리</S.ManageTitleStyle>
-        <S.InvitationLinkButton onClick={() => setInviteModalOpen(true)}>팀원 초대 링크</S.InvitationLinkButton>
+        <Popover>
+          <PopoverTrigger>
+            <S.InvitationLinkButton backgroundColor="#EEEEEE" color="black">
+              리더 권한 양도
+            </S.InvitationLinkButton>
+          </PopoverTrigger>
+          <PopoverContent>
+            <PopoverArrow />
+            <PopoverCloseButton />
+            <PopoverHeader fontSize={15}>리더 권한을 양도할 팀원을 선택하세요.</PopoverHeader>
+            <PopoverBody minH={200} overflow="auto">
+              <Flex flexDirection="column">
+                {members.map(item => (
+                  <Flex margin="5px 0">
+                    {item.profileImage ? (
+                      <M.UploadImage sizes="40px" width="40px" height="auto" src={image[item.userId]} />
+                    ) : (
+                      <CgProfile size="40px" color="#DADEE5" />
+                    )}
+
+                    <p style={{ margin: 'auto 10px' }}>{item.username ?? '닉네임 없음'}</p>
+                  </Flex>
+                ))}
+              </Flex>
+            </PopoverBody>
+          </PopoverContent>
+        </Popover>
+        <S.InvitationLinkButton backgroundColor="#2f4dce" color="white" onClick={() => setInviteModalOpen(true)}>
+          팀원 참여 링크
+        </S.InvitationLinkButton>
         <S.LinkExpirationText>링크는 2시간 후에 만료됩니다.</S.LinkExpirationText>
       </Flex>
       <Flex marginTop="20px">
