@@ -1,4 +1,5 @@
 // get
+// 게시글 목록 조회
 export interface GetNoticeListRequest {
   page: number;
   size: number;
@@ -25,6 +26,7 @@ export interface GetNoticeListPosts {
   view: number;
 }
 
+// 개별 게시글 조회
 export interface GetNoticePostsRequest {
   id: number;
 }
@@ -103,6 +105,7 @@ export interface PostNoticePresignedURLData {
 
 // put
 export interface PutNoticeRequest {
+  id: number;
   title: string;
   content: string;
 }
@@ -127,15 +130,16 @@ export interface DeleteNoticeRequest {
   id: number;
 }
 
-export interface DeleteNoticeResponse {
-  code: number;
-}
+// export interface DeleteNoticeResponse {
+//   code: number;
+// }
 
 export interface NoticeBoardClient {
-  NoticeGet(request: GetNoticeListRequest): Promise<GetNoticeListResponse>;
+  NoticeListGet(request: GetNoticeListRequest): Promise<GetNoticeListResponse>;
+  NoticePostsGet(request: GetNoticePostsRequest): Promise<GetNoticePostsResponse>;
   NoticeCreate(request: PostNoticeRequest): Promise<PostNoticeResponse>;
   NoticeTempSave(request: PostNoticeTempPostsRequest): Promise<PostNoticeTempPostsResponse>;
   NoticeImg(request: PostNoticePresignedURLRequest): Promise<PostNoticePresignedURLResponse>;
   NoticeRevise(request: PutNoticeRequest): Promise<PutNoticeResponse>;
-  NoticeDelete(request: DeleteNoticeRequest): Promise<DeleteNoticeResponse>;
+  NoticeDelete(request: DeleteNoticeRequest): Promise<void>;
 }
