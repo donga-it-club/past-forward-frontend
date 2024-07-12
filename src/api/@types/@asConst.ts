@@ -3,6 +3,11 @@ export const Order = {
   OLDEST: 'OLDEST',
 } as const;
 
+export const NotificationType = {
+  COMMENT: 'COMMENT',
+  LIKE: 'LIKE',
+} as const;
+
 export const Status = {
   ALL: 'ALL',
   NOT_STARTED: 'NOT_STARTED',
@@ -26,3 +31,4 @@ export type TStatus = typeof Status;
 export type TOrder = typeof Order;
 export type TTemplate = typeof Template;
 export type TRetrospective = typeof RetrospectiveType;
+export type TNotificationType = keyof typeof NotificationType;
