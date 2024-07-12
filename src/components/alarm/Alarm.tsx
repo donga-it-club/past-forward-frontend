@@ -126,7 +126,7 @@ const Alarm = () => {
             </Flex>
           </PopoverBody>
           <PopoverFooter style={{ overflow: 'auto' }} maxH={300}>
-            <S.MenuText>오늘 받은 알림</S.MenuText>
+            <S.MenuText>최근에 받은 알림</S.MenuText>
             <Flex flexDirection="column-reverse">
               {todayNotification && todayNotification.length > 0 ? (
                 todayNotification.map(item => (
