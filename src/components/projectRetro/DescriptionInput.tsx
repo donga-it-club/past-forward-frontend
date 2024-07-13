@@ -2,15 +2,13 @@ import * as S from '@/styles/projectRetro/Modal.styles';
 
 interface DescriptionInputProps {
   onChange: (description: string) => void;
+  placeholder: string;
 }
 
-const DescriptionInput: React.FC<DescriptionInputProps> = ({ onChange }) => {
+const DescriptionInput: React.FC<DescriptionInputProps> = ({ onChange, placeholder }) => {
   return (
     <>
-      <S.DescriptionInput
-        placeholder="프로젝트에 대한 설명을 입력해 주세요."
-        onChange={e => onChange(e.target.value)}
-      ></S.DescriptionInput>
+      <S.DescriptionInput placeholder={placeholder} onChange={e => onChange(e.target.value)}></S.DescriptionInput>
     </>
   );
 };

@@ -1,4 +1,4 @@
-// get
+// get all groups
 export interface GetRetrospectiveGroupsNodes {
   id: number;
   title: string;
@@ -80,4 +80,25 @@ export interface PutRetrospectivesGroupNodes {
   thumbnail: string;
   description: string;
   updatedDate: Date | string;
+}
+
+// get a group
+export interface GetRetrospectiveGroupRequest {
+  retrospectiveGroupId: number;
+}
+
+export interface GetRetrospectiveGroupResponse {
+  code: number;
+  message: string;
+  data: Array<GetRetrospectiveGroupNodes>;
+}
+
+export interface GetRetrospectiveGroupNodes {
+  title: string;
+  userId: number;
+  userName: string;
+  description: string;
+  thumnail: string | null;
+  status: string;
+  id: number;
 }

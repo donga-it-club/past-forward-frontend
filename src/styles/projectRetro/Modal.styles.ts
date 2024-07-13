@@ -55,6 +55,10 @@ export const ImageBox = styled.div`
   margin: 10px 0px;
 `;
 
+export const ImageText = styled.p`
+  color: #676767;
+  font-size: small;
+`;
 export const NameInput = styled.input`
   margin: 10px 0px;
   border-bottom: 1px solid #949494;

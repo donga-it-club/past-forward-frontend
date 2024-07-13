@@ -2,12 +2,13 @@ import * as S from '@/styles/projectRetro/Modal.styles';
 
 interface TitleInputProps {
   onChange: (title: string) => void;
+  placeholder: string;
 }
 
-const TitleInput: React.FC<TitleInputProps> = ({ onChange }) => {
+const TitleInput: React.FC<TitleInputProps> = ({ onChange, placeholder }) => {
   return (
     <>
-      <S.NameInput placeholder="Project Name *" onChange={e => onChange(e.target.value)}></S.NameInput>
+      <S.NameInput placeholder={placeholder} onChange={e => onChange(e.target.value)}></S.NameInput>
     </>
   );
 };

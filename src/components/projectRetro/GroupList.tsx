@@ -31,7 +31,7 @@ const GroupList: React.FC<GroupListProps> = ({ groups }) => {
         ))}
         <MdOutlineMoreHoriz onClick={handleModal} style={{ cursor: 'pointer' }} />
       </S.Container>
-      {isModalOpen && <Modal isClose={() => setIsModalOpen(false)} type="edit" />}
+      {isModalOpen && <Modal isClose={() => setIsModalOpen(false)} type="edit" groupId={6} />}
     </>
   );
 };
