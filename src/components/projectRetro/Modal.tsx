@@ -13,6 +13,7 @@ import postImageToS3 from '@/api/imageApi/postImageToS3';
 import { GetRetrospectiveGroup } from '@/api/retroGroupsApi/getGroup';
 import postGroup from '@/api/retroGroupsApi/postGroup';
 import ImageUpload from '@/components/createRetro/modal/ImageUpload';
+import DeleteModal from '@/components/projectRetro/DeleteModal';
 import DescriptionInput from '@/components/projectRetro/DescriptionInput';
 import TitleInput from '@/components/projectRetro/TitleInput';
 import { useCustomToast } from '@/hooks/useCustomToast';
@@ -31,6 +32,11 @@ const Modal: React.FC<ModalProps> = ({ isClose, type, groupId }) => {
   const statusList = ['ING', 'DONE'];
   const statusObj: { [key: string]: string } = { ING: 'IN_PROGRESS', DONE: 'COMPLETED' };
   const availableOption = statusList.filter(statusList => statusList !== statusOption);
+  const [deleteModal, setDeleteModal] = useState<boolean>(false);
+
+  const handleDeleteModal = () => {
+    setDeleteModal(true);
+  };
 
   const [requestData, setRequestData] = useState<PostRetrospectivesGroupRequest>({
     title: '',
@@ -199,12 +205,16 @@ const Modal: React.FC<ModalProps> = ({ isClose, type, groupId }) => {
               </div>
             )}
           </S.StatusBox>
-          <S.SubmitButton onClick={type === 'create' ? handleCreateGroup : handleEditGroup}>
-            {type === 'create' && 'Create'}
-            {type === 'edit' && 'Edit'}
-          </S.SubmitButton>
+          <S.ButtonContainer>
+            <S.SubmitButton onClick={type === 'create' ? handleCreateGroup : handleEditGroup}>
+              {type === 'create' && 'Create'}
+              {type === 'edit' && 'Edit'}
+            </S.SubmitButton>
+            {type === 'edit' && <S.DeleteButton onClick={handleDeleteModal}>Delete</S.DeleteButton>}
+          </S.ButtonContainer>
         </S.Modal>
       </S.Container>
+      {deleteModal && <DeleteModal isClose={() => setDeleteModal(false)} />}
     </S.Background>
   );
 };

@@ -83,12 +83,10 @@ const ProjectRetro = () => {
         <S.DescriptionText>사용법</S.DescriptionText>
       </S.DescriptionBox>
       <StatusFilter onSelectedFilter={handleStatusFilter} />
-      <div>
-        <S.CreateBox>
-          <FiPlusCircle size={40} style={{ color: '#a9a9a9', cursor: 'pointer' }} onClick={handleModal} />
-        </S.CreateBox>
-        <GroupList groups={filteredGroups} />
-      </div>
+      <S.CreateBox>
+        <FiPlusCircle size={40} style={{ color: '#a9a9a9', cursor: 'pointer' }} onClick={handleModal} />
+      </S.CreateBox>
+      <GroupList groups={filteredGroups} />
       {isDescriptionOpen ? <DescriptionModal isClose={() => setIsDescriptionOpen(false)} /> : null}
       {isModalOpen && <Modal isClose={() => setIsModalOpen(false)} type="create" />}
     </>
