@@ -15,6 +15,8 @@ export interface NotificationData {
   thumbnail: string;
   notificationType: TNotificationType;
   dateTime: string;
+  retrospectiveId: number;
+  teamId: number;
 }
 
 export interface PostNotificationRequest {

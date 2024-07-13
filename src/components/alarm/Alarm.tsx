@@ -50,7 +50,7 @@ const Alarm = () => {
       setOtherNotification(otherFiltered);
     });
   };
-  console.log('today', todayNotification);
+
   const fetchUser = async () => {
     try {
       const data = await UserServices.get();
@@ -69,6 +69,7 @@ const Alarm = () => {
     }
   };
 
+  console.log(notification);
   const deleteNotification = async () => {
     try {
       if (user && user.userId) {
@@ -128,9 +129,11 @@ const Alarm = () => {
           <PopoverFooter style={{ overflow: 'auto' }} maxH={300}>
             <S.MenuText>최근에 받은 알림</S.MenuText>
             <Flex flexDirection="column-reverse">
-              {todayNotification && todayNotification.length > 0 ? (
+              {notification && todayNotification.length > 0 ? (
                 todayNotification.map(item => (
-                  <S.AlarmContents onClick={() => navigate(`/`)}>
+                  <S.AlarmContents
+                    onClick={() => navigate(`/sections?retrospectiveId=${item.retrospectiveId}&teamId=${item.teamId}`)}
+                  >
                     <Flex justifyContent="space-between">
                       <S.AlarmTitle>
                         [{item.retrospectiveTitle}]에서 알림{' '}
@@ -163,7 +166,7 @@ const Alarm = () => {
             <Divider />
             <S.MenuText style={{ margin: '5px 0' }}>저번에 받은 알림</S.MenuText>
             <Flex flexDirection="column-reverse">
-              {otherNotification && otherNotification.length > 0 ? (
+              {notification && otherNotification.length > 0 ? (
                 otherNotification.map(item => (
                   <S.AlarmContents onClick={() => navigate(`/`)}>
                     <Flex justifyContent="space-between">

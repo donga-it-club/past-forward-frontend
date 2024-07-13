@@ -6,6 +6,8 @@ import {
   onlyGetRetrospectiveResponse,
   PostRetrospectivesRequest,
   PostRetrospectivesResponse,
+  PostTransferLeaderRequest,
+  PostTransferLeaderResponse,
   RetrospectivesClient,
 } from '../@types/Retrospectives';
 import axiosInstance from '../axiosConfig';
@@ -52,6 +54,19 @@ export const RetrospectiveService: RetrospectivesClient = {
   put: async ({ retrospectiveId, ...request }) => {
     try {
       const response = await axiosInstance.put(`${ROUTE}/${retrospectiveId}`, request);
+      return response.data;
+    } catch (error) {
+      throw new Error(error as string);
+    }
+  },
+  leaderPost: async ({
+    retrospectiveId,
+    newLeaderId,
+  }: PostTransferLeaderRequest): Promise<PostTransferLeaderResponse> => {
+    try {
+      const response = await axiosInstance.post(
+        `${ROUTE}/${retrospectiveId}/transferLeadership?newLeaderId=${newLeaderId}`,
+      );
       return response.data;
     } catch (error) {
       throw new Error(error as string);

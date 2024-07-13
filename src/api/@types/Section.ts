@@ -28,11 +28,14 @@ export interface ActionItemData {
 }
 
 export interface CommentData {
+  sectionId: number;
   commentId: number;
   userId: number;
   content: string;
   username: string;
   thumbnail: string;
+  lastModifiedDate: string;
+  createdDate: string;
 }
 
 export interface AddedImageCommentData extends CommentData {
