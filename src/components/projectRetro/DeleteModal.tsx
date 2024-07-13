@@ -1,13 +1,30 @@
 import { IoMdClose } from 'react-icons/io';
 import { RiFolder6Fill } from 'react-icons/ri';
+import { DeleteGroup } from '@/api/retroGroupsApi/deleteGroup';
+import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/projectRetro/DeleteModal.styles';
 
 interface DeleteModalProps {
   isClose: () => void;
-  //   groupId: number;
+  modalClose: () => void;
+  groupId: number;
 }
 
-const DeleteModal: React.FC<DeleteModalProps> = ({ isClose }) => {
+const DeleteModal: React.FC<DeleteModalProps> = ({ isClose, modalClose, groupId }) => {
+  const toast = useCustomToast();
+  const handleDeleteGroup = async () => {
+    try {
+      await DeleteGroup({ retrospectiveGroupId: groupId });
+      setTimeout(() => {
+        isClose();
+        modalClose();
+        toast.info('그룹이 삭제되었습니다.');
+      }, 1000);
+    } catch (e) {
+      toast.error('그룹 삭제에 실패했습니다.');
+    }
+  };
+
   return (
     <S.Background>
       <S.Container>
@@ -27,7 +44,7 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ isClose }) => {
               <S.ProjectName>프로젝트1</S.ProjectName> {/* 프로젝트 이름 */}
               <S.Text>를 삭제하시겠습니까?</S.Text>
             </div>
-            <S.Button>Delete</S.Button>
+            <S.Button onClick={handleDeleteGroup}>Delete</S.Button>
           </S.Bottom>
         </S.Modal>
       </S.Container>

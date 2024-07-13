@@ -214,7 +214,8 @@ const Modal: React.FC<ModalProps> = ({ isClose, type, groupId }) => {
           </S.ButtonContainer>
         </S.Modal>
       </S.Container>
-      {deleteModal && <DeleteModal isClose={() => setDeleteModal(false)} />}
+      {deleteModal && <DeleteModal groupId={9} isClose={() => setDeleteModal(false)} modalClose={isClose} />}{' '}
+      {/* groupId 받아오기 */}
     </S.Background>
   );
 };
