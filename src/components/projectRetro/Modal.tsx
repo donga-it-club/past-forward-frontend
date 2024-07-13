@@ -106,7 +106,6 @@ const Modal: React.FC<ModalProps> = ({ isClose, type, groupId }) => {
     }
   }, []);
 
-  console.log(groupData[0].title);
   const handleEditGroup = async () => {};
 
   const handleToggle = () => {
