@@ -40,7 +40,7 @@ const ProjectRetro = () => {
         setData(responseData.data);
         console.log(data);
       } catch (error) {
-        toast.error('그룹 생성에 실패했습니다');
+        toast.error('그룹 불러오기에 실패했습니다');
       }
     };
     fetchGroup();

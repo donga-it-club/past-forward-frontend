@@ -3,8 +3,14 @@ import { CgTimelapse } from 'react-icons/cg'; // ing
 import { FaRegCircleCheck } from 'react-icons/fa6'; // done
 import { IoMdClose } from 'react-icons/io';
 import { IoIosArrowDown } from 'react-icons/io';
-// import Thumbnail from '@/assets/Thumbnail.png';
-// import ImageUpload from '@/components/createRetro/modal/ImageUpload';
+import axios from 'axios';
+import { PostRetrospectivesGroupRequest } from '@/api/@types/Groups';
+import postImageToS3 from '@/api/imageApi/postImageToS3';
+import postGroup from '@/api/retroGroupsApi/postGroup';
+import ImageUpload from '@/components/createRetro/modal/ImageUpload';
+import DescriptionInput from '@/components/projectRetro/DescriptionInput';
+import TitleInput from '@/components/projectRetro/TitleInput';
+import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/projectRetro/Modal.styles';
 
 interface ModalProps {
@@ -13,10 +19,67 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ isClose, type }) => {
+  const toast = useCustomToast();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [statusOption, setStatusOption] = useState<string>('ING');
   const statusList = ['ING', 'DONE'];
+  const statusObj: { [key: string]: string } = { ING: 'IN_PROGRESS', DONE: 'COMPLETED' };
   const availableOption = statusList.filter(statusList => statusList !== statusOption);
+
+  const [requestData, setRequestData] = useState<PostRetrospectivesGroupRequest>({
+    title: '',
+    status: statusObj.ING,
+    thumbnail: null,
+    description: '',
+  });
+
+  const [image, setImage] = useState<Blob | null>(null);
+
+  const handleCreateGroup = async () => {
+    try {
+      if (!requestData.title) {
+        alert('그룹 이름을 입력해 주세요.');
+        return;
+      }
+      if (!requestData.description) {
+        requestData.description = '';
+        return;
+      }
+
+      if (requestData.thumbnail) {
+        const imageResponse = await postImageToS3({
+          filename: requestData.thumbnail,
+          method: 'PUT',
+        });
+
+        const imageURL = imageResponse.data.preSignedUrl;
+
+        const uploadResponse = await axios.put(imageURL, image, {
+          headers: {
+            'Content-Type': image?.type,
+          },
+        });
+
+        if (uploadResponse.status === 200) {
+          console.log('사진 form-data 성공', uploadResponse);
+        } else {
+          console.error('사진 업로드 실패');
+        }
+      }
+
+      // put 요청 전송
+      await postGroup({
+        ...requestData,
+        thumbnail: requestData.thumbnail || null,
+      });
+
+      isClose();
+    } catch (error) {
+      toast.error('그룹 생성에 실패했습니다');
+    }
+  };
+
+  // const handleEdit = async () => {};
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -41,15 +104,14 @@ const Modal: React.FC<ModalProps> = ({ isClose, type }) => {
             <S.TitleText>{type === 'create' ? '생성하기' : '수정하기'}</S.TitleText>
           </S.TitleBox>
           <S.ImageBox>
-            {type === 'create' &&
-              //   <ImageUpload
-              //     onChange={(file, imageUUID) => {
-              //       setRequestData({ ...requestData, thumbnail: imageUUID });
-              //       setImage(file);
-              //     }}
-              //     text="PC에서 이미지 선택"
-              //   />
-              'PC에서 이미지 선택'}
+            {type === 'create' && (
+              <ImageUpload
+                onChange={(file, imageUUID) => {
+                  setRequestData({ ...requestData, thumbnail: imageUUID });
+                  setImage(file);
+                }}
+              />
+            )}
             {type === 'edit' &&
               //   <ImageUpload
               //     onChange={(file, imageUUID) => {
@@ -60,10 +122,10 @@ const Modal: React.FC<ModalProps> = ({ isClose, type }) => {
               //   />
               '변경하기'}
           </S.ImageBox>
-          <S.NameInput placeholder="Project Name *" />
+          <TitleInput onChange={title => setRequestData({ ...requestData, title })} />
           <S.DescriptionBox>
             <S.Text>프로젝트 설명</S.Text>
-            <S.DescriptionInput placeholder="프로젝트에 대한 설명을 입력해 주세요." />
+            <DescriptionInput onChange={description => setRequestData({ ...requestData, description })} />
           </S.DescriptionBox>
           <S.StatusBox>
             <S.Text>프로젝트 상태</S.Text>
@@ -80,7 +142,13 @@ const Modal: React.FC<ModalProps> = ({ isClose, type }) => {
             {isOpen && (
               <div>
                 {availableOption.map((option, index) => (
-                  <S.Button key={index} onClick={() => handleStatusOption(option)}>
+                  <S.Button
+                    key={index}
+                    onClick={() => {
+                      handleStatusOption(option);
+                      setRequestData({ ...requestData, status: statusObj[option] });
+                    }}
+                  >
                     {option === 'ING' ? (
                       <CgTimelapse style={{ color: '#57AD5A' }} />
                     ) : (
@@ -92,7 +160,7 @@ const Modal: React.FC<ModalProps> = ({ isClose, type }) => {
               </div>
             )}
           </S.StatusBox>
-          <S.SubmitButton>
+          <S.SubmitButton onClick={handleCreateGroup}>
             {type === 'create' && 'Create'}
             {type === 'edit' && 'Edit'}
           </S.SubmitButton>
