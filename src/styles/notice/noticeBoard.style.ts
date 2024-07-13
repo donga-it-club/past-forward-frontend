@@ -24,7 +24,7 @@ export const NoticeBoardBox = styled.div`
   border-radius: 5px;
   display: grid;
   grid-template-columns: 1fr 5fr 2fr 1fr;
-  grid-template-rows: 1fr 5fr;
+  grid-template-rows: 1fr 10fr;
   grid-auto-rows: minmax(76px, auto);
 `;
 

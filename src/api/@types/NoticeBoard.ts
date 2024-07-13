@@ -135,11 +135,11 @@ export interface DeleteNoticeRequest {
 // }
 
 export interface NoticeBoardClient {
-  NoticeListGet(request: GetNoticeListRequest): Promise<GetNoticeListResponse>;
-  NoticePostsGet(request: GetNoticePostsRequest): Promise<GetNoticePostsResponse>;
-  NoticeCreate(request: PostNoticeRequest): Promise<PostNoticeResponse>;
-  NoticeTempSave(request: PostNoticeTempPostsRequest): Promise<PostNoticeTempPostsResponse>;
-  NoticeImg(request: PostNoticePresignedURLRequest): Promise<PostNoticePresignedURLResponse>;
-  NoticeRevise(request: PutNoticeRequest): Promise<PutNoticeResponse>;
-  NoticeDelete(request: DeleteNoticeRequest): Promise<void>;
+  listGet(request: GetNoticeListRequest): Promise<GetNoticeListResponse>;
+  postsGet(request: GetNoticePostsRequest): Promise<GetNoticePostsResponse>;
+  create(request: PostNoticeRequest): Promise<PostNoticeResponse>;
+  tempSave(request: PostNoticeTempPostsRequest): Promise<PostNoticeTempPostsResponse>;
+  Img(request: PostNoticePresignedURLRequest): Promise<PostNoticePresignedURLResponse>;
+  revise(request: PutNoticeRequest): Promise<PutNoticeResponse>;
+  delete(request: DeleteNoticeRequest): Promise<void>;
 }

@@ -3,15 +3,19 @@ import { IoIosArrowForward } from 'react-icons/io';
 import * as S from '@/styles/notice/noticeBoard.style';
 
 export const NoticeBoardContents = () => {
+  const NoticeNumber = 1;
+  const NoticeTitle = '일반공지, 공결 신청시 유의사항(공결 신청 시 반드시 확인)';
+  const NoticeDate = '2024-02-28';
+  const NoticeView = 22;
   return (
     <>
       <S.NoticeBoardContentsStyle>
-        <p className="NoticeBoardContentsText">1</p>
+        <p className="NoticeBoardContentsText">{NoticeNumber}</p>
         <p className="NoticeBoardContentsText" style={{ textAlign: 'left' }}>
-          일반공지, 공결 신청시 유의사항(공결 신청 시 반드시 확인)
+          {NoticeTitle}
         </p>
-        <p className="NoticeBoardContentsText">2024-02-28</p>
-        <p className="NoticeBoardContentsText">26</p>
+        <p className="NoticeBoardContentsText">{NoticeDate}</p>
+        <p className="NoticeBoardContentsText">{NoticeView}</p>
       </S.NoticeBoardContentsStyle>
       <S.NoticeBoardContentsLine></S.NoticeBoardContentsLine>
       <S.NoticeBoardContentsStyle>
@@ -40,6 +44,7 @@ export const NoticeBoard = () => {
     >
       <S.NoticeBoardContainer>
         <S.NoticeBoardTitle>게시판</S.NoticeBoardTitle>
+
         <S.NoticeBoardBox>
           <p>번호</p>
           <p style={{ textAlign: 'left' }}>제목</p>
@@ -53,9 +58,11 @@ export const NoticeBoard = () => {
             </div>
           </S.NoticeBoardContentsBox>
         </S.NoticeBoardBox>
+
         <div style={{ textAlign: 'right' }}>
           <S.NoticeWriteButton>글쓰기</S.NoticeWriteButton>
         </div>
+
         <S.NoticeMoveArrow>
           <IoIosArrowBack color="gray" />
           <p>1</p>

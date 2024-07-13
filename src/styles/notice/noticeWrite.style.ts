@@ -7,13 +7,10 @@ export const NoticeMenuBarStyle = styled.div`
   /* border: 1px solid #cfcfcf; */
   box-shadow: 0 -10px 10px 10px #cfcfcf;
   display: grid;
-  grid-template-columns: 7fr 3fr;
+  grid-template-columns: repeat(2, 1fr);
   position: fixed;
   top: 0px;
   z-index: 1;
-  @media (max-width: 580px) {
-    grid-template-columns: repeat(2, 5fr);
-  }
 `;
 
 export const NoticeMenuTitle = styled.p`
@@ -82,7 +79,6 @@ export const NoticeWriteMainTitle = styled.textarea`
   font-weight: 500;
   padding-bottom: 15px;
   margin-top: 120px;
-  /* background-color: red; */
 
   &:focus {
     outline: none; /* 포커스 시 검은색 테두리 제거 */
