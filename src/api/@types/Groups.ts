@@ -58,6 +58,7 @@ export interface DeleteRetrospectiveRequest {
 
 // put
 export interface PutRetrospectiveGroupRequest {
+  retrospectiveGroupId: number;
   title: string;
   status: string;
   thumbnail: string | null;

@@ -22,7 +22,8 @@ const GroupList: React.FC<GroupListProps> = ({ groups }) => {
 
   return (
     <>
-      {isModalOpen && <Modal isClose={() => setIsModalOpen(false)} type="edit" groupId={6} />}
+      {isModalOpen && <Modal isClose={() => setIsModalOpen(false)} type="edit" groupId={6} />}{' '}
+      {/* id,title,description,thumbnail 넘겨주기 -> 넘겨받은거 그대로 출력(수정하기 모달), deletemodal에 id 넘겨주기 */}
       <S.Container>
         {groups.map(group => (
           <div key={group.id}>
