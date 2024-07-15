@@ -168,7 +168,9 @@ const Alarm = () => {
             <Flex flexDirection="column-reverse">
               {notification && otherNotification.length > 0 ? (
                 otherNotification.map(item => (
-                  <S.AlarmContents onClick={() => navigate(`/`)}>
+                  <S.AlarmContents
+                    onClick={() => navigate(`/sections?retrospectiveId=${item.retrospectiveId}&teamId=${item.teamId}`)}
+                  >
                     <Flex justifyContent="space-between">
                       <S.AlarmTitle>
                         [{item.retrospectiveTitle}]에서 알림{' '}

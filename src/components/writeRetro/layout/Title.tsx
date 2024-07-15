@@ -70,7 +70,7 @@ const Title: FC<Props> = ({ name, description, retro, user }) => {
             margin={{ base: 'auto 30px', md: 'auto 5px' }}
           />
         )}
-        <Flex flexDirection="column" margin="20px 0px 20px 30px">
+        <Flex flexDirection="column" margin="20px 0px 20px 30px" flexGrow={1}>
           <S.TitleStyleBox>
             <RetroTitle teamId={teamId} name={name} />
             <div style={{ display: 'flex' }}>
