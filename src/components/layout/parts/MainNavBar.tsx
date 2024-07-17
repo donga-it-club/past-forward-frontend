@@ -27,7 +27,7 @@ const MainNavBar = () => {
       <div
         style={{
           backgroundColor: 'white',
-          zIndex: 999,
+          zIndex: 3,
           borderBottom: '1px solid rgba(184, 184, 184, 0.5)',
           position: 'fixed',
           left: 0,

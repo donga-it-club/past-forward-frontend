@@ -14,9 +14,8 @@ export const ExplainButtonStyle = styled.button`
 
 // 흰색 바탕
 export const ExplainStyle = styled.div`
-  width: 934px;
-  height: 523px;
   border-radius: 10px;
+  overflow: auto;
   position: relative;
   padding: 29px 11px;
 `;
@@ -36,8 +35,6 @@ export const ExplainTitleBox = styled.div`
 `;
 
 export const ExplainSideTitle = styled.div`
-  width: 200px;
-  display: inline-block;
   margin-left: 5px;
   /* position: absolute;
   margin-top: 15px; */
@@ -53,28 +50,27 @@ export const RecommendMessage = styled.span`
 `;
 
 export const ExplainTitle = styled.div`
-  width: 317px;
-  height: 42px;
-  font-size: 24px;
+  font-size: 20px;
+  padding: 10px;
   font-weight: 500;
+  margin: 10px 0;
   color: #ffffff;
   line-height: 42px;
   text-align: center;
   background-color: #111b47;
   border-radius: 8px;
-  margin: 0 auto;
 `;
 
 export const ExplainBody = styled.div`
-  width: 438px;
-  height: 388px;
+  /* width: 438px; */
+  /* height: 388px; */
   /* background-color: gray; */
   padding-left: 13px;
-  margin: 25px 9px 0px;
+  margin: 25px auto;
 `;
 
 export const ExplainLine = styled.div`
-  height: 388px;
+  /* height: 388px; */
   border-right: 1px dashed #b6b6b6;
   margin-top: 25px;
 `;
