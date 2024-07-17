@@ -91,8 +91,6 @@ const Alarm = () => {
       toast.error('error');
     }
   };
-  console.log(todayNotification, otherNotification);
-  console.log(user);
 
   useEffect(() => {
     fetchNotification();
@@ -120,7 +118,7 @@ const Alarm = () => {
         </S.IconStyle>
       </PopoverTrigger>
       <Portal>
-        <PopoverContent minW={{ base: '200', md: '500' }} zIndex={999}>
+        <PopoverContent minW={{ base: '200', md: '500' }}>
           <PopoverArrow />
           <PopoverHeader>
             <BellFill style={{ fontSize: '30px' }} />
