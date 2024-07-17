@@ -132,11 +132,34 @@ export interface PatchRetrospectiveResponse {
   data: boolean;
 }
 
+export interface PostTransferLeaderRequest {
+  newLeaderId: number;
+  retrospectiveId: number;
+}
+
+export interface PostTransferLeaderResponse {
+  code: number;
+  message: string;
+}
+
+export interface LeaderData {
+  id: number;
+  title: string;
+  teamId: number;
+  userId: number;
+  templateId: number;
+  status: keyof TStatus;
+  thumbnail: string;
+  startedDate: string;
+  description: string;
+}
+
 export interface RetrospectivesClient {
   onlyGet(request: onlyGetRetrospectiveRequest): Promise<onlyGetRetrospectiveResponse>;
   create(request: PostRetrospectivesRequest): Promise<PostRetrospectivesResponse>;
   get(request: GetRetrospectiveRequest): Promise<GetRetrospectiveData>;
   delete(request: DeleteRetrospectiveRequest): Promise<void>;
   put(request: PutTeamRetrospectiveRequest): Promise<RetrospectiveResponse>;
+  leaderPost(request: PostTransferLeaderRequest): Promise<PostTransferLeaderResponse>;
   patch(request: PatchRetrospectiveRequest): Promise<PatchRetrospectiveResponse>;
 }

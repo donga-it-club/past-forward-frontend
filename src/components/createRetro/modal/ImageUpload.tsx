@@ -4,9 +4,10 @@ import { v4 as uuidv4 } from 'uuid';
 
 interface ImageUploadProps {
   onChange: (file: File | null, uuid: string) => void; // 파일 객체, uuid 함께 전달
+  text: string;
 }
 
-const ImageUpload: React.FC<ImageUploadProps> = ({ onChange }) => {
+const ImageUpload: React.FC<ImageUploadProps> = ({ onChange, text }) => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [_, setImageUUID] = useState<string | null>(null); // 상태를 활용할 수 있도록 수정
 
@@ -41,7 +42,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onChange }) => {
         <Center>
           <label htmlFor="image-upload">
             <Button as="span" mt={4} variant="outline" borderColor="gray.700" size="md" width="15rem" id="cr_loadpc">
-              PC에서 이미지 선택
+              {text}
             </Button>
           </label>
         </Center>

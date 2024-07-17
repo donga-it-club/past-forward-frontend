@@ -152,6 +152,7 @@ const CreateModal: React.FC<CreateModalProps> = ({ isOpen, onClose, templateId, 
                   setRequestData({ ...requestData, thumbnail: imageUUID });
                   setImage(file);
                 }}
+                text="PC에서 이미지 선택"
               />
             </S.LeftColumn>
             <S.RightColumn>

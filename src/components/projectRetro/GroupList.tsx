@@ -1,3 +1,6 @@
+import { useState } from 'react';
+import { MdOutlineMoreHoriz } from 'react-icons/md';
+import Modal from '@/components/projectRetro/Modal';
 import * as S from '@/styles/projectRetro/GroupList.styles';
 
 export interface RetroGroup {
@@ -12,15 +15,24 @@ interface GroupListProps {
 }
 
 const GroupList: React.FC<GroupListProps> = ({ groups }) => {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const handleModal = () => {
+    setIsModalOpen(true);
+  };
+
   return (
-    <S.Container>
-      {groups.map(group => (
-        <div key={group.id}>
-          <p>{group.title}</p>
-          <p>{group.description}</p>
-        </div>
-      ))}
-    </S.Container>
+    <>
+      {isModalOpen && <Modal isClose={() => setIsModalOpen(false)} type="edit" groupId={6} />}
+      <S.Container>
+        {groups.map(group => (
+          <div key={group.id}>
+            <p>{group.title}</p>
+            <p>{group.description}</p>
+          </div>
+        ))}
+        <MdOutlineMoreHoriz onClick={handleModal} style={{ cursor: 'pointer' }} />
+      </S.Container>
+    </>
   );
 };
 

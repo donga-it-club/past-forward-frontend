@@ -257,13 +257,12 @@ export const reviseTitleText = styled.p`
 
 export const TaskText = styled.p`
   font-size: 15px;
-  min-width: 200px;
-  max-width: 500px;
   font-weight: 700;
   color: #6b7a99;
   line-height: 20px;
   vertical-align: top;
   margin: 20px 0;
+  margin-right: 10px;
   margin-top: 20px;
   &:hover {
     cursor: pointer;
