@@ -94,6 +94,7 @@ export const SideBarBGContainer = styled.div`
   color: white;
   background-color: #f8f8f8;
   z-index: 999;
+  overflow: auto;
 `;
 
 export const LogoBox = styled.div``;
@@ -170,6 +171,7 @@ export const MenuText = styled.a`
   color: #111b47;
   font-weight: 600;
   text-decoration: none;
+  margin: 5px 0;
 `;
 
 export const AllDeleteText = styled.button`
