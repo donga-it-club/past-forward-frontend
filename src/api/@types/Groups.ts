@@ -5,10 +5,10 @@ export interface GetRetrospectiveGroupsNodes {
   userId: number;
   userName: string;
   status: string;
-  isBookmarked: true;
-  thumnail: string | null;
+  isBookmarked: boolean;
+  thumbnail: string | null;
   description: string;
-  updatedDate: Date;
+  updateDate: Date;
 }
 
 export interface GetRetrospectiveGroups {
