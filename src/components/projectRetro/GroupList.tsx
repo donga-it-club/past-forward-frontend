@@ -4,6 +4,7 @@ import { FaRegCircleCheck } from 'react-icons/fa6'; // done
 import { FiPlusCircle } from 'react-icons/fi';
 import { MdOutlineMoreHoriz } from 'react-icons/md';
 import { RiFolder6Fill } from 'react-icons/ri';
+import { useNavigate } from 'react-router-dom';
 import { Center, Spinner } from '@chakra-ui/react';
 import { GetRetrospectiveGroupsNodes } from '@/api/@types/Groups';
 import { UserData } from '@/api/@types/Users';
@@ -18,10 +19,40 @@ interface GroupListProps {
   groups: { totalCount: number; nodes: GetRetrospectiveGroupsNodes[] };
 }
 
+interface GroupData {
+  id: number;
+  title: string;
+  description: string;
+  thumbnail: string | null;
+  status: string;
+}
+
 const GroupList: React.FC<GroupListProps> = ({ groups }) => {
-  // const [data, setData] = useState<GetRetrospectiveGroupsNodes[]>(groups.nodes);
+  const data = groups.nodes;
+  const navigate = useNavigate();
+  const toast = useCustomToast();
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState<boolean>(false);
+  const [image, setImage] = useState<{ [key: number]: string }>({});
+  const [user, setUser] = useState<UserData>();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [seletedGroupData, setSelectedGroupData] = useState<GroupData>({
+    id: 0,
+    title: '',
+    description: '',
+    thumbnail: '',
+    status: 'IN_PROGRESS',
+  });
+
+  const handleGroupData = (
+    id: number,
+    title: string,
+    description: string,
+    thumbnail: string | null,
+    status: string,
+  ) => {
+    setSelectedGroupData({ id, title, description, thumbnail, status });
+  };
 
   const handlCreateModal = () => {
     setIsCreateModalOpen(true);
@@ -30,13 +61,6 @@ const GroupList: React.FC<GroupListProps> = ({ groups }) => {
   const handleEditModal = () => {
     setIsEditModalOpen(true);
   };
-
-  const data = groups.nodes;
-
-  const toast = useCustomToast();
-  const [image, setImage] = useState<{ [key: number]: string }>({});
-  const [user, setUser] = useState<UserData>();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const handleImageLoad = () => {
     setIsLoading(false);
@@ -62,7 +86,6 @@ const GroupList: React.FC<GroupListProps> = ({ groups }) => {
             filename: item.thumbnail,
             method: 'GET',
           });
-          // console.log('s3 사진 받아오기 성공', imageResponse.data.preSignedUrl);
           setImage(prevImage => ({
             ...prevImage,
             [item.id]: imageResponse.data.preSignedUrl,
@@ -92,7 +115,9 @@ const GroupList: React.FC<GroupListProps> = ({ groups }) => {
 
   return (
     <>
-      {isEditModalOpen && <Modal isClose={() => setIsEditModalOpen(false)} type="edit" groupId={6} />}
+      {isEditModalOpen && (
+        <Modal isClose={() => setIsEditModalOpen(false)} type="edit" selectedGroupData={seletedGroupData} />
+      )}
       {isCreateModalOpen && <Modal isClose={() => setIsCreateModalOpen(false)} type="create" />}
 
       {/* id,title,description,thumbnail 넘겨주기 -> 넘겨받은거 그대로 출력(수정하기 모달), deletemodal에 id 넘겨주기 */}
@@ -106,11 +131,14 @@ const GroupList: React.FC<GroupListProps> = ({ groups }) => {
             <S.InfoBox>
               <S.InnerBox>
                 <RiFolder6Fill size={20} style={{ color: '#FFE500' }} />
-                <S.TitleText>{group.title}</S.TitleText>
+                <S.TitleText onClick={() => navigate(`/retrospectiveGroups/${group.id}`)}>{group.title}</S.TitleText>
                 <MdOutlineMoreHoriz
                   size={25}
-                  onClick={handleEditModal}
                   style={{ alignItems: 'start', justifySelf: 'end', cursor: 'pointer', marginLeft: 'auto' }}
+                  onClick={() => {
+                    handleEditModal();
+                    handleGroupData(group.id, group.title, group.description, group.thumbnail, group.status);
+                  }}
                 />
               </S.InnerBox>
               {group.status === 'IN_PROGRESS' ? (

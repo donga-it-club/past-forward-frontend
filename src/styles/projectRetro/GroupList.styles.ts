@@ -41,6 +41,7 @@ export const Thumbnail = styled.img`
 export const TitleText = styled.p`
   font-weight: bold;
   margin-left: 5px;
+  cursor: pointer;
 `;
 
 export const InnerBox = styled.div`

@@ -17,8 +17,8 @@ export interface RetroGroup {
 }
 
 const ProjectRetro = () => {
-  const [isDescriptionOpen, setIsDescriptionOpen] = useState<boolean>(false);
   const toast = useCustomToast();
+  const [isDescriptionOpen, setIsDescriptionOpen] = useState<boolean>(false);
   const [data, setData] = useState<GetRetrospectiveGroups['data']>({ totalCount: 0, nodes: [] });
   const [query, setQuery] = useState<GetRetrospectiveGroupsRequest>({
     page: 0,
