@@ -110,9 +110,7 @@ const Alarm = () => {
           <Bell size={20} />
           {notification && notification.length > 0 && (
             <>
-              <S.notificationBadge>
-                {notification.filter(item => item.receiverId === user?.userId).length}
-              </S.notificationBadge>
+              <S.notificationBadge>{todayNotification.concat(otherNotification).length}</S.notificationBadge>
             </>
           )}
         </S.IconStyle>
@@ -177,7 +175,7 @@ const Alarm = () => {
             <Divider />
             <S.MenuText style={{ margin: '10px 0' }}>저번에 받은 알림</S.MenuText>
             <Flex flexDirection="column-reverse">
-              {otherNotification && otherNotification.length > 0 ? (
+              {notification && otherNotification.length > 0 ? (
                 otherNotification
                   .filter(item => item.receiverId === user?.userId)
                   .map(item => (
