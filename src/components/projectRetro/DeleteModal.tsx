@@ -8,9 +8,10 @@ interface DeleteModalProps {
   isClose: () => void;
   modalClose: () => void;
   groupId: number;
+  title: string;
 }
 
-const DeleteModal: React.FC<DeleteModalProps> = ({ isClose, modalClose, groupId }) => {
+const DeleteModal: React.FC<DeleteModalProps> = ({ isClose, modalClose, groupId, title }) => {
   const toast = useCustomToast();
   const handleDeleteGroup = async () => {
     try {
@@ -19,6 +20,7 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ isClose, modalClose, groupId 
         isClose();
         modalClose();
         toast.info('그룹이 삭제되었습니다.');
+        window.location.reload();
       }, 1000);
     } catch (e) {
       toast.error('그룹 삭제에 실패했습니다.');
@@ -41,8 +43,8 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ isClose, modalClose, groupId 
           <S.Bottom>
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <RiFolder6Fill size={25} style={{ color: '#FFE500', padding: 0 }} />
-              <S.ProjectName>프로젝트1</S.ProjectName> {/* 프로젝트 이름 */}
-              <S.Text>를 삭제하시겠습니까?</S.Text>
+              <S.ProjectName>{title}</S.ProjectName>
+              <S.Text>을(를) 삭제하시겠습니까?</S.Text>
             </div>
             <S.Button onClick={handleDeleteGroup}>Delete</S.Button>
           </S.Bottom>
