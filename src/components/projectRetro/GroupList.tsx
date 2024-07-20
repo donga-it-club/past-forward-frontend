@@ -119,8 +119,6 @@ const GroupList: React.FC<GroupListProps> = ({ groups }) => {
         <Modal isClose={() => setIsEditModalOpen(false)} type="edit" selectedGroupData={seletedGroupData} />
       )}
       {isCreateModalOpen && <Modal isClose={() => setIsCreateModalOpen(false)} type="create" />}
-
-      {/* id,title,description,thumbnail 넘겨주기 -> 넘겨받은거 그대로 출력(수정하기 모달), deletemodal에 id 넘겨주기 */}
       <S.Container>
         <S.CreateBox>
           <FiPlusCircle size={40} style={{ color: '#a9a9a9', cursor: 'pointer' }} onClick={handlCreateModal} />

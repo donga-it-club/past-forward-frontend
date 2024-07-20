@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { CgTimelapse } from 'react-icons/cg'; // ing
 import { FaRegCircleCheck } from 'react-icons/fa6'; // done
 import { IoMdClose } from 'react-icons/io';
@@ -43,14 +43,14 @@ const Modal: React.FC<ModalProps> = ({ isClose, type, selectedGroupData }) => {
   const editStatusList = ['IN_PROGRESS', 'COMPLETED'];
   const editStatusOption = editStatusList.filter(editStatusList => editStatusList !== editData?.status);
   const [image, setImage] = useState<Blob | null>(null);
-  const [editImage, setEditImage] = useState<{ [key: number]: string }>({});
+  const [editImage, setEditImage] = useState<Blob | null>(null);
   const [requestData, setRequestData] = useState<PostRetrospectivesGroupRequest>({
     title: '',
     status: statusObj.ING,
     thumbnail: null,
     description: '',
   });
-  console.log('@@@', editData);
+
   const handleCreateGroup = async () => {
     try {
       if (!requestData.title) {
@@ -70,17 +70,11 @@ const Modal: React.FC<ModalProps> = ({ isClose, type, selectedGroupData }) => {
 
         const imageURL = imageResponse.data.preSignedUrl;
 
-        const uploadResponse = await axios.put(imageURL, image, {
+        await axios.put(imageURL, image, {
           headers: {
             'Content-Type': image?.type,
           },
         });
-
-        if (uploadResponse.status === 200) {
-          console.log('사진 form-data 성공', uploadResponse);
-        } else {
-          console.error('사진 업로드 실패');
-        }
       }
 
       // put 요청 전송
@@ -97,6 +91,19 @@ const Modal: React.FC<ModalProps> = ({ isClose, type, selectedGroupData }) => {
   };
 
   const handleEditGroup = async () => {
+    if (editData.thumbnail && selectedGroupData?.thumbnail !== editData.thumbnail) {
+      const response = await postImageToS3({
+        filename: editData.thumbnail,
+        method: 'PUT',
+      });
+
+      await axios.put(response.data.preSignedUrl, editImage, {
+        headers: {
+          'Content-Type': editImage?.type,
+        },
+      });
+    }
+
     try {
       await putGroup({
         retrospectiveGroupId: editData.id,
@@ -115,47 +122,7 @@ const Modal: React.FC<ModalProps> = ({ isClose, type, selectedGroupData }) => {
     } catch (e) {
       toast.error('그룹 수정에 실패했습니다.');
     }
-
-    // if (editData.thumbnail) {
-    //   const imageResponse = await postImageToS3({
-    //     filename: editData.thumbnail,
-    //     method: 'PUT',
-    //   });
-
-    //   const imageURL = imageResponse.data.preSignedUrl;
-
-    //   const uploadResponse = await axios.put(imageURL, editImage, {
-    //     headers: {
-    //       'Content-Type': editImage?.type,
-    //     },
-    //   });
-
-    //   if (uploadResponse.status === 200) {
-    //     console.log('사진 form-data 성공', uploadResponse);
-    //   } else {
-    //     console.error('사진 업로드 실패');
-    //   }
-    // }
   };
-
-  useEffect(() => {
-    async () => {
-      try {
-        if (editData?.thumbnail) {
-          const imageResponse = await postImageToS3({
-            filename: editData.thumbnail,
-            method: 'GET',
-          });
-          setEditImage(prev => ({
-            ...prev,
-            [editData.id]: imageResponse.data.preSignedUrl,
-          }));
-        }
-      } catch (e) {
-        console.error(e);
-      }
-    };
-  }, []);
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -200,12 +167,11 @@ const Modal: React.FC<ModalProps> = ({ isClose, type, selectedGroupData }) => {
             )}
             {type === 'edit' && (
               <>
-                <img src={(editData.thumbnail && editImage[editData.id]) ?? undefined} />
-                {!editData.thumbnail && <S.ImageText>변경 전 사진이 없으면 보이지 않습니다.</S.ImageText>}
+                {!editData.thumbnail && <S.ImageText>변경 전 사진이 없습니다.</S.ImageText>}
                 <ImageUpload
                   onChange={(file, imageUUID) => {
                     setEditData({ ...editData, thumbnail: imageUUID });
-                    setImage(file);
+                    setEditImage(file);
                   }}
                   text="변경하기"
                 />

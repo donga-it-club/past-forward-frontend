@@ -44,7 +44,7 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ isClose, modalClose, groupId,
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <RiFolder6Fill size={25} style={{ color: '#FFE500', padding: 0 }} />
               <S.ProjectName>{title}</S.ProjectName>
-              <S.Text>를 삭제하시겠습니까?</S.Text>
+              <S.Text>을(를) 삭제하시겠습니까?</S.Text>
             </div>
             <S.Button onClick={handleDeleteGroup}>Delete</S.Button>
           </S.Bottom>
