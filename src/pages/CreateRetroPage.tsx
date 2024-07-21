@@ -39,7 +39,7 @@ const CreateRetroPage: React.FC = () => {
           </S.SpacedButton>
           <D.SpacedLeft>
             <D.DescriptionTitle backgroundColor="#111b47">
-              <span style={{ fontWeight: 'bold' }}>팀 회고 템플릿 소개</span>
+              <span style={{ fontWeight: 'bold' }}>팀 회고 템플릿</span>
             </D.DescriptionTitle>
             <TeamRetroDescription />
           </D.SpacedLeft>
@@ -50,7 +50,7 @@ const CreateRetroPage: React.FC = () => {
           </S.SpacedButton>
           <D.SpacedRight>
             <D.DescriptionTitle color="#111b47">
-              <span style={{ fontWeight: 'bold' }}>개인 회고 템플릿 소개</span>
+              <span style={{ fontWeight: 'bold' }}>개인 회고 템플릿</span>
             </D.DescriptionTitle>
             <PersonalRetroDescription />
           </D.SpacedRight>
