@@ -11,6 +11,7 @@ import ProfileLayout from '@/components/layout/ProfileLayout';
 // import AcceptInvitePage from '@/pages/AccpetInvitePage';
 import AuthPage from '@/pages/AuthPage';
 import CreateRetroPage from '@/pages/CreateRetroPage';
+import GroupBoard from '@/pages/GroupBoardPage';
 import HomePage from '@/pages/HomePage';
 import MyPage from '@/pages/MyPage';
 import ProjectRetro from '@/pages/ProjectRetroPage';
@@ -121,7 +122,16 @@ const App = () => {
                   </PrivateRoute>
                 }
               />
+              <Route
+                path="/retrospectiveGroups/:id"
+                element={
+                  <PrivateRoute>
+                    <GroupBoard />
+                  </PrivateRoute>
+                }
+              />
             </Route>
+
             {/* MainLayout */}
             <Route element={<MainLayout />}>
               <Route path="/" element={<HomePage />} />
