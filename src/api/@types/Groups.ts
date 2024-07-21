@@ -5,10 +5,10 @@ export interface GetRetrospectiveGroupsNodes {
   userId: number;
   userName: string;
   status: string;
-  isBookmarked: true;
-  thumnail: string | null;
+  isBookmarked: boolean;
+  thumbnail: string | null;
   description: string;
-  updatedDate: Date;
+  updateDate: Date;
 }
 
 export interface GetRetrospectiveGroups {
@@ -58,6 +58,7 @@ export interface DeleteRetrospectiveRequest {
 
 // put
 export interface PutRetrospectiveGroupRequest {
+  retrospectiveGroupId: number;
   title: string;
   status: string;
   thumbnail: string | null;

@@ -23,7 +23,7 @@ export const Modal = styled.div`
   border-radius: 5px;
   width: 500px;
   height: auto;
-  padding: 25px;
+  padding: 15px 25px;
 `;
 
 export const TitleBox = styled.div`
@@ -104,12 +104,18 @@ export const Button = styled.button`
 `;
 
 interface StatusTextProps {
-  option: string;
+  option: string | undefined;
 }
 
 export const StatusText = styled.p<StatusTextProps>`
   color: ${props => (props.option === 'ING' ? '#57AD5A' : '#FF1818')};
   font-weight: bold;
+`;
+
+export const StatusEditText = styled.p<StatusTextProps>`
+  color: ${props => (props.option === 'IN_PROGRESS' ? '#57AD5A' : '#FF1818')};
+  font-weight: bold;
+  margin-left: 5px;
 `;
 
 export const DefaultText = styled.p`

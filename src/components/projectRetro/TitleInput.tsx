@@ -2,7 +2,7 @@ import * as S from '@/styles/projectRetro/Modal.styles';
 
 interface TitleInputProps {
   onChange: (title: string) => void;
-  placeholder: string;
+  placeholder: string | undefined;
 }
 
 const TitleInput: React.FC<TitleInputProps> = ({ onChange, placeholder }) => {
