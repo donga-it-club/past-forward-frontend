@@ -106,6 +106,7 @@ export interface GetRetrospectiveGroupResponse {
 export interface GetRetrospectiveGroupNodes {
   id: number;
   title: string;
+  userId: number;
   username: string;
   teamId: number;
   templateId: number;

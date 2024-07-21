@@ -55,8 +55,8 @@ const GroupBoard = () => {
           {groupData?.title}
         </S.TitleText>
       </S.TitleContainter>
-      <S.Button>회고 관리하기</S.Button>
       <S.Wrapper>
+        <S.Button>회고 관리하기</S.Button>
         <GroupBoardList data={groupBoardData} />
       </S.Wrapper>
     </S.Container>
