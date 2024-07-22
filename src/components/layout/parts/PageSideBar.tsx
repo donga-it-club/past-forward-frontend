@@ -13,12 +13,15 @@ import {
   Flex,
 } from '@chakra-ui/react';
 import { useRecoilState } from 'recoil';
+import { GetRetrospectiveGroups } from '@/api/@types/Groups';
 import { GetRetrospectiveData } from '@/api/@types/Retrospectives';
+import { queryGetRetrospectiveAllGroups } from '@/api/retroGroupsApi/getAllGroups';
 import { queryGetRetrospective } from '@/api/retrospectivesApi/getRetrospective';
 import DefaultHeader from '@/components/user/DefaultHeader';
 import UserEmail from '@/components/user/UserEmail';
 import UserNickname from '@/components/user/UserNickname';
 import UserProfileImage from '@/components/user/UserProfileImage';
+import { useSingleAndDoubleClick } from '@/hooks/useSingleAndDoubleClick';
 import { userNicknameState } from '@/recoil/user/userAtom';
 import * as S from '@/styles/layout/layout.style';
 
@@ -30,6 +33,7 @@ const PageSideBar: FC<Props> = ({ onClose }) => {
   const [userNickname, setUserNickname] = useRecoilState(userNicknameState);
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const [retro, setRetro] = useState<GetRetrospectiveData['data']>();
+  const [group, setGroup] = useState<GetRetrospectiveGroups['data']>({ totalCount: 0, nodes: [] });
   const navigate = useNavigate();
 
   const navigateToMy = () => {
@@ -57,6 +61,34 @@ const PageSideBar: FC<Props> = ({ onClose }) => {
     fetchRetrospective();
   }, [retro?.totalCount]);
 
+  useEffect(() => {
+    const fetchGroup = async () => {
+      try {
+        const responseData = await queryGetRetrospectiveAllGroups({
+          page: 0,
+          size: 5,
+          status: '',
+          keyword: '',
+          isBookmarked: false,
+        });
+        setGroup(responseData.data);
+      } catch (e) {
+        console.error(e);
+      }
+    };
+    fetchGroup();
+  }, []);
+
+  const callbackClick = () => {
+    void 0;
+  };
+
+  const callbackDoubleclick = () => {
+    navigate(`/groups`);
+  };
+
+  const click = useSingleAndDoubleClick(callbackClick, callbackDoubleclick);
+
   return (
     <S.SideBarBGContainer>
       <Flex justifyContent="flex-end" margin="5px">
@@ -82,7 +114,7 @@ const PageSideBar: FC<Props> = ({ onClose }) => {
       <Accordion allowMultiple color="black">
         {/* Project */}
         <AccordionItem border="1px solid gray">
-          <AccordionButton>
+          <AccordionButton onClick={click}>
             <S.MiniBox>
               <Flex alignItems="center" padding="2px 10px">
                 <AccordionIcon /> <RiFolder6Fill style={{ marginRight: '5px', color: '#111b47' }} />
@@ -90,6 +122,21 @@ const PageSideBar: FC<Props> = ({ onClose }) => {
               </Flex>
             </S.MiniBox>
           </AccordionButton>
+          {group &&
+            group.nodes.map(id => (
+              <AccordionPanel pb={4}>
+                <a
+                  id="leftside_persnalproject"
+                  href={`group-boards?id=${id.id}`}
+                  style={{ color: '#939393', textDecoration: 'none' }}
+                >
+                  <Flex alignItems="center" padding="0 20px">
+                    <PersonFill style={{ marginRight: '5px', color: '#939393' }} />
+                    {id.title}
+                  </Flex>
+                </a>
+              </AccordionPanel>
+            ))}
         </AccordionItem>
 
         {/* Personal Retro */}
@@ -181,7 +228,7 @@ const PageSideBar: FC<Props> = ({ onClose }) => {
             <AccordionButton>
               <Flex alignItems="center" padding="2px 10px">
                 <IoIosListBox style={{ marginRight: '5px' }} />
-                <a style={{ color: '#111b47', textDecoration: 'none' }}>Go to Retrospect List</a>
+                <a style={{ color: '#111b47', textDecoration: 'none' }}>Retrospect List</a>
               </Flex>
             </AccordionButton>
           </Link>

@@ -83,23 +83,38 @@ export interface PutRetrospectivesGroupNodes {
   updatedDate: Date | string;
 }
 
-// get a group
+// get a group including retrospectives
 export interface GetRetrospectiveGroupRequest {
   retrospectiveGroupId: number;
 }
 
 export interface GetRetrospectiveGroupResponse {
   code: number;
-  message: string;
-  data: Array<GetRetrospectiveGroupNodes>;
+  message: string | null;
+  data: {
+    title: string;
+    userId: number;
+    userName: string;
+    description: string;
+    thumbnail: string | null;
+    status: string;
+    id: number;
+    retrospectives: GetRetrospectiveGroupNodes[];
+  };
 }
 
 export interface GetRetrospectiveGroupNodes {
+  id: number;
   title: string;
   userId: number;
-  userName: string;
-  description: string;
-  thumnail: string | null;
+  username: string;
+  teamId: number;
+  templateId: number;
   status: string;
-  id: number;
+  isBookmarked: boolean | null;
+  thumbnail: string | null;
+  description: string;
+  startDate: Date;
+  createdDate: Date;
+  updatedDate: Date;
 }
