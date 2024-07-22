@@ -20,7 +20,7 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
       <S.SearchLayout>
         <S.SearchInput
           type="search"
-          placeholder="Search Tasks"
+          placeholder="Search Retrospect"
           value={searchInput}
           onChange={handleInputChange}
           id="rl_seo"
