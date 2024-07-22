@@ -129,7 +129,7 @@ const GroupList: React.FC<GroupListProps> = ({ groups }) => {
             <S.InfoBox>
               <S.InnerBox>
                 <RiFolder6Fill size={20} style={{ color: '#FFE500' }} />
-                <S.TitleText onClick={() => navigate(`/retrospectiveGroups/${group.id}`)}>{group.title}</S.TitleText>
+                <S.TitleText onClick={() => navigate(`/group-boards?id=${group.id}`)}>{group.title}</S.TitleText>
                 <MdOutlineMoreHoriz
                   size={25}
                   style={{ alignItems: 'start', justifySelf: 'end', cursor: 'pointer', marginLeft: 'auto' }}

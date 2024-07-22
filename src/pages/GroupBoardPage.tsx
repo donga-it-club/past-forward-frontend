@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { RiFolder6Fill } from 'react-icons/ri';
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import {
   GetRetrospectiveGroupRequest,
   GetRetrospectiveGroupResponse,
@@ -13,12 +13,9 @@ import * as S from '@/styles/projectRetro/GroupBoard.styles';
 
 const GroupBoard = () => {
   const toast = useCustomToast();
-  const { id } = useParams();
-  if (!id) {
-    toast.error('다시 접속해주시기 바랍니다.');
-    throw new Error('ID is undefined');
-  }
-  const groupId: number = parseInt(id);
+  const { search } = useLocation();
+  const query = search.split(/[=,&]/);
+  const groupId = Number(query[1]);
 
   const [groupData, setGroupData] = useState<GetRetrospectiveGroupResponse['data'] | null>(null);
   const [groupBoardData, setGroupBoardData] = useState<GetRetrospectiveGroupNodes[] | null>(null);
@@ -44,8 +41,6 @@ const GroupBoard = () => {
       setGroupBoardData(groupData.retrospectives);
     }
   }, [groupData]);
-
-  console.log('groupBoardData', groupBoardData);
 
   return (
     <S.Container>
