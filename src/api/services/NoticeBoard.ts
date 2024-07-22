@@ -26,7 +26,7 @@ export const NoticeServices: NoticeBoardClient = {
       throw new Error(error as string);
     }
   },
-  postsGet: async (id: GetNoticePostsRequest): Promise<GetNoticePostsResponse> => {
+  postsGet: async ({ id }: GetNoticePostsRequest): Promise<GetNoticePostsResponse> => {
     try {
       const response = await axiosInstance.get<GetNoticePostsResponse>(`/posts/${id}`);
       return response.data;
@@ -61,7 +61,7 @@ export const NoticeServices: NoticeBoardClient = {
       throw new Error(error as string);
     }
   },
-  revise: async (id, ...request): Promise<PutNoticeResponse> => {
+  revise: async ({ id, ...request }): Promise<PutNoticeResponse> => {
     try {
       const response = await axiosInstance.put<PutNoticeResponse>(`${ROUTE}/posts/${id}`, request);
       return response.data;

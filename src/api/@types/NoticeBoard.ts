@@ -12,7 +12,7 @@ export interface GetNoticeListResponse {
 }
 
 export interface GetNoticeListData {
-  posts: GetNoticeListPosts;
+  posts: GetNoticeListPosts[];
   totalPages: number;
 }
 
@@ -20,10 +20,10 @@ export interface GetNoticeListPosts {
   id: number;
   title: string;
   content: string;
-  status: string;
+  status: 'PUBLISHED';
   createdDate: string;
   modifiedDate: string;
-  view: number;
+  views: number;
 }
 
 // 개별 게시글 조회
@@ -43,13 +43,14 @@ export interface GetNoticePostsData {
   status: string;
   createdDate: string;
   modifiedDate: string;
-  view: number;
+  views: number;
 }
 
 //post
 export interface PostNoticeRequest {
   title: string;
   content: string;
+  status: 'PUBLISHED' | 'TEMP';
 }
 
 export interface PostNoticeResponse {
@@ -108,6 +109,7 @@ export interface PutNoticeRequest {
   id: number;
   title: string;
   content: string;
+  status: string;
 }
 
 export interface PutNoticeResponse {

@@ -12,8 +12,16 @@ export interface UserData {
   phone: string;
   createdDate: string;
   updatedDate: string;
+  administrator: boolean;
+}
+
+// post
+export interface PostUserRequest {
+  email: string;
+  admin: boolean;
 }
 
 export interface UserClient {
   get(): Promise<GetUserResponse>;
+  post(request: PostUserRequest): Promise<void>;
 }
