@@ -115,7 +115,7 @@ const App = () => {
                 }
               />
               <Route
-                path="/retrospectiveGroups"
+                path="/groups"
                 element={
                   <PrivateRoute>
                     <ProjectRetro />
@@ -123,7 +123,7 @@ const App = () => {
                 }
               />
               <Route
-                path="/retrospectiveGroups/:id"
+                path="/group-boards"
                 element={
                   <PrivateRoute>
                     <GroupBoard />

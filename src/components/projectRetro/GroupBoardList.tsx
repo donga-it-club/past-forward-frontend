@@ -78,8 +78,6 @@ const GroupBoardList: React.FC<GroupBoardListProps> = ({ data }) => {
     }
   }, [data]);
 
-  console.log('DATA', data);
-
   return (
     <>
       {data && data.length !== 0 ? (
