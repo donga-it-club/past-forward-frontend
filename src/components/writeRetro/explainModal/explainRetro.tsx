@@ -5,7 +5,7 @@ import { IoPersonSharp } from 'react-icons/io5';
 import { IoPeopleSharp } from 'react-icons/io5';
 import { IoPersonCircleSharp } from 'react-icons/io5';
 
-import { Modal, ModalOverlay, ModalContent, ModalCloseButton, useDisclosure } from '@chakra-ui/react';
+import { Modal, ModalOverlay, ModalContent, ModalCloseButton, useDisclosure, Flex } from '@chakra-ui/react';
 import * as S from '@/styles/writeRetroStyles/Explain.style';
 
 interface ExplainButtonProps {
@@ -29,7 +29,7 @@ export const ExplainButton = ({ templateId }: ExplainButtonProps) => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
 
-        <ModalContent style={{ maxWidth: '934px', height: '523px', borderRadius: '10px' }}>
+        <ModalContent style={{ maxWidth: '934px', height: '523px', borderRadius: '10px' }} margin="auto 10px">
           {modalBody}
           {/* <ModalCloseButton /> */}
           <ModalCloseButton
@@ -64,14 +64,16 @@ export const ExplainKPT = () => {
   return (
     <>
       <S.ExplainStyle>
-        <div style={{ display: 'flex' }}>
-          <div style={{ display: 'flex', marginTop: '15px', position: 'absolute', left: '120px' }}>
-            <IoPersonSharp color="#878787" size="26px" />
-            <S.ExplainSideTitle>개인 단위 회고에 추천!</S.ExplainSideTitle>
-          </div>
-          <S.ExplainTitle>KPT 회고 더 잘 활용하기</S.ExplainTitle>
-        </div>
-        <div style={{ display: 'flex' }}>
+        <Flex justifyContent="center">
+          <Flex margin="0 auto" flexDirection={{ md: 'row', base: 'column' }}>
+            <Flex margin="auto 10px">
+              <IoPersonSharp color="#878787" size="26px" />
+              <S.ExplainSideTitle>개인 단위 회고에 추천!</S.ExplainSideTitle>
+            </Flex>
+            <S.ExplainTitle>KPT 회고 더 잘 활용하기</S.ExplainTitle>
+          </Flex>
+        </Flex>
+        <Flex flexDirection={{ md: 'row', base: 'column' }}>
           {/* ExplainKPT */}
           <S.ExplainBody>
             <S.ExplainSubTitle>진행 방법</S.ExplainSubTitle>
@@ -156,7 +158,7 @@ export const ExplainKPT = () => {
               </S.ExplainContentSpan>
             </S.ExplainContent>
           </S.ExplainBody>
-        </div>
+        </Flex>
       </S.ExplainStyle>
     </>
   );

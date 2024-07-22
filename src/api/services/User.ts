@@ -1,4 +1,4 @@
-import { PostUserRequest, UserClient } from '../@types/Users';
+import { PostAdminRequest, UserClient } from '../@types/Users';
 import axiosInstance from '../axiosConfig';
 
 const ROUTE = 'users';
@@ -12,7 +12,7 @@ export const UserServices: UserClient = {
       throw new Error(error as string);
     }
   },
-  post: async (request: PostUserRequest): Promise<void> => {
+  adminPost: async (request: PostAdminRequest): Promise<void> => {
     try {
       const response = await axiosInstance.post(`/${ROUTE}/me/admin-status`, request);
       return response.data;

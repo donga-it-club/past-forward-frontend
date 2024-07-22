@@ -52,6 +52,7 @@ interface IconProps {
 
 export const IconStyle = styled.button<IconProps>`
   width: auto;
+  position: relative;
   border-radius: ${props => props['border-radius']};
   display: inline-block;
   border: 2px solid black;
@@ -93,6 +94,7 @@ export const SideBarBGContainer = styled.div`
   color: white;
   background-color: #f8f8f8;
   z-index: 999;
+  overflow: auto;
 `;
 
 export const LogoBox = styled.div``;
@@ -169,15 +171,53 @@ export const MenuText = styled.a`
   color: #111b47;
   font-weight: 600;
   text-decoration: none;
+  margin: 5px 0;
+`;
+
+export const AllDeleteText = styled.button`
+  color: #5a5a5a;
+  font-weight: 600;
+`;
+
+export const notificationBadge = styled.span`
+  position: absolute;
+  top: 0px;
+  left: 18px;
+  background: red;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  color: white;
+  font-size: 10px;
+  align-content: center;
+`;
+
+export const notificationBadgeText = styled.span`
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  color: white;
+  padding: 3px;
+  font-size: 8px;
 `;
 
 export const AlarmContents = styled.div`
   background-color: #f8f8f8;
-  width: 90%;
   height: auto;
   border-radius: 10px;
-  padding: 2px 5px;
+  padding: 10px;
+  margin: 0 10px;
   margin-bottom: 20px;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const AlarmTitle = styled.p`
+  font-size: 15px;
+  margin: 10px 0;
+  margin-right: 10px;
+  max-width: 80%;
 `;
 
 export const ProjectMenuText = styled.a`

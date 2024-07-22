@@ -11,8 +11,10 @@ import ProfileLayout from '@/components/layout/ProfileLayout';
 // import AcceptInvitePage from '@/pages/AccpetInvitePage';
 import AuthPage from '@/pages/AuthPage';
 import CreateRetroPage from '@/pages/CreateRetroPage';
+import GroupBoard from '@/pages/GroupBoardPage';
 import HomePage from '@/pages/HomePage';
 import MyPage from '@/pages/MyPage';
+import ProjectRetro from '@/pages/ProjectRetroPage';
 import RetroListPage from '@/pages/RetroListPage';
 import SurveyPage from '@/pages/SurveyPage';
 import { NoticeShowPage } from '@/pages/notice/NoticeShowPage';
@@ -112,7 +114,24 @@ const App = () => {
                   </PrivateRoute>
                 }
               />
+              <Route
+                path="/groups"
+                element={
+                  <PrivateRoute>
+                    <ProjectRetro />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/group-boards"
+                element={
+                  <PrivateRoute>
+                    <GroupBoard />
+                  </PrivateRoute>
+                }
+              />
             </Route>
+
             {/* MainLayout */}
             <Route element={<MainLayout />}>
               <Route path="/" element={<HomePage />} />

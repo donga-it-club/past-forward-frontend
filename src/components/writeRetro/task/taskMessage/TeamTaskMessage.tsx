@@ -29,6 +29,7 @@ const TeamTaskMessage: FC<Props> = ({ section, setRendering, user, teamId }) => 
     setValue(e.target.value);
   };
 
+  console.log('section', section.comments);
   const handlePostComment = async () => {
     try {
       await CommentService.post({ sectionId: section.sectionId, commentContent: value });
@@ -52,6 +53,8 @@ const TeamTaskMessage: FC<Props> = ({ section, setRendering, user, teamId }) => 
     } finally {
     }
   };
+
+  console.log('section', section);
 
   const fetchImage = async (item: CommentData) => {
     try {
@@ -137,9 +140,12 @@ const TeamTaskMessage: FC<Props> = ({ section, setRendering, user, teamId }) => 
                       </>
                     )}
                   </Flex>
-                  <div>
-                    <S.TaskText>{section.content}</S.TaskText>
-                  </div>
+                  <Flex>
+                    <S.TaskText>{section.content} </S.TaskText>{' '}
+                    {section.createdDate !== section.lastModifiedDate && (
+                      <S.TaskText style={{ color: '#DADEE5' }}>(수정됨)</S.TaskText>
+                    )}
+                  </Flex>
                 </Flex>
               ))}
           </S.TaskMessageStyle>

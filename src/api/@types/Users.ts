@@ -16,12 +16,12 @@ export interface UserData {
 }
 
 // post
-export interface PostUserRequest {
+export interface PostAdminRequest {
   email: string;
   admin: boolean;
 }
 
 export interface UserClient {
   get(): Promise<GetUserResponse>;
-  post(request: PostUserRequest): Promise<void>;
+  adminPost(reuest: PostAdminRequest): Promise<void>;
 }

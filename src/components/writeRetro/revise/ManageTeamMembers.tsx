@@ -10,17 +10,20 @@ import {
   TableContainer,
   Flex,
   Button,
+  PopoverHeader,
+  PopoverBody,
   Popover,
   PopoverTrigger,
   PopoverContent,
   PopoverArrow,
   PopoverCloseButton,
 } from '@chakra-ui/react';
+import { RetrospectiveData } from '@/api/@types/Retrospectives';
 import { TeamMembersData } from '@/api/@types/TeamController';
 import { UserData } from '@/api/@types/Users';
 import postImageToS3 from '@/api/imageApi/postImageToS3';
+import { RetrospectiveService } from '@/api/services/Retrospectives';
 import { TeamControllerServices } from '@/api/services/TeamController';
-import { UserServices } from '@/api/services/User';
 import { convertToLocalTime } from '@/components/RetroList/ContentsList';
 import InviteTeamModal from '@/components/inviteTeam/InviteTeamModal';
 import { useCustomToast } from '@/hooks/useCustomToast';
@@ -30,24 +33,17 @@ import * as S from '@/styles/writeRetroStyles/ReviseLayout.style';
 interface Props {
   teamId: number;
   members: TeamMembersData[];
+  user: UserData;
+  retro: RetrospectiveData;
 }
 
-const ManageTeamMembers: FC<Props> = ({ teamId, members }) => {
+const ManageTeamMembers: FC<Props> = ({ teamId, members, user, retro }) => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [isInviteModalOpen, setInviteModalOpen] = useState<boolean>(false);
-  const [user, setUser] = useState<UserData>();
   const [image, setImage] = useState<{ [key: number]: string }>({});
   const toast = useCustomToast();
   const filterData = members.filter(members => members.username.includes(searchTerm));
-
-  const fetchUser = async () => {
-    try {
-      const data = await UserServices.get();
-      setUser(data.data);
-    } catch (error) {
-      toast.error(error);
-    }
-  };
+  // const navigate = useNavigate();
 
   const DeleteTeamMember = async (id: number) => {
     try {
@@ -71,12 +67,23 @@ const ManageTeamMembers: FC<Props> = ({ teamId, members }) => {
         }));
       }
     } catch (e) {
-      toast.error(e);
+      console.error(e);
     }
   };
 
+  const PostAdminStatus = async (member: number) => {
+    try {
+      await RetrospectiveService.leaderPost({ newLeaderId: member, retrospectiveId: retro.retrospectiveId });
+      toast.success('리더 권한을 양도하였습니다.');
+      // navigate('/');
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  console.log('members', members);
+
   useEffect(() => {
-    fetchUser();
     members.forEach(item => fetchImage(item));
   }, []);
 
@@ -86,7 +93,38 @@ const ManageTeamMembers: FC<Props> = ({ teamId, members }) => {
     <S.ManageStyle>
       <Flex height="46px">
         <S.ManageTitleStyle>팀원 관리</S.ManageTitleStyle>
-        <S.InvitationLinkButton onClick={() => setInviteModalOpen(true)}>팀원 초대 링크</S.InvitationLinkButton>
+        <Popover>
+          <PopoverTrigger>
+            <S.InvitationLinkButton backgroundColor="#EEEEEE" color="black">
+              리더 권한 양도
+            </S.InvitationLinkButton>
+          </PopoverTrigger>
+          <PopoverContent>
+            <PopoverArrow />
+            <PopoverCloseButton />
+            <PopoverHeader fontSize={15}>리더 권한을 양도할 팀원을 선택하세요.</PopoverHeader>
+            <PopoverBody minH={200} overflow="auto">
+              <Flex flexDirection="column" cursor="pointer">
+                {members
+                  .filter(member => user.userId !== member.userId)
+                  .map(item => (
+                    <Flex margin="5px 0" onClick={() => PostAdminStatus(item.userId)}>
+                      {item.profileImage ? (
+                        <M.UploadImage sizes="40px" width="40px" height="auto" src={image[item.userId]} />
+                      ) : (
+                        <CgProfile size="40px" color="#DADEE5" />
+                      )}
+
+                      <p style={{ margin: 'auto 10px' }}>{item.username ?? '닉네임 없음'}</p>
+                    </Flex>
+                  ))}
+              </Flex>
+            </PopoverBody>
+          </PopoverContent>
+        </Popover>
+        <S.InvitationLinkButton backgroundColor="#2f4dce" color="white" onClick={() => setInviteModalOpen(true)}>
+          팀원 참여 링크
+        </S.InvitationLinkButton>
         <S.LinkExpirationText>링크는 2시간 후에 만료됩니다.</S.LinkExpirationText>
       </Flex>
       <Flex marginTop="20px">

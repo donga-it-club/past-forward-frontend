@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 import { RetrospectiveData } from '@/api/@types/Retrospectives';
 import { TeamMembersData } from '@/api/@types/TeamController';
+import { UserData } from '@/api/@types/Users';
 import { RetrospectiveService } from '@/api/services/Retrospectives';
 import { TeamControllerServices } from '@/api/services/TeamController';
+import { UserServices } from '@/api/services/User';
 import RetroTitle from '@/components/writeRetro/layout/RetroTitle';
 import BackButton from '@/components/writeRetro/revise/BackButton';
 import ManageTeamMembers from '@/components/writeRetro/revise/ManageTeamMembers';
@@ -21,6 +23,8 @@ const RetroRevisePage = () => {
   const [retro, setRetro] = useState<RetrospectiveData>();
   const [members, setMembers] = useState<TeamMembersData[]>([]);
   const [status, setStatus] = useState<string>('NOT_STARTED');
+  const [user, setUser] = useState<UserData>();
+  const navigate = useNavigate();
   const toast = useCustomToast();
 
   const fetchRetrospective = async () => {
@@ -47,12 +51,26 @@ const RetroRevisePage = () => {
     }
   };
 
+  const fetchUser = async () => {
+    try {
+      const data = await UserServices.get();
+      setUser(data.data);
+    } catch (error) {
+      toast.error(error);
+    }
+  };
+
   useEffect(() => {
     fetchTeamMembers();
     fetchRetrospective();
+    fetchUser();
   }, [retro?.status, members.values]);
 
   if (!retro) return;
+  if (user?.userId !== retro.userId) {
+    toast.error('리더 권한이 없습니다.');
+    navigate('/');
+  }
 
   return (
     <>
@@ -77,7 +95,11 @@ const RetroRevisePage = () => {
             <TabPanel>
               <ReviseSetting retro={retro} status={status} setStatus={setStatus} />
             </TabPanel>
-            <TabPanel>{members && <ManageTeamMembers teamId={teamId} members={members} />}</TabPanel>
+            {user && (
+              <TabPanel>
+                {members && <ManageTeamMembers teamId={teamId} members={members} user={user} retro={retro} />}
+              </TabPanel>
+            )}
           </TabPanels>
         </Tabs>
       </S.SettingMenuStyle>

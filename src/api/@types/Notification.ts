@@ -1,3 +1,5 @@
+import { TNotificationType } from './@asConst';
+
 export interface NotificationResponse {
   code: number;
   message: string;
@@ -11,10 +13,34 @@ export interface NotificationData {
   receiverId: number;
   senderName: string;
   thumbnail: string;
-  notificationType: string;
+  notificationType: TNotificationType;
   dateTime: string;
+  retrospectiveId: number;
+  teamId: number;
+}
+
+export interface PostNotificationRequest {
+  notificationId: number;
+}
+
+export interface PostNotificationResponse {
+  code: number;
+  message: string;
+  data: object;
+}
+
+export interface DeleteNotificationRequest {
+  userId: number;
+}
+
+export interface DeleteNotificationResponse {
+  code: number;
+  message: string;
+  data: object;
 }
 
 export interface notificationClient {
   get(): Promise<NotificationResponse>;
+  readPost(request: PostNotificationRequest): Promise<PostNotificationResponse>;
+  delete(request: DeleteNotificationRequest): Promise<DeleteNotificationResponse>;
 }

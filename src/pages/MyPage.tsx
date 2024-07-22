@@ -20,7 +20,6 @@ const MyPage = () => {
   const [userNickname, _] = useRecoilState(userNicknameState);
   const [image, setImage] = useState<Blob | null>(null);
   const [userProfile, setUserProfile] = useState<{ [key: string]: string }>({});
-
   const [imageURL, setImageURL] = useState<string>('');
   const toast = useCustomToast();
   const navigate = useNavigate();
@@ -37,18 +36,15 @@ const MyPage = () => {
           method: 'PUT',
         });
 
-        const uploadResponse = await axios.put(response.data.preSignedUrl, image, {
+        await axios.put(response.data.preSignedUrl, image, {
           headers: {
             'Content-Type': image?.type,
           },
         });
-        console.log(uploadResponse.status);
-
         const requestData: PutUsersRequest = {
           thumbnail: response.data.filename,
           username: userNickname,
         };
-
         // 이미지 업로드가 완료된 후, 새로운 이미지 URL을 받아와서 미리보기 업데이트
         if (userData) {
           setUserProfile(prevImage => ({
@@ -71,7 +67,6 @@ const MyPage = () => {
     const fetchUserData = async () => {
       try {
         const response = await getUser();
-        console.log('유저 정보', response);
         setUserData(response);
       } catch (error) {
         console.error('에러', error);
