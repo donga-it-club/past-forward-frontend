@@ -36,9 +36,13 @@ export const ListItem = styled.div`
   margin: 25px;
   display: grid;
   grid-template-columns: 0.5fr 1fr 1.5fr 1fr 1.8fr 1fr 1fr;
+  align-items: center;
 `;
 
-export const CheckBox = styled.span``;
+export const CheckBox = styled.input`
+  width: 15px;
+  height: 15px;
+`;
 
 export const RetroTitle = styled.span`
   padding-left: 5px;
@@ -68,6 +72,7 @@ export const RetroLeader = styled.span`
 `;
 
 export const RetroBox = styled.div`
+  align-self: center;
   padding-left: 5px;
 `;
 

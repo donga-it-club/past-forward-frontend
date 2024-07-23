@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CgTimelapse } from 'react-icons/cg'; // ing
 import { CiStar } from 'react-icons/ci';
 import { FaStar } from 'react-icons/fa';
@@ -9,6 +9,7 @@ import { MdPeople } from 'react-icons/md';
 import { RxCounterClockwiseClock } from 'react-icons/rx'; //before
 import { GetRetrospectiveData } from '@/api/@types/Retrospectives';
 import { UserData } from '@/api/@types/Users';
+import { putBoard } from '@/api/retroGroupsApi/putBoard';
 import { queryGetRetrospective } from '@/api/retrospectivesApi/getRetrospective';
 import { UserServices } from '@/api/services/User';
 import { useCustomToast } from '@/hooks/useCustomToast';
@@ -16,6 +17,7 @@ import * as S from '@/styles/projectRetro/ManageModal.styles';
 import * as T from '@/styles/projectRetro/Modal.styles';
 
 interface ManageModalProps {
+  groupId: number;
   isClose: () => void;
 }
 
@@ -32,10 +34,11 @@ export const convertToLocalTime = (dateString: string | number | Date) => {
   return localTime.toLocaleString(undefined, options);
 };
 
-const ManageModal: React.FC<ManageModalProps> = ({ isClose }) => {
+const ManageModal: React.FC<ManageModalProps> = ({ groupId, isClose }) => {
   const toast = useCustomToast();
   const [user, setUser] = useState<UserData>();
   const [retro, setRetro] = useState<GetRetrospectiveData['data']>();
+  const [requestData, setRequestData] = useState<number[]>([]);
 
   const fetchUser = async () => {
     try {
@@ -57,9 +60,8 @@ const ManageModal: React.FC<ManageModalProps> = ({ isClose }) => {
         isBookmarked: false,
       });
       setRetro(data.data);
-      console.log('retro', retro);
     } catch (e) {
-      console.error(e);
+      toast.error('회고 불러오기에 실패했습니다.');
     }
   };
 
@@ -67,6 +69,24 @@ const ManageModal: React.FC<ManageModalProps> = ({ isClose }) => {
     fetchUser();
     fetchRetrospective();
   }, [retro?.totalCount]);
+
+  const handlePutBoard = async () => {
+    try {
+      await putBoard({ retrospectiveGroupId: groupId, retrospectiveIds: requestData });
+      toast.info('그룹에 회고가 정상적으로 추가되었습니다.');
+      isClose();
+    } catch (e) {
+      toast.error('그룹 회고 추가에 실패했습니다.');
+    }
+  };
+
+  const handleInputCheck = (id: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.checked) {
+      setRequestData(prev => [...prev, id]);
+    } else {
+      setRequestData(prev => prev.filter(retroId => retroId !== id));
+    }
+  };
 
   return (
     <>
@@ -89,8 +109,10 @@ const ManageModal: React.FC<ManageModalProps> = ({ isClose }) => {
               {retro &&
                 retro.nodes.map(item => (
                   <S.ListItem key={item.id}>
-                    <S.CheckBox>□</S.CheckBox>
-                    {item.teamId ? <IoMdPerson size={20} /> : <MdPeople size={20} />}
+                    <S.RetroBox>
+                      <S.CheckBox type="checkbox" id="board_check" onChange={handleInputCheck(item.id)}></S.CheckBox>
+                    </S.RetroBox>
+                    <S.RetroBox>{item.teamId ? <IoMdPerson size={20} /> : <MdPeople size={20} />}</S.RetroBox>
                     <S.RetroTitle>{item.title}</S.RetroTitle>
                     <S.RetroUserBox>
                       <S.RetroUser>{item.username}</S.RetroUser>
@@ -112,7 +134,7 @@ const ManageModal: React.FC<ManageModalProps> = ({ isClose }) => {
                   </S.ListItem>
                 ))}
             </S.Box>
-            <S.Button>적용하기</S.Button>
+            <S.Button onClick={handlePutBoard}>적용하기</S.Button>
           </S.Modal>
         </T.Container>
       </T.Background>

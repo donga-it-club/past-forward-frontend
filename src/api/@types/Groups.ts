@@ -118,3 +118,25 @@ export interface GetRetrospectiveGroupNodes {
   createdDate: Date;
   updatedDate: Date;
 }
+
+// put - update group boards
+export interface PutRetrospectiveGroupBoardRequest {
+  retrospectiveGroupId: number;
+  retrospectiveIds: number[];
+}
+
+export interface PutRetrospectiveGroupBoardResponse {
+  code: number;
+  message: string;
+  data: {
+    id: number;
+    title: string;
+    userId: number;
+    userName: string;
+    status: string;
+    isBookmarked: boolean;
+    thumbnail: string | null;
+    description: string;
+    updateDate: Date;
+  };
+}

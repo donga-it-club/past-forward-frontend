@@ -46,7 +46,7 @@ const GroupBoard = () => {
 
   return (
     <>
-      {isOpen && <ManageModal isClose={() => setIsOpen(false)} />}
+      {isOpen && <ManageModal groupId={groupId} isClose={() => setIsOpen(false)} />}
       <S.Container>
         <S.TitleContainter>
           <S.TitleText>
