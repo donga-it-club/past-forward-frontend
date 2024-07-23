@@ -42,6 +42,9 @@ export const ListItem = styled.div`
 export const CheckBox = styled.input`
   width: 15px;
   height: 15px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const RetroTitle = styled.span`
