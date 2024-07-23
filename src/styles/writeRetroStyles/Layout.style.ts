@@ -115,22 +115,33 @@ export const SettingButton = styled.div`
   }
 `;
 
-export const SectionBox = styled.div`
+interface SectionBoxProps {
+  column: number;
+}
+
+export const SectionBox = styled.div<SectionBoxProps>`
   width: 100vw;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(column, 1fr);
+  grid-auto-flow: column;
+  gap: 10px;
   margin-top: 10px;
-  flex-direction: row;
-  flex-wrap: wrap;
   @media (max-width: 800px) {
     display: block;
     margin: 10px auto;
   }
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(Math.ceil(calc(column/2)), 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
 `;
 
 export const FrameStyle = styled.div`
+  /* width: 345px; */
+  /* min-width: 300px; */
+  width: 100%;
+  height: auto;
   min-height: 100vh;
-  min-width: 300px;
-  width: 345px;
   background-color: #f8f8f8;
   box-shadow:
     -0.3px 0 0 0.3px #4d5e80,
@@ -138,10 +149,9 @@ export const FrameStyle = styled.div`
     0 -0.3px 0 0.3px #4d5e80;
   border-radius: 10px 10px 0px 0px;
   padding: 15px;
-  margin-left: 10px;
   padding-bottom: 80px;
   @media (max-width: 800px) {
-    width: 90vw;
+    width: 90%;
     /* box-shadow:
       0.3px 0 0 0.3px #4d5e80,
       0 0.3px 0 0.3px #4d5e80,

@@ -73,11 +73,9 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
       const requestData: PatchRetrospectiveRequest = {
         retrospectiveId: itemId,
       };
-      const response = await patchRetrospective(requestData);
-      console.log('북마크 patch 요청 완료', response);
+      await patchRetrospective(requestData);
       setBookmarkUpdate(prev => !prev);
     } catch (error) {
-      // console.error('북마크 patch 요청 실패:', error);
       toast.error(error);
     }
   };

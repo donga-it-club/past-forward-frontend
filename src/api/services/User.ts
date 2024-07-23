@@ -12,7 +12,7 @@ export const UserServices: UserClient = {
       throw new Error(error as string);
     }
   },
-  adminPost: async (request: PostAdminRequest) => {
+  adminPost: async (request: PostAdminRequest): Promise<void> => {
     try {
       const response = await axiosInstance.post(`/${ROUTE}/me/admin-status`, request);
       return response.data;

@@ -69,7 +69,11 @@ const Contact: React.FC = () => {
         <S.TextContainer>
           <S.EmailContainer>
             <S.EmailTitle>Email</S.EmailTitle>
-            <S.EmailInput placeholder="이메일을 입력해주세요" value={email} onChange={handleEmailChange}></S.EmailInput>
+            <S.EmailInput
+              placeholder="문의 답변을 받을 이메일을 입력해주세요"
+              value={email}
+              onChange={handleEmailChange}
+            ></S.EmailInput>
           </S.EmailContainer>
 
           <S.SubjectContainer>

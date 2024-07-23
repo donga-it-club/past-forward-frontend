@@ -8,6 +8,7 @@ import {
 } from '@/api/@types/Groups';
 import { GetRetrospectiveGroup } from '@/api/retroGroupsApi/getGroup';
 import GroupBoardList from '@/components/projectRetro/GroupBoardList';
+import ManageModal from '@/components/projectRetro/ManageModal';
 import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/projectRetro/GroupBoard.styles';
 
@@ -19,6 +20,7 @@ const GroupBoard = () => {
 
   const [groupData, setGroupData] = useState<GetRetrospectiveGroupResponse['data'] | null>(null);
   const [groupBoardData, setGroupBoardData] = useState<GetRetrospectiveGroupNodes[] | null>(null);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchGroupBoard = async () => {
@@ -28,7 +30,6 @@ const GroupBoard = () => {
         };
         const responseData = await GetRetrospectiveGroup(requestData);
         setGroupData(responseData.data);
-        console.log('단일 그룹 내 회고 불러오기', responseData);
       } catch (error) {
         toast.error('단일 그룹 내 회고 불러오기에 실패했습니다.');
       }
@@ -43,18 +44,21 @@ const GroupBoard = () => {
   }, [groupData]);
 
   return (
-    <S.Container>
-      <S.TitleContainter>
-        <S.TitleText>
-          <RiFolder6Fill size={40} style={{ color: '#FFE500', marginRight: '10px' }} />
-          {groupData?.title}
-        </S.TitleText>
-      </S.TitleContainter>
-      <S.Wrapper>
-        <S.Button>회고 관리하기</S.Button>
-        <GroupBoardList data={groupBoardData} />
-      </S.Wrapper>
-    </S.Container>
+    <>
+      {isOpen && <ManageModal groupId={groupId} isClose={() => setIsOpen(false)} data={groupBoardData} />}
+      <S.Container>
+        <S.TitleContainter>
+          <S.TitleText>
+            <RiFolder6Fill size={40} style={{ color: '#FFE500', marginRight: '10px' }} />
+            {groupData?.title}
+          </S.TitleText>
+        </S.TitleContainter>
+        <S.Wrapper>
+          <S.Button onClick={() => setIsOpen(true)}>회고 관리하기</S.Button>
+          <GroupBoardList data={groupBoardData} />
+        </S.Wrapper>
+      </S.Container>
+    </>
   );
 };
 

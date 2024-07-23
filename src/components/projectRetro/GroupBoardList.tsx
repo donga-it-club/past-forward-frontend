@@ -1,14 +1,19 @@
 import { useEffect, useState } from 'react';
 import { CgTimelapse } from 'react-icons/cg'; // ing
+import { CiStar } from 'react-icons/ci';
+import { FaStar } from 'react-icons/fa';
 import { FaRegCircleCheck } from 'react-icons/fa6';
 import { IoMdPerson } from 'react-icons/io';
 import { MdPeople } from 'react-icons/md';
+import { RxCounterClockwiseClock } from 'react-icons/rx'; //before
+import { useNavigate } from 'react-router-dom';
 import { Spinner } from '@chakra-ui/react';
 import { GetRetrospectiveGroupNodes } from '@/api/@types/Groups';
 import { UserData } from '@/api/@types/Users';
 import postImageToS3 from '@/api/imageApi/postImageToS3';
 import { UserServices } from '@/api/services/User';
 import Thumbnail from '@/assets/Thumbnail.png';
+import ReviseModal from '@/components/RetroList/Modal';
 import { useCustomToast } from '@/hooks/useCustomToast';
 import * as T from '@/styles/RetroList/ContentsList.styles';
 import * as S from '@/styles/projectRetro/GroupBoardList.styles';
@@ -27,16 +32,26 @@ export const convertToLocalTime = (dateString: string | number | Date) => {
     hour: 'numeric',
     minute: 'numeric',
   };
-  return localTime.toLocaleString(undefined, options); // 로컬 타임존으로 변환하여 문자열로 반환
+  return localTime.toLocaleString(undefined, options);
 };
 
 const GroupBoardList: React.FC<GroupBoardListProps> = ({ data }) => {
+  const navigate = useNavigate();
   const toast = useCustomToast();
   const [user, setUser] = useState<UserData>();
   const [image, setImage] = useState<{ [key: number]: string }>({});
+  const [openReviseModalId, setOpenReviseModalId] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const handleImageLoad = () => {
     setIsLoading(false);
+  };
+
+  const openModalForItem = (itemId: number) => {
+    setOpenReviseModalId(itemId);
+  };
+
+  const closeModalForItem = () => {
+    setOpenReviseModalId(null);
   };
 
   const fetchUser = async () => {
@@ -49,7 +64,7 @@ const GroupBoardList: React.FC<GroupBoardListProps> = ({ data }) => {
   };
   useEffect(() => {
     if (data) {
-      const filtered = data.filter(item => item.thumbnail !== null); // thumbnail이 null인 항목 필터링
+      const filtered = data.filter(item => item.thumbnail !== null);
       fetchUser();
 
       const fetchThumbnailsData = async (item: GetRetrospectiveGroupNodes) => {
@@ -80,7 +95,11 @@ const GroupBoardList: React.FC<GroupBoardListProps> = ({ data }) => {
 
   return (
     <>
-      {data && data.length !== 0 ? (
+      {isLoading ? (
+        <S.Wrapper>
+          <Spinner size="xl" style={{ color: '#a9a9a9' }} />
+        </S.Wrapper>
+      ) : data && data.length !== 0 ? (
         <S.Container>
           {data?.map(item => (
             <S.Box key={item.id}>
@@ -95,7 +114,9 @@ const GroupBoardList: React.FC<GroupBoardListProps> = ({ data }) => {
               <T.InfoBox>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   {item.teamId && <MdPeople size={20} />} {!item.teamId && <IoMdPerson size={20} />}
-                  <T.RetroTitle>{item.title}</T.RetroTitle>{' '}
+                  <T.RetroTitle onClick={() => navigate(`/sections?retrospectiveId=${item.id}&teamId=${item.teamId}`)}>
+                    {item.title}
+                  </T.RetroTitle>
                 </div>
                 <div
                   style={{
@@ -105,7 +126,21 @@ const GroupBoardList: React.FC<GroupBoardListProps> = ({ data }) => {
                     justifyItems: 'center',
                   }}
                 >
-                  {item.isBookmarked ? <T.StyledFaStar /> : <T.StyledCiStar />} <T.StyledHiOutlineDotsHorizontal />
+                  {item.isBookmarked ? (
+                    <FaStar size={20} style={{ color: '#fcea12', cursor: 'pointer' }} />
+                  ) : (
+                    <CiStar size={20} style={{ cursor: 'pointer' }} />
+                  )}
+                  <T.StyledHiOutlineDotsHorizontal
+                    onClick={() => {
+                      if (user && user.userId === item.userId) {
+                        navigate(`/revise?retrospectiveId=${item.id}&teamId=${item.teamId}`);
+                      } else {
+                        openModalForItem(item.id);
+                      }
+                    }}
+                  />
+                  <ReviseModal onClose={closeModalForItem} isOpen={openReviseModalId === item.id} />
                 </div>
                 <T.RetroUser>
                   {item.username}
@@ -117,6 +152,12 @@ const GroupBoardList: React.FC<GroupBoardListProps> = ({ data }) => {
                     ? `${convertToLocalTime(item.updatedDate)} 수정`
                     : convertToLocalTime(item.createdDate)}
                 </T.RetroDate>
+                {item.status === 'NOT_STARTED' && (
+                  <RxCounterClockwiseClock
+                    size={15}
+                    style={{ alignItems: 'start', justifySelf: 'end', color: '#5B5B5B' }}
+                  />
+                )}
                 {item.status === 'IN_PROGRESS' && (
                   <CgTimelapse size={15} style={{ alignItems: 'start', justifySelf: 'end', color: '#57AD5A' }} />
                 )}
