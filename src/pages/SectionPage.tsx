@@ -81,7 +81,7 @@ const RetroTeamPage = () => {
     <S.Container>
       {retro && <Title name={retro.title} description={retro.description} user={user} retro={retro} />}
 
-      <S.SectionBox>
+      <S.SectionBox column={4}>
         {/* <Flex flexDirection="column" margin="0 auto">
           <Flex> */}
         {template
@@ -94,19 +94,21 @@ const RetroTeamPage = () => {
                     taskCount={section.filter(data => data.sectionName === title.name).length}
                   />
                   <AddTask template={title.id} retrospectiveId={retro?.retrospectiveId} setRendering={setRendering} />
-                  {section
-                    .filter(key => key.sectionName === title.name)
-                    .map(section => (
-                      <TeamTask
-                        section={section}
-                        setRendering={setRendering}
-                        teamId={teamId ?? null}
-                        imageURL={section.thumbnail}
-                        user={user}
-                        fetchSection={fetchSection}
-                        key={section.sectionId}
-                      />
-                    ))}
+                  <div style={{ height: 'auto', display: 'flex', flexDirection: 'column-reverse' }}>
+                    {section
+                      .filter(key => key.sectionName === title.name)
+                      .map(section => (
+                        <TeamTask
+                          section={section}
+                          setRendering={setRendering}
+                          teamId={teamId ?? null}
+                          imageURL={section.thumbnail}
+                          user={user}
+                          fetchSection={fetchSection}
+                          key={section.sectionId}
+                        />
+                      ))}
+                  </div>
                 </S.FrameStyle>
               </>
             ))

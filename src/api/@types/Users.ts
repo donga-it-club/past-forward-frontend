@@ -1,3 +1,4 @@
+// get
 export interface GetUserResponse {
   code: number;
   message: string;
