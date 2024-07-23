@@ -8,6 +8,7 @@ import {
 } from '@/api/@types/Groups';
 import { GetRetrospectiveGroup } from '@/api/retroGroupsApi/getGroup';
 import GroupBoardList from '@/components/projectRetro/GroupBoardList';
+import ManageModal from '@/components/projectRetro/ManageModal';
 import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/projectRetro/GroupBoard.styles';
 
@@ -19,6 +20,7 @@ const GroupBoard = () => {
 
   const [groupData, setGroupData] = useState<GetRetrospectiveGroupResponse['data'] | null>(null);
   const [groupBoardData, setGroupBoardData] = useState<GetRetrospectiveGroupNodes[] | null>(null);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchGroupBoard = async () => {
@@ -43,18 +45,21 @@ const GroupBoard = () => {
   }, [groupData]);
 
   return (
-    <S.Container>
-      <S.TitleContainter>
-        <S.TitleText>
-          <RiFolder6Fill size={40} style={{ color: '#FFE500', marginRight: '10px' }} />
-          {groupData?.title}
-        </S.TitleText>
-      </S.TitleContainter>
-      <S.Wrapper>
-        <S.Button>회고 관리하기</S.Button>
-        <GroupBoardList data={groupBoardData} />
-      </S.Wrapper>
-    </S.Container>
+    <>
+      {isOpen && <ManageModal isClose={() => setIsOpen(false)} />}
+      <S.Container>
+        <S.TitleContainter>
+          <S.TitleText>
+            <RiFolder6Fill size={40} style={{ color: '#FFE500', marginRight: '10px' }} />
+            {groupData?.title}
+          </S.TitleText>
+        </S.TitleContainter>
+        <S.Wrapper>
+          <S.Button onClick={() => setIsOpen(true)}>회고 관리하기</S.Button>
+          <GroupBoardList data={groupBoardData} />
+        </S.Wrapper>
+      </S.Container>
+    </>
   );
 };
 
