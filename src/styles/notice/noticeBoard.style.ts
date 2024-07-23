@@ -11,6 +11,7 @@ export const NoticeBoardTitle = styled.p`
   font-weight: 400;
   color: #000000;
   line-height: 48px;
+  margin-bottom: 114px;
 `;
 
 export const NoticeBoardBox = styled.div`
@@ -24,8 +25,16 @@ export const NoticeBoardBox = styled.div`
   border-radius: 5px;
   display: grid;
   grid-template-columns: 1fr 5fr 2fr 1fr;
-  grid-template-rows: 1fr 5fr;
+  grid-template-rows: 1fr 10fr;
   grid-auto-rows: minmax(76px, auto);
+  margin-bottom: 38px;
+`;
+
+export const NoticeBoardContentsTitle = styled.p`
+  height: auto;
+  min-height: 76px;
+  display: grid;
+  align-items: center;
 `;
 
 export const NoticeBoardContentsBox = styled.div`
@@ -42,11 +51,13 @@ export const NoticeBoardContentsLine = styled.div`
 
 export const NoticeBoardContentsStyle = styled.div`
   width: 100%;
-  height: minmax(76px, auto);
+  min-height: 76px;
+  height: auto;
   font-size: 20px;
   font-weight: 500;
   color: #25213b;
   text-align: center;
+  align-items: center;
   display: grid;
   grid-template-columns: 1fr 5fr 2fr 1fr;
 `;
@@ -58,14 +69,28 @@ export const NoticeWriteButton = styled.button`
   font-weight: 700;
   color: #486c8d;
   line-height: 22px;
+  margin-bottom: 152px;
   &:hover {
     cursor: pointer;
   }
 `;
 
-export const NoticeMoveArrow = styled.div`
+export const NoticePaginationContainer = styled.div`
   width: auto;
   height: 39px;
   display: flex;
   justify-content: center;
+`;
+
+export const NoticePaginationButton = styled.button`
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  display: grid;
+  justify-content: center;
+  /* background-color: red; */
+  &:hover {
+    cursor: pointer;
+  }
+  margin: 0px 20px;
 `;

@@ -12,8 +12,10 @@ export interface UserData {
   phone: string;
   createdDate: string;
   updatedDate: string;
+  administrator: boolean;
 }
 
+// post
 export interface PostAdminRequest {
   email: string;
   admin: boolean;

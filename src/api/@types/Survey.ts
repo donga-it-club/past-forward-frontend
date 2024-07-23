@@ -6,6 +6,7 @@ export interface PostSurveyRequest {
   region: string;
   source: string;
   purposes: string[] | undefined;
+  emailConsents: boolean;
 }
 
 export interface PostSurveyResponse {

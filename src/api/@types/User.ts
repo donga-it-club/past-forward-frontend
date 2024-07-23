@@ -28,3 +28,9 @@ export interface PutUsersResponse {
     username: string;
   };
 }
+
+// // post
+// export interface PostUserRequest {
+//   email: string;
+//   admin: boolean;
+// }
