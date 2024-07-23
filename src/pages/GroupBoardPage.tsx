@@ -30,7 +30,6 @@ const GroupBoard = () => {
         };
         const responseData = await GetRetrospectiveGroup(requestData);
         setGroupData(responseData.data);
-        console.log('단일 그룹 내 회고 불러오기', responseData);
       } catch (error) {
         toast.error('단일 그룹 내 회고 불러오기에 실패했습니다.');
       }
@@ -46,7 +45,7 @@ const GroupBoard = () => {
 
   return (
     <>
-      {isOpen && <ManageModal groupId={groupId} isClose={() => setIsOpen(false)} />}
+      {isOpen && <ManageModal groupId={groupId} isClose={() => setIsOpen(false)} data={groupBoardData} />}
       <S.Container>
         <S.TitleContainter>
           <S.TitleText>

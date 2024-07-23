@@ -7,6 +7,7 @@ import { IoMdClose } from 'react-icons/io';
 import { IoMdPerson } from 'react-icons/io';
 import { MdPeople } from 'react-icons/md';
 import { RxCounterClockwiseClock } from 'react-icons/rx'; //before
+import { GetRetrospectiveGroupNodes } from '@/api/@types/Groups';
 import { GetRetrospectiveData } from '@/api/@types/Retrospectives';
 import { UserData } from '@/api/@types/Users';
 import { putBoard } from '@/api/retroGroupsApi/putBoard';
@@ -18,6 +19,7 @@ import * as T from '@/styles/projectRetro/Modal.styles';
 
 interface ManageModalProps {
   groupId: number;
+  data: GetRetrospectiveGroupNodes[] | null;
   isClose: () => void;
 }
 
@@ -34,11 +36,12 @@ export const convertToLocalTime = (dateString: string | number | Date) => {
   return localTime.toLocaleString(undefined, options);
 };
 
-const ManageModal: React.FC<ManageModalProps> = ({ groupId, isClose }) => {
+const ManageModal: React.FC<ManageModalProps> = ({ groupId, data, isClose }) => {
   const toast = useCustomToast();
   const [user, setUser] = useState<UserData>();
   const [retro, setRetro] = useState<GetRetrospectiveData['data']>();
   const [requestData, setRequestData] = useState<number[]>([]);
+  const [checkedRetroId, setCheckedRetroId] = useState<number[]>([]); // 그룹에 추가되어 있는 회고 id
 
   const fetchUser = async () => {
     try {
@@ -71,12 +74,17 @@ const ManageModal: React.FC<ManageModalProps> = ({ groupId, isClose }) => {
   }, [retro?.totalCount]);
 
   const handlePutBoard = async () => {
-    try {
-      await putBoard({ retrospectiveGroupId: groupId, retrospectiveIds: requestData });
-      toast.info('그룹에 회고가 정상적으로 추가되었습니다.');
+    if (requestData.length === 0) {
       isClose();
-    } catch (e) {
-      toast.error('그룹 회고 추가에 실패했습니다.');
+    } else {
+      try {
+        await putBoard({ retrospectiveGroupId: groupId, retrospectiveIds: requestData });
+        toast.info('그룹 회고가 정상적으로 추가되었습니다.');
+        isClose();
+        window.location.reload();
+      } catch (e) {
+        toast.error('그룹 회고 추가에 실패했습니다.');
+      }
     }
   };
 
@@ -87,6 +95,13 @@ const ManageModal: React.FC<ManageModalProps> = ({ groupId, isClose }) => {
       setRequestData(prev => prev.filter(retroId => retroId !== id));
     }
   };
+
+  useEffect(() => {
+    if (data) {
+      const ids = data.map(item => item.id);
+      setCheckedRetroId(ids);
+    }
+  }, [data]);
 
   return (
     <>
@@ -110,7 +125,12 @@ const ManageModal: React.FC<ManageModalProps> = ({ groupId, isClose }) => {
                 retro.nodes.map(item => (
                   <S.ListItem key={item.id}>
                     <S.RetroBox>
-                      <S.CheckBox type="checkbox" id="board_check" onChange={handleInputCheck(item.id)}></S.CheckBox>
+                      {checkedRetroId.indexOf(item.id) < 0 ? ( // 이미 추가된 회고인지 판단
+                        <S.CheckBox type="checkbox" onChange={handleInputCheck(item.id)}></S.CheckBox>
+                      ) : (
+                        <S.CheckBox type="checkbox" onChange={handleInputCheck(item.id)} checked></S.CheckBox>
+                      )}
+                      {/* <S.CheckBox type="checkbox" onChange={handleInputCheck(item.id)}></S.CheckBox> */}
                     </S.RetroBox>
                     <S.RetroBox>{item.teamId ? <IoMdPerson size={20} /> : <MdPeople size={20} />}</S.RetroBox>
                     <S.RetroTitle>{item.title}</S.RetroTitle>

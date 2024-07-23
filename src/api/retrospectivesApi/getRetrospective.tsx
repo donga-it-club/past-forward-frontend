@@ -17,14 +17,11 @@ export const queryGetRetrospective = async (requestData: GetRetrospectiveRequest
       params.keyword = keyword;
     }
 
-    console.log(params);
     const response = await axiosInstance.get<GetRetrospectiveData>('/retrospectives', {
       params,
     });
-    // console.log('회고 get 성공', response.data);
     return response.data;
   } catch (error) {
-    // console.log('회고 get 실패', error);
     throw new Error('회고 get 실패');
   }
 };
