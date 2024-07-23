@@ -3,12 +3,14 @@ import { CgTimelapse } from 'react-icons/cg'; // ing
 import { FaRegCircleCheck } from 'react-icons/fa6';
 import { IoMdPerson } from 'react-icons/io';
 import { MdPeople } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
 import { Spinner } from '@chakra-ui/react';
 import { GetRetrospectiveGroupNodes } from '@/api/@types/Groups';
 import { UserData } from '@/api/@types/Users';
 import postImageToS3 from '@/api/imageApi/postImageToS3';
 import { UserServices } from '@/api/services/User';
 import Thumbnail from '@/assets/Thumbnail.png';
+import ReviseModal from '@/components/RetroList/Modal';
 import { useCustomToast } from '@/hooks/useCustomToast';
 import * as T from '@/styles/RetroList/ContentsList.styles';
 import * as S from '@/styles/projectRetro/GroupBoardList.styles';
@@ -31,12 +33,22 @@ export const convertToLocalTime = (dateString: string | number | Date) => {
 };
 
 const GroupBoardList: React.FC<GroupBoardListProps> = ({ data }) => {
+  const navigate = useNavigate();
   const toast = useCustomToast();
   const [user, setUser] = useState<UserData>();
   const [image, setImage] = useState<{ [key: number]: string }>({});
+  const [openReviseModalId, setOpenReviseModalId] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const handleImageLoad = () => {
     setIsLoading(false);
+  };
+
+  const openModalForItem = (itemId: number) => {
+    setOpenReviseModalId(itemId);
+  };
+
+  const closeModalForItem = () => {
+    setOpenReviseModalId(null);
   };
 
   const fetchUser = async () => {
@@ -95,7 +107,9 @@ const GroupBoardList: React.FC<GroupBoardListProps> = ({ data }) => {
               <T.InfoBox>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   {item.teamId && <MdPeople size={20} />} {!item.teamId && <IoMdPerson size={20} />}
-                  <T.RetroTitle>{item.title}</T.RetroTitle>{' '}
+                  <T.RetroTitle onClick={() => navigate(`/sections?retrospectiveId=${item.id}&teamId=${item.teamId}`)}>
+                    {item.title}
+                  </T.RetroTitle>
                 </div>
                 <div
                   style={{
@@ -105,7 +119,17 @@ const GroupBoardList: React.FC<GroupBoardListProps> = ({ data }) => {
                     justifyItems: 'center',
                   }}
                 >
-                  {item.isBookmarked ? <T.StyledFaStar /> : <T.StyledCiStar />} <T.StyledHiOutlineDotsHorizontal />
+                  {item.isBookmarked ? <T.StyledFaStar /> : <T.StyledCiStar />}{' '}
+                  <T.StyledHiOutlineDotsHorizontal
+                    onClick={() => {
+                      if (user && user.userId === item.userId) {
+                        navigate(`/revise?retrospectiveId=${item.id}&teamId=${item.teamId}`);
+                      } else {
+                        openModalForItem(item.id);
+                      }
+                    }}
+                  />
+                  <ReviseModal onClose={closeModalForItem} isOpen={openReviseModalId === item.id} />
                 </div>
                 <T.RetroUser>
                   {item.username}
