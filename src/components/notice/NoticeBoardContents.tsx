@@ -24,17 +24,17 @@ export const NoticeBoardContents = ({ posts, index }: NoticeBoardContentsProps) 
 
   // 개별 게시글 페이지로 이동
   const handleMoveNoticeShow = () => {
-    navigate(`/noticeShow?id=${posts.id}`);
+    navigate(`/noticeShow?id=${posts.id}&index=${index}`);
   };
   return (
     <>
       <S.NoticeBoardContentsStyle>
         {/* 번호 */}
-        <p className="NoticeBoardContentsText">{index}</p>
+        <p className="NoticeBoardContentsText">{index + 1}</p>
 
         {/* 제목 */}
         <div style={{ textAlign: 'left' }} onClick={handleMoveNoticeShow}>
-          <p className="NoticeBoardContentsText" style={{ textAlign: 'left', cursor: 'pointer' }}>
+          <p className="NoticeBoardContentsText" style={{ textAlign: 'left', cursor: 'pointer', margin: '10px 0px' }}>
             {posts.title}
           </p>
         </div>

@@ -1,44 +1,55 @@
 import { IoIosArrowDown } from 'react-icons/io';
 import { IoIosArrowUp } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom';
+// import { GetNoticePostsData } from '@/api/@types/NoticeBoard';
+import { usePublishedNotice } from './NoticeBoard';
+import { GetNoticeListPosts } from '@/api/@types/NoticeBoard';
 import * as S from '@/styles/notice/noticeShow.style';
 
 interface NoticeShowFooterProps {
   id: number;
 }
 
-export const NoticeShowFooter = ({ id }: NoticeShowFooterProps) => {
-  return (
-    <>
-      <S.NoticeShowFooterLine></S.NoticeShowFooterLine>
-      <S.NoticeShowFooterStyle>
-        {/* 이전 글 */}
-        <NoticeShowMove direction="up" id={id}></NoticeShowMove>
-        {/* 다음 글 */}
-        <NoticeShowMove direction="down" id={id}></NoticeShowMove>
-      </S.NoticeShowFooterStyle>
-    </>
-  );
-};
-
 interface NoticeShowMoveProps {
   direction: 'up' | 'down';
   id: number;
+  notice: GetNoticeListPosts[];
 }
 
-export const NoticeShowMove = ({ direction, id }: NoticeShowMoveProps) => {
+export const NoticeShowMove = ({ direction, id, notice }: NoticeShowMoveProps) => {
   const navigate = useNavigate();
+  const index = notice.findIndex(post => post.id === id);
 
-  const { icon, title } =
+  const { move, icon, title } =
     direction === 'up'
-      ? { icon: <IoIosArrowUp size={29} color="#8A95B7" />, title: '이전 글' }
-      : { icon: <IoIosArrowDown size={29} color="#8A95B7" />, title: '다음 글' };
+      ? {
+          move: index - 1,
+          icon: <IoIosArrowUp size={29} color="#8A95B7" />,
+          title: index > 0 ? notice[index - 1]?.title ?? 'No more posts' : 'No more posts',
+        }
+      : {
+          move: index + 1,
+          icon: <IoIosArrowDown size={29} color="#8A95B7" />,
+          title: index < notice.length - 1 ? notice[index + 1]?.title ?? 'No more posts' : 'No more posts',
+        };
+
+  const handleNoticeShowMove = () => {
+    if (move >= 0 && move < notice.length) {
+      navigate(`/noticeShow?id=${notice[move].id}&index=${move}`);
+    }
+  };
 
   // 게시물로 이동하기
-  const noticeMove = direction === 'up' ? id - 1 : id + 1;
-  const handleNoticeShowMove = () => {
-    navigate(`/noticeShow?id=${noticeMove}`);
-  };
+  // const noticeMove = direction === 'up' ? 1 : 1;
+  // const handleNoticeShowMove = () => {
+  //   navigate(`/noticeShow?id=${notice[move].id}&index=${move}`);
+  //   console.log(id);
+  //   console.log(index);
+  //   console.log(notice);
+  //   console.log(move);
+  //   console.log(notice[move].id);
+  //   console.log(notice[move].title);
+  // };
   return (
     <>
       <S.NoticeShowMoveStyle>
@@ -49,6 +60,22 @@ export const NoticeShowMove = ({ direction, id }: NoticeShowMoveProps) => {
         <S.NoticeMoveTitle onClick={handleNoticeShowMove}>{title}</S.NoticeMoveTitle>
       </S.NoticeShowMoveStyle>
       <S.NoticeShowFooterLine></S.NoticeShowFooterLine>
+    </>
+  );
+};
+
+export const NoticeShowFooter = ({ id }: NoticeShowFooterProps) => {
+  const publishedList = usePublishedNotice();
+
+  return (
+    <>
+      <S.NoticeShowFooterLine></S.NoticeShowFooterLine>
+      <S.NoticeShowFooterStyle>
+        {/* 이전 글 */}
+        <NoticeShowMove direction="up" id={id} notice={publishedList}></NoticeShowMove>
+        {/* 다음 글 */}
+        <NoticeShowMove direction="down" id={id} notice={publishedList}></NoticeShowMove>
+      </S.NoticeShowFooterStyle>
     </>
   );
 };

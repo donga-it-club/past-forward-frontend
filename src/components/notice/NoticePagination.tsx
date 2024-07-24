@@ -3,7 +3,7 @@ import { IoIosArrowForward } from 'react-icons/io';
 import * as S from '@/styles/notice/noticeBoard.style';
 
 export const NoticePagination = () => {
-  const NoticePageNumber = [1, 2, 3];
+  const NoticePageNumber = [1];
   return (
     <>
       <S.NoticePaginationContainer>

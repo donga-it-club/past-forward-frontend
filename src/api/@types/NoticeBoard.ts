@@ -20,10 +20,11 @@ export interface GetNoticeListPosts {
   id: number;
   title: string;
   content: string;
-  status: 'PUBLISHED';
+  status: 'PUBLISHED' | 'TEMP';
   createdDate: string;
   modifiedDate: string;
   views: number;
+  thumbnail: string;
 }
 
 // 개별 게시글 조회
@@ -44,6 +45,7 @@ export interface GetNoticePostsData {
   createdDate: string;
   modifiedDate: string;
   views: number;
+  thumbnail: string;
 }
 
 //post
@@ -51,6 +53,7 @@ export interface PostNoticeRequest {
   title: string;
   content: string;
   status: 'PUBLISHED' | 'TEMP';
+  thumbnail: string;
 }
 
 export interface PostNoticeResponse {
@@ -66,11 +69,14 @@ export interface PostNoticeData {
   createdDate: string;
   modifiedDate: string;
   views: number;
+  thumbnail: string;
 }
 
 export interface PostNoticeTempPostsRequest {
   title: string;
   content: string;
+  status: 'PUBLISHED' | 'TEMP';
+  thumbnail: string;
 }
 
 export interface PostNoticeTempPostsResponse {
@@ -86,6 +92,7 @@ export interface PostNoticeTempPostsData {
   createdDate: string;
   modifiedDate: string;
   views: number;
+  thumbnail: string;
 }
 
 export interface PostNoticePresignedURLRequest {
@@ -110,6 +117,7 @@ export interface PutNoticeRequest {
   title: string;
   content: string;
   status: string;
+  thumbnail: string;
 }
 
 export interface PutNoticeResponse {
@@ -125,6 +133,7 @@ export interface PutNoticeData {
   createdDate: string;
   modifiedDate: string;
   views: number;
+  thumbnail: string;
 }
 
 // delete
