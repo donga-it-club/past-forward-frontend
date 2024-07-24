@@ -21,6 +21,21 @@ export const NoticeMenuBar = ({ title, content }: NoticeMenuBarProps) => {
   const query = search.split(/[=,&]/);
   const NoticeShowId = Number(query[1]);
 
+  // 임시 게시글 작성 api 연결
+  const handleNoticeWriteTemp = async () => {
+    try {
+      await NoticeServices.tempSave({
+        title: title,
+        content: content,
+        status: 'TEMP',
+        thumbnail: '',
+      });
+      toast.success('게시글이 임시저장 되었습니다.');
+    } catch (e) {
+      toast.error(e);
+    }
+  };
+
   // 게시글 작성 api 연결
   const handleNoticeWrite = async () => {
     try {
@@ -28,6 +43,7 @@ export const NoticeMenuBar = ({ title, content }: NoticeMenuBarProps) => {
         title: title,
         content: content,
         status: 'PUBLISHED',
+        thumbnail: '',
       });
       toast.success('공지사항이 추가되었습니다.');
       navigate('/');
@@ -44,6 +60,7 @@ export const NoticeMenuBar = ({ title, content }: NoticeMenuBarProps) => {
         title: title,
         content: content,
         status: 'PUBLISHED',
+        thumbnail: '',
       });
       toast.success('공지사항이 수정되었습니다.');
       navigate(`/noticeShow?id=${NoticeShowId}`);
@@ -72,7 +89,9 @@ export const NoticeMenuBar = ({ title, content }: NoticeMenuBarProps) => {
           {isNaN(NoticeShowId) ? (
             <>
               {/* 게시물 임시저장 */}
-              <S.NoticeTempSaveButton>{`저장 | ${TemporarySaveCount}`}</S.NoticeTempSaveButton>
+              <S.NoticeTempSaveButton
+                onClick={handleNoticeWriteTemp}
+              >{`저장 | ${TemporarySaveCount}`}</S.NoticeTempSaveButton>
 
               {/* 게시물 저장 */}
               <S.NoticeSaveButton onClick={handleNoticeWrite}>저장</S.NoticeSaveButton>
