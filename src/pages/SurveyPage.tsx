@@ -59,7 +59,6 @@ const SurveyPage: React.FC = () => {
       navigate('/create');
     } catch (error) {
       toast.error(error);
-      console.error('실패입니다.', error);
     }
   };
 

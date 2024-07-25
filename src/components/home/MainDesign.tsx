@@ -25,7 +25,7 @@ const MainDesign = () => {
         >
           Moving Forward from the Past
         </Text> */}
-      <Image src={main} width={{ base: '70%', md: '50%' }} margin="0 auto" marginTop={100} />
+      <Image src={main} width={{ base: '70%', md: '40%' }} margin="0 auto" marginTop={100} />
       <Flex
         padding="0 auto"
         margin={{ md: '20px auto', base: '10px' }}

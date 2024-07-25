@@ -5,6 +5,8 @@ export const CustomModalBody = styled(ModalBody)`
   display: flex;
   justify-content: space-between;
   width: 100%;
+  overflow: auto;
+  max-height: 300px;
 
   @media (max-width: 800px) {
     min-width: 95vh;
