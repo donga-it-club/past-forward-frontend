@@ -28,6 +28,7 @@ const TemplateSelect: React.FC<TemplateSelectProps> = ({ onChange, defaultTempla
   return (
     <>
       <div>Template</div>
+      <p style={{ fontSize: '10px', fontWeight: '400', color: '#898ea9' }}>템플릿 설정 안할 시, KPT(default)</p>
       <Select
         placeholder="Select option"
         onChange={e => onChange(Number(e.target.value))}
