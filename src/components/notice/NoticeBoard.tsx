@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { NoticeBoardContents } from './NoticeBoardContents';
+// import { NoticeBoardContents } from './NoticeBoardContents';
+import { FakeNoticeBoardContents } from './FakeNotice/FakeNoticeBoardContents';
 import { NoticePagination } from './NoticePagination';
 import { GetNoticeListPosts } from '@/api/@types/NoticeBoard';
 import { UserData } from '@/api/@types/Users';
@@ -71,7 +72,7 @@ export const NoticeBoard = () => {
   const toast = useCustomToast();
   const navigate = useNavigate();
   const [user, setUser] = useState<UserData>();
-  const publishedList = usePublishedNotice();
+  // const publishedList = usePublishedNotice();
   // const tempList = useTempNotice();
 
   // 유저 정보 조회
@@ -116,9 +117,25 @@ export const NoticeBoard = () => {
           <S.NoticeBoardContentsBox>
             <div style={{ height: 'auto', display: 'flex', flexDirection: 'column-reverse' }}>
               {/* 게시판 내용*/}
-              {publishedList.map((posts, index) => (
+              {/* {publishedList.map((posts, index) => (
                 <NoticeBoardContents posts={posts} key={posts.id} index={index}></NoticeBoardContents>
-              ))}
+              ))} */}
+
+              {/* 가짜 게시물 내용 */}
+              <FakeNoticeBoardContents
+                index={1}
+                title="회고 어떻게 해야 잘할 수 있을까?"
+                date="2024.03.09"
+                view={78}
+                move="noticeShowFirst"
+              ></FakeNoticeBoardContents>
+              <FakeNoticeBoardContents
+                index={2}
+                title="왜, 회고가 중요한가?"
+                date="2024.03.09"
+                view={78}
+                move="noticeShowSecond"
+              ></FakeNoticeBoardContents>
             </div>
           </S.NoticeBoardContentsBox>
         </S.NoticeBoardBox>
