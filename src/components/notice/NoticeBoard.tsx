@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react';
-// import getUser from '@/api/imageApi/getUser';
-// import { GetUsersResponse } from '@/api/@types/User';
 import { useNavigate } from 'react-router-dom';
 import { NoticeBoardContents } from './NoticeBoardContents';
 import { NoticePagination } from './NoticePagination';
@@ -11,12 +9,51 @@ import { UserServices } from '@/api/services/User';
 import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/notice/noticeBoard.style';
 
-export const NoticeBoard = () => {
+// 발행한 게시물 조회
+export const usePublishedNotice = () => {
+  const [PublishedNoticeList, setPublishedNoticeList] = useState<GetNoticeListPosts[]>([]);
   const toast = useCustomToast();
-  const navigate = useNavigate();
-  const [user, setUser] = useState<UserData>();
-  const [NoticeList, setNoticeList] = useState<GetNoticeListPosts[]>([]);
 
+  // 게시글 목록 조회 api
+  const fetchNotice = async () => {
+    try {
+      const data = await NoticeServices.listGet({ page: 1, size: 10 });
+      setPublishedNoticeList(data.data.posts.filter(post => post.status === 'PUBLISHED'));
+    } catch (error) {
+      toast.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchNotice();
+  }, []);
+
+  return PublishedNoticeList;
+};
+
+// 임시저장한 게시물 조회
+export const useTempNotice = () => {
+  const [TempNoticeList, setTempNoticeList] = useState<GetNoticeListPosts[]>([]);
+  const toast = useCustomToast();
+
+  // 게시글 목록 조회 api
+  const fetchNotice = async () => {
+    try {
+      const data = await NoticeServices.listGet({ page: 1, size: 10 });
+      setTempNoticeList(data.data.posts.filter(post => post.status === 'TEMP'));
+    } catch (error) {
+      toast.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchNotice();
+  }, []);
+
+  return TempNoticeList;
+};
+
+export const NoticeBoard = () => {
   // 관리자 권한 부여 api
   // import { UserServices } from '@/api/services/User';
   // const handleNoticeAdmin = async () => {
@@ -31,17 +68,13 @@ export const NoticeBoard = () => {
   //   }
   // };
 
+  const toast = useCustomToast();
+  const navigate = useNavigate();
+  const [user, setUser] = useState<UserData>();
+  const publishedList = usePublishedNotice();
+  // const tempList = useTempNotice();
+
   // 유저 정보 조회
-  // const fetchUserData = async () => {
-  //   try {
-  //     const response = await getUser();
-  //     console.log('유저 정보', response);
-  //     setUserData(response);
-  //   } catch (error) {
-  //     console.error('에러', error);
-  //     toast.error(error);
-  //   }
-  // };
   const fetchUser = async () => {
     try {
       const data = await UserServices.get();
@@ -52,21 +85,8 @@ export const NoticeBoard = () => {
     }
   };
 
-  // 게시글 목록 조회 api
-  // const [page, setPage] = useState<number>(1);
-  // const [size, setSize] = useState<number>(10);
-  const fetchNotice = async () => {
-    try {
-      const data = await NoticeServices.listGet({ page: 1, size: 10 });
-      setNoticeList(data.data.posts);
-    } catch (error) {
-      toast.error(error);
-    }
-  };
-
   useEffect(() => {
     fetchUser();
-    fetchNotice();
   }, []);
   if (!user) return;
 
@@ -95,18 +115,20 @@ export const NoticeBoard = () => {
 
           <S.NoticeBoardContentsBox>
             <div style={{ height: 'auto', display: 'flex', flexDirection: 'column-reverse' }}>
-              {/* 게시판 내용: NoticeList ExData.data.posts*/}
-              {NoticeList.map((posts, index) => (
-                <NoticeBoardContents posts={posts} key={posts.id} index={index + 1}></NoticeBoardContents>
+              {/* 게시판 내용*/}
+              {publishedList.map((posts, index) => (
+                <NoticeBoardContents posts={posts} key={posts.id} index={index}></NoticeBoardContents>
               ))}
             </div>
           </S.NoticeBoardContentsBox>
         </S.NoticeBoardBox>
 
         {/* 글쓰기 버튼 */}
-        <div style={{ textAlign: 'right' }}>
-          <S.NoticeWriteButton onClick={handleNoticeWriteButton}>글쓰기</S.NoticeWriteButton>
-        </div>
+        {user.administrator && (
+          <div style={{ textAlign: 'right' }}>
+            <S.NoticeWriteButton onClick={handleNoticeWriteButton}>글쓰기</S.NoticeWriteButton>
+          </div>
+        )}
 
         {/* 게시판 목록 리모컨 */}
         <NoticePagination></NoticePagination>

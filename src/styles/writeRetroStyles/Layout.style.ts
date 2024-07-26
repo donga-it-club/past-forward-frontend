@@ -115,31 +115,36 @@ export const SettingButton = styled.div`
   }
 `;
 
-interface SectionBoxProps {
-  column: number;
-}
+// interface SectionBoxProps {
+//   column: number;
+// }
 
-export const SectionBox = styled.div<SectionBoxProps>`
-  width: 100vw;
+// export const SectionBox = styled.div<SectionBoxProps>`
+export const SectionBox = styled.div`
+  /* width: 100vw; */
+  /* width: 100vw; */
   display: grid;
-  grid-template-columns: repeat(column, 1fr);
+  /* grid-template-columns: repeat(column, 1fr); */
   grid-auto-flow: column;
   gap: 10px;
   margin-top: 10px;
   @media (max-width: 800px) {
     display: block;
     margin: 10px auto;
+    padding: 0px 10px;
   }
   @media (max-width: 1200px) {
-    grid-template-columns: repeat(Math.ceil(calc(column/2)), 1fr);
+    width: 100%;
+    /* grid-template-columns: repeat(Math.ceil(calc(column/2)), 1fr); */
+    grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
   }
 `;
 
 export const FrameStyle = styled.div`
-  /* width: 345px; */
+  width: 345px;
   /* min-width: 300px; */
-  width: 100%;
+  /* width: 100%; */
   height: auto;
   min-height: 100vh;
   background-color: #f8f8f8;
@@ -153,13 +158,14 @@ export const FrameStyle = styled.div`
   @media (max-width: 800px) {
     width: 90%;
     /* box-shadow:
-      0.3px 0 0 0.3px #4d5e80,
-      0 0.3px 0 0.3px #4d5e80,
-      0 -0.3px 0 0.3px #4d5e80;
+    0.3px 0 0 0.3px #4d5e80,
+    0 0.3px 0 0.3px #4d5e80,
+    0 -0.3px 0 0.3px #4d5e80;
     border-radius: 10px;
     margin: 0 auto 35px; */
   }
   @media (max-width: 1200px) {
+    width: 100%;
     box-shadow:
       0.3px 0 0 0.3px #4d5e80,
       0 0.3px 0 0.3px #4d5e80,
