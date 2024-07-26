@@ -6,6 +6,7 @@ import { RecoilRoot } from 'recoil';
 import AcceptInvite from './components/inviteTeam/AcceptInvite';
 import RetroRevisePage from './pages/RevisePage';
 import RetroTeamPage from './pages/SectionPage';
+import { FakeNoticeShowPageFirst, FakeNoticeShowPageSecond } from './pages/notice/FakeNoticeShowPage';
 import MainLayout from '@/components/layout/MainLayout';
 import ProfileLayout from '@/components/layout/ProfileLayout';
 // import AcceptInvitePage from '@/pages/AccpetInvitePage';
@@ -160,6 +161,24 @@ const App = () => {
               element={
                 <PrivateRoute>
                   <NoticeShowPage />
+                </PrivateRoute>
+              }
+            />
+
+            {/* 가짜 게시물 페이지 */}
+            <Route
+              path="/noticeShowFirst"
+              element={
+                <PrivateRoute>
+                  <FakeNoticeShowPageFirst />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/noticeShowSecond"
+              element={
+                <PrivateRoute>
+                  <FakeNoticeShowPageSecond />
                 </PrivateRoute>
               }
             />
