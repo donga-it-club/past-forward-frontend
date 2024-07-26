@@ -42,7 +42,7 @@ export const FakeNoticeShowMainSecond = () => {
           <S.NoticeShowText>
             <p style={{ fontSize: '20px', fontWeight: '600' }}>회고의 필요성</p>
             <br />
-            프로젝트 회고는 프로젝트 완료 후 팀이 경험을 되돌하보고, 향후 프로젝트의 효율성을 높이기 위해 중요한
+            프로젝트 회고는 프로젝트 완료 후 팀이 경험을 되돌아보고, 향후 프로젝트의 효율성을 높이기 위해 중요한
             과정입니다.
             <br /> <br />
             <br />
