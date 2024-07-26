@@ -124,7 +124,7 @@ const PageSideBar: FC<Props> = ({ onClose }) => {
           </AccordionButton>
           {group &&
             group.nodes.map(id => (
-              <AccordionPanel pb={4}>
+              <AccordionPanel pb={4} overflow="auto">
                 <a
                   id="leftside_persnalproject"
                   href={`group-boards?id=${id.id}`}
@@ -186,7 +186,7 @@ const PageSideBar: FC<Props> = ({ onClose }) => {
 
           <AccordionPanel pb={4}>
             <Accordion allowMultiple>
-              <AccordionItem>
+              <AccordionItem overflow="auto">
                 {retro &&
                   retro.nodes
                     .filter(item => item.teamId)

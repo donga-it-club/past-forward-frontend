@@ -59,7 +59,7 @@ const Alarm = () => {
       const data = await UserServices.get();
       setUser(data.data);
     } catch (error) {
-      toast.error(error);
+      console.error(error);
     }
   };
 
@@ -88,7 +88,7 @@ const Alarm = () => {
       await NotificationServices.readPost({ notificationId: notificationId });
       setRender(prev => !prev);
     } catch {
-      toast.error('error');
+      console.error('error');
     }
   };
 

@@ -12,7 +12,6 @@ import * as S from '@/styles/notice/noticeBoard.style';
 // 발행한 게시물 조회
 export const usePublishedNotice = () => {
   const [PublishedNoticeList, setPublishedNoticeList] = useState<GetNoticeListPosts[]>([]);
-  const toast = useCustomToast();
 
   // 게시글 목록 조회 api
   const fetchNotice = async () => {
@@ -20,7 +19,7 @@ export const usePublishedNotice = () => {
       const data = await NoticeServices.listGet({ page: 1, size: 10 });
       setPublishedNoticeList(data.data.posts.filter(post => post.status === 'PUBLISHED'));
     } catch (error) {
-      toast.error(error);
+      console.error(error);
     }
   };
 
@@ -68,7 +67,6 @@ export const NoticeBoard = () => {
   //   }
   // };
 
-  const toast = useCustomToast();
   const navigate = useNavigate();
   const [user, setUser] = useState<UserData>();
   const publishedList = usePublishedNotice();
@@ -79,9 +77,8 @@ export const NoticeBoard = () => {
     try {
       const data = await UserServices.get();
       setUser(data.data);
-      console.log(data.data);
     } catch (error) {
-      toast.error(error);
+      console.error(error);
     }
   };
 
