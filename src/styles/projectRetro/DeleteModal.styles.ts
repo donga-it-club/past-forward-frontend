@@ -24,6 +24,11 @@ export const Modal = styled.div`
   border-radius: 5px;
   width: 600px;
   height: auto;
+
+  @media screen and (max-width: 768px) {
+    width: 350px;
+    /* padding: 10px 20px 10px 20px; */
+  }
 `;
 
 export const Top = styled.div`

@@ -28,3 +28,10 @@ export const DescriptionText = styled.span`
   color: #a9a9a9;
   font-size: small;
 `;
+
+export const FilterContainer = styled.div`
+  @media screen and (max-width: 768px) {
+    display: flex;
+    justify-content: center;
+  }
+`;

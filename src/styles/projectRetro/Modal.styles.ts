@@ -24,6 +24,11 @@ export const Modal = styled.div`
   width: 500px;
   height: auto;
   padding: 15px 25px;
+  @media screen and (max-width: 768px) {
+    width: 300px;
+    height: auto;
+    padding: 10px 20px 10px 20px;
+  }
 `;
 
 export const TitleBox = styled.div`

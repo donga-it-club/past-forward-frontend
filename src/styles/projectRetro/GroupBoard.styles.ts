@@ -26,9 +26,16 @@ export const Button = styled.button`
   padding: 5px 50px;
   border-radius: 3px;
   margin: 20px 0px 20px auto;
+  @media screen and (max-width: 768px) {
+    margin: 20px auto;
+  }
 `;
 
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  @media screen and (max-width: 768px) {
+    justify-content: center;
+    align-items: center;
+  }
 `;
