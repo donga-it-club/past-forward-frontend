@@ -7,6 +7,11 @@ export const Container = styled.div`
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
+  @media screen and (max-width: 768px) {
+    display: inline-block;
+    padding: 0;
+    width: auto;
+  }
 `;
 
 export const Box = styled.div`
@@ -16,6 +21,10 @@ export const Box = styled.div`
   margin-top: 30px;
   margin-left: 40px;
   margin-right: 40px;
+  @media screen and (max-width: 768px) {
+    width: 260px;
+    height: auto;
+  }
 `;
 
 export const InfoBox = styled.div`

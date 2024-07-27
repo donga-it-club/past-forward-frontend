@@ -25,6 +25,11 @@ export const Modal = styled.div`
   border-radius: 5px;
   width: 800px;
   height: 300px;
+  @media screen and (max-width: 768px) {
+    width: 300px;
+    height: 450px;
+    padding: 10px 20px 10px 20px;
+  }
 `;
 
 export const Title = styled.div`
@@ -37,4 +42,8 @@ export const Title = styled.div`
   width: 250px;
   padding-top: 5px;
   padding-bottom: 5px;
+  @media screen and (max-width: 768px) {
+    width: 200px;
+    height: 35px;
+  }
 `;
