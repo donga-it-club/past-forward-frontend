@@ -132,13 +132,17 @@ const ManageModal: React.FC<ManageModalProps> = ({ groupId, data, isClose }) => 
                       )}
                       {/* <S.CheckBox type="checkbox" onChange={handleInputCheck(item.id)}></S.CheckBox> */}
                     </S.RetroBox>
-                    <S.RetroBox>{item.teamId ? <IoMdPerson size={20} /> : <MdPeople size={20} />}</S.RetroBox>
+                    <S.RetroBox>{item.teamId ? <MdPeople size={20} /> : <IoMdPerson size={20} />}</S.RetroBox>
                     <S.RetroTitle>{item.title}</S.RetroTitle>
                     <S.RetroUserBox>
                       <S.RetroUser>{item.username}</S.RetroUser>
                       {user?.userId === item.userId && <S.RetroLeader>본인</S.RetroLeader>}
                     </S.RetroUserBox>
-                    <S.RetroBox>{convertToLocalTime(item.updatedDate)}</S.RetroBox>
+                    <S.RetroBox>
+                      {convertToLocalTime(item.createdDate) === convertToLocalTime(item.updatedDate)
+                        ? convertToLocalTime(item.createdDate)
+                        : `${convertToLocalTime(item.updatedDate)} (수정)`}
+                    </S.RetroBox>
                     <S.RetroBox>
                       {item.isBookmarked ? <FaStar size={20} style={{ color: '#fcea12' }} /> : <CiStar size={20} />}
                     </S.RetroBox>

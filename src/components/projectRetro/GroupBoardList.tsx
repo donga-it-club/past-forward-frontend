@@ -107,7 +107,11 @@ const GroupBoardList: React.FC<GroupBoardListProps> = ({ data }) => {
                 {isLoading ? (
                   <Spinner size="md" />
                 ) : (
-                  <T.Thumbnail src={item.thumbnail ? image[item.id] : Thumbnail} onLoad={handleImageLoad} />
+                  <T.Thumbnail
+                    src={item.thumbnail ? image[item.id] : Thumbnail}
+                    onLoad={handleImageLoad}
+                    onClick={() => navigate(`/sections?retrospectiveId=${item.id}&teamId=${item.teamId}`)}
+                  />
                 )}
               </T.ImgBox>
               <hr />

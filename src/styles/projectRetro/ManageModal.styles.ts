@@ -35,7 +35,7 @@ export const Box = styled.div`
 export const ListItem = styled.div`
   margin: 25px;
   display: grid;
-  grid-template-columns: 0.5fr 1fr 1.5fr 1fr 1.8fr 1fr 1fr;
+  grid-template-columns: 0.5fr 1fr 1.5fr 1fr 2.3fr 1fr 1fr;
   align-items: center;
 `;
 
