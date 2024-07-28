@@ -8,6 +8,7 @@ export const TitleContainter = styled.div`
   border-bottom: 1px solid rgba(17, 27, 71, 0.3);
   display: flex;
   margin-top: 15px;
+  align-items: center;
 `;
 
 export const TitleText = styled.span`
@@ -17,7 +18,14 @@ export const TitleText = styled.span`
   border-bottom: 3px solid #111b47;
   display: flex;
   align-items: center;
-  padding: 0px 10px;
+  padding: 0px 20px;
+`;
+
+export const DescriptionText = styled.span`
+  color: #a9a9a9;
+  font-size: large;
+  font-weight: bold;
+  margin-left: 20px;
 `;
 
 export const Button = styled.button`
@@ -26,9 +34,16 @@ export const Button = styled.button`
   padding: 5px 50px;
   border-radius: 3px;
   margin: 20px 0px 20px auto;
+  @media screen and (max-width: 768px) {
+    margin: 20px auto;
+  }
 `;
 
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  @media screen and (max-width: 768px) {
+    justify-content: center;
+    align-items: center;
+  }
 `;

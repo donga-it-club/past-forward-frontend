@@ -60,7 +60,9 @@ const ProjectRetro = () => {
         />
         <S.DescriptionText>사용법</S.DescriptionText>
       </S.DescriptionBox>
-      <StatusFilter onSelectedFilter={handleStatusFilter} />
+      <S.FilterContainer>
+        <StatusFilter onSelectedFilter={handleStatusFilter} />
+      </S.FilterContainer>
       <GroupList groups={data} />
       {isDescriptionOpen ? <DescriptionModal isClose={() => setIsDescriptionOpen(false)} /> : null}
     </>

@@ -9,6 +9,11 @@ export const Modal = styled.div`
   width: 1000px;
   height: 600px;
   padding: 15px 25px;
+  @media screen and (max-width: 768px) {
+    width: 300px;
+    height: 550px;
+    padding: 10px 20px 10px 20px;
+  }
 `;
 
 export const Title = styled.span`
@@ -21,6 +26,11 @@ export const Title = styled.span`
   align-items: center;
   padding: 5px 35px;
   width: 300px;
+  @media screen and (max-width: 768px) {
+    width: 220px;
+    height: 35px;
+    padding: 5px 20px;
+  }
 `;
 
 export const Box = styled.div`
@@ -30,13 +40,22 @@ export const Box = styled.div`
   overflow-y: scroll;
   width: 90%;
   height: 90%;
+  @media screen and (max-width: 768px) {
+    overflow-x: scroll;
+    overflow: auto;
+    white-space: nowrap;
+    padding: 5px 10px;
+  }
 `;
 
 export const ListItem = styled.div`
   margin: 25px;
   display: grid;
-  grid-template-columns: 0.5fr 1fr 1.5fr 1fr 1.8fr 1fr 1fr;
+  grid-template-columns: 0.5fr 1fr 1.5fr 1fr 2.3fr 1fr 1fr;
   align-items: center;
+  @media screen and (max-width: 768px) {
+    margin: 30px;
+  }
 `;
 
 export const CheckBox = styled.input`
@@ -52,12 +71,18 @@ export const RetroTitle = styled.span`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  @media screen and (max-width: 768px) {
+    margin-right: 5px;
+  }
 `;
 
 export const RetroUserBox = styled.div`
   padding-left: 5px;
   display: flex;
   align-items: center;
+  @media screen and (max-width: 768px) {
+    margin-right: 5px;
+  }
 `;
 export const RetroUser = styled.span`
   white-space: nowrap;
@@ -77,6 +102,9 @@ export const RetroLeader = styled.span`
 export const RetroBox = styled.div`
   align-self: center;
   padding-left: 5px;
+  @media screen and (max-width: 768px) {
+    margin-right: 5px;
+  }
 `;
 
 export const Button = styled.button`
