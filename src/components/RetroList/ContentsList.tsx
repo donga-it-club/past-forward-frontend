@@ -144,7 +144,11 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
                 {isLoading ? (
                   <Spinner size="md" />
                 ) : (
-                  <S.Thumbnail src={item.thumbnail ? image[item.id] : Thumbnail} onLoad={handleImageLoad} />
+                  <S.Thumbnail
+                    src={item.thumbnail ? image[item.id] : Thumbnail}
+                    onLoad={handleImageLoad}
+                    onClick={() => navigate(`/sections?retrospectiveId=${item.id}&teamId=${item.teamId}`)}
+                  />
                 )}
               </S.ImgBox>
               <hr />

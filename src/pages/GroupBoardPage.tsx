@@ -52,6 +52,7 @@ const GroupBoard = () => {
             <RiFolder6Fill size={40} style={{ color: '#FFE500', marginRight: '10px' }} />
             {groupData?.title}
           </S.TitleText>
+          <S.DescriptionText> {groupData?.description}</S.DescriptionText>
         </S.TitleContainter>
         <S.Wrapper>
           <S.Button onClick={() => setIsOpen(true)}>회고 관리하기</S.Button>

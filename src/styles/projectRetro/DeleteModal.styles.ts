@@ -27,7 +27,6 @@ export const Modal = styled.div`
 
   @media screen and (max-width: 768px) {
     width: 350px;
-    /* padding: 10px 20px 10px 20px; */
   }
 `;
 
