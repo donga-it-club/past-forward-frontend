@@ -79,11 +79,11 @@ const ManageModal: React.FC<ManageModalProps> = ({ groupId, data, isClose }) => 
     } else {
       try {
         await putBoard({ retrospectiveGroupId: groupId, retrospectiveIds: requestData });
-        toast.info('그룹 회고가 정상적으로 추가되었습니다.');
+        toast.info('그룹 회고가 정상적으로 추가/제거되었습니다.');
         isClose();
         window.location.reload();
       } catch (e) {
-        toast.error('그룹 회고 추가에 실패했습니다.');
+        toast.error('그룹 회고 추가/제거에 실패했습니다.');
       }
     }
   };
@@ -102,6 +102,13 @@ const ManageModal: React.FC<ManageModalProps> = ({ groupId, data, isClose }) => 
       setCheckedRetroId(ids);
     }
   }, [data]);
+
+  useEffect(() => {
+    if (checkedRetroId) {
+      const tempId = checkedRetroId.concat(requestData); // 이미 추가된 회고 id들 requestData에 넣기(api 수정됨에 따라)
+      setRequestData(tempId);
+    }
+  }, [checkedRetroId]);
 
   return (
     <>
@@ -125,12 +132,11 @@ const ManageModal: React.FC<ManageModalProps> = ({ groupId, data, isClose }) => 
                 retro.nodes.map(item => (
                   <S.ListItem key={item.id}>
                     <S.RetroBox>
-                      {checkedRetroId.indexOf(item.id) < 0 ? ( // 이미 추가된 회고인지 판단
+                      {requestData.indexOf(item.id) < 0 ? ( // 이미 추가된 회고라면 checked
                         <S.CheckBox type="checkbox" onChange={handleInputCheck(item.id)}></S.CheckBox>
                       ) : (
                         <S.CheckBox type="checkbox" onChange={handleInputCheck(item.id)} checked></S.CheckBox>
                       )}
-                      {/* <S.CheckBox type="checkbox" onChange={handleInputCheck(item.id)}></S.CheckBox> */}
                     </S.RetroBox>
                     <S.RetroBox>{item.teamId ? <MdPeople size={20} /> : <IoMdPerson size={20} />}</S.RetroBox>
                     <S.RetroTitle>{item.title}</S.RetroTitle>
