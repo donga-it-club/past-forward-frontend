@@ -15,6 +15,7 @@ export const NoticeShowPage = () => {
   const { search } = useLocation();
   const query = search.split(/[=,&]/);
   const NoticeShowId = Number(query[1]);
+  // const NoticeShowIndex = Number(query[3]);
 
   // 개별 게시물 조회
   const [notice, setNotice] = useState<GetNoticePostsData>();
@@ -28,15 +29,10 @@ export const NoticeShowPage = () => {
       toast.error(e);
     }
   };
+
   useEffect(() => {
     fetchNoticeShow();
   }, [NoticeShowId]);
-
-  // useEffect(() => {
-  //   if (notice) {
-  //     console.log(notice.title);
-  //   }
-  // }, [notice]);
 
   return (
     <>
