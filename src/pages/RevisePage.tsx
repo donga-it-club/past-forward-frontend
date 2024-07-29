@@ -67,7 +67,7 @@ const RetroRevisePage = () => {
   }, [retro?.status, members.values]);
 
   if (!retro) return;
-  if (user?.userId !== retro.userId) {
+  if (user && user.userId !== retro.userId) {
     toast.error('리더 권한이 없습니다.');
     navigate('/');
   }

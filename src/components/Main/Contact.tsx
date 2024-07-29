@@ -17,7 +17,6 @@ const Contact: React.FC = () => {
   };
 
   const handleSend = async () => {
-    console.log({ email, subject, content, mailStatus });
     try {
       await PostMail({
         from: email,

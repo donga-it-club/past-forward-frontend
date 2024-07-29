@@ -30,7 +30,6 @@ axiosInstance.interceptors.response.use(
         originalRequest.headers.Authorization = `Bearer ${authToken}`;
         return axiosInstance(originalRequest);
       } catch (refreshError) {
-        console.error('Refresh 토큰 실패', refreshError);
         return Promise.reject(refreshError);
       }
     }
@@ -42,10 +41,8 @@ axiosInstance.interceptors.response.use(
 // 세션 새로 고치는 함수
 async function refreshSession() {
   try {
-    const { tokens } = await fetchAuthSession({ forceRefresh: true });
-    console.log('새로운 세션:', tokens);
+    await fetchAuthSession({ forceRefresh: true });
   } catch (err) {
-    console.error('세션 새로 고치기 실패:', err);
     throw err; // 예외를 다시 던져서 호출하는 곳에서 처리하도록 함
   }
 }
@@ -59,7 +56,6 @@ axiosInstance.interceptors.request.use(
 
       // authToken이 없으면 반환
       if (!authToken) {
-        console.log('세션 토큰 없음');
         return config;
       }
 

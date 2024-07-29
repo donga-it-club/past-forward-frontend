@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 // import { Flex } from '@chakra-ui/react';
 import { RetrospectiveData } from '@/api/@types/Retrospectives';
 import { sectionData } from '@/api/@types/Section';
-import { TemplateNameData } from '@/api/@types/TeamController';
+import { TeamMembersData, TemplateNameData } from '@/api/@types/TeamController';
 import { UserData } from '@/api/@types/Users';
 import { RetrospectiveService } from '@/api/services/Retrospectives';
 import { SectionServices } from '@/api/services/Section';
@@ -27,7 +27,21 @@ const RetroTeamPage = () => {
   const [template, setTemplate] = useState<TemplateNameData[]>();
   const [rendering, setRendering] = useState<boolean>(false);
   const [user, setUser] = useState<UserData>();
+  const [members, setMembers] = useState<TeamMembersData[]>([]);
   const toast = useCustomToast();
+  const navigate = useNavigate();
+
+  const fetchTeamMembers = async () => {
+    try {
+      if (teamId) {
+        const data = await TeamControllerServices.TeamMemberGet({ teamId: teamId, retrospectiveId: retrospectiveId });
+        setMembers(data.data);
+      }
+      return;
+    } catch (e) {
+      toast.error(e);
+    }
+  };
 
   const fetchRetrospective = async () => {
     try {
@@ -72,10 +86,19 @@ const RetroTeamPage = () => {
     fetchRetrospective();
     fetchTemplate();
     fetchUser();
+    fetchTeamMembers();
   }, [retro?.description, rendering]);
 
   if (!retro) return;
   if (!user) return;
+  if (teamId && !members.some(value => value.userId === user.userId)) {
+    toast.error('회고 보기 권한이 없습니다.');
+    navigate('/');
+  }
+  if (!teamId && retro.userId !== user.userId) {
+    toast.error('회고 보기 권한이 없습니다.');
+    navigate('/');
+  }
 
   return (
     <S.Container>

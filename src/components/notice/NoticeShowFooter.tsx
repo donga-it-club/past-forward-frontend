@@ -39,17 +39,6 @@ export const NoticeShowMove = ({ direction, id, notice }: NoticeShowMoveProps) =
     }
   };
 
-  // 게시물로 이동하기
-  // const noticeMove = direction === 'up' ? 1 : 1;
-  // const handleNoticeShowMove = () => {
-  //   navigate(`/noticeShow?id=${notice[move].id}&index=${move}`);
-  //   console.log(id);
-  //   console.log(index);
-  //   console.log(notice);
-  //   console.log(move);
-  //   console.log(notice[move].id);
-  //   console.log(notice[move].title);
-  // };
   return (
     <>
       <S.NoticeShowMoveStyle>

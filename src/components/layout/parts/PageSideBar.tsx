@@ -51,7 +51,6 @@ const PageSideBar: FC<Props> = ({ onClose }) => {
         isBookmarked: false,
       });
       setRetro(data.data);
-      console.log('retro', retro);
     } catch (e) {
       console.error(e);
     }

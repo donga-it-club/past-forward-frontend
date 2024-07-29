@@ -28,22 +28,6 @@ const SurveyPage: React.FC = () => {
 
   const handleSurvey = async () => {
     try {
-      console.log(
-        '나이는:',
-        age,
-        '/성별은:',
-        gender,
-        '/직업은:',
-        job,
-        '/지역은:',
-        city,
-        '/경로는:',
-        path,
-        '/목적은(복수선택):',
-        purpose,
-        '이메일 수신 동의 여부: ',
-        emailConsents,
-      );
       const SurveyRequest = await PostSurvey({
         age: numAge,
         gender: gender,

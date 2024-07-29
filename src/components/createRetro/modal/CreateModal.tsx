@@ -87,7 +87,6 @@ const CreateModal: React.FC<CreateModalProps> = ({ isOpen, onClose, templateId, 
       // startDate 값이 오늘 이전이면 'IN_PROGRESS'로 설정
       const today = new Date();
       const startedDate = new Date(requestData.startDate);
-      // console.log(startedDate);
       if (startedDate <= today) {
         calculatedStatus = 'IN_PROGRESS';
       }
@@ -132,7 +131,6 @@ const CreateModal: React.FC<CreateModalProps> = ({ isOpen, onClose, templateId, 
   };
 
   const handleStartDateChange = (startDate: Date) => {
-    console.log('startDate:', startDate); // startDate를 콘솔에 출력
     setRequestData({ ...requestData, startDate }); // startDate 상태 업데이트
   };
 
