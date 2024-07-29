@@ -74,7 +74,7 @@ const ManageModal: React.FC<ManageModalProps> = ({ groupId, data, isClose }) => 
   }, [retro?.totalCount]);
 
   const handlePutBoard = async () => {
-    if (requestData.length === 0) {
+    if (requestData.length === 0 && checkedRetroId.length === 0) {
       isClose();
     } else {
       try {
