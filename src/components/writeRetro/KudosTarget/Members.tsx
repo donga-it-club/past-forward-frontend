@@ -1,50 +1,37 @@
 import { useEffect, useState } from 'react';
 import { CgProfile } from 'react-icons/cg';
-import { PutActionItemsRequest } from '@/api/@types/TeamController';
 import postImageToS3 from '@/api/imageApi/postImageToS3';
-import { putActionItemsMember } from '@/api/teamControllerApi/putActionItemsMember';
+import { putKudosTarget } from '@/api/teamControllerApi/putKudosTarget';
 import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/writeRetroStyles/Members.styles';
 
 interface UserListProps {
   users: { name: string; image: string; userId: number }[];
+  sId: number;
   onSelectUserImg: (image: string) => void;
   onSelectUserName: (name: string) => void;
-  tId: number;
-  rId: number;
-  sId: number;
   imageURL: { url: string }[];
   fetchSection: () => void;
 }
 
 export const Members: React.FC<UserListProps> = ({
   users,
+  sId,
   onSelectUserImg,
   onSelectUserName,
-  tId,
-  rId,
-  sId,
   imageURL,
   fetchSection,
 }) => {
-  const teamId: number = tId;
-  const retrospectiveId: number = rId;
-  const sectionId: number = sId;
   const toast = useCustomToast();
+  const sectionId: number = sId;
   const [rendering, setRendering] = useState<boolean>(false);
 
-  const putActionItemMember = async (selectedUserId: number) => {
+  const putTargetMember = async (selectedUserId: number) => {
     try {
-      const requestData: PutActionItemsRequest = {
-        teamId: teamId,
-        retrospectiveId: retrospectiveId,
-        sectionId: sectionId,
-        userId: selectedUserId,
-      };
-      await putActionItemsMember(requestData);
+      await putKudosTarget({ sectionId: sectionId, userId: selectedUserId });
       setRendering(prev => !prev);
     } catch (e) {
-      toast.error('담당자 지정 실패');
+      toast.error('kudos 실패');
     }
   };
 
@@ -73,7 +60,7 @@ export const Members: React.FC<UserListProps> = ({
     const selectedUserImage = usersWithImages[userIndex].imageURL;
     const userImage = selectedUserImage !== '' ? selectedUserImage : '';
     onSelectUserImg(userImage);
-    await putActionItemMember(userId);
+    await putTargetMember(userId);
     fetchSection();
   };
 

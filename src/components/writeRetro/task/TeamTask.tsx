@@ -1,7 +1,9 @@
 import { FC, useEffect, useState } from 'react';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { BiLike, BiSolidLike } from 'react-icons/bi';
+import { BsPersonFillCheck } from 'react-icons/bs';
 import { CgProfile } from 'react-icons/cg';
+import { FaThumbsUp } from 'react-icons/fa6';
 import { MdAccessAlarm, MdMessage } from 'react-icons/md';
 import { useLocation } from 'react-router-dom';
 import { Flex } from '@chakra-ui/react';
@@ -14,6 +16,7 @@ import postImageToS3 from '@/api/imageApi/postImageToS3';
 import { SectionServices } from '@/api/services/Section';
 import { convertToLocalTime } from '@/components/RetroList/ContentsList';
 import ActionItemTask from '@/components/writeRetro/ActionItems/ActionItemTask';
+import KudosTargetButton from '@/components/writeRetro/KudosTarget/KudosTargetButton';
 import { useCustomToast } from '@/hooks/useCustomToast';
 import * as M from '@/styles/my/myPage.style';
 import * as S from '@/styles/writeRetroStyles/Layout.style';
@@ -36,6 +39,7 @@ const TeamTask: FC<Props> = ({ section, setRendering, teamId, imageURL, user, fe
   const [liked, setLiked] = useState<number>(0);
   const [image, setImage] = useState<string>('');
   const actionCondition = teamId && section.sectionName === 'Action Items';
+  const kudosCondition = teamId && section.sectionName === 'Kudos';
 
   const rId = Number(query[1]); // action-items로 넘겨줄 Id값들
   const tId = Number(query[3]);
@@ -109,9 +113,17 @@ const TeamTask: FC<Props> = ({ section, setRendering, teamId, imageURL, user, fe
 
           {/* TaskCenter */}
 
+          {kudosCondition ? (
+            <S.ManagerStyle>
+              <KudosTargetButton tId={tId} rId={rId} sId={sId} section={section} fetchSection={fetchSection} />
+              <FaThumbsUp size="24px" color="#666666" style={{ marginRight: '5px' }} />
+            </S.ManagerStyle>
+          ) : null}
+
           {actionCondition ? (
             <S.ManagerStyle>
               <ActionItemTask tId={tId} rId={rId} sId={sId} section={section} fetchSection={fetchSection} />
+              <BsPersonFillCheck size="24px" color="#666666" style={{ marginRight: '5px' }} />
             </S.ManagerStyle>
           ) : null}
 
