@@ -19,7 +19,6 @@ const UserProfileImage = ({ width }: Props) => {
   const fetchUserData = async () => {
     try {
       const response = await getUser();
-      console.log('유저 정보', response);
       setUserData(response);
     } catch (error) {
       console.error('에러', error);
