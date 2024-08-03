@@ -13,7 +13,6 @@ const UserEmail: React.FC<Props> = ({ setUserEmail }) => {
   async function handleFetchUserAttributes() {
     try {
       const userAttributes = await fetchUserAttributes();
-      console.log(userAttributes);
       setUserEmail(userAttributes.email || null);
     } catch (err) {
       console.log(err);

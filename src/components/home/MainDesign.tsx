@@ -41,7 +41,7 @@ const MainDesign = () => {
           onClick={navigateToCreate}
           id={isLoggedIn ? 'header_startpf_login' : 'header_startpf_logout'}
         >
-          Get Started for Free
+          TRY IT NOW
         </S.GetStaredButton>
         <Button variant="ghost" onClick={handleLoginOrLogout} id="header_login" fontSize="15px" margin="10px 40%">
           {isLoggedIn ? 'Logout' : 'Login'}
