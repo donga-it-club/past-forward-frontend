@@ -76,6 +76,7 @@ export const NoticeMenuBar = ({ title, content }: NoticeMenuBarProps) => {
 
   // 게시물 이미지 api 연결
   const handleNoticeImg = () => {
+    console.log('게시물 이미지를 등록합니다.');
     console.log(NoticeShowId);
   };
 

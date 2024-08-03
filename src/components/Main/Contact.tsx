@@ -155,7 +155,7 @@ const Contact: React.FC = () => {
           onClick={navigateToCreate}
           id={isLoggedIn ? 'contact_startpf_login' : 'contact_startpf_logout'}
         >
-          지금 회고 시작하기
+          회고 무료로 시작하기
         </S.ContactButton>
       </S.ContactButtonContainer>
     </div>

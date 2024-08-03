@@ -61,6 +61,7 @@ axiosInstance.interceptors.request.use(
 
       // 헤더에 토큰 추가
       config.headers.Authorization = `Bearer ${authToken}`;
+      console.log('헤더에 토큰 추가 확인', config.headers.Authorization);
       return config;
     } catch (err) {
       console.error('에러', err);
