@@ -81,8 +81,6 @@ const ManageTeamMembers: FC<Props> = ({ teamId, members, user, retro }) => {
     }
   };
 
-  console.log('members', members);
-
   useEffect(() => {
     members.forEach(item => fetchImage(item));
   }, []);

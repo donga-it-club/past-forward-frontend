@@ -17,16 +17,14 @@ const Contact: React.FC = () => {
   };
 
   const handleSend = async () => {
-    console.log({ email, subject, content, mailStatus });
     try {
-      const MailRequest = await PostMail({
+      await PostMail({
         from: email,
         subject: subject,
         content: content,
         mailStatus: mailStatus,
       });
-      console.log('메일 전송 성공', MailRequest);
-      alert('문의가 전송되었습니다.');
+      alert('문의가 정상적으로 전송되었습니다. 입력하신 이메일로 빠른 시일 내에 답변 드리도록 하겠습니다');
     } catch (error) {
       console.error('실패입니다.', error);
     }
@@ -56,7 +54,7 @@ const Contact: React.FC = () => {
     <div style={{ height: '100vh' }}>
       <S.Container>
         <S.TitleContainer>
-          <S.Title>Contact</S.Title>
+          <S.Title>건의 및 문의사항</S.Title>
         </S.TitleContainer>
 
         <S.Poster>
@@ -157,7 +155,7 @@ const Contact: React.FC = () => {
           onClick={navigateToCreate}
           id={isLoggedIn ? 'contact_startpf_login' : 'contact_startpf_logout'}
         >
-          회고 무료로 시작하기
+          지금 회고 시작하기
         </S.ContactButton>
       </S.ContactButtonContainer>
     </div>

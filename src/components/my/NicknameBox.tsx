@@ -43,7 +43,6 @@ const NicknameBox = () => {
       alert('닉네임이 수정되었습니다.');
       setUserNickname(updatedNickname);
       setNewNickname('');
-      // console.log(updatedNickname);
     } catch (error) {
       console.log(error);
     }

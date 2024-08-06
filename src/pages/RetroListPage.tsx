@@ -10,7 +10,6 @@ import Pagination from '@/components/RetroList/Pagination';
 import ProgressButton from '@/components/RetroList/ProgressButton';
 import Search from '@/components/RetroList/Search';
 import ViewButton from '@/components/RetroList/ViewButton';
-import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/RetroList/RetroListPage.style';
 
 const formatDate = (isoDateString: string) => {
@@ -25,7 +24,6 @@ const formatDate = (isoDateString: string) => {
 
 const RetroListPage = () => {
   const [data, setData] = useState<GetRetrospectiveData['data']>({ totalCount: 0, nodes: [] });
-  const toast = useCustomToast();
   const [page, setPage] = useState<number>(Math.ceil(data.totalCount / 10));
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [bookmarkUpdate, setBookmarkUpdate] = useState<boolean>(false);
@@ -58,13 +56,11 @@ const RetroListPage = () => {
 
   useEffect(() => {
     const fetchRetrolist = async () => {
-      // console.log(query);
       try {
         const responseData = await queryGetRetrospective(query);
         setData(responseData.data);
       } catch (error) {
-        // console.error('회고 데이터를 가져오는 도중 오류가 발생했습니다:', error);
-        toast.error(error);
+        console.error(error);
       }
     };
     fetchRetrolist();

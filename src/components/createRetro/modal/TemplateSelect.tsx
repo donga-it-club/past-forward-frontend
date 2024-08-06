@@ -15,7 +15,6 @@ const TemplateSelect: React.FC<TemplateSelectProps> = ({ onChange, defaultTempla
     const fetchTemplates = async () => {
       try {
         const response = await getTemplate();
-        console.log('템플릿 데이터', response);
         setTemplates(response);
       } catch (error) {
         console.error('에러', error);

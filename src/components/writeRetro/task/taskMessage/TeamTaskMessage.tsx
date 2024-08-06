@@ -29,7 +29,6 @@ const TeamTaskMessage: FC<Props> = ({ section, setRendering, user, teamId }) => 
     setValue(e.target.value);
   };
 
-  console.log('section', section.comments);
   const handlePostComment = async () => {
     try {
       await CommentService.post({ sectionId: section.sectionId, commentContent: value });
@@ -53,8 +52,6 @@ const TeamTaskMessage: FC<Props> = ({ section, setRendering, user, teamId }) => 
     } finally {
     }
   };
-
-  console.log('section', section);
 
   const fetchImage = async (item: CommentData) => {
     try {

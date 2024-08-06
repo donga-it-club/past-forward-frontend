@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { PeopleFill, Person, PersonFill, PlusCircleFill } from 'react-bootstrap-icons';
 import { IoIosListBox } from 'react-icons/io';
 import { RiFolder6Fill } from 'react-icons/ri';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   Accordion,
   AccordionButton,
@@ -51,7 +51,6 @@ const PageSideBar: FC<Props> = ({ onClose }) => {
         isBookmarked: false,
       });
       setRetro(data.data);
-      console.log('retro', retro);
     } catch (e) {
       console.error(e);
     }
@@ -124,7 +123,7 @@ const PageSideBar: FC<Props> = ({ onClose }) => {
           </AccordionButton>
           {group &&
             group.nodes.map(id => (
-              <AccordionPanel pb={4}>
+              <AccordionPanel pb={4} overflow="auto">
                 <a
                   id="leftside_persnalproject"
                   href={`group-boards?id=${id.id}`}
@@ -186,7 +185,7 @@ const PageSideBar: FC<Props> = ({ onClose }) => {
 
           <AccordionPanel pb={4}>
             <Accordion allowMultiple>
-              <AccordionItem>
+              <AccordionItem overflow="auto">
                 {retro &&
                   retro.nodes
                     .filter(item => item.teamId)
@@ -214,24 +213,30 @@ const PageSideBar: FC<Props> = ({ onClose }) => {
         </AccordionItem>
 
         <AccordionItem border="1px solid gray">
-          <Link to="/create">
-            <AccordionButton>
-              <Flex alignItems="center" padding="2px 10px">
-                <PlusCircleFill style={{ marginRight: '5px' }} />
-                <a style={{ color: '#111b47', textDecoration: 'none' }}>Create New Retrospective</a>
-              </Flex>
-            </AccordionButton>
-          </Link>
+          <AccordionButton
+            onClick={() => {
+              navigate('/create');
+              onClose();
+            }}
+          >
+            <Flex alignItems="center" padding="2px 10px">
+              <PlusCircleFill style={{ marginRight: '5px' }} />
+              <a style={{ color: '#111b47', textDecoration: 'none' }}>Create New Retrospective</a>
+            </Flex>
+          </AccordionButton>
         </AccordionItem>
         <AccordionItem borderBottom="1px solid gray">
-          <Link to="/retrolist">
-            <AccordionButton>
-              <Flex alignItems="center" padding="2px 10px">
-                <IoIosListBox style={{ marginRight: '5px' }} />
-                <a style={{ color: '#111b47', textDecoration: 'none' }}>Retrospect List</a>
-              </Flex>
-            </AccordionButton>
-          </Link>
+          <AccordionButton
+            onClick={() => {
+              navigate('/retrolist');
+              onClose();
+            }}
+          >
+            <Flex alignItems="center" padding="2px 10px">
+              <IoIosListBox style={{ marginRight: '5px' }} />
+              <a style={{ color: '#111b47', textDecoration: 'none' }}>Retrospect List</a>
+            </Flex>
+          </AccordionButton>
         </AccordionItem>
       </Accordion>
     </S.SideBarBGContainer>

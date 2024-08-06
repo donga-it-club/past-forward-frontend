@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { NoticeBoardContents } from './NoticeBoardContents';
+// import { NoticeBoardContents } from './NoticeBoardContents';
+import { FakeNoticeBoardContents } from './FakeNotice/FakeNoticeBoardContents';
 import { NoticePagination } from './NoticePagination';
 import { GetNoticeListPosts } from '@/api/@types/NoticeBoard';
 import { UserData } from '@/api/@types/Users';
@@ -12,7 +13,6 @@ import * as S from '@/styles/notice/noticeBoard.style';
 // 발행한 게시물 조회
 export const usePublishedNotice = () => {
   const [PublishedNoticeList, setPublishedNoticeList] = useState<GetNoticeListPosts[]>([]);
-  const toast = useCustomToast();
 
   // 게시글 목록 조회 api
   const fetchNotice = async () => {
@@ -20,7 +20,7 @@ export const usePublishedNotice = () => {
       const data = await NoticeServices.listGet({ page: 1, size: 10 });
       setPublishedNoticeList(data.data.posts.filter(post => post.status === 'PUBLISHED'));
     } catch (error) {
-      toast.error(error);
+      console.error(error);
     }
   };
 
@@ -68,10 +68,9 @@ export const NoticeBoard = () => {
   //   }
   // };
 
-  const toast = useCustomToast();
   const navigate = useNavigate();
   const [user, setUser] = useState<UserData>();
-  const publishedList = usePublishedNotice();
+  // const publishedList = usePublishedNotice();
   // const tempList = useTempNotice();
 
   // 유저 정보 조회
@@ -79,9 +78,8 @@ export const NoticeBoard = () => {
     try {
       const data = await UserServices.get();
       setUser(data.data);
-      console.log(data.data);
     } catch (error) {
-      toast.error(error);
+      console.error(error);
     }
   };
 
@@ -116,9 +114,25 @@ export const NoticeBoard = () => {
           <S.NoticeBoardContentsBox>
             <div style={{ height: 'auto', display: 'flex', flexDirection: 'column-reverse' }}>
               {/* 게시판 내용*/}
-              {publishedList.map((posts, index) => (
+              {/* {publishedList.map((posts, index) => (
                 <NoticeBoardContents posts={posts} key={posts.id} index={index}></NoticeBoardContents>
-              ))}
+              ))} */}
+
+              {/* 가짜 게시물 내용 */}
+              <FakeNoticeBoardContents
+                index={1}
+                title="회고 어떻게 해야 잘할 수 있을까?"
+                date="2024.03.09"
+                view={78}
+                move="noticeShowFirst"
+              ></FakeNoticeBoardContents>
+              <FakeNoticeBoardContents
+                index={2}
+                title="왜, 회고가 중요한가?"
+                date="2024.03.09"
+                view={78}
+                move="noticeShowSecond"
+              ></FakeNoticeBoardContents>
             </div>
           </S.NoticeBoardContentsBox>
         </S.NoticeBoardBox>

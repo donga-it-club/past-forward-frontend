@@ -12,7 +12,6 @@ import postImageToS3 from '@/api/imageApi/postImageToS3';
 import { UserServices } from '@/api/services/User';
 import Thumbnail from '@/assets/Thumbnail.png';
 import Modal from '@/components/projectRetro/Modal';
-import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/projectRetro/GroupList.styles';
 
 interface GroupListProps {
@@ -30,7 +29,6 @@ interface GroupData {
 const GroupList: React.FC<GroupListProps> = ({ groups }) => {
   const data = groups.nodes;
   const navigate = useNavigate();
-  const toast = useCustomToast();
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState<boolean>(false);
   const [image, setImage] = useState<{ [key: number]: string }>({});
@@ -71,7 +69,7 @@ const GroupList: React.FC<GroupListProps> = ({ groups }) => {
       const data = await UserServices.get();
       setUser(data.data);
     } catch (error) {
-      toast.error(error);
+      console.error(error);
     }
   };
 

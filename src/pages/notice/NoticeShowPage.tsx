@@ -23,9 +23,7 @@ export const NoticeShowPage = () => {
     try {
       const data = await NoticeServices.postsGet({ id: NoticeShowId });
       setNotice(data.data);
-      console.log(data.data);
     } catch (e) {
-      console.log(NoticeShowId);
       toast.error(e);
     }
   };

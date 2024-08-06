@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  margin: 0 30px;
+  margin: 0 auto;
   @media (max-width: 800px) {
     position: relative;
     margin: 0 auto;

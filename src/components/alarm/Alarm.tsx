@@ -59,7 +59,7 @@ const Alarm = () => {
       const data = await UserServices.get();
       setUser(data.data);
     } catch (error) {
-      toast.error(error);
+      console.error(error);
     }
   };
 
@@ -88,7 +88,7 @@ const Alarm = () => {
       await NotificationServices.readPost({ notificationId: notificationId });
       setRender(prev => !prev);
     } catch {
-      toast.error('error');
+      console.error('error');
     }
   };
 
@@ -110,9 +110,7 @@ const Alarm = () => {
           <Bell size={20} />
           {notification && notification.length > 0 && (
             <>
-              <S.notificationBadge>
-                {notification.filter(item => item.receiverId === user?.userId).length}
-              </S.notificationBadge>
+              <S.notificationBadge>{todayNotification.concat(otherNotification).length}</S.notificationBadge>
             </>
           )}
         </S.IconStyle>
@@ -143,15 +141,7 @@ const Alarm = () => {
                       }
                     >
                       <Flex justifyContent="space-between">
-                        <S.AlarmTitle>
-                          [{item.retrospectiveTitle}]에서 알림{' '}
-                          <Icon viewBox="0 0 200 200" color="red.500" margin="auto 0">
-                            <path
-                              fill="currentColor"
-                              d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
-                            />
-                          </Icon>
-                        </S.AlarmTitle>
+                        <S.AlarmTitle>[{item.retrospectiveTitle}]에서 알림 </S.AlarmTitle>
                         <MdDelete
                           style={{ margin: 'auto 0', minHeight: '40' }}
                           onClick={() => {
@@ -177,7 +167,7 @@ const Alarm = () => {
             <Divider />
             <S.MenuText style={{ margin: '10px 0' }}>저번에 받은 알림</S.MenuText>
             <Flex flexDirection="column-reverse">
-              {otherNotification && otherNotification.length > 0 ? (
+              {notification && otherNotification.length > 0 ? (
                 otherNotification
                   .filter(item => item.receiverId === user?.userId)
                   .map(item => (

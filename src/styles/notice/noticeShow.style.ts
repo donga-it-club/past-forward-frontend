@@ -63,6 +63,7 @@ export const NoticeShowText = styled.div`
   width: 100%;
   height: auto;
   margin-top: 30px;
+  word-break: keep-all;
 `;
 
 export const NoticeShowImgContainer = styled.div`

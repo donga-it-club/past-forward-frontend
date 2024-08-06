@@ -20,6 +20,7 @@ import ImageUpload from '@/components/createRetro/modal/ImageUpload';
 import StartDateCalendar from '@/components/createRetro/modal/StartDateCalender';
 import TemplateSelect from '@/components/createRetro/modal/TemplateSelect';
 import TitleInput from '@/components/createRetro/modal/TitleInput';
+import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/createRetro/modal/CreateModal.style';
 
 interface CreateModalProps {
@@ -34,28 +35,33 @@ interface CreateModalProps {
 const CreateModal: React.FC<CreateModalProps> = ({ isOpen, onClose, templateId, type, status, name }) => {
   const size = 'xl';
   const navigate = useNavigate();
+  const toast = useCustomToast();
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [image, setImage] = useState<Blob | null>(null);
   const [requestData, setRequestData] = useState<PostRetrospectivesRequest>({
     title: '',
     type: type,
     userId: 1,
-    templateId: templateId || 1,
+    templateId: templateId || null,
     status: status,
     thumbnail: null,
     startDate: new Date(),
     description: '',
   });
-  const [image, setImage] = useState<Blob | null>(null);
 
   useEffect(() => {
     setRequestData(prevData => ({
       ...prevData,
-      templateId: templateId || 1, // templateId가 변경될 때마다 업데이트
+      templateId: templateId || null, // templateId가 변경될 때마다 업데이트
       type: type,
       status: status,
     }));
   }, [templateId, type, status]);
 
   const handleCreateClick = async () => {
+    if (isSubmitting) return; // 이미 제출 중이면 종료
+
+    setIsSubmitting(true);
     try {
       if (!requestData.title) {
         // 회고 제목이 비어 있다면 사용자에게 알림을 표시함
@@ -71,21 +77,24 @@ const CreateModal: React.FC<CreateModalProps> = ({ isOpen, onClose, templateId, 
         return;
       }
 
+      if (requestData.templateId === null) {
+        alert('회고 템플릿을 선택해주세요.');
+        return;
+      }
+
       let calculatedStatus: keyof TStatus = 'NOT_STARTED'; // 기본값은 'NOT_STARTED'로 설정
 
       // startDate 값이 오늘 이전이면 'IN_PROGRESS'로 설정
       const today = new Date();
       const startedDate = new Date(requestData.startDate);
-      // console.log(startedDate);
       if (startedDate <= today) {
         calculatedStatus = 'IN_PROGRESS';
       }
 
       const isoDateString = startedDate.toISOString();
-      // console.log(isoDateString);
 
       // 회고 생성 요청 전송
-      const retrospectiveResponse = await postRetrospective({
+      await postRetrospective({
         ...requestData,
         startDate: isoDateString,
         status: calculatedStatus, // 계산된 status 값으로 설정
@@ -98,28 +107,22 @@ const CreateModal: React.FC<CreateModalProps> = ({ isOpen, onClose, templateId, 
           filename: requestData.thumbnail, // imageUUID를 filename으로 설정
           method: 'PUT',
         });
-        console.log('사진 S3 업로드 성공 및 url 확인', imageResponse.data.preSignedUrl);
 
         const imageUrl = imageResponse.data.preSignedUrl;
-
-        const uploadResponse = await axios.put(imageUrl, image, {
+        await axios.put(imageUrl, image, {
           headers: {
             'Content-Type': image?.type,
           },
         });
-
-        if (uploadResponse.status === 200) {
-          console.log('사진 form-data 성공', uploadResponse);
-        } else {
-          console.error('사진 업로드 실패');
-        }
       }
 
-      console.log('회고 생성 성공', retrospectiveResponse);
       onClose(); // 모달 닫기
+      toast.success('회고 생성에 성공하였습니다.');
       navigate('/retrolist'); // 회고 목록 페이지로 이동
     } catch (error) {
       console.error('회고 생성 실패', error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -128,10 +131,8 @@ const CreateModal: React.FC<CreateModalProps> = ({ isOpen, onClose, templateId, 
   };
 
   const handleStartDateChange = (startDate: Date) => {
-    console.log('startDate:', startDate); // startDate를 콘솔에 출력
     setRequestData({ ...requestData, startDate }); // startDate 상태 업데이트
   };
-  console.log(name);
 
   return (
     <Modal isOpen={isOpen} size={size} onClose={onClose}>
@@ -168,7 +169,7 @@ const CreateModal: React.FC<CreateModalProps> = ({ isOpen, onClose, templateId, 
         </S.BottomModalBody>
 
         <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={handleCreateClick} id={name}>
+          <Button colorScheme="blue" mr={3} onClick={handleCreateClick} id={name} disabled={isSubmitting}>
             Create
           </Button>
         </ModalFooter>
