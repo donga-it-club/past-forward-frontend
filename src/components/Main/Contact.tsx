@@ -54,7 +54,7 @@ const Contact: React.FC = () => {
     <div style={{ height: '100vh' }}>
       <S.Container>
         <S.TitleContainer>
-          <S.Title>Contact</S.Title>
+          <S.Title>건의 및 문의사항</S.Title>
         </S.TitleContainer>
 
         <S.Poster>
