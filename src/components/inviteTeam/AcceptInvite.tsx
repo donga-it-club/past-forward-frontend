@@ -45,6 +45,11 @@ const AcceptInvite: React.FC = () => {
             toast.error('리더는 초대 수락을 할 수 없습니다.');
           }
 
+          if (response.code == 400) {
+            toast.error('유효하지 않은 초대 메세지입니다.');
+            navigate('/');
+          }
+
           if (response.data.role === 'MEMBER') {
             setInviteSuccess(true); // 초대 요청이 성공했을 때 상태를 true로 변경
           } else {
