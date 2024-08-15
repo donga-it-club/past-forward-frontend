@@ -17,14 +17,12 @@ import * as S from '@/styles/writeRetroStyles/Layout.style';
 interface Props {
   comment: CommentData;
   setRendering: React.Dispatch<React.SetStateAction<boolean>>;
-  section: CommentData;
 }
 
-const ReviseCommentModal: FC<Props> = ({ comment, setRendering, section }) => {
+const ReviseCommentModal: FC<Props> = ({ comment, setRendering }) => {
   // Input 높이 자동 조절
   const [value, setValue] = useState('');
   const toast = useCustomToast();
-  console.log(section);
 
   const ChangeContent = async () => {
     try {

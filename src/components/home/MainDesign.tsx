@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { Button, Flex, Image } from '@chakra-ui/react';
+import main from '@/../public/mainDesign.svg';
 import { useAuth } from '@/hooks/useAuth';
 import * as S from '@/styles/layout/layout.style';
 
@@ -24,7 +25,7 @@ const MainDesign = () => {
         >
           Moving Forward from the Past
         </Text> */}
-      <Image src="mainDesign.svg" width={{ base: '70%', md: '50%' }} margin="0 auto" marginTop={100} />
+      <Image src={main} width={{ base: '70%', md: '30%' }} margin="0 auto" marginTop={100} />
       <Flex
         padding="0 auto"
         margin={{ md: '20px auto', base: '10px' }}
@@ -32,7 +33,7 @@ const MainDesign = () => {
         fontSize={{ md: '20px', base: '15px' }}
         flexDirection="column"
       >
-        <Flex justifyContent="center" margin="0 30px">
+        <Flex justifyContent="center" margin="0 30px" fontSize={18}>
           과거를 회고하며 미래로 나아가는 과정을 촉진하는 의미를 가진 이름으로 &apos; Past&apos; (과거)와 &apos;Forward
           &apos;(앞으로 나아가다)를 결합하여 비전을 표현합니다.
         </Flex>
@@ -40,7 +41,7 @@ const MainDesign = () => {
           onClick={navigateToCreate}
           id={isLoggedIn ? 'header_startpf_login' : 'header_startpf_logout'}
         >
-          Get Started for Free
+          TRY IT NOW
         </S.GetStaredButton>
         <Button variant="ghost" onClick={handleLoginOrLogout} id="header_login" fontSize="15px" margin="10px 40%">
           {isLoggedIn ? 'Logout' : 'Login'}

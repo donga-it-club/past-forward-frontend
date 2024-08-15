@@ -1,19 +1,20 @@
-import { ChangeEventHandler, FC, MouseEventHandler, useEffect, useRef, useState } from 'react';
-import { PersonCircle } from 'react-bootstrap-icons';
+import { ChangeEventHandler, FC, MouseEventHandler, useRef } from 'react';
 import { Text } from '@chakra-ui/react';
 import { v4 as uuidv4 } from 'uuid';
+import defaultImage from '@/../public/defaultImage.png';
 import * as S from '@/styles/my/myPage.style';
 
 interface Props {
-  initialImage: string | null;
+  image: string;
   onChange: (image: File | null, uuid: string) => void;
+  setImageUUID: (imageUUID: string | null) => void;
+  setPreview: (preview: string | null) => void;
+  preview: string | null;
 }
 
-const ImageUploader: FC<Props> = ({ initialImage, onChange }) => {
-  const [preview, setPreview] = useState<string | null>(initialImage);
-  const [_, setImageUUID] = useState<string | null>(null);
-
+const ImageUploader: FC<Props> = ({ image, onChange, setImageUUID, preview, setPreview }) => {
   const inputRef = useRef<HTMLInputElement>(null);
+
   const handleUploadButtonClick: MouseEventHandler<HTMLButtonElement> = () => {
     inputRef.current?.click();
   };
@@ -32,36 +33,21 @@ const ImageUploader: FC<Props> = ({ initialImage, onChange }) => {
         setImageUUID(uuid);
       };
       reader.readAsDataURL(files);
-    } else {
-      // 이미지  제거할 때 파일을 null로 설정하고 UUID를 빈 문자열로 설정
-      onChange(null, '');
-      setPreview(null); // 미리보기 이미지를 null로 설정
-      setImageUUID(null); // UUID를 null로 설정
     }
   };
 
   const DeleteImage: MouseEventHandler<HTMLButtonElement> = () => {
-    setPreview(null);
+    setPreview(defaultImage);
     setImageUUID(null);
     onChange(null, '');
   };
-
-  useEffect(() => {
-    setPreview(initialImage);
-  }, []);
 
   return (
     <>
       <S.MainName>프로필 사진 </S.MainName>
       <S.DivingLine />
       <S.ProfileBox>
-        {preview ? (
-          <S.UploadImage src={preview} width="100px" height="100px" />
-        ) : initialImage ? (
-          <S.UploadImage src={initialImage} width="100px" height="100px" />
-        ) : (
-          <PersonCircle style={{ width: '100px', height: 'auto' }} />
-        )}
+        {image ? <S.UploadImage src={preview ?? image} width="100px" height="100px" /> : null}
       </S.ProfileBox>
       <S.ImageButtonBox>
         <S.OrdinaryButton id="mypage_editimg" color="#111B47" onClick={handleUploadButtonClick}>

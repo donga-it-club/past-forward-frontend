@@ -14,7 +14,6 @@ import postImageToS3 from '@/api/imageApi/postImageToS3';
 import { UserServices } from '@/api/services/User';
 import Thumbnail from '@/assets/Thumbnail.png';
 import ReviseModal from '@/components/RetroList/Modal';
-import { useCustomToast } from '@/hooks/useCustomToast';
 import * as T from '@/styles/RetroList/ContentsList.styles';
 import * as S from '@/styles/projectRetro/GroupBoardList.styles';
 
@@ -37,7 +36,6 @@ export const convertToLocalTime = (dateString: string | number | Date) => {
 
 const GroupBoardList: React.FC<GroupBoardListProps> = ({ data }) => {
   const navigate = useNavigate();
-  const toast = useCustomToast();
   const [user, setUser] = useState<UserData>();
   const [image, setImage] = useState<{ [key: number]: string }>({});
   const [openReviseModalId, setOpenReviseModalId] = useState<number | null>(null);
@@ -59,7 +57,7 @@ const GroupBoardList: React.FC<GroupBoardListProps> = ({ data }) => {
       const data = await UserServices.get();
       setUser(data.data);
     } catch (error) {
-      toast.error(error);
+      console.error(error);
     }
   };
   useEffect(() => {

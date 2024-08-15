@@ -25,9 +25,8 @@ export const NoticeShowHeader = ({ id, title, date, views }: NoticeShowHeaderPro
     try {
       const data = await UserServices.get();
       setUser(data.data);
-      console.log(data.data);
     } catch (error) {
-      toast.error(error);
+      console.error(error);
     }
   };
 
@@ -52,7 +51,7 @@ export const NoticeShowHeader = ({ id, title, date, views }: NoticeShowHeaderPro
         toast.info('게시글이 삭제되었습니다.');
       }, 1000); // 1초(1000밀리초) 후에 함수를 실행
     } catch (e) {
-      toast.error(e);
+      console.error(e);
     }
   };
 

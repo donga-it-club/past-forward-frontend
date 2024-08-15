@@ -28,23 +28,7 @@ const SurveyPage: React.FC = () => {
 
   const handleSurvey = async () => {
     try {
-      console.log(
-        '나이는:',
-        age,
-        '/성별은:',
-        gender,
-        '/직업은:',
-        job,
-        '/지역은:',
-        city,
-        '/경로는:',
-        path,
-        '/목적은(복수선택):',
-        purpose,
-        '이메일 수신 동의 여부: ',
-        emailConsents,
-      );
-      const SurveyRequest = await PostSurvey({
+      await PostSurvey({
         age: numAge,
         gender: gender,
         occupation: job,
@@ -53,13 +37,11 @@ const SurveyPage: React.FC = () => {
         purposes: purpose,
         emailConsents: emailConsents,
       });
-      console.log('설문조사 전송 성공', SurveyRequest);
       alert('설문조사가 전송되었습니다.');
       // 회고 작성 페이지로 이동
       navigate('/create');
     } catch (error) {
       toast.error(error);
-      console.error('실패입니다.', error);
     }
   };
 

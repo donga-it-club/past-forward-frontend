@@ -13,7 +13,6 @@ import { patchRetrospective } from '@/api/retrospectivesApi/patchRetrospective';
 import { UserServices } from '@/api/services/User';
 import Thumbnail from '@/assets/Thumbnail.png';
 import Modal from '@/components/RetroList/Modal';
-import { useCustomToast } from '@/hooks/useCustomToast';
 import * as S from '@/styles/RetroList/ContentsList.styles';
 
 interface Content {
@@ -54,7 +53,6 @@ export const convertToLocalTime = (dateString: string | number | Date) => {
 const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, setBookmarkUpdate }) => {
   // const [contentData, setContentData] = useState<Content[]>(data); 받아온데이터
   const [openModalId, setOpenModalId] = useState<number | null>(null);
-  const toast = useCustomToast();
   const [image, setImage] = useState<{ [key: number]: string }>({});
   const [user, setUser] = useState<UserData>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -64,7 +62,7 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
       const data = await UserServices.get();
       setUser(data.data);
     } catch (error) {
-      toast.error(error);
+      console.error(error);
     }
   };
 
@@ -76,7 +74,7 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
       await patchRetrospective(requestData);
       setBookmarkUpdate(prev => !prev);
     } catch (error) {
-      toast.error(error);
+      console.error(error);
     }
   };
 
@@ -106,7 +104,6 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
             filename: item.thumbnail,
             method: 'GET',
           });
-          // console.log('s3 사진 받아오기 성공', imageResponse.data.preSignedUrl);
           setImage(prevImage => ({
             ...prevImage,
             [item.id]: imageResponse.data.preSignedUrl,

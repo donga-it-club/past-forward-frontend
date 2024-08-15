@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, useEffect, useState } from 'react';
 import { CgProfile } from 'react-icons/cg';
-import { Center, Flex, Spinner } from '@chakra-ui/react';
+import { Button, Center, Flex, Spinner } from '@chakra-ui/react';
 import DeleteData from '../DeleteData';
 import ReviseCommentModal from '../ReviseCommentModal';
 import { CommentData, sectionData } from '@/api/@types/Section';
@@ -23,16 +23,18 @@ const TeamTaskMessage: FC<Props> = ({ section, setRendering, user, teamId }) => 
   const toast = useCustomToast();
   const [image, setImage] = useState<{ [key: number]: string }>('');
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isDisabled, setIsDisabled] = useState<boolean>(false);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
   };
 
-  console.log('section', section.comments);
   const handlePostComment = async () => {
+    setIsDisabled(true);
     try {
       await CommentService.post({ sectionId: section.sectionId, commentContent: value });
+      setTimeout(() => setIsDisabled(false), 1500);
       setRendering(prev => !prev);
       setIsLoading(false);
       setValue('');
@@ -53,8 +55,6 @@ const TeamTaskMessage: FC<Props> = ({ section, setRendering, user, teamId }) => 
     } finally {
     }
   };
-
-  console.log('section', section);
 
   const fetchImage = async (item: CommentData) => {
     try {
@@ -154,7 +154,13 @@ const TeamTaskMessage: FC<Props> = ({ section, setRendering, user, teamId }) => 
         {/* AddMessage */}
         <Flex>
           <S.InputMessage value={value} onChange={handleChange} placeholder="내용을 입력해주세요" rows={1} />
-          <S.InputButton onClick={handlePostComment}>확인</S.InputButton>
+          {isDisabled ? (
+            <Button marginTop={10} margin="5px 10px" colorScheme="blue" isLoading loadingText="Loading">
+              로딩 중
+            </Button>
+          ) : (
+            <S.InputButton onClick={handlePostComment}>확인</S.InputButton>
+          )}
         </Flex>
       </S.TaskMessageBoxStyle>
     </>

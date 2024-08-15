@@ -59,7 +59,7 @@ const Alarm = () => {
       const data = await UserServices.get();
       setUser(data.data);
     } catch (error) {
-      toast.error(error);
+      console.error(error);
     }
   };
 
@@ -76,8 +76,10 @@ const Alarm = () => {
     try {
       if (user && user.userId) {
         await NotificationServices.delete({ userId: user.userId });
-        setRender(prev => !prev);
       }
+      setRender(prev => !prev);
+      setOtherNotification([]);
+      setTodayNotification([]);
     } catch {
       toast.error('전체 삭제가 처리되지 않았습니다.');
     }
@@ -87,15 +89,23 @@ const Alarm = () => {
     try {
       await NotificationServices.readPost({ notificationId: notificationId });
       setRender(prev => !prev);
+      const isOtherNotification = otherNotification.some(
+        notification => notification.notificationId === notificationId,
+      );
+      if (isOtherNotification) {
+        setOtherNotification([]);
+      } else {
+        setTodayNotification([]);
+      }
     } catch {
-      toast.error('error');
+      console.error('error');
     }
   };
 
   useEffect(() => {
-    fetchNotification();
     fetchUser();
-  }, [render]);
+    fetchNotification();
+  }, [todayNotification.length, otherNotification.length, render]);
 
   useEffect(() => {
     if (notification) {
@@ -108,13 +118,11 @@ const Alarm = () => {
       <PopoverTrigger>
         <S.IconStyle border-radius="50%">
           <Bell size={20} />
-          {notification && notification.length > 0 && (
+          {todayNotification.concat(otherNotification).length > 0 ? (
             <>
-              <S.notificationBadge>
-                {notification.filter(item => item.receiverId === user?.userId).length}
-              </S.notificationBadge>
+              <S.notificationBadge>{todayNotification.concat(otherNotification).length}</S.notificationBadge>
             </>
-          )}
+          ) : null}
         </S.IconStyle>
       </PopoverTrigger>
       <Portal>
@@ -143,15 +151,7 @@ const Alarm = () => {
                       }
                     >
                       <Flex justifyContent="space-between">
-                        <S.AlarmTitle>
-                          [{item.retrospectiveTitle}]에서 알림{' '}
-                          <Icon viewBox="0 0 200 200" color="red.500" margin="auto 0">
-                            <path
-                              fill="currentColor"
-                              d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
-                            />
-                          </Icon>
-                        </S.AlarmTitle>
+                        <S.AlarmTitle>[{item.retrospectiveTitle}]에서 알림 </S.AlarmTitle>
                         <MdDelete
                           style={{ margin: 'auto 0', minHeight: '40' }}
                           onClick={() => {
@@ -177,7 +177,7 @@ const Alarm = () => {
             <Divider />
             <S.MenuText style={{ margin: '10px 0' }}>저번에 받은 알림</S.MenuText>
             <Flex flexDirection="column-reverse">
-              {otherNotification && otherNotification.length > 0 ? (
+              {notification && otherNotification.length > 0 ? (
                 otherNotification
                   .filter(item => item.receiverId === user?.userId)
                   .map(item => (
@@ -218,9 +218,6 @@ const Alarm = () => {
                 <S.MenuText style={{ margin: '0 auto' }}>알림 없음</S.MenuText>
               )}
             </Flex>
-
-            {/* <S.MenuText>어제 받은 알림</S.MenuText>
-            <S.AlarmContents>이채연님이 회고보드에 댓글을 작성했습니다 </S.AlarmContents> */}
           </PopoverFooter>
         </PopoverContent>
       </Portal>

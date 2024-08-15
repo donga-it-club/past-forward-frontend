@@ -48,7 +48,7 @@ const ManageModal: React.FC<ManageModalProps> = ({ groupId, data, isClose }) => 
       const data = await UserServices.get();
       setUser(data.data);
     } catch (error) {
-      toast.error(error);
+      console.error(error);
     }
   };
 
