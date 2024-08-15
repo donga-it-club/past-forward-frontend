@@ -104,7 +104,6 @@ const ContentList: React.FC<ContentListProps> = ({ data, viewMode, searchData, s
             filename: item.thumbnail,
             method: 'GET',
           });
-          // console.log('s3 사진 받아오기 성공', imageResponse.data.preSignedUrl);
           setImage(prevImage => ({
             ...prevImage,
             [item.id]: imageResponse.data.preSignedUrl,
