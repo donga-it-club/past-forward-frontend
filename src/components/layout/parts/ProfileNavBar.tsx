@@ -1,4 +1,3 @@
-import { Gear } from 'react-bootstrap-icons';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { useNavigate } from 'react-router-dom';
 import { Button, Drawer, DrawerContent, DrawerOverlay, Flex, useDisclosure } from '@chakra-ui/react';
@@ -67,9 +66,6 @@ const PageNavBar = () => {
                 </div>
               </S.IconStyle>
               <Flex display={{ base: 'none', md: 'flex' }}>
-                <S.IconStyle border-radius="45%">
-                  <Gear />
-                </S.IconStyle>
                 <Alarm />
               </Flex>
               <Button style={{ marginRight: '0.3rem' }} variant="ghost" onClick={handleLoginOrLogout}>

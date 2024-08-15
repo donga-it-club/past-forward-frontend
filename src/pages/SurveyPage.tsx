@@ -28,7 +28,7 @@ const SurveyPage: React.FC = () => {
 
   const handleSurvey = async () => {
     try {
-      const SurveyRequest = await PostSurvey({
+      await PostSurvey({
         age: numAge,
         gender: gender,
         occupation: job,
@@ -37,7 +37,6 @@ const SurveyPage: React.FC = () => {
         purposes: purpose,
         emailConsents: emailConsents,
       });
-      console.log('설문조사 전송 성공', SurveyRequest);
       alert('설문조사가 전송되었습니다.');
       // 회고 작성 페이지로 이동
       navigate('/create');

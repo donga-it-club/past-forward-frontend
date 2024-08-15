@@ -77,7 +77,7 @@ const TeamTask: FC<Props> = ({ section, setRendering, teamId, imageURL, user, fe
       setRendering(prev => !prev);
       toast.info('회고 카드가 삭제되었습니다.');
     } catch {
-      toast.error('존재하지 않는 회고 카드입니다.');
+      toast.error('회고 카드가 삭제되지 않았습니다.');
     }
   };
 

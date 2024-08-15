@@ -76,8 +76,10 @@ const Alarm = () => {
     try {
       if (user && user.userId) {
         await NotificationServices.delete({ userId: user.userId });
-        setRender(prev => !prev);
       }
+      setRender(prev => !prev);
+      setOtherNotification([]);
+      setTodayNotification([]);
     } catch {
       toast.error('전체 삭제가 처리되지 않았습니다.');
     }
@@ -87,15 +89,23 @@ const Alarm = () => {
     try {
       await NotificationServices.readPost({ notificationId: notificationId });
       setRender(prev => !prev);
+      const isOtherNotification = otherNotification.some(
+        notification => notification.notificationId === notificationId,
+      );
+      if (isOtherNotification) {
+        setOtherNotification([]);
+      } else {
+        setTodayNotification([]);
+      }
     } catch {
       console.error('error');
     }
   };
 
   useEffect(() => {
-    fetchNotification();
     fetchUser();
-  }, [render]);
+    fetchNotification();
+  }, [todayNotification.length, otherNotification.length, render]);
 
   useEffect(() => {
     if (notification) {
@@ -108,11 +118,11 @@ const Alarm = () => {
       <PopoverTrigger>
         <S.IconStyle border-radius="50%">
           <Bell size={20} />
-          {notification && notification.length > 0 && (
+          {todayNotification.concat(otherNotification).length > 0 ? (
             <>
               <S.notificationBadge>{todayNotification.concat(otherNotification).length}</S.notificationBadge>
             </>
-          )}
+          ) : null}
         </S.IconStyle>
       </PopoverTrigger>
       <Portal>
@@ -208,9 +218,6 @@ const Alarm = () => {
                 <S.MenuText style={{ margin: '0 auto' }}>알림 없음</S.MenuText>
               )}
             </Flex>
-
-            {/* <S.MenuText>어제 받은 알림</S.MenuText>
-            <S.AlarmContents>이채연님이 회고보드에 댓글을 작성했습니다 </S.AlarmContents> */}
           </PopoverFooter>
         </PopoverContent>
       </Portal>

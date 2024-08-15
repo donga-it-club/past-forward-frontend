@@ -13,7 +13,6 @@ const UserNickname: React.FC<Props> = ({ setUserNickname }) => {
   async function handleFetchUserAttributes() {
     try {
       const userAttributes = await fetchUserAttributes();
-      console.log(userAttributes);
       setUserNickname(userAttributes.nickname || null);
     } catch (err) {
       console.log(err);

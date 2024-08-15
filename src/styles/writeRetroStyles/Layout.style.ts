@@ -280,9 +280,6 @@ export const TaskText = styled.p`
   margin: 20px 0;
   margin-right: 10px;
   margin-top: 20px;
-  &:hover {
-    cursor: pointer;
-  }
 `;
 
 export const ReviseText = styled.p`
