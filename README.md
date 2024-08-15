@@ -23,9 +23,9 @@
 
 <div align="center">
 
-|                                                                **공정민**                                                                 |                                                                 **임희정**                                                                  |                                                            **김예나**                                                            |                                                                  **배금빈**                                                                  |
+|                                                                **임희정**                                                                 |                                                                 **김예나**                                                                  |                                                            **공정민**                                                            |                                                                  **배금빈**                                                                  |
 | :---------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------: |
-| [<img src="https://avatars.githubusercontent.com/u/102538362?v=4" height=150 width=150> <br/> @jeongmin59](https://github.com/jeongmin59) | [<img src="https://avatars.githubusercontent.com/u/138123134?v=4" height=150 width=150> <br/> @heejung0413](https://github.com/heejung0413) | [<img src="https://avatars.githubusercontent.com/u/76564438?v=4" height=150 width=150> <br/> @yeneua](https://github.com/yeneua) | [<img src="https://avatars.githubusercontent.com/u/84950772?v=4" height=150 width=150> <br/> @sunflower888](https://github.com/sunflower888) |
+| [<img src="https://avatars.githubusercontent.com/u/138123134?v=4" height=150 width=150> <br/> @heejung0413](https://github.com/heejung0413) | [<img src="https://avatars.githubusercontent.com/u/76564438?v=4" height=150 width=150> <br/> @yeneua](https://github.com/yeneua) |  [<img src="https://avatars.githubusercontent.com/u/102538362?v=4" height=150 width=150> <br/> @jeongmin59](https://github.com/jeongmin59) |[<img src="https://avatars.githubusercontent.com/u/84950772?v=4" height=150 width=150> <br/> @sunflower888](https://github.com/sunflower888) |
 
 </div>
 
@@ -56,7 +56,7 @@
   - 변수 타입을 지정하고 javascript로 컴파일되어 실행할 수 있습니다.
   - 컴파일 과정에서 타입을 지정함으로써, 에러 예방과 손쉬운 디버깅이 가능했습니다.
 
-### styled-component, Chakra UI
+### styled-components, Chakra UI
 
 - styled-component
   - props를 이용한 조건부 스타일링을 활용하여 상황에 알맞은 스타일을 적용시킬 수 있었습니다.
@@ -65,7 +65,7 @@
 - Chakra UI
   - React 애플리케이션을 빌드하는데 필요한 블록을 간단하고 모듈적이며 접근 가능하게 만들 수 있는 UI 컴포넌트 라이브러리입니다.
 
-### eslint, prettier
+### Eslint, Prettier
 
 - 정해진 규칙에 따라 자동적으로 코드 스타일을 정리해 코드의 일관성을 유지하고자 했습니다.
 - 코드 품질 관리는 eslint에, 코드 포맷팅은 prettier에 일임해 사용했습니다.
@@ -75,6 +75,38 @@
 <br>
 
 ## 3. 역할 분담
+
+<br>
+    
+### 👻임희정
+- **UI**
+    - 페이지 : 메인 페이지 첫번째 section 페이지,마이페이지 기본디자인, 레이아웃(Navbar, SideBar), 회고카드 페이지 디자인 마무리 작업, 회고 수정 페이지 마무리 작업
+    - 공통 컴포넌트 : Chakra UI 모달창
+
+- **기능**
+  - 백엔드에서 주어진 API 타입 작성, API 비동기 함수 객체 설정
+  - 회고 카드 작성 페이지 전반적 작업 ( 댓글 기능, 좋아요, 회고 카드 작성 및 수정)
+  - 알림 기능
+- **개발환경 구축**
+  - MSW 설정
+  - ESLint, Prettier 정책 설정
+  - Chakra UI 공통 theme 설정 및 브랜드 컬러 커스텀
+
+<br>
+
+### 👩🏻‍💻김예나
+
+- **UI**
+
+  - 페이지: RetroList 페이지, Main 화면 서브 페이지 디자인, Action Items 담당자 지정 창, 그룹화 페이지
+
+- **기능**
+  - 메인 페이지 react-fullpage 라이브러리 적용
+  - RetroList API 연결
+  - Action Items 담당자 지정 창 API 연결
+  - 그룹화 기능 구현
+
+<br>
 
 ### 🤩공정민
 
@@ -87,33 +119,6 @@
   - 개발환경 구축 (webpack 사용)
 
 <br>
-    
-### 👻임희정
-- **UI**
-    - 페이지 : 메인 페이지 첫번째 section 페이지,마이페이지 기본디자인, 레이아웃(Navbar, SideBar), 회고카드 페이지 디자인 마무리 작업, 회고 수정 페이지 마무리 작업
-    - 공통 컴포넌트 : Chakra UI 모달창
-
-- **기능**
-  - 백엔드에서 주어진 API 타입 작성, API 비동기 함수 객체 설정
-  - 회고 카드 작성 페이지 전반적 작업 ( 댓글 기능, 좋아요, 회고 카드 작성 및 수정)
-  - MSW 설정
-  - ESLint, Prettier 정책 설정
-  - Chakra UI 공통 theme 설정 및 브랜드 컬러 커스텀
-
-<br>
-
-### 👩🏻‍💻김예나
-
-- **UI**
-
-  - 페이지: RetroList 페이지, Main 화면 서브 페이지 디자인, Action Items 담당자 지정 창
-
-- **기능**
-  - 메인 페이지 react-fullpage 라이브러리 적용
-  - RetroList API 연결
-  - Action Items 담당자 지정 창 API 연결
-
-<br>
 
 ### 🐬배금빈
 
@@ -123,6 +128,7 @@
   - 설문조사 페이지 API 연결
   - 메인 페이지 Contact API 연결
   - 데이터 분석을 위한 버튼 Id 값 입력
+  - 공지사항 게시판 전반적인 기능 구현
 
 <br>
 
@@ -152,7 +158,6 @@
 
 | 메인페이지 |
 | ---------- |
-
 | ![mainPage](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/e54876e6-34e6-4d79-a6f5-fc0ed4e86cb5)
 
 <br>
@@ -196,7 +201,6 @@
 
 | 레이아웃 |
 | -------- |
-
 | ![layout](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/bce14804-789e-40c4-977b-36bcf288aa0e)
 
 <br>
@@ -265,3 +269,11 @@
 | ![invited](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/fa2f03f1-07ef-4cf3-bb07-07e64de20dc3) |
 
 <br>
+
+#### 5. 그룹화 페이지
+
+- 생성한 회고들을 그룹화 시킬 수 있습니다.
+
+| 그룹화페이지                                                                                                               |
+| ------------------------------------------------------------------------------------------------------------------------ |
+| ![group](https://github.com/user-attachments/assets/a8d746c4-4621-417a-9092-7a428518ef7a)                             |
