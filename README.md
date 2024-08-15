@@ -158,7 +158,6 @@
 
 | 메인페이지 |
 | ---------- |
-
 | ![mainPage](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/e54876e6-34e6-4d79-a6f5-fc0ed4e86cb5)
 
 <br>
@@ -202,7 +201,6 @@
 
 | 레이아웃 |
 | -------- |
-
 | ![layout](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/bce14804-789e-40c4-977b-36bcf288aa0e)
 
 <br>
