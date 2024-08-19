@@ -26,6 +26,13 @@
         f.parentNode.insertBefore(j, f);
       })(window, document, 'script', 'dataLayer', 'GTM-5MBRZF34');
     </script>
+    <script>
+      if (userId) {
+        gtag('config', 'G-KGEPKHTDL6', {
+          user_id: userId, // 'userId'는 동적으로 할당된 사용자 ID입니다.
+        });
+      }
+    </script>
     <link
       rel="stylesheet"
       as="style"

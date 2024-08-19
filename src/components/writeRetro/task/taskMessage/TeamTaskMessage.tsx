@@ -32,6 +32,7 @@ const TeamTaskMessage: FC<Props> = ({ section, setRendering, user, teamId }) => 
 
   const handlePostComment = async () => {
     setIsDisabled(true);
+
     try {
       await CommentService.post({ sectionId: section.sectionId, commentContent: value });
       setTimeout(() => setIsDisabled(false), 1500);
@@ -130,7 +131,7 @@ const TeamTaskMessage: FC<Props> = ({ section, setRendering, user, teamId }) => 
                     </S.TaskUserProfile>
                     {user.userName === section.username && (
                       <>
-                        <ReviseCommentModal comment={section} setRendering={setRendering} section={section} />
+                        <ReviseCommentModal comment={section} setRendering={setRendering} />
                         <DeleteData
                           value="댓글"
                           handleDeleteValue={() => {

@@ -23,9 +23,9 @@
 
 <div align="center">
 
-|                                                                **임희정**                                                                 |                                                                 **김예나**                                                                  |                                                            **공정민**                                                            |                                                                  **배금빈**                                                                  |
-| :---------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------: |
-| [<img src="https://avatars.githubusercontent.com/u/138123134?v=4" height=150 width=150> <br/> @heejung0413](https://github.com/heejung0413) | [<img src="https://avatars.githubusercontent.com/u/76564438?v=4" height=150 width=150> <br/> @yeneua](https://github.com/yeneua) |  [<img src="https://avatars.githubusercontent.com/u/102538362?v=4" height=150 width=150> <br/> @jeongmin59](https://github.com/jeongmin59) |[<img src="https://avatars.githubusercontent.com/u/84950772?v=4" height=150 width=150> <br/> @sunflower888](https://github.com/sunflower888) |
+|                                                                 **임희정**                                                                  |                                                            **김예나**                                                            |                                                                **공정민**                                                                 |                                                                  **배금빈**                                                                  |
+| :-----------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------: |
+| [<img src="https://avatars.githubusercontent.com/u/138123134?v=4" height=150 width=150> <br/> @heejung0413](https://github.com/heejung0413) | [<img src="https://avatars.githubusercontent.com/u/76564438?v=4" height=150 width=150> <br/> @yeneua](https://github.com/yeneua) | [<img src="https://avatars.githubusercontent.com/u/102538362?v=4" height=150 width=150> <br/> @jeongmin59](https://github.com/jeongmin59) | [<img src="https://avatars.githubusercontent.com/u/84950772?v=4" height=150 width=150> <br/> @sunflower888](https://github.com/sunflower888) |
 
 </div>
 
@@ -158,6 +158,7 @@
 
 | 메인페이지 |
 | ---------- |
+
 | ![mainPage](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/e54876e6-34e6-4d79-a6f5-fc0ed4e86cb5)
 
 <br>
@@ -201,6 +202,7 @@
 
 | 레이아웃 |
 | -------- |
+
 | ![layout](https://github.com/donga-it-club/past-forward-frontend/assets/138123134/bce14804-789e-40c4-977b-36bcf288aa0e)
 
 <br>
@@ -274,6 +276,6 @@
 
 - 생성한 회고들을 그룹화 시킬 수 있습니다.
 
-| 그룹화페이지                                                                                                               |
-| ------------------------------------------------------------------------------------------------------------------------ |
-| ![group](https://github.com/user-attachments/assets/a8d746c4-4621-417a-9092-7a428518ef7a)                             |
+| 그룹화페이지                                                                              |
+| ----------------------------------------------------------------------------------------- |
+| ![group](https://github.com/user-attachments/assets/a8d746c4-4621-417a-9092-7a428518ef7a) |
